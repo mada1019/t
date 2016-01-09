@@ -1,0 +1,40 @@
+%
+% Einleitung
+%
+% @version 1.0
+% @author wipatrick
+% @created 22. November 2015
+% @edited 
+
+\setchapterpreamble[o]{%
+\dictum[--- \textsc{Johann Wolfgang von Goethe}]{\Gun Erfolgreich zu sein setzt zwei Dinge voraus: Klare Ziele und den brennenden Wunsch, sie zu erreichen.\Gob}}
+\renewcommand{\chapterheadstartvskip}{\vspace*{3cm}}
+\chapter{Einleitung}
+\label{chap:einleitung}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
+
+
+\section{Motivation und Problemstellung}
+\label{sec:motivation}
+Mit der steigenden Komplexität von Prozessen/ technischen Anlagen werden auch die Anforderungen an deren Steuerungen stetig höher. Um ddiesen Anforderungen und der steigernden Komüplextiat gerecht zu werden müssen entsprechend neue Steuerungen reaksiisert werden. Ein Ansatz ist die modellbasierte prädiktive Regelung. Mit Hilfe derer wird das zukünftige Verhalten eines Systems progbnostiziert und versucht durch möglichst wenig Eingriff von Außen(Input der Geld kostet) einem eigens definierten Zielkrietiertium zu folgen.
+
+Beispiel Glossaries: \gls{wpist}
+
+\section{Zielsetzung und Aufbau der Arbeit}
+\label{sec:ziel}
+Das übergeordnete Ziel dieser Arbeit ist es, durch die Konzipierung, Planung und Inbetriebnahme eines technischen Systems eine Anwendungs- und Testumgebung zu schaffen, um auf dem Gebiet der \acrlong{mpc} (\acrshort{mpc}) Forschen zu können.
+Diese beschäftigt sich damit, ein technisches System oder allgemeiner einen Prozess -- im mathematisch exakten Sinne -- optimal zu regeln.
+Als konkrete Ziel wurde davon abgeleitet, eine Anlage zur Steuerung der Temperatur eines Raumes zu konzipieren, zu planen und zu implementieren. 
+%um weitere Forschung im Rahmen von \acrlong{mpc} zu ermöglichen. 
+Die Herleitung dieses Ziels findet der Übersichtlichkeit halber in Kapitel \ref{chap:anlagendesign} statt.
+
+Im Rahmen dieser Arbeit werden -- anschließend an die Einleitung in \ref{chap:einleitung} -- die theoretischen Grundlagen in \ref{chap:theoretischegrundlagen} ausgeführt. Zunächst wird die grundlegenden Theorie zu \acrlong{mpc} vorgestellt bevor anschließend weitere technische Grundlagen erklärt, welche für das weitere Verständnis dieser Arbeit benötigt werden. 
+
+%Zu konkret evtl%Diese umfassen zunächst die thermodynamischen Grundlagen zur Modellbildung, die Beschreibung der Hardware- und Software-Schnittstellen des realisierten, technischen Systems.
+Danach wird das technische System in Kapitel \ref{chap:anlagendesign} Schritt für Schritt entwickelt, ausgehend von der Idee und den räumlichen Gegebenheiten/Nebenbedingungen, und weiter konkretisiert bis zur realisierten Umsetzung in eine funktionierende Anlage.
+
+
+
+Dementsprechend werden zunächst das Konzept, die Planung und die technische Umsetzung der konkreten Anlage dargestellt, bevor anschließend die theoretischen Grundlagen von \acrlong{mpc} und zur die Modellbildung erläutert werden. Anschließend wird das Modell für \acrlong{mpc} gebildet und ein erstes grobes Konzept zur Steuerung der Raumtemperatur vorgestellt. Abschließend wird eine Validierung des Modells versucht und findet eine Anpassung des Modells statt damit es künftig mit \acrlong{mpc} genutzt werden kann.

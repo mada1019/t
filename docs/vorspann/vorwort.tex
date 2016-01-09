@@ -1,0 +1,18 @@
+%
+% Vorwort
+%
+% @version 1.0
+% @author wipatrick
+% @created 22. November 2015
+% @edited 
+%
+\chapter*{Vorwort}
+\thispagestyle{empty}
+Ziel dieser Arbeit ist es, eine Heizungssteuerung im ersten Schritt zu konzipieren und planen um sie im Rahmen der  Modellprädiktiven Regelung nutzen zu können. Im zweiten Schritt soll diese Heizungstseuetung in Betrieb genommen werden um Forschung im Bereich MPC zu ermöglichen.
+Was ist MPC?
+Das Hauptaugenmerk bei der Palnung liegt deshalb auf der Kompabilität und möglichst großen Einfachheit der einzlenen Komponenten der Heizungstseuerung. 
+Die Optimalsteuerung stellt in diesem Fall den begrenzenden Faktor dar, da die Optimierungsumgebund CasADi für dynamische Systeme nur unter JModelica.org läuft. Daher wird darauf aufbauend das benötigte Modell für die MPC in Modelica gebildet unter Berücksichtigung der Restriktionen bezüglich JModelica. Die gemeinsame Schnittstelle beider ist Python, übder die damit auch die Kommunikation mit den Hardwarekomponenten der Heizungstseurung erfolgen muss/soll.
+
+Bild Hardware ---- Software   Interface Python, da Software darauf angewiesen ist.
+
+Weitere Merkmale zur Planung der Anlage sind eine kleine Skalierung, um "schnelle" Messungen und Antworten zu erhalten. Des weiteren eine hohe Funktionalität, möglichst flexibel ansprechbar, zu Testzwecken verschiedener Algorithmen Systematiken geeignet sein, 
