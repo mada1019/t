@@ -1,6 +1,3 @@
-%
-% Grundlagen
-
 \chapter{Theoretische Grundlagen}
 \label{chap:theoretischegrundlagen}
 
@@ -10,76 +7,66 @@
 
 \acrlong{mpc} an sich ist eine Methodik zur Steuerung von Systemen. Diese versucht zunächst, zu sich periodisch wiederholenden, diskreten Zeitpunkten das Verhalten eines Systems in der Zukunft -- also einer immer gleich weit in die Zukunft hineinreichenden Periode -- zu beschreiben. Hierzu bedient \acrlong{mpc} sich der Kenntnis des aktuellen Zustandes und eines physikalischen-mathematischen Modells des Systems, um dessen zukünftiges Verhalten \Gun vorherzusagen \Gob bzw. abzubilden. Des Weiteren wird versucht das Verhalten des Systems mit minimalem Aufwand zu beeinflussen, um einem eigens- oder vordefinierten Zielkriterium zu folgen \acrlong{bzw} diesem zu entsprechen.
 
-\begin{table}[H]
-\centering
-\small
-\renewcommand{\arraystretch}{1.3}
-\begin{threeparttable}
-\begin{tabularx}{\textwidth}{p{0.018\textwidth}p{0.25\textwidth}C{0.1915\textwidth}C{0.1915\textwidth}C{0.1915\textwidth}}
-\toprule
-
-\multicolumn{1}{c}{N\textdegree}		&
-Merkmal						&
-\multicolumn{3}{c}{Merkmalsausprägung} \\
-
-\cmidrule[0.4pt](r{0.25em}){1-1} 
-\cmidrule[0.4pt](lr{0.25em}){2-2}
-\cmidrule[0.4pt](lr{0.25em}){3-3}
-\cmidrule[0.4pt](lr{0.25em}){4-4}
-\cmidrule[0.4pt](l{0.25em}){5-5}
-
-1						&
-Bla					    &	
-\ccol Bla	 	        &	
-Bla			            & 	
-Bla 					\\
-
-2						&
-Bla			            &	
-\ccol Bla				&	
-Bla					    &	
-Bla 					\\
-
-3						&
-Bla			            &	
-\ccol Bla		        &	
-Bla				        &	
-Bla 			        \\
-
-4						&
-Bla\tnote{1)}		    &
-\multicolumn{2}{c}{\ccol Bla}   &
-Bla 							\\
-
-\bottomrule
-\end{tabularx}
-\begin{tablenotes}[]\footnotesize\singlespacing\setlength\labelsep{0pt}
-\item[\textcolor{black!20}{\quadrat}] Der Fokus dieser Arbeit liegt auf ...
-\item[1)] Die ist eine weitere Fußnote.
-\end{tablenotes}
-\end{threeparttable}
-\caption[Tabellenunterschrift im Tabellenverzeichnis]{Tabellenunterschrift im Test.}
-\label{tab:zsmmuster}
-\end{table}
 
 
 
-\section{Technische Grundlagen zu Bussystemen}
+\section{Technische Grundlagen zur Kommunikation mit Bussystemen}
 \label{sec:grundlagenbus}
 In diesem Kapitel werden die Grundlagen von Hard- und Software beleuchtet die für die Kommunikation der Steuerung mit den einzelnen Anlagenteilen benötigt werden.
 Diese umfassen zunächst Bussysteme im Allgemeinen und werden anhand des spezifischen/konkreten Anwendungsfalls Modbus erläutert.
 Die Einführung wird sich an die Strukutr nach \cite{schn06} anlehnen.
 
+\subsection{OSI-Kommunikationsmodell}
+Hier wird das OSI mit Schichten--> Referenzieren von Schichten in den Folgenden.
+
+\subsection{Modbus}
+Hier wird das Modbusprotokoll nach \cite{mod12} und \cite{mod06ser} und \cite{mod06tcp}  
+Und nach hier wird das Modbusprotokoll nach \cite[S.5]{mod12} und \cite[S.5]{mod06ser} und \cite[S.5]{mod06tcp}
+
 \subsection{Bussysteme} 
-Um Prozesse überwachen und steuern zu können müssen unter den einzelnen Einheiten innerhalb eines Systems Informationen ausgetauscht werden. Verknüpft man diese über Verbindungsleitungen, über die Informationen übertragen werden können, miteinander entstehen dabei Netzwerke.
+Um ganz allgemein Prozesse überwachen und steuern zu können müssen unter den einzelnen Einheiten innerhalb eines Systems Informationen ausgetauscht werden. Dazu werden Kommunikationssysteme benötigt mit Hilfe derer Kommunikation erfolgen kann. Diesem Zweck dienen Bussysteme
+Info/Quelle 
+%%W. Kriesel, T. Heimbold, D. Telschow: Bustechnologien für die Automation, Hüthig GmbH, Heidelberg 1998
+Bussysteme lassen sich anhand verschiedener Kriterien einteilen bzw klassifizieren. Im Rahmen dieser Arbeit wird der Modbus eingesetzt weshalb im Folgenden die Kriterien zunächst sehr allgemein zum Verständnis des Krieteriums beschrieben werden. Die verschiedenen Ausprägungen der einzelnen Kriterien werden lediglich die für Modbus relevanten detailliert beschrieben.
 
-Im Folgenden werden deshalb die Netzwerk-Grundlagen die im Rahmen dieser Arbeit von Relevanz sind dargestellt und erläutert.
+\subsection{Netzwerk und Topologie}
+Verknüpft man einzelne Prozesseinheiten -- im folgenden Teilnehmer des Netzwerks -- miteinander über Verbindungsleitungen, über die Informationen übertragen werden können, entstehen dabei Netzwerke. Diese Netzwerke können unterschiedlich ausgeprägt sein und werden anhand ihrer geometrischen Anordnung, der Netzwerktopologie, unterschieden.
+--> Teilnehmer im Netzwerk definieren
 
-Zunächst wird das Netzwerk anhand der geometrischen Anordnung der Verbindungsleitungen klassifiziert \cite[S.~1f.]{schn06}. 
-Die einfachste Art ist zwei Kommunikationspartner direkt miteinander zu einer Zweipunktverbindung zu verbinden. Dazu werden jedoch bei einer großen ANzahl von Kommunikationspartnern sehr viele Verbindungsleitungen benötigt, was mit einer großen Anzahl von Schnittstellen und hohen Kosten einhergeht. Jedoch würden Fehler nicht das ganze Netzwerk sondern nur eine Verbindung zwischen zwei Partnern betreffen und der Fhler wäre leicht zu diagnostizieren.
+Die einfachste Art zwei Teilnehmer miteinander zu verbinden ist eine direkte Zweipunktverbindung mit einer Leitung. Jedoch würde mit jeder steigenden Zahl von Teinehmern auch überproportional mehr Verbindungsleitungen benötigt um alle Teilnehmer miteinander zu verbinden. Dies hätte für große Zweipunbktverbindungsnetzwerke. die auch als vermaschtes Netz bezeichnet werden, eine unübersichtliche große Anzahl von Schnittstellen, einen extrem hohen Verkabelungsaufwand und damit verbundene hohe Kosten zur Folge. Um dies zu vermeiden ergeben sich noch verschiedene andere Möglichkeiten zur Anordnung von Teilnehmern in Netzwerken \cite[S.~1f.]{schn06}.
 
-(Um Zweipunktverbindung mit weniger Leitungen zu realisieren gibt es hzwei möglihckiten um die Kommuniktaion von mehreren Partnern über eine leitung zu ermöglichen, d.h. eine Signalbeeinflussung von Signalen unterineinander zu vermeiden : Zeitmultiplex und Frequenzmultiplex.) Überflüssig?!?!
+Die Zweipunktverbindungen sind wie oben beschrieben mit einem hohen Verkabelungsaufwand verbunden, weshalb bei großen Netzwerken oftmals zu einer Linienstruktur übergegangen wird. Diese wird auch Linienstruktur genannt und wird auch von der Modbus-Technologie empfohlen/vorgeschrieben. Charakteristisch dafür ist, dass alle Teilnehmer eine gemeinsame Verbindungsleitung zur Kommunikation nutzen. Dazu gibt es ein sogenanntes, langes Buskabel entlang dessen die einzelnen Teilnehmer mit Hilfe von kurzen Stichleitungen angebunden sind, wie auf Abbildung \ref{fig:bus_struktur} zu sehen ist.
 
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160109_busstruktur}
+\caption[Linienstruktur]{Linienstruktur aus \cite[S.~3]{schn06}}
+\label{fig:bus_struktur}
+\end{figure}
+
+Dadurch wird der Verkabelungsaufwand auch für sehr große Netzwerke stark reduziert und auch die Anzahl an Schnittstellen der Teilnehmer auf eine einzige reduziert. Jedoch wird dadurch das gleichzeitige Senden von Teilnehmern erschwert und es müssen sogenannte Buszugriffsverfahren definiert werden, die nichts weiter als Regeln sind die den Zugriff auf den Bus festlegen. Da die Kommunikation auf einer einzigen Leitung stattfindet und ständig alle Teilnehmer alle Sendungen verfolgen wird der Sender durch diese Parallelschaltung der Empfänger stark belastet. Da die Bus-Längen meist sehr lang sind ( hunderte Meter) ist die Leitungslänge im Bezug auf die zu übertragende Wellenlänge nicht mehr vernachlässigbar. Deshalb müssen beide Enden der Busleitung mit Leitungsabschlusswiderständen versehen werden sowie die Leitungslänge und die Teilnehmer je Netzwerk begrenzt werden. Der Leistungs- und Kapazitätswiderstand einer Leitung sind von der Länge der Leitung abhängig und werden durch das Ersatzschaltbild eines RC-Gliedes repräsentiert, wie in Abbildung \ref{fig:bus_impuls}a zu sehen ist. Durch diese Widerstände wird eine Impulsverzerrung $\delta t$ auf der Leitung ausgelöst, die somit mittelbar auch von der Leitungslänge abhängt. Je länger die Leitung desto größer die beiden Widerstande und desto größer ist die Impulsverzerrung $\delta t$, da der Kondensator C\_{Leitung} mehr Zeit zum Aufladen benötigt und die Lastspannung sinkt, wie in Abbildung \ref{fig:bus_impuls}b und \ref{fig:bus_impuls}c dargestellt. Dadurch wird die maximale Frequenz der Datenübertragung beschränkt (auf den Kehrwert der Impulsverzerrung f=1/t). Dies bedeutet das die Frequenz der Datenübertragung entlang der Leitung von ihrer Länge mittelbar abhängig ist, da ansonsten der Empfänger den Wechsel des logischen Zustand nicht mehr registrieren kann \cite[S.~3ff.]{schn06}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{abbildungen/20160110_impulsbus}
+\caption[Impulsverzerrung auf einer Leitung]{Impulsverzerrung auf einer Leitung: a) Ersatzschaltbild der Anordnung b) Ausgangsspannung des Generators c) Empfängerspannung aus \cite[S.~4]{schn06}}
+\label{fig:bus_impuls}
+\end{figure}
+
+Weitere Bus-Strukturen sind die Baumstruktur, die eine Weiterentwicklung der Linienstruktur ist und auf Abbildung \ref{fig:baum_struktur}. Dabei werden einzelne Linienstrukturen durch Verstärkerelemente, sogenannte  Repeater, miteinander verbunden und es können dadurch größere Flächen als mit der Linienstruktur vernetzt werden. \cite[S.5~f.]{schn06}.
+--> Galvanische Trennung und Abschirmung 
+Diese Struktur ist insofern interessant, da es also im Rahmen dieser Arbeit Anlage noch eine nachträgliche Erweiterung/Vergrößerung der geplanten Anlage ermöglicht.
+
+Modbus was da oben steht, Teilnehmer kabellängen etc.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160110_baumstruktur}
+\caption[Baumstruktur]{Baumstruktur aus \cite[S.~5]{schn06}}
+\label{fig:baum_struktur}
+\end{figure}
+
+Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit keine weitere Relevanz haben, jedoch genannt werden sollten sind die Ring- und die Stern-Struktur. Die Ring-Struktur ist dadurch gekennzeichnet, ein physikalischer Ring mit Zweipunktverbindungen aufgebaut wird in dem über Teilnehmer hinweg kommuniziert wird. Die Stern-Topologie ist durch eine Zentralstation gekennzeichnet, die mit allen Teilnehmer verbunden ist und über die die gesamte Kommunikation abläuft \cite[S.~6f.]{schn06}.
 
 
 
@@ -91,11 +78,7 @@ Kabel, Belegung
 
 
 
-\subsection{Modbus}
 
-
-
-Hier wird das Modbusprotokoll
 
 
 
