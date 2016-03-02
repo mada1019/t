@@ -1,5 +1,8 @@
+%\renewcommand{\chapterheadstartvskip}{\vspace*{0 cm}}
+
 \chapter{Theoretische Grundlagen}
 \label{chap:theoretischegrundlagen}
+
 
 \section{Model Predictive Control}
 \label{chap:mpc}
@@ -36,9 +39,9 @@ Das \acrshort{osi} beschäftigt sich also zentral mit dem Austausch von Informat
 \item die Übertragung von Daten, umfassenderweise eine Kooperation von Systemen
 \end{itemize}
 
-Bezogen auf den Austausch von Daten überschneiden sich die physischen Medien mit der Vernetzung und meinen also die Infrastruktur und deren Architektur, die zur Übertragung zur Verfügung steht. Bei der Kooperation von Systemen zur Datenübertragung sind weitaus mehr Aspekte zu beachten: Zunächst die Synchronisation der Prozesse, die Daten austauschen wollen. Des Weiteren die Darstellung der auszutauschenden Daten und deren eventuell notwendigen Transformation um für ein anderes System nutzbar zu sein. Weitere wichtige Aufgaben sind die Datenspeicherung sowie deren Integrität und die Sicherheit des Austausch hinsichtlich Fehler und Einsicht von Außen \cite[S.~4]{osi96}.
+Bezogen auf den Austausch von Daten überschneiden sich die physischen Medien mit der Vernetzung und meinen also die Infrastruktur und deren Architektur, die zur Übertragung zur Verfügung steht. Bei der Kooperation von Systemen zur Datenübertragung sind weitaus mehr Aspekte zu beachten: Zunächst die Synchronisation der Prozesse, die Daten austauschen wollen. Des Weiteren die Darstellung der auszutauschenden Daten und deren eventuell notwendigen Transformation um mit einem anderen System kompatibel zu sein. Weitere wichtige Aufgaben sind die Datenspeicherung sowie deren Integrität und die Sicherheit des Austausch hinsichtlich Fehler und Einsicht von Außen \cite[S.~4]{osi96}.
 
-Wie leicht zu erkennen ist, ist die Kommunikation zwischen verschiedenen technischen Systemen ist umfangreich/komplex/kompliziert. Daher teilt das \acrshort{osi} die Kommunikation zunächst in 7 verschiedene, abstrakte Ebenen auf um, die einzelnen Aufgabenbereiche des Kommunikationsprozesses anfallen in Teilaufgaben zu gliedern bzw. zusammenzufassen, wie in Abbildung \ref{fig:osi} dargestellt.
+Wie leicht zu erkennen ist, ist die Kommunikation zwischen verschiedenen technischen Systemen sehr umfangreich/komplex/kompliziert. Daher wird der Kommunikationsprozess im \acrshort{osi} stark abstrahiert und zunächst in 7 verschiedene, abstrakte Ebenen aufgeteil um die einzelnen Aufgabenbereiche des Kommunikationsprozesses anfallen in Teilaufgaben zu gliedern bzw. zusammenzufassen, wie in Abbildung \ref{fig:osi} dargestellt.
 
 \begin{figure}
 \centering
@@ -51,12 +54,11 @@ Jede Ebene hat dann klar definierte Teilaufgaben, die der Kommunikation dienen. 
 
 Im Folgenden wird kurz auf die einzelnen Schichten eingegangen bevor das Zusammenwirken der einzelnen Schichten anhand eines Beispiels verdeutlicht wird.
 
-Die Schicht eins bestimmt 
+Die Schicht eins -- die physikalische Schicht -- Möglichkeiten zur Verfügung und die phsysikalische Datenübertragung der einzelnen Bits \cite[S.~49f.]{osi96}. Sie legt also die mechanischen, wie zb. stecker(endsystemkopplung), zurodnung der pins und kabelspezifikationen, elektrischen, art der codierung Spannungspegel etc., fest, idr Standards wie RS/EIA 232, RS/EIA 422, RS/EIA 485, oder aber auch Glasfaserstrecke. Wichtig ist dabei, dass diese lediglich die tatsächlcihe Strecke spezifiziert und nicht das physikalische Medium selbst ist und die Kommunikation unabhängig von der konkreten Ausprägung der Schicht ist \cite[S.~9]{schn06}.
+
+Die zweite Schicht -- die Datenverbindungsschicht -- ist für verschiedene Verbindungsmodi 
 
 
-\subsection{Modbus}
-Hier wird das Modbusprotokoll nach \cite{mod12} und \cite{mod06ser} und \cite{mod06tcp}  
-Und nach hier wird das Modbusprotokoll nach \cite[S.5]{mod12} und \cite[S.5]{mod06ser} und \cite[S.5]{mod06tcp}
 
 \subsection{Bussysteme} 
 Um ganz allgemein Prozesse überwachen und steuern zu können müssen unter den einzelnen Einheiten innerhalb eines Systems Informationen ausgetauscht werden. Dazu werden Kommunikationssysteme benötigt mit Hilfe derer Kommunikation erfolgen kann. Diesem Zweck dienen Bussysteme
@@ -64,7 +66,7 @@ Info/Quelle
 %%W. Kriesel, T. Heimbold, D. Telschow: Bustechnologien für die Automation, Hüthig GmbH, Heidelberg 1998
 Bussysteme lassen sich anhand verschiedener Kriterien einteilen bzw klassifizieren. Im Rahmen dieser Arbeit wird der Modbus eingesetzt weshalb im Folgenden die Kriterien zunächst sehr allgemein zum Verständnis des Krieteriums beschrieben werden. Die verschiedenen Ausprägungen der einzelnen Kriterien werden lediglich die für Modbus relevanten detailliert beschrieben.
 
-\subsection{Netzwerk und Topologie}
+\subsubsection{Netzwerk und Topologie}
 Verknüpft man einzelne Prozesseinheiten -- im folgenden Teilnehmer des Netzwerks -- miteinander über Verbindungsleitungen, über die Informationen übertragen werden können, entstehen dabei Netzwerke. Diese Netzwerke können unterschiedlich ausgeprägt sein und werden anhand ihrer geometrischen Anordnung, der Netzwerktopologie, unterschieden.
 --> Teilnehmer im Netzwerk definieren
 
@@ -103,13 +105,23 @@ Modbus was da oben steht, Teilnehmer kabellängen etc.
 
 Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit keine weitere Relevanz haben, jedoch genannt werden sollten sind die Ring- und die Stern-Struktur. Die Ring-Struktur ist dadurch gekennzeichnet, ein physikalischer Ring mit Zweipunktverbindungen aufgebaut wird in dem über Teilnehmer hinweg kommuniziert wird. Die Stern-Topologie ist durch eine Zentralstation gekennzeichnet, die mit allen Teilnehmer verbunden ist und über die die gesamte Kommunikation abläuft \cite[S.~6f.]{schn06}.
 
-
-
 \subsubsection{Elektrisches EIA-485 Netzwerk/Interface}
 Hier wird EIA / RS485 dargestellt und abgegrenzt zu RS 232 und RS 422
 
+t 
+\newpage
 \subsubsection{Hardware}
 Kabel, Belegung
+t 
+\newpage
+
+\subsection{Modbus}
+Hier wird das Modbusprotokoll nach \cite{mod12} und \cite{mod06ser} und \cite{mod06tcp}  
+Und nach hier wird das Modbusprotokoll nach \cite[S.5]{mod12} und \cite[S.5]{mod06ser} und \cite[S.5]{mod06tcp}
+
+t 
+\newpage
+
 
 
 
@@ -119,25 +131,25 @@ Kabel, Belegung
 
 \section{Technische Grundlagen zur Modellbildung}
 \label{sec:grundlagenmodell}
-In diesem Kapitel werden die technischen Grundlagen zur Bilanzierung, welche für die Modellbildung benötigt werden, erläutert.
+In diesem Kapitel werden die technischen Grundlagen zur Bildung eines mathematischen Modells des Raumes erläutert.
 
 \subsection{Thermodynamische Systeme}
-Im Raummodell müssen Energieströme, genauer betrachtet Wärmeströme, untersucht werden. Um diese mit Hilfe von Bilanzierungen zu beschreiben folgt zunächst ein kurze Einführung in die Thermodynamische Systembildung nach \cite[S.~11ff.]{ba12}.
+Im Raummodell müssen Energieströme, genauer betrachtet Wärmeströme, untersucht werden. Um dieses thermodynamischen Vorgänge mit Hilfe von Bilanzierungsgleichungen zu beschreiben, folgt zunächst ein kurze Einführung in die Thermodynamische Systembildung nach \cite[S.~11ff.]{ba12}.
 
+\textit{Thermodynamische Systeme} werden durch den zu untersuchenden Raum abgegrenzt. Sie dienen dem Zweck der Bilanzierung von Massen- und Energieströmen und alles was diesen abgegrenzten Raum an den Systemgrenzen umgibt wird als Umgebung bezeichnet. Die begrenzenden Flächen können gedanklicher, physischer oder beider Natur zugleich sein, wichtig ist jedoch das die Systemgrenzen eindeutig festgelegt sind \cite[S.~11]{ba12}.
 
-Die thermodynamischen Systeme sind dadurch charakterisiert, dass sie durch den zu untersuchenden Raum abgegrenzt sind. Sie dienen dem Zweck der Bilanzierung von Massen- und Energieströmen. Alles was diesen abgegrenzten Raum an den Systemgrenzen umgibt wird als Umgebung bezeichnet. Die begrenzenden Flächen können gedanklicher, physischer oder beider Natur sein, sie müssen lediglich eindeutig festgelegt sein.
-Anhand der Eigenschaften der Systemgrenzen lassen sich die Systeme weiter differenzieren.
-Bei Systemen deren Grenzen undurchlässig für Materie sind spricht man von geschlossenen Systemen. Die Grenzen eines solchen Systems sind meistens räumlich fest/definiert, müssen aber nicht gezwungenermaßen räumlich fest/fix sondern könne auch beweglich sein und werden dann durch das Volumen der Stoffmenge festgelegt.
-Sind die Grenzen für Materie durchlässig spricht man von offenen Systemen die in der Regel durch räumlich festgelegte räumliche Grenzen begrenzt sind. Dieser wird auch als Kontrollraum zbw. Kontrollvolumen bezeichnet. Diese werden können von Stoffströmen durchflossen werden.
-Ein abgeschlossenes System umfasst in der Regel mehrere Systeme \acrlong{bzw} ein System und dessen Umgebung sodass es zwischen dessen Grenzen und der Umgebung des abgeschlossenen Systems keine Wechselwirkungen gibt, dass heißt über dessen Grenzen hinweg fließen keine bzw. keine relevanten, dh kaum messbare, Flüsse von Materie und Energie.
+Anhand der Eigenschaften von den Systemgrenzen lassen sich die thermodynamischen Systeme weiter differenzieren.
+Solche Systeme, deren Grenzen undurchlässig für Materie sind, werden als \textit{geschlossene Systeme} bezeichnet und werden durch eine konstante Stoffmenge innerhalb des Systems gekennzeichnet. Die Grenzen eines geschlossenen Systems sind meistens räumlich anhand eines fixen Volumens definiert, können aber auch beweglich sein, wie z.B. das Volumen einer vorgegebenen Stoffmenge unabhängig von dessen räumlicher Ausdehnung \cite[S.~12]{ba12}.
 
+Sind die Grenzen von thermodynamischen Systemen für Materie durchlässig, werden diese als \textit{offene Systeme} bezeichnet. In der Regel werden diese von Stoffströmen durchflossen und durch räumlich festgelegte Grenzen beschrieben. Diese werden in der Literatur auch als \textit{Kontrollraum} oder \textit{Kontrollvolumen} bezeichnet \cite[S.~12]{ba12}.
 
-Solche thermodynamischen Systeme werden durch physikalische Größen beschrieben, welche gleichzeitig seine Eigenschaften kennzeichnen. Im Rahmen dieser Arbeit ist es ausreichend die Vorgänge und Effekte auf Makroskopischer Ebene zu betrachten, daher lässt sich ein solches Systems mit wenigen Variablen/Größen beschreiben.
-Deshalb wird innerhalb der Grenzen eines thermodynamischen Systems, also auch implizit für das Raummodell(Diese Annahme ist noch zu überprüfen und zu diskutieren), angenommen werden, dass die physikalischen Eigenschaften wie z.B. Temperatur, Druck und die chemische Zusammensetzung homogen ist, also an jeder Stelle die gleiche Ausprägung besitzt \cite[S.15]{ba12} . 
-Die Variablen lassen sich in äußere, welche den mechanischen Zustand beschreiben (Koordinaten im Raum, relative Geschw. zum Beobachter), und innere, welche den thermodynamischen Zustand der MAterie innerhalb der Systemgrenzen beschreiben , Größen aufteilen.
-Der Zustand eines Systems wird also durch die Variablen die ihn beschreiben charakterisiert/definiert, welshalb die Variablen, wie auch im Folgenden, als Zustandsgrößen bezeichnet werden.
-\cite[S.13~f.]{ba12}
+Ein \textit{abgeschlossenes System} umfasst in der Regel mehrere Systeme oder ein einzelnes System und dessen Umgebung, so dass es zwischen den Grenzen des abgeschlossenen Systems und seiner Umgebung keine Wechselwirkungen gibt. Die Systemgrenzen werden also so gelegt, dass über sie hinweg keine \acrlong{bzw} keine relevanten\footnote{\textit{Relevant} im Sinne von kaum messbarer Fluss und nicht messbare Auswirkung auf das System.} Flüsse von Materie und Energie \cite[S.~13]{ba12}.
 
+Nach der Abgrenzung folgt die \textit{Beschreibung} von thermodynamischen Systemen und dessen \textit{Eigenschaften}. Diese erfolgt durch \textit{Variablen} und \textit{physikalische Größen} die ein System kennzeichnen. Falls die Variablen feste Werte annehmen werden diese als \textit{Zustandsgrößen} bezeichnet, da sie den \textit{Zustand} eines Systems bestimmen \cite[S.~13]{ba12}. Im Rahmen der Modellbildung in Kapitel \ref{chap:modellbildung} ist es ausreichend die Vorgänge und Effekte auf systemischer Ebene zu betrachten, wodurch sich Modelle mit wenigen Variablen und physikalischen Größen beschreiben lassen.
+
+Die Variablen lassen sich in \textit{äußere Größen}, welche den mechanischen Zustand eines Systems beschreiben\footnote{Zum Beispiel die Koordinaten im Raum oder die relative Geschwindigkeit zum Beobachter)}, und \textit{innere Größen} gliedern, welche den thermodynamischen Zustand, also die Eigenschaften der Materie innerhalb der Systemgrenzen, beschreiben\cite[S.13~f.]{ba12}.
+
+Innerhalb der Grenzen eines thermodynamischen Systems, und damit implizit auch für das Raummodell\footnote{Diese Annahme wird im Kapitel \ref{chap:schlussteil} noch überprüft und kritisch hinterfragt werden müssen} wird \textit{Homogenität} angenommen. Dies bedeutet, dass die physikalischen Eigenschaften, wie \acrlong{zb} Temperatur und Druck, sowie die chemische Zusammensetzung an jeder Stelle innerhalb des Systems homogen ist, also die gleiche Ausprägung besitzt \cite[S.15]{ba12}.
 
 Da wir im Rahmen von \acrlong{mpc} Zustände und deren Änderungen untersuchen müssen auch Zustandsänderungen untersucht werden. Zustandsänderungen eines Systems werden durch Änderungen (also Flüsse) von Energie und Materie/Masse über dessen Grenzen hinweg bedingt. Diese finden meist im Austausch der Umgebung statt. Während einer solchen Änderung des Systemzustands wird ein Prozess durchlaufen, der eine zeitliche Abfolge von Ereignissen ist. Eine gleiche Zustandsänderung kann also durch verschiedene Prozesse bewirkt werden. Ein Prozess beschreibt also mehr als die reine Zustandsänderung des Systems sondern viel mehr die Beziehungen zwischen einem System und seiner Umgebung. 
 Ein Prozess ist also umfassender als eine Zustandsänderung und diese weist lediglich auf einen ablaufenden Prozess hin.
@@ -200,3 +212,8 @@ Gleichung Qdot =k*A*deltaT
 Geben Wärmestrom als Funktion an von verschiedenen Paramatern, hier Fläche an der Austausch stattfindet, Temperaturdifferenz und Wärmedurchgangszahl bzw Wärmeübergangszahl an.
 Wärmedurchgangskoeefizient oder auch U Wert
 Übertsragung folgt ab Seite 17 Wärmebuch
+
+t 
+\newpage
+t 
+\newpage
