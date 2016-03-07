@@ -126,6 +126,9 @@ Und nach hier wird das Modbusprotokoll nach \cite[S.5]{mod12} und \cite[S.5]{mod
 \section{Technische Grundlagen zur Modellbildung}
 \label{sec:grundlagenmodell}
 In diesem Kapitel werden die technischen Grundlagen zur Bildung eines mathematischen Modells des Raumes erläutert.
+Themrodym systeme
+1. HS thermo
+Wärmeübertragung
 
 \subsection{Thermodynamische Systeme}
 Im Raummodell müssen Energieströme, genauer betrachtet Wärmeströme, untersucht werden. Um dieses thermodynamischen Vorgänge mit Hilfe von Bilanzierungsgleichungen zu beschreiben, folgt zunächst ein kurze Einführung in die Thermodynamische Systembildung nach \cite[S.~11ff.]{ba12}.
@@ -150,53 +153,49 @@ Da wir im Rahmen der Modellbildung Zustände betrachten müssen auch deren Ände
 Ein Prozess kann aber auch innerhalb eines Systems stattfinden, dass heißt ohne äußere Einwirkungen. Dies geschieht zum durch das Aufheben innerer Hemmungen oder dem Wegfall Zwängen von Außen. Diese Prozesse laufen in abgeschlossenen Systemen meist von selbst ab und streben als Ziel einen ausgeglichenen, also homogenen, Endzustand an. \textit{Ausgleichsprozesse} dienen somit dazu, einen \textit{Gleichgewichtszustand} zu erreichen und repräsentieren Wechselwirkungen zwischen verschiedenen Teilen eines abgeschlossenen Systems. Dabei gleichen sich die Zustandsgrößen von einzelnen Subsystemen wie zum Beispiel der Druck oder die Temperatur einander an. Der Gleichgewichtszustand wird also durch die Zustände in den einzelnen Subsystemen bestimmt und ist dadurch charakterisiert, dass ein System diesen Zustand nicht von sich aus sondern nur durch äußere Eingriffe verlässt, zum Beispiel durch eine Veränderungen in der Umgebung. Die Erfahrung lehrt, dass ein System einem Gleichgewichtszustand entgegen strebt, wenn es sich selbst überlassen wird \cite[S.22~f.]{ba12}.
 Im Rahmen der Modellbildung in Kapitel \ref{chap:modellbildung} nehmen diese \textit{Ausgleichsprozesse} eine zentrale Rolle ein, weil der Großteil an Änderungen von einzelnen Zustandsgrößen innerhalb des Raumes darauf zurückgeführt werden können. 
 
-%Here We Go
-Reversible Prozesse, da angenommen dass Umgebung groß genug damit die \Gun kleinen\Gob Energieströme vernachlässigt werden können. -notwendig?!
-
-
 \subsection{Erster Hauptsatz der Thermodynamik}
+Der erste Hauptsatz der Thermodynamik wird im Folgenden als allgemeiner Energieerhaltungssatz formuliert und anschließend angewendet um eine Energiebilanzgleichung für geschlossene thermodynamische Systeme zu erhalten.
 
-\cite[S.~43ff.]{ba12}
-Der erste Hauptsatz der Thermodynamik erweitert den mechanischen Ernergieerhaltungssatz um die Energieformen Wärme und Energie und handelt ganz allgemein vom Prinzip der Energieerhaltung und dient der Bilanzierung von Systemen und wird später bei der Modellbildung des Raumes Anwendung finden. 
-Die Energie eines Systems $E$ besteht aus potenzieller $E_{pot}$ und kinetischer Energie $E_{kin}$ wie in der Mechanik und wird durch die Innere Energie $U$ ergänzt wie in nachstehender Gleichung beschrieben \cite[S.~49]{ba12}
+Der erste Hauptsatz der Thermodynamik erweitert den mechanischen Energieerhaltungssatz um die Energieformen Wärme und innere Energie. Er handelt ganz allgemein vom Prinzip der Energieerhaltung und  dient er der Bilanzierung von Systemen \cite[S.~43]{ba12}.
+
+Die Gesamtenergie eines Systems \textit{\gls{e}} setzt sich zusammen aus der potenziellen \textit{\gls{epot}} und kinetischen Energie \textit{\gls{ekin}} wie in der Mechanik und wird durch die innere Energie \textit{ \gls{u}} ergänzt \cite[S.~49]{ba12}:
 
 \begin{equation}
 \label{eq:energie}
 E := E_{pot} + E_{kin} + U
 \end{equation}
- 
-Die mechanischen Energie kann bei den nachfogenden Betrachtungen vernachlässigt werden, da es sich um ein ortsfestes System handelt, das heißt die potentielle Energie ist konstant, in das und aus dem heraus keine Ströme fließen und es sich eslbts nicht bewegt, das heißt die kinetsiche Energie bleobt evenfalls kosntant und können somit beide vernachlässigt werden und die Energie des Systems wird verinfacht nur durch durch die innere Energie angenommen.
 
+Im weiteren Verlauf der Arbeit werden nur ortsfeste Systeme betrachtet die sich dadurch auszeichnen, dass deren potenzielle Energie  \gls{epot} in etwa konstant ist. Weiterhin erfahren sie im betrachteten Intertialsystem Erde auch nur sehr kleine Änderungen in ihrer Geschwindigkeit, weshalb auch die kinetische Energie \gls{ekin} in etwa konstant ist.  Da die Änderungen der mechanischen Energien in Bezug auf die Änderung der inneren Energie sehr klein sind werden im Folgenden nicht weiter betrachtet und die Gesamtenergie eines Systems \gls{e} vereinfacht und lediglich aus der inneren Energie bestehend angenommen.
 
-
-Die innere Energie ist abhängig von der spezifischen Wärmekapazität und der Masse innerhalb eines Systems und berechnet sich nach der veränderten Gleichung aus \cite[S.~54]{ba12} und entspricht der Energie der Masse eines Systems:
+Die innere Energie hängt von der spezifischen Wärmekapazität \gls{cp}, der Masse eines Systems \gls{msys} und der Temperatur \gls{t} \acrlong{bzw} \gls{T} ab \cite[S.~54]{ba12}:
 
 \begin{equation}
 \label{eq:innereenergie}
-U := m*c_p*T bzw. m*c_p*(t-T_0)+u_0
+U := m*c_p*T=m*c_p*t+u_0,~mit~t=T-T_0
 \end{equation}
 
-Erst qualitativ, dann quantitaiv
-Der 1. Hauptsatz besagt, dass jedes System eine Energie als Zustandsgröße besitzt die sich aus den folgenden zusammensetzt:
-mechanisch
-wärme
-innere Energie
+Nach dem Prinzip der Energieerhaltung, kann die Energie eines Systems also weder erzeugt noch vernichtet werden sondern lediglich durch den Energietransport über dessen Grenzen hinweg verändert werden. Daraus ergeben sich folgende qualitative Formen des Energietransports \cite[S.~48f.]{ba12}:
 
-\cite[S.~48]{ba12}
-Außerdem kann sich energie nur durch transport über die grenzen hinweg ändern und es gilt das prinzip der nergieerhaltung. Möglich trabsportformen, Verricgten von arbeit --> wie mechanik, d.h. umewandlung von enegrie
-Übergang von wärme, das heiosst qärmetrabsprot, und Transport von Materie, da Mateire gleiche energie, also auch durch Stoffstransport.
-Daraus kfolgt die Energiebilanzgleichung um den effekt quanititiv zu bescheibeen
-Energie System Gesamt E= Ekin+Epot+U --Y Auch System in Ruhe, d.h. ekin=epot=0 hat Energie
-U ist innere Energie und ebschreibt die Energie die innerhalb eines Systems, durch bestandteile und ist abhönigg von der der masse, da Masse=energie
-Energie eines systems ist konstant und berechnet sich nach folgender Gleichung \cite[S.~54]{ba12}
+\begin{itemize}
+	\item Die Arbeit \gls{w}, die entweder von oder an einem System verrichtet wird, in differentieller Form die Leistung \gls{p}.
+	\item Die Wärme \gls{q}, die entweder in das System hinein- oder herausfließt, in differentieller Form der Wärmestrom \gls{qdot}.
+	\item Der Transport von Materie, also das Einbringen oder Wegnehmen von Masse \gls{m} eines System, in differentieller Form die Materialflüsse \gls{mdot}.
+\end{itemize}
+
+Mit der zuvor getroffenen Annahme, dass die innere Energie der des Systems entspricht, und unter Beachtung der Vorzeichenkonvention, welche besagt dass zugeführte Energie positiv und abgeführte Energie negativ zu bewerten ist, lassen sich die Änderungen der Energie eines Systems mit der folgenden Gleichung quantitativ beschreiben \cite[S.~54]{ba12}:
 
 \begin{equation}
 \label{eq:hauptsatz}
-Q_{12} + W_{12} = E_2 - E_1
+\begin{split}
+\Delta U & = Q + W + m_{in}*c_{p}*T_{in}-m_{out}*c_{p}*T_{out} \\ ~& \mathrm{beziehungsweise~in~differentieller~Form}\\
+\frac{dU}{dt}=\dot{U} & =\dot{Q}+P+\dot{m}_{in}*c_{p}*T_{in}-\dot{m}_{out}*c_{p}*T_{out}
+\end{split}
 \end{equation}
 
 
 \subsection{Wärmeübertragung}
+% Here we go
+
 Da zur Betsimmung und Steuerung einer Raumheizungsnalage die Betrachtung von Wärmeströmen unumgänglich ist werden die Grundlagen dazu im Folgenden erläutert.
 Die Wärmeübertragung kann grundsätzlich nur durch zwei Arten stattfinden, durch Strahlung, die ohne stofflichen Träger durch elektromagnetische Wellen erfolgt, welche keine weitere Relevanz für weitere Betrachtungen hat und deshalb hier nicht erläutert wird, und durch die Wärmeleitung, die sich wiederum in die Leitung und die Konvektion aufteilt. \cite[S.~3f.]{bo14}
 

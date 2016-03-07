@@ -1,7 +1,109 @@
 This is makeindex, version 2.15 [TeX Live 2015] (kpathsea + Thai support).
-Scanning style file /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo....done (41 entries accepted, 0 rejected).
-Sorting entries....done (235 comparisons).
-Generating output file /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.sls....done (91 lines written, 0 warnings).
-Output written in /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.sls.
+Scanning input file /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo...
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 1):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 2):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 3):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 4):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 5):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 6):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 7):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 8):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 9):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 10):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 11):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 12):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 13):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 14):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 15):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 16):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 17):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 18):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 19):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 20):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 21):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 22):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 23):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 24):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 25):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 26):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 27):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 28):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 29):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 30):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 31):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 32):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 33):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 34):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 35):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 36):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 37):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 38):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 39):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 40):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 41):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 42):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 43):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 44):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 45):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 46):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 47):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 48):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 49):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 50):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 51):
+   -- Unknown index keyword \glossaryentry.
+!! Input index error (file = /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slo, line = 52):
+   -- Unknown index keyword \glossaryentry.
+done (0 entries accepted, 52 rejected).
+Nothing written in /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.sls.
 Transcript written in /Users/danielmayer/Desktop/t/docs/.texpadtmp/thesis-doc.slg.
