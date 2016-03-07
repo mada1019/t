@@ -108,19 +108,13 @@ Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit ke
 \subsubsection{Elektrisches EIA-485 Netzwerk/Interface}
 Hier wird EIA / RS485 dargestellt und abgegrenzt zu RS 232 und RS 422
 
-t 
-\newpage
 \subsubsection{Hardware}
 Kabel, Belegung
-t 
-\newpage
 
 \subsection{Modbus}
 Hier wird das Modbusprotokoll nach \cite{mod12} und \cite{mod06ser} und \cite{mod06tcp}  
 Und nach hier wird das Modbusprotokoll nach \cite[S.5]{mod12} und \cite[S.5]{mod06ser} und \cite[S.5]{mod06tcp}
 
-t 
-\newpage
 
 
 
@@ -151,11 +145,12 @@ Die Variablen lassen sich in \textit{äußere Größen}, welche den mechanischen
 
 Innerhalb der Grenzen eines thermodynamischen Systems, und damit implizit auch für das Raummodell\footnote{Diese Annahme wird im Kapitel \ref{chap:schlussteil} noch überprüft und kritisch hinterfragt werden müssen} wird \textit{Homogenität} angenommen. Dies bedeutet, dass die physikalischen Eigenschaften, wie \acrlong{zb} Temperatur und Druck, sowie die chemische Zusammensetzung an jeder Stelle innerhalb des Systems homogen ist, also die gleiche Ausprägung besitzt \cite[S.15]{ba12}.
 
-Da wir im Rahmen von \acrlong{mpc} Zustände und deren Änderungen untersuchen müssen auch Zustandsänderungen untersucht werden. Zustandsänderungen eines Systems werden durch Änderungen (also Flüsse) von Energie und Materie/Masse über dessen Grenzen hinweg bedingt. Diese finden meist im Austausch der Umgebung statt. Während einer solchen Änderung des Systemzustands wird ein Prozess durchlaufen, der eine zeitliche Abfolge von Ereignissen ist. Eine gleiche Zustandsänderung kann also durch verschiedene Prozesse bewirkt werden. Ein Prozess beschreibt also mehr als die reine Zustandsänderung des Systems sondern viel mehr die Beziehungen zwischen einem System und seiner Umgebung. 
-Ein Prozess ist also umfassender als eine Zustandsänderung und diese weist lediglich auf einen ablaufenden Prozess hin.
-Ein Prozess kann aber auch innerhalb eines Systems ohne äußere Einwirkungen stattfinden, z.B. durch Aufheben innnerer Hemmungen oder Zwängen von Außen. Dies sind meist von selbst statfindende Prozesse in abgeschlossenen Systemen, wie auch relevant für die Modellbildung in Kapitel \ref{chap:modellbildung}. Diese Prozesse werden Ausgleichsprozesse genannt, die danach streben einen Gleichgewichtszustand als Endzustand einzunehmen(\Gun Erfahrungsatz\Gob dass ein sich selbst überlassenes abgeschl. System einem GG-Zustand zustrebt). Solche Ausgleichprozesse repräsentieren Wechselwirkungen zwischen verschiedenen Teilen des abgeschlossenen Systems, die dabei versuchen die Zustandsgrößen auszugleichen und in den GG-Zustand zu kommen, in dem das System vsich von sich aus nicht ändert sondern nur durch äußere Eingriffe, da das System den GG nie von selbst verlässt. Ein abgeschlossenes System strebt also imme einem GG-Zustand hinterher, der durch die Zustände in den einzelnen Teilen(Subsystemen) bestimmt wird. 
-\cite[S.21~f.]{ba12}
+Da wir im Rahmen der Modellbildung Zustände betrachten müssen auch deren Änderungen genauer untersucht werden. Die \textit{Zustandsänderungen} eines Systems werden durch Änderungen von Energie oder Materie über dessen Grenzen hinweg bedingt und finden meist im Austausch der Umgebung statt. Während einer solchen Änderung des Systemzustands wird ein Prozess durchlaufen, der eine zeitliche Abfolge von Ereignissen ist. Eine Änderung des Zustands eines Systems mit der gleichen Wirkung kann also durch verschiedene Prozesse bewirkt werden. Daher beschreibt ein \textit{Prozess} nicht nur die Veränderung des Zustands sondern viel mehr die Beziehungen zwischen einem System und seiner Umgebung \cite[S.21~f.]{ba12}.
 
+Ein Prozess kann aber auch innerhalb eines Systems stattfinden, dass heißt ohne äußere Einwirkungen. Dies geschieht zum durch das Aufheben innerer Hemmungen oder dem Wegfall Zwängen von Außen. Diese Prozesse laufen in abgeschlossenen Systemen meist von selbst ab und streben als Ziel einen ausgeglichenen, also homogenen, Endzustand an. \textit{Ausgleichsprozesse} dienen somit dazu, einen \textit{Gleichgewichtszustand} zu erreichen und repräsentieren Wechselwirkungen zwischen verschiedenen Teilen eines abgeschlossenen Systems. Dabei gleichen sich die Zustandsgrößen von einzelnen Subsystemen wie zum Beispiel der Druck oder die Temperatur einander an. Der Gleichgewichtszustand wird also durch die Zustände in den einzelnen Subsystemen bestimmt und ist dadurch charakterisiert, dass ein System diesen Zustand nicht von sich aus sondern nur durch äußere Eingriffe verlässt, zum Beispiel durch eine Veränderungen in der Umgebung. Die Erfahrung lehrt, dass ein System einem Gleichgewichtszustand entgegen strebt, wenn es sich selbst überlassen wird \cite[S.22~f.]{ba12}.
+Im Rahmen der Modellbildung in Kapitel \ref{chap:modellbildung} nehmen diese \textit{Ausgleichsprozesse} eine zentrale Rolle ein, weil der Großteil an Änderungen von einzelnen Zustandsgrößen innerhalb des Raumes darauf zurückgeführt werden können. 
+
+%Here We Go
 Reversible Prozesse, da angenommen dass Umgebung groß genug damit die \Gun kleinen\Gob Energieströme vernachlässigt werden können. -notwendig?!
 
 
@@ -212,8 +207,3 @@ Gleichung Qdot =k*A*deltaT
 Geben Wärmestrom als Funktion an von verschiedenen Paramatern, hier Fläche an der Austausch stattfindet, Temperaturdifferenz und Wärmedurchgangszahl bzw Wärmeübergangszahl an.
 Wärmedurchgangskoeefizient oder auch U Wert
 Übertsragung folgt ab Seite 17 Wärmebuch
-
-t 
-\newpage
-t 
-\newpage
