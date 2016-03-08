@@ -1,4 +1,4 @@
-%\renewcommand{\chapterheadstartvskip}{\vspace*{0 cm}}
+\renewcommand{\chapterheadstartvskip}{\vspace*{0 cm}}
 
 \chapter{Theoretische Grundlagen}
 \label{chap:theoretischegrundlagen}
@@ -158,7 +158,7 @@ Der erste Hauptsatz der Thermodynamik wird im Folgenden als allgemeiner Energiee
 
 Der erste Hauptsatz der Thermodynamik erweitert den mechanischen Energieerhaltungssatz um die Energieformen Wärme und innere Energie. Er handelt ganz allgemein vom Prinzip der Energieerhaltung und  dient er der Bilanzierung von Systemen \cite[S.~43]{ba12}.
 
-Die Gesamtenergie eines Systems \textit{\gls{e}} setzt sich zusammen aus der potenziellen \textit{\gls{epot}} und kinetischen Energie \textit{\gls{ekin}} wie in der Mechanik und wird durch die innere Energie \textit{ \gls{u}} ergänzt \cite[S.~49]{ba12}:
+Die Gesamtenergie eines Systems \gls{e} setzt sich zusammen aus der potenziellen \gls{epot} und kinetischen Energie \gls{ekin} wie in der Mechanik und wird durch die innere Energie \gls{u} ergänzt \cite[S.~49]{ba12}:
 
 \begin{equation}
 \label{eq:energie}
@@ -188,21 +188,37 @@ Mit der zuvor getroffenen Annahme, dass die innere Energie der des Systems entsp
 \label{eq:hauptsatz}
 \begin{split}
 \Delta U & = Q + W + m_{in}*c_{p}*T_{in}-m_{out}*c_{p}*T_{out} \\ ~& \mathrm{beziehungsweise~in~differentieller~Form}\\
-\frac{dU}{dt}=\dot{U} & =\dot{Q}+P+\dot{m}_{in}*c_{p}*T_{in}-\dot{m}_{out}*c_{p}*T_{out}
+\frac{dU}{dt}=\dot{U} & =\dot{Q}+P+\sum\dot{m}_{in}*c_{p}*T_{in}-\sum\dot{m}_{out}*c_{p}*T_{out}
 \end{split}
 \end{equation}
 
 
+%Noch einmal überarbeiten
+
 \subsection{Wärmeübertragung}
-% Here we go
 
-Da zur Betsimmung und Steuerung einer Raumheizungsnalage die Betrachtung von Wärmeströmen unumgänglich ist werden die Grundlagen dazu im Folgenden erläutert.
-Die Wärmeübertragung kann grundsätzlich nur durch zwei Arten stattfinden, durch Strahlung, die ohne stofflichen Träger durch elektromagnetische Wellen erfolgt, welche keine weitere Relevanz für weitere Betrachtungen hat und deshalb hier nicht erläutert wird, und durch die Wärmeleitung, die sich wiederum in die Leitung und die Konvektion aufteilt. \cite[S.~3f.]{bo14}
+Wärmeströme spielen bei der Modellbildung in Kapitel \ref{chap:modellbildung} eine wichtige Rolle, daher ist eine genauere Betrachtung dieser unumgänglich und im Folgenden werden die Grundlagen dazu erläutert.
 
-Die Wärmeübertragung wird druch den Wärmestrom $\dot{Q}$ beschrieben, der quantifiziert wieviel Wärme pro Zeiteinheit $[W]$ übertragen wird \cite[S.~5]{bo14}.
-Für die weitere Betrachtung im Rahmen dieser Arbeit ist lediglich die Wärmeleitung ohne KOnvektion von Relevanz, weshalb diese nun näher erläutert wird.
-Kinetische Kopplungsgleichung\cite[S.~7]{bo14}
-Gleichung Qdot =k*A*deltaT
-Geben Wärmestrom als Funktion an von verschiedenen Paramatern, hier Fläche an der Austausch stattfindet, Temperaturdifferenz und Wärmedurchgangszahl bzw Wärmeübergangszahl an.
-Wärmedurchgangskoeefizient oder auch U Wert
-Übertsragung folgt ab Seite 17 Wärmebuch
+Die Definition von Wärmeübertragung ist nach \cite[S.~1]{bo14} \Gun [...] der Transfer der Energieform Wärme aufgrund einer Temperaturdifferenz. \Gun Die Definition umfasst also einen zuvor beschriebenen Ausgleichsprozess und eine Änderung der inneren Energie eines thermodynamischen Systems.
+Die Wärmeübertragung kann nach \textit{Nußelt}\footnote{Beschrieben in seinem Aufsatz \Gun Das Grundgesetz des Wärmeüberganges\Gob , 1915.} grundsätzlich durch zwei verschiedene Arten stattfinden \cite[S.~3f.]{bo14}:
+
+\begin{itemize}
+	\item Durch Strahlung, bei der die Übertragung von Wärme ohne stofflichen Träger durch elektromagnetische Wellen zwischen Oberflächen erfolgt. Weil diese Art der Wärmeübertragung keine Relevanz für die weiteren Betrachtungen hat wird an dieser Stelle nicht weiter darauf eingegangen. 
+	\item  Durch Wärmeleitung, die sich wiederum in die Wärmeübertragung zwischen ruhenden Stoffen, und die Konvektion, die eine Wärmeübertragung zwischen einem ruhenden und einem strömenden Fluid beschreibt, aufteilen lässt. 
+\end{itemize}
+
+Die übertragene Wärmemenge ist bei der reinen Wärmeleitung lediglich von den Stoffeigenschaften und der Temperaturdifferenz abhängig, bei der Konvektion hingegen, unabhängig davon ob erzwungen oder frei, hängt sie von der Strömung der Fluide ab. Die Konvektion ist ein Effekt zusätzlich zur reinen Wärmeleitung auftritt und ist im weiteren Verlauf der Arbeit nicht relevant und wird deshalb nicht detaillierter ausgeführt \cite[S.~3f.]{bo14}.
+Erfolgt der Wärmetransport stationär, dass heißt er ist von äußeren Anregungen bedingt und unabhängig von der Zeit, lässt er sich qualitativ einfach als konstanter Wärmestrom \gls{qdot} beschreiben und gibt an wie viel Wärme pro Sekunde übertragen wird \cite[S.~5ff.]{bo14}. Der Wärmestrom ist wie zuvor bereits erwähnt von den Stoffeigenschaften abhängig, welche von der Wärmedurchgangszahl \gls{uwert}\footnote{Der U-Wert wurde bis zu der Umstellung auf die europäischen Prüfnormen 2003 als k-Wert bezeichnet und ist unter dieser Bezeichnung noch häufig in der Literatur zu finden \cite[S.1~f.]{sa04}} und der Austauschoberfläche \gls{A}, an der der Wärmeaustausch stattfindet. Typische U-Werte für verschiedene Materialien und Komponenten finden in der einschlägigen Literatur und beziehen sich bei der Übertragung durch eine Wand im europäischen Raum auf die Außenfläche \cite[S.~28]{bo14}. Damit lässt sich der Wärmestrom unter Berücksichtigung der Abhängigkeiten durch die kinetische Kopplungsgleichung quantifizieren \cite[S.~6f.]{bo14}:
+
+\begin{equation}
+\label{eq:qdot}
+\dot{Q} := u*A*(t_{1}-t_{2})
+\end{equation}
+
+Unterschiedliche geometrische Ausprägungen, wie zum Beispiel ein Wärmeaustausch durch eine Wand oder ein Rohr hindurch, finden damit implizit bei der Austauschoberfläche Berücksichtigung.
+
+\subsection{Klima und Sonneneinstrahlung und Sonnenbahn}
+% Here we go after OSI
+
+
+
