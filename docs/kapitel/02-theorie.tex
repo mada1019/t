@@ -44,15 +44,16 @@ Es ist leicht zu erkennen, dass die technische Kommunikation einen sehr umfangre
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\textwidth]{abbildungen/20160112_osi}
+\includegraphics[width=\textwidth]{abbildungen/20160112_osi}
 \caption[Die sieben Schichten des Open System Interconnection Modells]{Die sieben Schichten des \textit{Open System Interconnection} Modells verändert nach \cite[S.~10]{schn06} und \cite[S.~28]{osi96}}
 \label{fig:osi}
 \end{figure}
 
-%Here We Go
-Jede Ebene hat dann klar definierte Teilaufgaben, die der Kommunikation dienen. Diese Ebenen werden Schichten genannt und haben klar definierte Schnittstellen/interfaces zu ihren Nachbarschichten. An diesen Schnittstellen stellen die einzelnen Schichten Dienste bereit die von den anderen Ebenen genutzt werden können. Durch diesen Aufbau können Schichten einfach bearbeitet oder ausgetauscht werden, ohne die Gesamtfunktionalität zu gefährden. Dadurch kann ein System auch aus Komponenten verschiedener Hersteller zusammengesetzt werden, diese Architektur dient also als Basis für offene Systeme. Wie in Abbildung \ref{fig:osi} ebenfalls dargestellt ist, werden die Schichten eins bis vier auch als Übertragungsschichten oder Transportsystem zusammengefasst und sind für die Datenübertragung zwischen den Systemen verantwortlich. Die Schichten fünf bis sieben werden gemeinsam als Anwendungsschichten bezeichnet und stellen die Zusammenarbeit bei der Datenübertragung zwischen der Anwendersoftware und dem Betriebssystem sicher \cite[S.~8f.]{schn06}.
+Die Ebenen werden Schichten genannt und haben klar definierte Aufgaben und Schnittstellen zu ihren Nachbarschichten. An diesen Schnittstellen werden Dienste bereitgestellt, die von den anderen Ebenen genutzt werden können. Durch diesen Aufbau können einzelne Schichten einfach bearbeitet oder ausgetauscht werden, ohne die Gesamtfunktionalität zu gefährden. Außerdem kann ein System auch aus Komponenten verschiedener Hersteller zusammengesetzt werden, womit diese Architektur nachweislich als Basis für offene Systeme dient. In \ref{fig:osi} ist ebenfalls dargestellt, dass die Schichten eins bis vier auch als Übertragungsschichten beziehungsweise Transportsystem zusammengefasst werden, weil sie für die Datenübertragung zwischen Systemen als gemeinsame Aufgabe haben. Die Schichten fünf bis sieben werden als Anwendungsschichten bezeichnet weil sie bei der Datenübertragung die Zusammenarbeit zwischen der Anwendersoftware und dem Betriebssystem sicherstellen \cite[S.~8f.]{schn06}.
 
-Im Folgenden wird kurz auf die einzelnen Schichten eingegangen bevor das Zusammenwirken der einzelnen Schichten anhand eines Beispiels verdeutlicht wird.
+Im Folgenden wird kurz auf die einzelnen Schichten eingegangen bevor das Zusammenwirken der einzelnen Schichten anhand eines Beispiels verdeutlicht wird. %Evtl raus
+
+%Here We Go
 
 Die Schicht eins -- die physikalische Schicht -- Möglichkeiten zur Verfügung und die phsysikalische Datenübertragung der einzelnen Bits \cite[S.~49f.]{osi96}. Sie legt also die mechanischen, wie zb. stecker(endsystemkopplung), zurodnung der pins und kabelspezifikationen, elektrischen, art der codierung Spannungspegel etc., fest, idr Standards wie RS/EIA 232, RS/EIA 422, RS/EIA 485, oder aber auch Glasfaserstrecke. Wichtig ist dabei, dass diese lediglich die tatsächlcihe Strecke spezifiziert und nicht das physikalische Medium selbst ist und die Kommunikation unabhängig von der konkreten Ausprägung der Schicht ist \cite[S.~9]{schn06}.
 
