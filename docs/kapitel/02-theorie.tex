@@ -17,31 +17,30 @@
 \label{sec:grundlagenbus}
 In diesem Kapitel werden die Grundlagen von Hard- und Software beleuchtet die für die Kommunikation der Steuerung mit den einzelnen Anlagenteilen benötigt werden.
 Diese umfassen zunächst Bussysteme im Allgemeinen und werden anhand des spezifischen/konkreten Anwendungsfalls Modbus erläutert.
-Die Einführung wird sich an die Strukutr nach \cite{schn06} anlehnen.
+Die Einführung wird sich an die Struktur nach \cite{schn06} anlehnen.
 
 \subsection{OSI-Kommunikationsmodell}
-Hier wird das OSI mit Schichten--> Referenzieren von Schichten in den Folgenden.
-Aufgrund der großen Anzahl verschiedener technischer Systemen existieren auch viele verschiedene Arten der Kommunikation von technischen Systemen. Bei einer genaueren Betrachtung dieser Kommunikation wird ersichtlich, das diese oftmals ähnlich abläuft und sich durch ein Meta-Schema beschreiben lässt \cite[S.~8]{schn06}. Um die Kommunikation auch über diese verschiedenen Systeme hinweg zu ermöglichen und zu formalisieren, wurde von der \textit{International Organization for Standardization} 1984 ein abstraktes Referenz-Modell entwickelt, dass in der \textit{ISO 7498-1} beschrieben ist und zur Entwicklung und Verbesserung von Standards der des Informationsaustauschs und als Referenz für die Konsistenz aller bestehenden Standards  dient \cite[S.~1]{osi96}. Das Ziel des Modells (design intend) war/ist es, eine Menge von Standards zu schaffen damit es autonomen Systemen möglich ist miteinander zu kommunizieren \cite[S.~4]{osi96}.
+Aufgrund der großen Anzahl verschiedener technischer Systeme existieren auch viele verschiedene Arten der Kommunikation untereinander. Bei der genaueren Betrachtung der Kommunikation wird ersichtlich, dass diese oftmals ähnlich abläuft und sich durch ein Meta-Schema beschreiben lässt \cite[S.~8]{schn06}. Um die Kommunikation auch über verschiedenen Systeme hinweg zu ermöglichen und sie zu formalisieren, wurde von der \textit{International Organization for Standardization} 1984 ein abstraktes Referenz-Modell entwickelt, dass in der \textit{ISO-Norm 7498-1} beschrieben ist. Es dient der Entwicklung und Verbesserung von Standards für den Informationsaustausch sowie als Referenz für bestehende Standard um eine gewisse Konsistenz zu wahren \cite[S.~1]{osi96}. Das Ziel bei dem Entwurf des Modells war es, eine Menge von Standards zu schaffen um autonomen Systemen die Kommunikation untereinander zu ermöglichen \cite[S.~4]{osi96}.
 
-Das sogenannte \acrlong{osi} (\acrshort{osi}) wird zunächst allgemein erläutert, da die Kommunikation von technischen Systemen im Rahmen dieser Arbeit eine zentrale Rolle spielt, und wird anschließend im Kontext mit den eingesetzten Protokollen/Schnittstellen der verschiedenen eingesetzten Technologien angewendet.
+Das sogenannte \acrlong{osi} wird zunächst allgemein erläutert, da die Kommunikation von technischen Systemen im Rahmen der Arbeit eine zentrale Rolle spielt, und wird anschließend im Anwendungskontext mit den eingesetzten Protokollen und Schnittstellen referenziert.
 
-Zunächst wird im Standard definiert womit sich das Modell beschäftigt und abgegrenzt was im Modell berücksichtigt wird und was nicht \cite[S.~3]{osi96}:
+Zunächst wird im Standard definiert, womit sich das Modell beschäftigt und abgegrenzt welche Aspekte im Modell keine Berücksichtigung finden \cite[S.~3]{osi96}:
 
 \begin{quote}
 \textit{\Gun OSI is concerned with the exchange of information between open systems (and not the internal functioning of each individual real open system).\Gob}
 \end{quote}
 
-Das \acrshort{osi} beschäftigt sich also zentral mit dem Austausch von Informationen und allen dazugehörigen Aufgaben. Diese sind sehr umfangreich und umfassen folgende Aufgabenbereiche/bzw werden jeweils/nur bezogen auf den Austausch von Informationen und wie folgt beschrieben, \cite[S.~3f.]{osi96}:.
+Das \acrshort{osi} beschäftigt sich also zentral mit dem Austausch von Informationen zwischen verschiedenen offenen Systemen und allen dabei anfallenden Aktivitäten. Diese sind sehr umfangreich und lassen sich in folgende Bereiche gliedern \cite[S.~3f.]{osi96}:
 
 \begin{itemize}
-\item die physischen Medien zur Vernetzung von offenen Systemen,
-\item die Vernetzung (an sich) von offenen Systemen,
-\item die Übertragung von Daten, umfassenderweise eine Kooperation von Systemen
+	\item Der Austausch von Informationen zwischen offenen Systemen,
+	\item die physischen Medien zur Verbindung von offenen Systemen und deren Transportmöglichkeit von Informationen,
+	\item die Vernetzung von offenen Systemen,
+	\item die Interaktion zwischen offenen Systemen und deren Fähigkeit zur Kooperation bei der Datenübertragung.
 \end{itemize}
 
-Bezogen auf den Austausch von Daten überschneiden sich die physischen Medien mit der Vernetzung und meinen also die Infrastruktur und deren Architektur, die zur Übertragung zur Verfügung steht. Bei der Kooperation von Systemen zur Datenübertragung sind weitaus mehr Aspekte zu beachten: Zunächst die Synchronisation der Prozesse, die Daten austauschen wollen. Des Weiteren die Darstellung der auszutauschenden Daten und deren eventuell notwendigen Transformation um mit einem anderen System kompatibel zu sein. Weitere wichtige Aufgaben sind die Datenspeicherung sowie deren Integrität und die Sicherheit des Austausch hinsichtlich Fehler und Einsicht von Außen \cite[S.~4]{osi96}.
-
-Wie leicht zu erkennen ist, ist die Kommunikation zwischen verschiedenen technischen Systemen sehr umfangreich/komplex/kompliziert. Daher wird der Kommunikationsprozess im \acrshort{osi} stark abstrahiert und zunächst in 7 verschiedene, abstrakte Ebenen aufgeteil um die einzelnen Aufgabenbereiche des Kommunikationsprozesses anfallen in Teilaufgaben zu gliedern bzw. zusammenzufassen, wie in Abbildung \ref{fig:osi} dargestellt.
+Bezogen auf den Austausch von Informationen überschneiden sich die physische Verbindung und die Vernetzung und entsprechen zusammen der Infrastruktur und deren Architektur, die zur Übertragung zur Verfügung steht. Die Interaktion umfasst weitaus mehr Aufgaben: Neben der Synchronisation der Prozesse, die Daten austauschen wollen, muss auch die Darstellung der auszutauschenden Daten und eventuell notwendige Transformationen beachtet werden, um eine Kompatibilität unterschiedlicher Systeme zu erreichen. Weitere wichtige Aufgaben sind die Datenspeicherung, deren Integrität und die Sicherheit beim Austausch hinsichtlich Fehler und Einsicht von Außen \cite[S.~4]{osi96}.
+Es ist leicht zu erkennen, dass die technische Kommunikation einen sehr umfangreichen und komplizierten Prozess darstellt. Daher wird der Kommunikationsprozess im \acrshort{osi} stark abstrahiert und in sieben abstrakte Ebenen gegliedert. Die einzelnen Ebenen sind in \ref{fig:osi} dargestellt und dienen dazu verschiedene Aufgaben des Kommunikationsprozesses in Teilaufgaben zusammenzufassen.
 
 \begin{figure}
 \centering
@@ -50,6 +49,7 @@ Wie leicht zu erkennen ist, ist die Kommunikation zwischen verschiedenen technis
 \label{fig:osi}
 \end{figure}
 
+%Here We Go
 Jede Ebene hat dann klar definierte Teilaufgaben, die der Kommunikation dienen. Diese Ebenen werden Schichten genannt und haben klar definierte Schnittstellen/interfaces zu ihren Nachbarschichten. An diesen Schnittstellen stellen die einzelnen Schichten Dienste bereit die von den anderen Ebenen genutzt werden können. Durch diesen Aufbau können Schichten einfach bearbeitet oder ausgetauscht werden, ohne die Gesamtfunktionalität zu gefährden. Dadurch kann ein System auch aus Komponenten verschiedener Hersteller zusammengesetzt werden, diese Architektur dient also als Basis für offene Systeme. Wie in Abbildung \ref{fig:osi} ebenfalls dargestellt ist, werden die Schichten eins bis vier auch als Übertragungsschichten oder Transportsystem zusammengefasst und sind für die Datenübertragung zwischen den Systemen verantwortlich. Die Schichten fünf bis sieben werden gemeinsam als Anwendungsschichten bezeichnet und stellen die Zusammenarbeit bei der Datenübertragung zwischen der Anwendersoftware und dem Betriebssystem sicher \cite[S.~8f.]{schn06}.
 
 Im Folgenden wird kurz auf die einzelnen Schichten eingegangen bevor das Zusammenwirken der einzelnen Schichten anhand eines Beispiels verdeutlicht wird.
@@ -217,8 +217,10 @@ Erfolgt der Wärmetransport stationär, dass heißt er ist von äußeren Anregun
 
 Unterschiedliche geometrische Ausprägungen, wie zum Beispiel ein Wärmeaustausch durch eine Wand oder ein Rohr hindurch, finden damit implizit bei der Austauschoberfläche Berücksichtigung.
 
-\subsection{Klima und Sonneneinstrahlung und Sonnenbahn}
 % Here we go after OSI
 
+\section{Technische Grundlagen zur Solartechnik}
+\subsection{Klima}\subsection{Sonnenbahn}
+\subsection{Sonnenstrahlung}
 
 
