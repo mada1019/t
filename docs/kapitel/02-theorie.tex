@@ -57,12 +57,40 @@ Die Ebenen werden Schichten genannt und haben klar definierte Aufgaben und Schni
 
 Im Folgenden wird kurz auf die einzelnen Schichten eingegangen bevor das Zusammenwirken der einzelnen Schichten anhand eines Beispiels verdeutlicht wird. %Evtl raus
 
+Die erste, physikalische Schicht stellt die mechanischen und elektrischen Möglichkeiten zur physischen Verbindung von Systemen zur Verfügung, um die Datenübertragung der einzelnen Bits zu ermöglichen \cite[S.~49f.]{osi96}. Sie legt also die mechanischen und elektrischen Eigenschaften der Übertragung fest, also die Endsystemkopplung (Stecker), die Kabelspezifikationen und die Zuordnung der Anschlüsse sowie die Art der Codierung und die Spannungspegel zur Übertragung. In der Regel werden dazu bestehende Normen genutzt, wie zum Beispiel die elektrischen Übertragungsstrecke nach RS485-Norm, welche im Folgenden noch erläutert wird.
+
+Ein wichtiger Aspekt der Schicht ist es, dass die Spezifikation der Strecke und nicht das physikalisches Medium selbst Teil der Schicht eins ist, denn die Kommunikation ist unabhängig von der konkreten Ausprägung der Schicht \cite[S.~9]{schn06}.
+
 %Here We Go
+Die zweite Schicht betrachtet Kommunikation zwischen zwei systemen. Deshalb stellt die Datenverbindungsschicht, stellt funktionale und prozedurale Möglihckeiten für den verbiindungsaufbau/trennung erhaltung und den Transfer von Dateneinheiten Verfügung. Ermögliocht dem Netzwerkschucht die Kontrolle über die Verbindung von Data circuits physikalisch, sowie fehlerabfangen der physikalsichen schicht \cite[S.~46f.]{osi96}
+Aufgabe ist sicherer transport von Station zu station. Datensicherung --> Verpacken um Übertragungsfehler erkenntlich zu machen in data frames. In Frames sind die maximale Anzahl Datenbits für Rohdaten spezifiziert, weiterhin wird Information zur Übertragung hinzugefügt. Die zusatzinfo kann Prüfsumme und Anfang und Ende des Rahmens enthalten oder quittierung eines telegramms und dient dazu fehlerhafte Übertragung oder etwas verloren gegangen zu überprüfen. MAC mit Schicht eins, LLC mit Schicht drei.
+Wuelle Wiki bisher
+MAC regelt den Zugriff auf das ohyische Medium zur Kommunikation, kotrolliert oder konkurriert.
+LLC verteilt die Daten passend in Schicht drei und gibt die Daten von schihct drei an passende MAC für schicht eins weiter und fügt Diese Infos von oben hinzu (Adressen Empfönger und Sender und zusatzinfo wie control für Steurung von Datenfluss oder so).
 
-Die Schicht eins -- die physikalische Schicht -- Möglichkeiten zur Verfügung und die phsysikalische Datenübertragung der einzelnen Bits \cite[S.~49f.]{osi96}. Sie legt also die mechanischen, wie zb. stecker(endsystemkopplung), zurodnung der pins und kabelspezifikationen, elektrischen, art der codierung Spannungspegel etc., fest, idr Standards wie RS/EIA 232, RS/EIA 422, RS/EIA 485, oder aber auch Glasfaserstrecke. Wichtig ist dabei, dass diese lediglich die tatsächlcihe Strecke spezifiziert und nicht das physikalische Medium selbst ist und die Kommunikation unabhängig von der konkreten Ausprägung der Schicht ist \cite[S.~9]{schn06}.
+Wichtig Die schicht hat jedoch keine Kenntnis über Inhalte der Daten!\cite[S.~9ff.]{schn06}
 
-Die zweite Schicht -- die Datenverbindungsschicht -- ist für verschiedene Verbindungsmodi 
+% EIG bei 3 evtl schon bei 2 mit LLC in zusammenahng
+verbindungsloser Dienst heisst keine Verbindung zwischen Kommunikationspartnern, Datenpakete werden wie Brief ganz in Netzwerk gespeist mit Zieladresse versehen und weitertransportiert, ohne beeinflussung des transportweges durch benutzer des netzwerkdienstes. Später ist Modbus ein Beispiel dazu erklärt.
+verbindungsorientierte Dienste heisst ein virtueller Kanal zwischen kommunikationspartnern wird zur Verüfung gestellt, eingeriechtet: Verbindungsaufbau, Datenautausch, Verbindungsabbau, wie telefongespräch. \cite[S.~11f.]{schn06}
 
+
+Die dritte Schicht beschäftigt sich mit dem Netzwerk als Ganzes. Die Aufgaben der Netzwerkschicht hängen ein wenig ab von verbindungsorientierung Daher beschäftigt sie sich mit dem Aufbau , der erhlatung und Datenaustasuch und dem trennen von Netzwerk Verbindungen zwischen offenen systemen i Netzwerk, also schnittstellen. weietrhin ist sie für den Transport von Daten im netzwerk zustaändig, also insbeonsdere auch für die Festelgung der Route(Wegsteuerung) der Daten im Netzwerk \cite[S.~41f.]{osi96}.
+Also Kontrolle von Verkehr im Netzwerk, d.h. Anzahl Pakete im Netzwerk, Staus \cite[S.~11f.]{schn06}
+
+
+Die vierte Schicht ist die Transportschicht und zuständig für die transparente Übertragung von Daten zwischen Prozessen und ist völlig unabähngig bzw losgelöst von den Gedanken an Kosten und Verlässlichkeit der Datenübertragung, da dies aufgaben der unteren schichten sind. Sie kümmert sich um die optimale nutzung von Netzwerk services/Nutzung \cite[S.~37f.]{osi96}.
+Adressierung der Teilnehmer, Aufbau und Abbau für Transportverbindung wzischen Kom.Partner prozessen(Sammel Einzel Mehrere), Fehlerbehalndlung verbidnung und flusskontrolle, Synchronisierung der dtaenaustauschenden Prozesse.Zerlegung der Daten aus Sitzugnsschicht in Transportierbare Einheiten. Internetworking, Umsetzung verschiedener Protokolle Gateway Aufgaben. Aufbau Verbindung legt Art fest, Punkt zu Punkt oder Broadcast/Multicast (Alle bzw einige Teilnehmer gleichzeitig) \cite[S.~12f.]{schn06}.
+
+Die fünfte Schicht, die Sitzungsschicht, startet eine Sitzungsverbindung mit bestimmter Adresse wenn dieser Prozess von einer höheren Schicht angefordert wird. Diese Verbindung dient dazu, den  dialog von kooperiendnen Porzesse auf der eines höhreren Darstellungsbene durch eine Sitzungsverbindung zu synchronisieren und deren Datenaustausch zu organisieren. verknüpft die Sitzungsadressen mit den Transportadressen, also die Anwendungsschiten mit dem Transportsystem \cite[S.~35]{osi96}.
+Benutzung des Transportsystems über die Schnittstelle zur Transportschicht. Je nach Funktionen der höheren Schihcten entsprechender Funktionsumfang
+BCS Basic Combined Subset - Verbindungssteuerung und Datenübertragung
+BAS Basic Activity Subset - Aktivitätsverwaltung
+BSS Basic synchronized Subset - Synchronisierung
+\cite[S.~13]{schn06}.
+
+
+Die sechste Schicht
 
 
 \subsection{Bussysteme} 
