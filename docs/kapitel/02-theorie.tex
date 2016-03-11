@@ -20,8 +20,65 @@ Zunächst MPC dann eher technisch
 \section{Technische Grundlagen zur Kommunikation mit Bussystemen}
 \label{sec:grundlagenbus}
 In diesem Kapitel werden die Grundlagen von Hard- und Software beleuchtet die für die Kommunikation der Steuerung mit den einzelnen Anlagenteilen benötigt werden.
-Diese umfassen zunächst Bussysteme im Allgemeinen und werden anhand des spezifischen/konkreten Anwendungsfalls Modbus erläutert.
+Diese umfassen zunächst Bussysteme im Allgemeinen, dann das OSI Modell für techn. Kommunikation und werden anhand des spezifischen/konkreten Anwendungsfalls Modbus erläutert.
+
 Die Einführung wird sich an die Struktur nach \cite{schn06} anlehnen.
+
+\subsection{Bussysteme} 
+Um allgemein Prozesse zu überwachen, zu steuern oder regeln zu können, müssen zwischen den verschiedenen Prozessbeteiligten/einheiten Informationen ausgetauscht werden. Im Kontext dieser Arbeit gilt es einen Prozess zur Temperatursteuerung/Halten zu regeln. Die Prozessbeteiligten sind hierbei technische Bauteile, Aktoren und Sensoren sowie ein Steuerungsrechner, die zusammen ein technisches System bilden, dass im Folgenden als Anlage bezeichnet wird. Die Anlage zeichnet sich dadurch aus, dass sie eine eigenständige funktionale Einheit bildet einen eigenen Zweck verfolgt, die Raumtemperaturregelung und einen Mehrwert gegenüber ihrer Einzelteile hat, was dem Zusammenspiel der einzelnen Bauteile und Geräte entspricht. 
+Um den Mehrwert zu realisieren und den Zweck zu erfüllen, werden Kommunikationssysteme benötigt. Mit Hilfe derer kann Kommunikation erfolgen und die Anlage ihren Zweck erreichen.
+Diese Kommunikationssysteme werden im technischen Umfeld als Bussysteme realisiert/umgesetzt.
+
+Bussysteme lassen sich anhand ihrer verschiedenen Ausprägungen von Merkmalen klassifizieren. Im folgenden Abschnitt werden zunächst die Merkmale von Bussystemen zum allgemeinen Verständnis dargestellt bevor auf die konkreten Ausprägungen des später eingesetzten Modbus-Bussystems eingegangen wird.
+% Bis hier noch nochmal überarbeiten
+
+\subsubsection{Netzwerk und Topologie}
+
+Werden einzelne Prozesseinheiten miteinander über sogenannte Verbindungsleitungen, die zur Übertragung Informationen genutzt werden können, verknüpft, entstehen dabei Netzwerke und die Prozesseinheiten werden als Teilnehmer des Netzwerks bezeichnet. Ein Netzwerk lässt sich in einzelne Segmente einteilen und kann je nach Ausführung der Verbindungsleitungen und Anzahl der Teilnehmer unterschiedlich ausgeprägt sein. Anhand der geometrischen Anordnung lassen sich die folgenden, verschiedenen Netzwerktopologien unterscheiden.
+
+
+Die einfachste Art, um eine Verbindung zwischen zwei Teilnehmern eines Netzwerks herzustellen, ist die sogenannte Zweipunktverbindung. Dazu sind die Netzwerkteilnehmer durch eine direkte Leitung miteinander verbunden. Jedoch steigt mit der Anzahl von Teilnehmern auch der Verbindungsaufwand überproportional an, um bei solchen vermaschten Netzwerk alle Teilnehmer miteinander zu verbinden. Dies hat für große, vermaschte Netze zur Folge, dass eine unübersichtliche große Anzahl von Schnittstellen, ein extrem hoher Verkabelungsaufwand und damit verbundene hohe Kosten entstehen. Um diese Kosten zu vermeiden, ergeben sich noch verschiedene andere Möglichkeiten zur Anordnung von Teilnehmern in Netzwerken \cite[S.~1f.]{schn06}.
+
+
+Um dem hohen Verkabelungsaufwand zu vermeiden, wird bei großen Netzwerken zu einer Linienstruktur übergegangen, die auch als Bus-Struktur bezeichnet wird und in \ref{fig:bus_struktur} visualisiert ist. Charakteristisch für die Bus-Struktur ist, dass alle Teilnehmer entlang einer langen Verbindungsleitung, dem sogenannten Buskabel, angeordnet sind. Sie sind mit Hilfe von kurzen Stichleitungen an das gemeinsame Buskabel angebunden, über das die gesamte Kommunikation im Netzwerk erfolgt.
+Durch diese Anordnung wird der Verkabelungsaufwand sowie die Anzahl an Schnittstellen, insbesondere für sehr große Netzwerke, stark reduziert. Jedoch wird durch Nutzung einer gemeinsamen Kommunikationsleitung die gleichzeitige Kommunikation von Teilnehmern erschwert und es müssen sogenannte Buszugriffsverfahren definiert werden, welche lediglich Regeln für Zugriff auf den Bus festlegen. Weiterhin müssen durch die Parallelschaltung alle Teilnehmer ständig alle Sendungen mitverfolgen, wodurch der Sender stark belastet wird. Die Busleitungslängen sind meist sehr lange\footnote{Diese reichen von mehreren hundert Metern bis teilweise in den Kilometerbereich, je nach Art und Einsatzort der Anwendung.}  und da die Länge auf die zu übertragende Wellenlänge bezogen nicht mehr vernachlässigbar klein ist, müssen Reflexionen durch Leitungsabschlusswiderstände an den beiden Enden der Busleitung unterbunden werden. Außerdem werden die Leitungslängen und die Teilnehmer je Netzwerksegment begrenzt\ref[S.~3f.]{schn06}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160109_busstruktur}
+\caption[Bus-Struktur]{Bus-Struktur aus \cite[S.~3]{schn06}}
+\label{fig:bus_struktur}
+\end{figure}
+
+Ein weiterer begrenzender Faktor für die Leitungslänge ist der Fakt, dass die maximale Übertragungslänge und die maximale Übertragungsrate miteinander verknüpft sind und sich gegenseitig beschränken.
+Der Leitungs- und Kapazitätswiderstand einer Leitung hängen von der Länge der Leitung ab und lassen sich durch das Ersatzschaltbild eines RC-Gliedes repräsentieren, wie in Abbildung \ref{fig:bus_impuls} a) zu sehen ist. Durch die beiden Widerstände entsteht auf der Leitung eine Impulsverzerrung \gls{timp}, die somit mittelbar von der Leitungslänge abhängt.
+Je länger die Leitung wird, desto größer werden auch beiden Widerstände. Durch die erhöhte Leitungskapazität $C_{Leitung}$ erhöht sich die Ladezeit und gleichzeitig sinkt durch den erhöhten Leitungswiderstand $R_{Leitung}$ die Lastspannung $U_{G}$. Damit vergrößert sich die Impulsverzerrung \gls{timp}, wie in \ref{fig:bus_impuls} b) und \ref{fig:bus_impuls} c) dargestellt.
+Dadurch wird die maximale Frequenz \gls{fmax} der Datenübertragung auf den Kehrwert der Impulsverzerrung $f_{max}=\frac{1}{\Delta t_{Imp}}$ beschränkt, da ansonsten der Empfänger den Wechsel des logischen Zustandes nicht mehr registrieren kann. In der Praxis bedeutet dies, dass die maximale Übertragungslänge und die maximale Übertragungsrate miteinander verknüpft sind und sich gegenseitig beschränken \cite[S.~4f.]{schn06}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160110_impulsbus}
+\caption[Impulsverzerrung auf einer Leitung]{Impulsverzerrung auf einer Leitung: a) Ersatzschaltbild der Anordnung b) Ausgangsspannung des Generators c) Empfängerspannung aus \cite[S.~4]{schn06}}
+\label{fig:bus_impuls}
+\end{figure}
+
+Um die Begrenzung der Leitungslängen zu korrigieren, wurde die Bus-Struktur zu einer Baumstruktur weiterentwickelt, welche in \ref{fig:baum_struktur} dargestellt ist. Darin werden einzelne Netzwerk-Segemente, also einzelne Bus-Strukturen, durch Verstärkerelemente, sogenannte  Repeater, zu einem großen Netzwerk verknüpft. Um damit jedoch größere Flächen als mit der Bus-Struktur zu vernetzen und gleichzeitig die maximale Leitungslänge und die maximale Anzahl der Busteilnehmer zu vergrößern, wird jedoch eine galvanische Trennung der Teilnehmer voneinander benötigt \cite[S.5~f.]{schn06}. Die Besonderheit in dieser Struktur liegt also darin, dass sich durch Ihren Aufbau bestehende Bus-Strukturen auch nachträglich einfach erweitern oder miteinander verknüpfen lassen.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160110_baumstruktur}
+\caption[Baumstruktur]{Baumstruktur aus \cite[S.~5]{schn06}}
+\label{fig:baum_struktur}
+\end{figure}
+
+%Here we go
+Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit keine weitere Relevanz haben, jedoch genannt werden sollten sind die Ring- und die Stern-Struktur. Die Ring-Struktur ist dadurch gekennzeichnet, ein physikalischer Ring mit Zweipunktverbindungen aufgebaut wird in dem über Teilnehmer hinweg kommuniziert wird. Die Stern-Topologie ist durch eine Zentralstation gekennzeichnet, die mit allen Teilnehmer verbunden ist und über die die gesamte Kommunikation abläuft \cite[S.~6f.]{schn06}. Der interessierte Leser findet in REFQUELLE weitere Informationen dazu.
+
+\subsubsection{Elektrisches EIA-485 Netzwerk/Interface}
+Hier wird EIA / RS485 dargestellt und abgegrenzt zu RS 232 und RS 422
+
+\subsubsection{Hardware}
+Kabel, Belegung
 
 \subsection{OSI-Kommunikationsmodell}
 Aufgrund der großen Anzahl verschiedener technischer Systeme existieren auch viele verschiedene Arten der Kommunikation untereinander. Bei der genaueren Betrachtung der Kommunikation wird ersichtlich, dass diese oftmals ähnlich abläuft und sich durch ein Meta-Schema beschreiben lässt \cite[S.~8]{schn06}. Um die Kommunikation auch über verschiedenen Systeme hinweg zu ermöglichen und sie zu formalisieren, wurde von der \textit{International Organization for Standardization} 1984 ein abstraktes Referenz-Modell entwickelt, dass in der \textit{ISO-Norm 7498-1} beschrieben ist. Es dient der Entwicklung und Verbesserung von Standards für den Informationsaustausch sowie als Referenz für bestehende Standard um eine gewisse Konsistenz zu wahren \cite[S.~1]{osi96}. Das Ziel bei dem Entwurf des Modells war es, eine Menge von Standards zu schaffen um autonomen Systemen die Kommunikation untereinander zu ermöglichen \cite[S.~4]{osi96}.
@@ -55,8 +112,10 @@ Es ist leicht zu erkennen, dass die technische Kommunikation einen sehr umfangre
 
 Die Ebenen werden Schichten genannt und haben klar definierte Aufgaben und Schnittstellen zu ihren Nachbarschichten. An diesen Schnittstellen werden Dienste bereitgestellt, die von den anderen Ebenen genutzt werden können. Durch diesen Aufbau können einzelne Schichten einfach bearbeitet oder ausgetauscht werden, ohne die Gesamtfunktionalität zu gefährden. Außerdem kann ein System auch aus Komponenten verschiedener Hersteller zusammengesetzt werden, womit diese Architektur nachweislich als Basis für offene Systeme dient. In \ref{fig:osi} ist ebenfalls dargestellt, dass die Schichten eins bis vier auch als Übertragungsschichten beziehungsweise Transportsystem zusammengefasst werden, weil sie für die Datenübertragung zwischen Systemen als gemeinsame Aufgabe haben. Die Schichten fünf bis sieben werden als Anwendungsschichten bezeichnet weil sie bei der Datenübertragung die Zusammenarbeit zwischen der Anwendersoftware und dem Betriebssystem sicherstellen \cite[S.~8f.]{schn06}.
 
-Die Schnittstellen/Dienste zwischen den Schichten werden als Service Access Points bezeichnet und besitzen jeweils eine eindeutige Adresse, die oberhalb liegende Schicht ist der Service user, da er den Service daer unterhalb liegenden Schicht nutzt, dem service provider. Die Dienste können in verbindungsorientierte und verbindungsunabhängige unterschieden werden. 
+Die Schnittstellen/Dienste zwischen den Schichten werden als Service Access Points bezeichnet und besitzen jeweils eine eindeutige Adresse, die oberhalb liegende Schicht ist der Service user, da er den Service daer unterhalb liegenden Schicht nutzt, dem service provider. Die Dienste können in verbindungsorientierte und verbindungsunabhängige unterschieden werden.
+Für den Datenausatausch stehen folgende Dienste zur Verfügung
 Bei der Abhandlung der Dienstaufgaben stehen vier Dienstvorgänge zur Verfügung, die zusammengefasst in \ref{fig:vorgang} abgebildet sind:
+
 request - Anforderung
 indication - Meldung
 response - Antwort
@@ -115,68 +174,12 @@ Die sechste Schicht, die Darstellungsschicht ist nach \cite[S.~33f.]{osi96} für
 Die siebte und letzte Schicht stellt lediglich eine Möglichkeit für Anwendungsprzesse zur Verfügung um auf die OSI Umgebung zuzugreifen. Jeder Anwendung stellt im OSI genau einen Anwendungsprozess dar, verschiedene Anwendungsprozesse für verschiedene Anwendungen und vice versa \cite[S.~32]{osi96}
 stellt Funktionen bereit, mit denen der Benutzer auf das Kommunikationssystem zugreifen kann, wobei der Benutzer idR ein Computerprogramm und kein Mensch ist. \cite[S.~14]{schn06}
 
+Im folgenden werden die verwendeten Modbus Protokolle und Spezifikation ind Anwendung Berzug zum OSI Modell gebracht um den praktischenNutzen davon klar zu machen.
 
-
-\subsection{Bussysteme} 
-Um ganz allgemein Prozesse überwachen und steuern zu können müssen unter den einzelnen Einheiten innerhalb eines Systems Informationen ausgetauscht werden. Dazu werden Kommunikationssysteme benötigt mit Hilfe derer Kommunikation erfolgen kann. Diesem Zweck dienen Bussysteme
-Info/Quelle 
-%%W. Kriesel, T. Heimbold, D. Telschow: Bustechnologien für die Automation, Hüthig GmbH, Heidelberg 1998
-Bussysteme lassen sich anhand verschiedener Kriterien einteilen bzw klassifizieren. Im Rahmen dieser Arbeit wird der Modbus eingesetzt weshalb im Folgenden die Kriterien zunächst sehr allgemein zum Verständnis des Krieteriums beschrieben werden. Die verschiedenen Ausprägungen der einzelnen Kriterien werden lediglich die für Modbus relevanten detailliert beschrieben.
-
-\subsubsection{Netzwerk und Topologie}
-Verknüpft man einzelne Prozesseinheiten -- im folgenden Teilnehmer des Netzwerks -- miteinander über Verbindungsleitungen, über die Informationen übertragen werden können, entstehen dabei Netzwerke. Diese Netzwerke können unterschiedlich ausgeprägt sein und werden anhand ihrer geometrischen Anordnung, der Netzwerktopologie, unterschieden.
---> Teilnehmer im Netzwerk definieren
-
-Die einfachste Art zwei Teilnehmer miteinander zu verbinden ist eine direkte Zweipunktverbindung mit einer Leitung. Jedoch würde mit jeder steigenden Zahl von Teinehmern auch überproportional mehr Verbindungsleitungen benötigt um alle Teilnehmer miteinander zu verbinden. Dies hätte für große Zweipunbktverbindungsnetzwerke. die auch als vermaschtes Netz bezeichnet werden, eine unübersichtliche große Anzahl von Schnittstellen, einen extrem hohen Verkabelungsaufwand und damit verbundene hohe Kosten zur Folge. Um dies zu vermeiden ergeben sich noch verschiedene andere Möglichkeiten zur Anordnung von Teilnehmern in Netzwerken \cite[S.~1f.]{schn06}.
-
-Die Zweipunktverbindungen sind wie oben beschrieben mit einem hohen Verkabelungsaufwand verbunden, weshalb bei großen Netzwerken oftmals zu einer Linienstruktur übergegangen wird. Diese wird auch Linienstruktur genannt und wird auch von der Modbus-Technologie empfohlen/vorgeschrieben. Charakteristisch dafür ist, dass alle Teilnehmer eine gemeinsame Verbindungsleitung zur Kommunikation nutzen. Dazu gibt es ein sogenanntes, langes Buskabel entlang dessen die einzelnen Teilnehmer mit Hilfe von kurzen Stichleitungen angebunden sind, wie auf Abbildung \ref{fig:bus_struktur} zu sehen ist.
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{abbildungen/20160109_busstruktur}
-\caption[Linienstruktur]{Linienstruktur aus \cite[S.~3]{schn06}}
-\label{fig:bus_struktur}
-\end{figure}
-
-Dadurch wird der Verkabelungsaufwand auch für sehr große Netzwerke stark reduziert und auch die Anzahl an Schnittstellen der Teilnehmer auf eine einzige reduziert. Jedoch wird dadurch das gleichzeitige Senden von Teilnehmern erschwert und es müssen sogenannte Buszugriffsverfahren definiert werden, die nichts weiter als Regeln sind die den Zugriff auf den Bus festlegen. Da die Kommunikation auf einer einzigen Leitung stattfindet und ständig alle Teilnehmer alle Sendungen verfolgen wird der Sender durch diese Parallelschaltung der Empfänger stark belastet. Da die Bus-Längen meist sehr lang sind ( hunderte Meter) ist die Leitungslänge im Bezug auf die zu übertragende Wellenlänge nicht mehr vernachlässigbar. Deshalb müssen beide Enden der Busleitung mit Leitungsabschlusswiderständen versehen werden sowie die Leitungslänge und die Teilnehmer je Netzwerk begrenzt werden. Der Leistungs- und Kapazitätswiderstand einer Leitung sind von der Länge der Leitung abhängig und werden durch das Ersatzschaltbild eines RC-Gliedes repräsentiert, wie in Abbildung \ref{fig:bus_impuls}a zu sehen ist. Durch diese Widerstände wird eine Impulsverzerrung $\delta t$ auf der Leitung ausgelöst, die somit mittelbar auch von der Leitungslänge abhängt. Je länger die Leitung desto größer die beiden Widerstande und desto größer ist die Impulsverzerrung $\delta t$, da der Kondensator C\_{Leitung} mehr Zeit zum Aufladen benötigt und die Lastspannung sinkt, wie in Abbildung \ref{fig:bus_impuls}b und \ref{fig:bus_impuls}c dargestellt. Dadurch wird die maximale Frequenz der Datenübertragung beschränkt (auf den Kehrwert der Impulsverzerrung f=1/t). Dies bedeutet das die Frequenz der Datenübertragung entlang der Leitung von ihrer Länge mittelbar abhängig ist, da ansonsten der Empfänger den Wechsel des logischen Zustand nicht mehr registrieren kann \cite[S.~3ff.]{schn06}.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.6\textwidth]{abbildungen/20160110_impulsbus}
-\caption[Impulsverzerrung auf einer Leitung]{Impulsverzerrung auf einer Leitung: a) Ersatzschaltbild der Anordnung b) Ausgangsspannung des Generators c) Empfängerspannung aus \cite[S.~4]{schn06}}
-\label{fig:bus_impuls}
-\end{figure}
-
-Weitere Bus-Strukturen sind die Baumstruktur, die eine Weiterentwicklung der Linienstruktur ist und auf Abbildung \ref{fig:baum_struktur}. Dabei werden einzelne Linienstrukturen durch Verstärkerelemente, sogenannte  Repeater, miteinander verbunden und es können dadurch größere Flächen als mit der Linienstruktur vernetzt werden. \cite[S.5~f.]{schn06}.
---> Galvanische Trennung und Abschirmung 
-Diese Struktur ist insofern interessant, da es also im Rahmen dieser Arbeit Anlage noch eine nachträgliche Erweiterung/Vergrößerung der geplanten Anlage ermöglicht.
-
-Modbus was da oben steht, Teilnehmer kabellängen etc.
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{abbildungen/20160110_baumstruktur}
-\caption[Baumstruktur]{Baumstruktur aus \cite[S.~5]{schn06}}
-\label{fig:baum_struktur}
-\end{figure}
-
-Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit keine weitere Relevanz haben, jedoch genannt werden sollten sind die Ring- und die Stern-Struktur. Die Ring-Struktur ist dadurch gekennzeichnet, ein physikalischer Ring mit Zweipunktverbindungen aufgebaut wird in dem über Teilnehmer hinweg kommuniziert wird. Die Stern-Topologie ist durch eine Zentralstation gekennzeichnet, die mit allen Teilnehmer verbunden ist und über die die gesamte Kommunikation abläuft \cite[S.~6f.]{schn06}.
-
-\subsubsection{Elektrisches EIA-485 Netzwerk/Interface}
-Hier wird EIA / RS485 dargestellt und abgegrenzt zu RS 232 und RS 422
-
-\subsubsection{Hardware}
-Kabel, Belegung
 
 \subsection{Modbus}
 Hier wird das Modbusprotokoll nach \cite{mod12} und \cite{mod06ser} und \cite{mod06tcp}  
 Und nach hier wird das Modbusprotokoll nach \cite[S.5]{mod12} und \cite[S.5]{mod06ser} und \cite[S.5]{mod06tcp}
-
-
-
-
-
-
 
 
 
