@@ -71,8 +71,18 @@ Um die Begrenzung der Leitungslängen zu korrigieren, wurde die Bus-Struktur zu 
 \label{fig:baum_struktur}
 \end{figure}
 
-%Here we go
-Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit keine weitere Relevanz haben, jedoch genannt werden sollten sind die Ring- und die Stern-Struktur. Die Ring-Struktur ist dadurch gekennzeichnet, ein physikalischer Ring mit Zweipunktverbindungen aufgebaut wird in dem über Teilnehmer hinweg kommuniziert wird. Die Stern-Topologie ist durch eine Zentralstation gekennzeichnet, die mit allen Teilnehmer verbunden ist und über die die gesamte Kommunikation abläuft \cite[S.~6f.]{schn06}. Der interessierte Leser findet in REFQUELLE weitere Informationen dazu.
+Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit keine weitere Relevanz haben, sind die Ring- und die Stern-Struktur.
+Die Ring-Struktur ist durch einen physikalischer Ring von Zweipunktverbindungen aufgebaut und gekennzeichnet durch die Kommunikation der Teilnehmer übereinander hinweg. Die Stern-Topologie hingegen ist um eine Zentralstation herum ausgebaut, die mit allen Teilnehmer verbunden ist und über die die gesamte Kommunikation abläuft. Der interessierte Leser findet in \cite[S.~6f.]{schn06} detailliertere Ausführungen.
+
+\subsubsection{Buszugriffsverfahren}
+Die meisten Netzwerktopologien kommunizieren gemeinsam über eine Verbindungsleitung. Daher werden Regeln für den Zugriff definiert, um eine reibungslose Kommunikation zu ermöglichen. Die Buszugriffsverfahren lassen sich in zwei Gruppen aufteilen, der kontrollierten und zufälligen Verfahren \cite[S.~19]{schn06}.
+
+Bei den kontrollierten Verfahren ist der Sender bereits vor Sendebeginn eindeutig bestimmt und eine Zuteilung des Busses ist nicht notwendig. Der Buszugriff findet entweder zentral innerhalb einer Zentralstation statt, bei sogenannten Master/Slave-Verfahren, oder wird dezentral durch Steuereinheiten vorgenommen, wie z.B. beim Tokenring und Tokenbus. Ein solches Verfahren heißt echtzeitfähig, wenn die Zykluszeit zur Datenübertragung berechenbar ist, aufgrund einer Beschränkung der Länge des Übertragungsintervalls und der maximalen Datenlänge.
+Bei zufälligen Buszugriffsverfahren greifen die Teilnehmer bei Bedarf auf die Verbindungsleitung zu und müssen sicherstellen, dass diese nicht gerade von einem anderen Teilnehmer belegt ist. Da nicht vorhergesehen werden kann, an welchem Zeitpunkt Informationen übertragen werden kann keine Echtzeitfähigkeit erreicht werden \cite[S.~19]{schn06}.
+
+Das Master/Slave-Verfahren besteht in der Regel aus einer Bussteuerungseinheit, dem sogenannten Master, und mehreren passiven Teilnehmern, den Slaves. Die Kommunikation wird ausschließlich vom Master initiiert, der die Verbindung zu den Slaves aktiv durch ein Request herstellt, in welchem die angeforderten Daten sepzifiziert sind. Die Slaves treten nur nach Anfragen in Aktion und antworten darauf unmittelbar mit einer Response, die die angeforderten Daten des Masters enthält. In der Regel erfolgt die Kommunikation zyklisch zu allen Slaves gleichzeitig (Polling), damit der Master ein umfassendes und aktuelles Bild über den Systemzustand bekommt. Dadurch ergeben sich einfache Slaves, die günstig in den Bus eingebunden werden können, weil die gesamte \Gun Intelligenz\Gob im Master implementiert ist. Jedoch gilt es bei diesem Verfahren zu beachten, dass der Informationsaustausch zwischen verschiedenen Slaves längere Zeit in Anspruch nehmen kann und bei einem Ausfall des Masters das gesamte Bussystem stillliegt \cite[S.~19ff.]{schn06}.
+Auf eine weitere Beschreibung der übrigen Verfahren wird aufgrund der geringen Relevanz für diese Arbeit verzichtet, der interessierte Leser findet jedoch bei \cite{schn06} im Kapitel Buszugriffsverfahren ausführliche Informationen.
+
 
 \subsubsection{Elektrisches EIA-485 Netzwerk/Interface}
 Hier wird EIA / RS485 dargestellt und abgegrenzt zu RS 232 und RS 422
