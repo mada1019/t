@@ -22,7 +22,7 @@ Zunächst MPC dann eher technisch
 In diesem Kapitel werden die Grundlagen von Hard- und Software beleuchtet die für die Kommunikation der Steuerung mit den einzelnen Anlagenteilen benötigt werden.
 Diese umfassen zunächst Bussysteme im Allgemeinen, dann das OSI Modell für techn. Kommunikation und werden anhand des spezifischen/konkreten Anwendungsfalls Modbus erläutert.
 
-Die Einführung wird sich an die Struktur nach \cite{schn06} anlehnen.
+Die Einführung wird stark an die Struktur nach \cite{schn06} anlehnen.
 
 \subsection{Bussysteme} 
 Um allgemein Prozesse zu überwachen, zu steuern oder regeln zu können, müssen zwischen den verschiedenen Prozessbeteiligten/einheiten Informationen ausgetauscht werden. Im Kontext dieser Arbeit gilt es einen Prozess zur Temperatursteuerung/Halten zu regeln. Die Prozessbeteiligten sind hierbei technische Bauteile, Aktoren und Sensoren sowie ein Steuerungsrechner, die zusammen ein technisches System bilden, dass im Folgenden als Anlage bezeichnet wird. Die Anlage zeichnet sich dadurch aus, dass sie eine eigenständige funktionale Einheit bildet einen eigenen Zweck verfolgt, die Raumtemperaturregelung und einen Mehrwert gegenüber ihrer Einzelteile hat, was dem Zusammenspiel der einzelnen Bauteile und Geräte entspricht. 
@@ -81,7 +81,23 @@ Bei den kontrollierten Verfahren ist der Sender bereits vor Sendebeginn eindeuti
 Bei zufälligen Buszugriffsverfahren greifen die Teilnehmer bei Bedarf auf die Verbindungsleitung zu und müssen sicherstellen, dass diese nicht gerade von einem anderen Teilnehmer belegt ist. Da nicht vorhergesehen werden kann, an welchem Zeitpunkt Informationen übertragen werden kann keine Echtzeitfähigkeit erreicht werden \cite[S.~19]{schn06}.
 
 Das Master/Slave-Verfahren besteht in der Regel aus einer Bussteuerungseinheit, dem sogenannten Master, und mehreren passiven Teilnehmern, den Slaves. Die Kommunikation wird ausschließlich vom Master initiiert, der die Verbindung zu den Slaves aktiv durch ein Request herstellt, in welchem die angeforderten Daten sepzifiziert sind. Die Slaves treten nur nach Anfragen in Aktion und antworten darauf unmittelbar mit einer Response, die die angeforderten Daten des Masters enthält. In der Regel erfolgt die Kommunikation zyklisch zu allen Slaves gleichzeitig (Polling), damit der Master ein umfassendes und aktuelles Bild über den Systemzustand bekommt. Dadurch ergeben sich einfache Slaves, die günstig in den Bus eingebunden werden können, weil die gesamte \Gun Intelligenz\Gob im Master implementiert ist. Jedoch gilt es bei diesem Verfahren zu beachten, dass der Informationsaustausch zwischen verschiedenen Slaves längere Zeit in Anspruch nehmen kann und bei einem Ausfall des Masters das gesamte Bussystem stillliegt \cite[S.~19ff.]{schn06}.
-Auf eine weitere Beschreibung der übrigen Verfahren wird aufgrund der geringen Relevanz für diese Arbeit verzichtet, der interessierte Leser findet jedoch bei \cite{schn06} im Kapitel Buszugriffsverfahren ausführliche Informationen.
+Auf eine weitere Beschreibung der übrigen Verfahren wird aufgrund der fehlenden Relevanz für diese Arbeit verzichtet, der interessierte Leser findet jedoch bei \cite{schn06} im Kapitel Buszugriffsverfahren ausführliche Informationen.
+%Here we go
+
+\subsubsection{Datensicherung}
+
+Bei der Übertragung von Informationen besteht die Gefahr von Störungen, welche sich als Fehler in einer Nachricht durch Invertierung von Bits  äußern. Störungen sind in der Regel technischer Art, wie zum Beispiel elektromagnetische Störsignale, Rauschen oder Potentialdifferenzen, und gegen einen Großteil lassen verschiedene Vorkehrungen treffen. Dadurch ergibt sich die Möglichkeit Störungen vorzubeugen oder diese nach Einsatz zu beseitigen. Der erste Ansatz ist also eine Verminderung des Auftretens durch technische Vorkehrungen, wie zum Beispiel Schirmung der Kabel, galvanische Trennung von Netzwerken oder differenzielle Signalübertragung. Der zweite Ansatz beschäftigt sich mit der Überwachung des Nachrichtenverkehrs und dem Ausbessern/Gegenmaßnahmen bei Fehlern \cite[S.~30]{schn06}.
+
+Auf dem Gebiet der Buskommunikation entspricht wird eine Information oder Nachricht codiert. Es werden stets Transparente Codes betrachtet, Welche bitorientiert sind. Dabei sind jegliche Kombination von Bits erlaubt und man kann allein Aus der Folge der Blitz nicht auf einen Fehler schließen.
+
+Die Vorkehrungen technischer Art Können Sind in aller Regel in den Spezifikationen der einzelnen Bussysteme enthalten, daher Werden diese nicht weiter beschrieben und lediglich die Überwachung und Ausbesserung das Nachrichtenverkehrs erläutert.
+Bei der Übermittlung von Nachrichten können drei Arten von Fehlern auftreten:
+Der Fehler kam erkennbar und korrigierbar sein,
+Erkennbar und nicht korrigierbar
+Oder nicht erkennbar und damit auch nicht korrigierbar.
+
+Kann der Fehler erkannt werden ist bereits ein großer Teil der Arbeit getan. 
+
 
 
 \subsubsection{Elektrisches EIA-485 Netzwerk/Interface}
@@ -273,7 +289,7 @@ Die Definition von Wärmeübertragung ist nach \cite[S.~1]{bo14} \Gun [...] der 
 Die Wärmeübertragung kann nach \textit{Nußelt}\footnote{Beschrieben in seinem Aufsatz \Gun Das Grundgesetz des Wärmeüberganges\Gob , 1915.} grundsätzlich durch zwei verschiedene Arten stattfinden \cite[S.~3f.]{bo14}:
 
 \begin{itemize}
-	\item Durch Strahlung, bei der die Übertragung von Wärme ohne stofflichen Träger durch elektromagnetische Wellen zwischen Oberflächen erfolgt. Weil diese Art der Wärmeübertragung keine Relevanz für die weiteren Betrachtungen hat wird an dieser Stelle nicht weiter darauf eingegangen. 
+	\item Durch Strahlung, bei der die Übertragung von Wärme ohne stofflichen Träger durch elektromagnetische Wellen zwischen Oberflächen erfolgt. Weil diese Art der Wärmeübertragung keine Relevanz für die weiteren Betrachtungen hat wird er interessierte Leser an dieser auf \cite{bo14} verwiesen der diese Thematik detailliert ausführt. 
 	\item  Durch Wärmeleitung, die sich wiederum in die Wärmeübertragung zwischen ruhenden Stoffen, und die Konvektion, die eine Wärmeübertragung zwischen einem ruhenden und einem strömenden Fluid beschreibt, aufteilen lässt. 
 \end{itemize}
 
