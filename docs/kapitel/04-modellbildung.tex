@@ -5,27 +5,78 @@
 % @author dmayer
 % @created 29. Dezember 2015
 
+\setchapterpreamble[o]{%
+\dictum[--- \textsc{Norbert Wiener}]{\Gun Das beste Modell für eine Katze ist eine Katze; möglichst dieselbe Katze. \Gob}}
+\renewcommand{\chapterheadstartvskip}{\vspace*{2cm}}
+
 \chapter{Modellbildung des Raumes}
 \label{chap:modellbildung}
 
-\renewcommand{\chapterheadstartvskip}{\vspace*{-0.5cm}}
+Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur, basierend auf den thermodynamischen Prozessen mit dessen Umgebung und der Anlage aus Kapitel \ref{chap:anlagendesign}, zu bilden, um damit und unter Zuhilfenahme der Anlage Modellpräditive Regelung zu ermöglichen.
+Dazu wird zunächst ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise an den bestehenden Raum erweitert angepasst wird, bis eine die Qualität des Modells ausreichend ist.
 
-\section{Das einfache Raummodell}
-
+\section{Anforderungen an das Raummodell}
+Da MPC die Lösung von Nichtlinearen Gleichungssystemen erfordert wird ein erhöhter Rechenbedarf benötigt. Daher sollte das Modell so einfach wie möglich gehalten werden. Die Krux liegt also darin, einen geeigneten Kompromiss zwischen Komplexität und Genauigkeit des Modells zu finden, der eine sinnvolle MPC Regelung ermöglicht.
+Des Weiteren werden gradientenbasierte Ableitungen bei der Optmierung/Lösung des LGS generiert weshalb auch keine Unstetigkeiten im Modell vorkommen dürfen.
+Die triviale Aufgabe ist die hinreichend genaue Beschreibung der Realität bzw realen Vorgänge.
 Damit eine Steuerung mit Hilfe von Modellprädiktiver Regelung möglich ist, darf das Modell keine hohe Kompliziertheit aufweisen und sollte durch möglichst wenig Gleichunge trotzdem ein möglichst genaues Abbild der Realität abbilden.
-
 Das Modell soll zunächst so simpel wie möglich gestaltet werden um eine Optimierung mit Hilfe von MPC zu ermöglichen. Dessen Verfahren zur Optimierung sind gradientenbasiert und erfordern damit die Erzeugung von stetigen Ableitungen bis zum zweiten Grad. Daher soll die Komlpexität des Modells zunöchgst sehr gering gehalten werdeen und dann Stück für Stück erhöht werden und die damit die Geanuiogkeit des modells erhöht werden
 
-Systemgrenzen/modell
+\section{Das Grundmodell des Raumes}
+Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothetischer Raum betrachtet. Dieser Raum bildet zusammen mit der ihn umgebenden Luft ein abgeschlossenes thermodynamisches System, wie in Kapitel \ref{sec:grundlagenmodell} beschrieben. Der Raum ist slebst mit Luft gefüllt und wird zu allen sechs Seiten hin durch Wände begrenzt. Damit bildet der Raum ein geschlossenes System, da lediglich keine Massenströme über die Grenzen hinweg fließen können. An den Grenzflächen kann also lediglich Wärme zwischen der Luft außerhalb und innerhalb des Raumes ausgetauscht werden. 
+Zur Bestimmung der Raumtemperatur muss der Wärmestrom zwischen dem Raum und der ihn umgebenden Luft nach Gleichung \ref{eq:qdot} bestimmt werden. Dazu werden verschiedene modellrelevanten Eigenschaften des Raumes durch physikalische Größen beschrieben. Um die Austauschoberfläche zu berechnen sind die Raumbreite, -länge und -höhe relevant, um den Wärmestrom zu bestimmen wird der U-Wert einer Wand aus Beton benötigt und um die Temperatur mit Hilfe des ersten Hauptsatzes der Thermodynamik zu bestimmen, wird zusätzlich noch die spezifische Wärmekapüazität der Luft innnerhlab des Raumes benötigt.
+Diese modellrelevanten Eigenschaften sind allesamt mit ihren Werten in Tabelle \ref{tab:eigenschaften_raum} zusammengefasst.
 
-\lstinputlisting[language={Modelica}, linerange={3-36}, label={lst:pump}]{listings/room_model_backup.mo}
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{threeparttable}
+\begin{tabularx}{1\textwidth}{p{0.5\textwidth}m{0.2\textwidth}m{0.18\textwidth}}
+\toprule
+\textbf{Modellrelevante Eigenschaften} & \textbf{Wert} & \textbf{Einheit} \\
+\cmidrule[0.5pt](r{0.25em}){1-1} 
+\cmidrule[0.5pt](l{0.25em}){2-2}
+\cmidrule[0.5pt](l{0.25em}){3-3}
+
+Raumbreite & 7,81\tnote{1)} & $[m]$ \\ 
+\ccol Raumlänge & \ccol 5,78\tnote{1)} & \ccol $[m]$ \\
+Raumhöhe & 2,99\tnote{1)} & $[m]$ \\
+\ccol Wärmedurchgangskoeffizient & \ccol 2\tnote{2)} & \ccol $[\frac{W}{m^{2}*K}]$\\
+Spezifische Wärmekapazität von Luft & 1.000\tnote{3)} & $[\frac{J}{kg*K}]$\\
+
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}[]\footnotesize\singlespacing\setlength\labelsep{0pt}
+\item[1)] Werte durch eigene Vermessung des Raumes K004b vom 07.12.2015
+\item[2)] Schätzwert, geschätzt nach \cite[S.~409]{re14} mit Richtwerten aus \cite[S.~194ff.]{re14}
+\item[3)] Tabellenwert aus \cite[S.~139]{ha13}
+\end{tablenotes}
+\end{threeparttable}
+\caption{Eigenschaften des Raummodells}
+\label{tab:eigenschaften_raum}
+\end{table}
+
+Erfolgt nun die Bilanzierung des Raumes mit Hilfe des ersten Hauptsatzes der Thermodynamik nach Gleichung \ref{eq:hauptsatz} und die Berechnung der inneren Energie des Raumes nach Gleichung \ref{eq:innereenergie} ergibt sich folgende einfache Differenzialgleichung zur Bestimmung der Raumtemperatur
+
+\begin{equation*}
+\begin{split}
+	U_{Raum} = m*c_{p}*t_{Raum}+u_{0} \\
+	\Longleftrightarrow \dot{U}_{Raum} = m*c_{p}*\dot{t} \\
+	\dot{U}_{Raum}=\dot{Q}= t_{Raum} *  u * A * t_{Umgebung} \\
+	\Rightarrow \dot{t}_{Raum} = t_{Raum} * \frac{u * A * t_{Umgebung}}{m*c_{p}} 
+\end{split}
+\end{equation*}
+
+
+
+
+
+\lstinputlisting[language={Modelica}, linerange={36-37}, label={lst:pump}]{listings/room_model_backup.mo}
 
 Die Abgrenzung bzw Wahl der Grenzen zur Bilanzierung eines thermodynamischen Systems erfolgt nach dem gesuchten Zustand und der gesuchten Zustandsgröße, der Raumtemperatur im Raum K004b. Der gesucten hießt zu berechnenenden/unbekannten
 
-Dazu lässt sich das thermodynamische System in drei Teile gliedern. Zum einen in den zu untersuchenden Raum, der durch die Aussenwände des Raumes begrenzt wird und innerhalb dessen Grenzen die zu betsimmende Raumtemperatur vorherrscht. Zum anderen die Teilsysteme Gebäude und die Umgebung, innerhalb deren Grenzen jeweils auch eine chrakterisierende Temperatur vorherrscht. Die Systemgrenzen des Raumes werden als geschlossen angesehen, dass heißt das Öffnen und schließen von Fenstern und Türen wird nicht explizit berücksichtigt sondern kann nur nur implizit als Störgröße berücksichtigt werden. Die Grenzen zwischen den Teilsystemen 
-
-Im Raumomodellfall ändert sich also immer der GG-Zustand bezogen auf die Temperatur vom Raum und wird durch die wechselnde Temperatur der äußeren Umgebung bedingt.
-ref erfahrungssatz
+Zum einen in den zu untersuchenden Raum, der durch die Aussenwände des Raumes begrenzt wird und innerhalb dessen Grenzen die zu betsimmende Raumtemperatur vorherrscht. Zum anderen die Teilsysteme Gebäude und die Umgebung, innerhalb deren Grenzen jeweils auch eine chrakterisierende Temperatur vorherrscht. Die Systemgrenzen des Raumes werden als geschlossen angesehen, dass heißt das Öffnen und schließen von Fenstern und Türen wird nicht explizit berücksichtigt sondern kann nur nur implizit als Störgröße berücksichtigt werden. Die Grenzen zwischen den Teilsystemen 
 
 
 \section{Erweiterung durch Sonneneinstrahlung}
