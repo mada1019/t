@@ -242,6 +242,16 @@
 \usepackage[a]{esvect}
 \usepackage{units}
 \usepackage{listings}
+\lstset{breaklines=true,label=}
+% \lstset{basicstyle=\ttfamily}
+\newcommand{\code}[1]{\texttt{\hyphenchar%
+\font45%
+\sloppy%
+\fontdimen2\font=0.4em%
+\fontdimen3\font=0.2em%
+\fontdimen4\font=0.1em%
+\fontdimen7\font=0.1em%
+#1}}
 
 \SetAlgorithmName{Alg.}{Alg.}{Algorithmenübersicht}               % Algorithmusname
 
@@ -453,3 +463,63 @@ literate=%
 %\hyphenation{Ein-zel-kom-po-nen-ten}
 %\hyphenation{Stör-an-fäl-lig-keit}
 %\hyphenation{ein-fach-e}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Listingseinstellungen und Modelica Syntax Highlighting
+%----------------------------------------------------------------------------------------------------------------------
+\lstdefinelanguage{Modelica}
+{
+morekeywords=[1]{
+algorithm,and,annotation,as,assert,block,break,case,class,connect,connector,
+constant,constrainedby,der,discrete,each,else,elseif,elsewhen,encapsulated,
+end,enumeration,equality,equation,expandable,extends,external,failure,final,
+flow,for,function,guard,if,import,in,initial,inner,input,List,local,loop,
+match,matchcontinue,model,not,operator,Option,or,outer,output,package,parameter,
+partial,protected,public,record,redeclare,replaceable,return,stream,
+subtypeof,then,Tuple,type,uniontype,when,while},
+morekeywords=[2]{true, false},
+morekeywords=[3]{Real, Integer,Modelica.Blocks.Interfaces.RealInput,Modelica.Blocks.Interfaces.IntegerInput},
+% Do not make true,false keywords because fn(true,x, false ) shows up as fn(true,x, *false*)
+sensitive=true,
+comment=[l][\color{stringcolor}]{//},
+morecomment=[s]{/*}{*/},
+alsodigit={.,-},
+morestring=[b]',
+morestring=[b]",
+morestring=[s]{/*}{*/},
+}
+[keywords,comments,strings]
+\definecolor{keywordcolor1}{rgb}{0,0,.4}
+\definecolor{keywordcolor2}{rgb}{.90,0,0}
+\definecolor{keywordcolor3}{rgb}{.90,0,0}
+\definecolor{stringcolor}{rgb}{0.133,0.545,0.133}
+% \definecolor{listingbgcolor}{rgb}{0.95,0.95,0.95}
+
+\lstset{
+breaklines=true,
+language=Modelica,
+basicstyle=\scriptsize\ttfamily,
+keywordstyle=[1]\color{keywordcolor1}\bfseries,
+keywordstyle=[2]\color{keywordcolor2},
+keywordstyle=[3]\color{keywordcolor2},
+stringstyle=\color{stringcolor},
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize\color{gray},  % the style that is used for the line-numbers
+stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
+                                  % will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},
+framexleftmargin=5pt,
+xleftmargin=5pt,
+xrightmargin=5pt,
+showstringspaces=false,
+showspaces=false,               % show spaces adding particular underscores
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,                   % adds a frame around the code
+rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+tabsize=2,                      % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+aboveskip = \floatsep,
+}
