@@ -14,86 +14,137 @@
 
 \renewcommand{\chapterheadstartvskip}{\vspace*{-0.5cm}}
 
-In diesem Kapitel werden zunächst die Anforderungen an eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung analysiert. Weiterhin werden die anlagenbezogenen Vorgaben und Rahmenbedingungen von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. 
-%Unzufrieden mit letztem Satz.
-Abschließend wird die Realisierung und die bei der Installation aufgetretenen Besonderheiten der Anlage beschrieben.
-
+Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung zu planen, zu konkretisieren und im letzten Schritt umzusetzen. Dazu werden zunächst die Anforderungen an die Anlage analysiert. Weiterhin werden die Vorgaben und Rahmenbedingungen zur Anlage von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. Abschließend wird die Installation und dabei aufgetretenen Besonderheiten der Anlage beschrieben.
 
 \section{Analyse der Anforderungen und Rahmenbedingungen}
 \label{sec:anforderungen}
 
-Um die Anforderungen an eine gewünschte Anlage zu bestimmen, muss zunächst der Zweck und die Einsatzziele der Anlage untersucht werden. In Kapitel \ref{sec:motivation} wurde bereits darauf hingewiesen, dass es die Vorgabe von Seiten der Hochschule war, die Einsatzziele in Einklang und komplementär zu der bisherigen Forschung wählen. Daher wurden im Dialog mit den Projektverantwortlichen der Hochschule Karlsruhe für die Forschung von MPC in solaren Anwendungen, in Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}, gemeinsam konkrete Einsatzziele für eine --wie in forsch frage gewünschte-- Anlage erarbeitet. Konkret werden mit dem Einsatz der Anlage die folgende Ziele verfolgt:
+Um die Anforderungen an eine MPC-fähige Anlage zu bestimmen, wird zunächst der Zweck und die Einsatzziele der Anlage untersucht. In Kapitel \ref{sec:motivation} wurde bereits darauf hingewiesen, dass es die Vorgabe von Seiten der Hochschule war, die Einsatzziele in Einklang zu der bisherigen Forschung zu bringen und komplementär zu wählen. Daher wurden im Dialog mit den Projektverantwortlichen\footnote{In Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}} für die Forschung im Bereich solarer Anwendungen an der Hochschule Karlsruhe gemeinsam konkrete Einsatzziele der Anlage erarbeitet. Als Ergebnis wurden die folgenden, konkreten Ziele vereinbart:
  
 \begin{itemize}
-	\item Die Einarbeitung in die Thematiken Modellbildung, Kommunikation technischer Systeme und Modellprädiktive Regelung soll durch eine praktisches Anwendung unterstützt werden.
-	\item Es soll Knowhow bei der Kommunikation technischer Systeme aufgebaut werden, insbesondere im Umgang mit der Software, der Hardware und zahlreichen Schnittstellen.
+	\item Die Einarbeitung in die Thematiken Modellbildung, Kommunikation von technischen Systemen und Modellprädiktive Regelung soll durch eine praktisches Anwendung unterstützt werden.
+	\item Es soll Know-how im Bereich der Kommunikation von technischen Systemen aufgebaut werden, insbesondere im Umgang mit der Software, der Hardware und zahlreichen Schnittstellen.
 	\item Die Anlage soll eine hohe Funktionalität, also möglichst wartungsarm, und eine hohe Robustheit gegenüber Fehlern und Beschädigungen besitzen, da bei der Einarbeitung eine erhöhte Wahrscheinlichkeit der Fehlbedienung besteht und Schäden dadurch vermieden werden sollen.
 	\item Es soll ein Vergleich verschiedener Regelungsmethodiken beim Einsatz von Modellprädiktiver Regelung ermöglicht werden.
-	\item Außerdem soll ein Vergleich von Ergebnissen ermöglicht werden, bei der Variation von Steuerungsparametern sowie beim Einsatz verschiedener Steuerungs- und Regelungsalgorithmen.
+	\item Außerdem soll ein Vergleich von Ergebnissen bei der Variation von Steuerungsparametern sowie beim Einsatz verschiedener Steuerungs- und Regelungsalgorithmen ermöglicht werden.
+	\item Des Weiteren soll die Anlage möglichst flexibel ansteuerbar und erweiterbar sein, damit der Grad der Kompliziertheit anpassbar ist und die Anlage um weitere Funktionen oder Features ergänzt werden kann.
+	\item Der temperaturerhöhende Effekt der Sonneneinstrahlung auf die Raumtemperatur soll untersucht werden können.
+	\item Im Rahmen der Anwendungsforschung soll der Raum zur Temperaturregelung möglichst nahe an der Realität sein, also Störgrößen beinhalten und nicht ungenutzt beziehungsweise leerstehend sein.
 \end{itemize}
 
-Zusammenfassend wurde festgehalten, dass die Anlage als Forschungsumgebung für Entwicklungs-, Test- und Anwendungszwecke für verschiedene Steuerungen dienen soll.
+Zusammenfassend wurde festgehalten, dass die Anlage als Forschungsumgebung für Entwicklungs-, Test- und Anwendungszwecke von verschiedenen Steuerungen und Regelungen dienen soll.
+
+Weiterhin wurden von Seiten der Hochschule Karlsruhe\footnote{In Person von Frau Professor \textsc{Angelika Altmann-Dieses}, Herrn Professor \textsc{Marco Braun} und Herrn \textsc{Adrian Bürger}} Rahmenbedingungen definiert, die im Folgenden zusammengefasst sind:
+
+\begin{itemize}
+	\item Der Raum K004b im K-Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
+	\item Die Installation der Anlage muss mit minimalem baulichem und finanziellem Aufwand zu realisieren sein.
+	\item Für die Kommunikation innerhalb der Anlage soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen Übertragungsprotokollen genutzt werden.
+	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform JModelica.org erfolgen.
+\end{itemize}
+
+Diese Einsatzziele und Rahmenbedingungen definieren implizit Anforderungen an eine Anlage, welche im Nachfolgenden explizit ausgeführt werden und aus Gründen der Übersichtlichkeit die wichtigsten in Tabelle \ref{tab:anforderungen_umgebung} zusammengefasst sind.
 
 %Here we go
-
-Weiterhin wurden von Seiten der Hochschule Karlsruhe, in den Person von Frau Professor \textsc{Angelika Altmann-Dieses}, Herrn Professor \textsc{Marco Braun} und Herrn \textsc{Adrian Bürger}, weitere Rahmenbedingungen vorgegeben:
-\begin{itemize}
-	\item Raum für Labor
-	\item Minimaler baulicher und finanzieller Aufwand
-	\item Modbus Kommunikationstechnologie
-	\item MPC mit JModelica.org
-	% EVTL fehlt noch was
-\end{itemize}
-
-
-Aus den Einsatzzielen und Rahmenbedingungen lassen sich konkrete Anforderungen ableiten, die in Tabelle \ref{tab:anforderungen_umgebung} zusammengefasst sind.
-
-% Hier gehts weiter mit der Tabelle
 
 \begin{table}[H]
 \centering
 \small
-\renewcommand{\arraystretch}{1.3}
+\renewcommand{\arraystretch}{1.4}
 \begin{tabularx}{1\textwidth}{m{0.35\textwidth}m{0.58\textwidth}}
 
 \toprule
 
-\textbf{Einsatzziele} & \textbf{Anforderungen} \\
+\textbf{Einsatzziele \&} & \multirow{2}{\hsize}{\textbf{Anforderungen}} \\ 
+\textbf{Rahmenbedingungen} & \\
 
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
-Einarbeitung in die Thematiken	& \multirow{2}{\hsize}{Komplexität erwünscht, allerdings nicht zu hoch}  \\
+Raum K004b als Umgebung  & \multirow{3}{\hsize}{
+\begin{minipage}[t]{0.58\textwidth}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=6mm]
+	\item Die Nutzung bestehender Heizkörper anstatt einer Klimatisierung des Raumes. 
+	\item Die Beschränkung auf eine minimale Funktionalität und Anzahl der einzelnen Komponenten. 
+\end{itemize}
+\end{minipage}
+} \\
+	
+\cmidrule[0.1pt](lr{2em}){1-1} 
+Minimaler baulicher Aufwand & \\
+
+\cmidrule[0.1pt](lr{2em}){1-1} 
+Minimaler finanzieller \newline Aufwand &\\ 
+
+\cmidrule[0.5pt](r{0.25em}){1-1} 
+\cmidrule[0.5pt](l{0.25em}){2-2}
+
+Einarbeitung in die Thematiken:
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=7mm]
+	\item Modellbildung,
+	\item Kommunikation technischer Systeme,
+	\item und Modellprädiktive Regelung.
+\end{itemize}
+ 	& \multirow{2}{\hsize}{
+\begin{minipage}[t]{0.57\textwidth}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=6mm]
+	\item Die Kompliziertheit ist notwendig, darf jedoch nicht zu hoch gewählt werden.
+	\item Es sind möglichst wenige thematische Überschneidungen erwünscht und es wird eine klare Struktur mit möglichst scharfer Trennung notwendig.
+\end{itemize}
+\end{minipage}
+}  \\
 
 \cmidrule[0.1pt](lr{2em}){1-1} 
 
-Knowhow Technische Kommunikation							&					\\
+Know-how für Kommunikation \newline technischer Systeme 	&		\\
+
 
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
-Vergleich von Ergebnissen		& Schnell und einfach messbare Reaktionen      \\
+Modellprädiktive Regelung mit JModelica.org & \multirow{3}{\hsize}{
+\begin{minipage}[t]{0.57\textwidth}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=6mm]
+\item Die Kommunikation erfolgt über die Modbus~RTU und Modbus~TCP Protokolle gemäß deren Spezifikationen.
+\item Durch die Kommunikation mit Modbus~TCP ist die Ansteuerung der innerhalb des gesamten lokalen Netzwerks möglich.
+\item Die Modellbildung erfolgt in Modelica.
+\item Die Kompabilität aller Softwareschnittstellen ist in Python durch verschiedene, bereits bestehende Pakete gegeben.
+\end{itemize}
+\end{minipage}
+}  \\
+
+\cmidrule[0.1pt](lr{2em}){1-1}
+Einsatz der Modbus \newline Technologie 	& 		\\
+
+\cmidrule[0.1pt](lr{2em}){1-1}
+Flexible Ansteuerung der Anlage & \\
+
+
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
-\multirow{2}{\hsize}{Hohe Funktionalität und Robustheit} & Einfache Anwendung mit geringer Störanfälligkeit\\
-\cmidrule[0.1pt](lr{2em}){2-2} 
+Vergleich von Ergebnissen durch:
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=7mm]
+	\item die Variation der Steuerungsparameter,
+	\item den Einsatz verschiedener Regelungsmethodiken,
+	\item und den Einsatz verschiedener Algorithmen.
+\end{itemize}
+
+& \\
+
+\cmidrule[0.1pt](lr{2em}){1-1} 
+
+Hohe Funktionalität und Robustheit & Einfache Anwendung mit geringer Störanfälligkeit \\
+
+\cmidrule[0.1pt](lr{2em}){1-1} 
+
+Erweiterbarkeit der Anlage
 
  & Einfache und robuste Einzelkomponenten \\
- 
-\cmidrule[0.5pt](r{0.25em}){1-1} 
-\cmidrule[0.5pt](l{0.25em}){2-2}
-
-Minimaler finanzieller und baulicher Aufwand & \\
-
-\cmidrule[0.5pt](r{0.25em}){1-1} 
-\cmidrule[0.5pt](l{0.25em}){2-2}
-
-& Einsatz der Modbus Kommunikationstechnologie \\
 
 \bottomrule
 \end{tabularx}
-\caption{Übersetzung der Ziele in Anforderungen der Anlage}
+\caption{Umsetzung der Ziele in Anforderungen der Anlage}
 \label{tab:anforderungen_umgebung}
 \end{table}
 
