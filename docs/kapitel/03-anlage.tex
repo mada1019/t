@@ -37,7 +37,7 @@ Zusammenfassend wurde festgehalten, dass die Anlage als Forschungsumgebung für 
 Weiterhin wurden von Seiten der Hochschule Karlsruhe\footnote{In Person von Frau Professor \textsc{Angelika Altmann-Dieses}, Herrn Professor \textsc{Marco Braun} und Herrn \textsc{Adrian Bürger}} Rahmenbedingungen definiert, die im Folgenden zusammengefasst sind:
 
 \begin{itemize}
-	\item Der Raum K004b im K-Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
+	\item Der Raum K004b im K Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
 	\item Die Installation der Anlage muss mit minimalem baulichem und finanziellem Aufwand zu realisieren sein.
 	\item Für die Kommunikation innerhalb der Anlage soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen Übertragungsprotokollen genutzt werden.
 	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform JModelica.org erfolgen.
@@ -83,7 +83,7 @@ Minimaler finanzieller \newline Aufwand &\\
 
 Einarbeitung in die Thematiken:
 \begin{minipage}[t]{0.34\textwidth}
-\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=7mm]
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=4mm]
 	\item Modellbildung,
 	\item Kommunikation technischer \newline Systeme,
 	\item und Modellprädiktive \newline Regelung.
@@ -129,7 +129,7 @@ Know-how für Kommunikation \newline technischer Systeme 	&		\\
 
 Vergleich von Ergebnissen durch:
 \begin{minipage}[t]{0.34\textwidth}
-\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=7mm]
+\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=4mm]
 	\item die Variation von \newline Steuerungsparametern,
 	\item den Einsatz verschiedener \newline Regelungsmethodiken,
 	\item und den Einsatz \newline verschiedener Algorithmen.
@@ -154,7 +154,6 @@ Hohe Funktionalität und \newline Robustheit & \\
 \cmidrule[0.1pt](lr{2em}){1-1} 
 
 Erweiterbarkeit der Anlage
-
  &  \\
 
 \bottomrule
@@ -163,6 +162,17 @@ Erweiterbarkeit der Anlage
 \label{tab:anforderungen_umgebung}
 \end{table}
 
+Die Grundlegendste Anforderung ist die angepasste Planung der Anlage an die räumlichen Gegebenheiten des Raumes K004b, welche in \ref{fig:skizzek004a} skizziert sind. Der Raum befindet auf dem Campus der Hochschule Karlsruhe im Gebäude K und ist ein Büro für wissenschaftliche Mitarbeiter. Dadurch wird der Forderung nach einer anwendungsnahen Umgebung nachgekommen. Aufgrund der Lage des Raumes und der großen Fensterfront in Richtung Süden, kann auch der Effekt der Sonneneinstrahlung auf die Raumtemperatur mit Hilfe der Anlage 
+
+ Wie in Abbildung \ref{fig:skizzek004a} zu sehen, ist der Raum von 4 Wänden quaderförmig umgeben. Die beiden dickeren Wände, die grob nach Süden und Westen ausgerichtet sind, grenzen an die Außenumgebung. Die anderen beiden Wände, sowie Decke und Boden, grenzen an anderen Räume im Gebäude. Die Ein- und Ausgangstüre befindet sich in der nordöstlichen Ecke an der Ostwand. Die nach Süden ausgerichtete Außenwand besitzt eine hohe Fensterfront. Außerdem ist unterhalb des Fensters ein Heizkörper installiert, der bisher mit einen Thermostat ausgestattet ist, der die Heizung über ein Ventil  steuert.
+Da der Raum ein Büro ist, sind Innerhalb des Raumes nicht nur eine Büroausstattung aus Schreibtischen und Schränken auch sechs Rechner sowie deren Nutzer zu finden/berücksichtigen.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160102_k004a}
+\caption[Raumskizze K004A vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft]{Raumskizze K004A vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft}
+\label{fig:skizzek004a}
+\end{figure}
 
 Um die Einarbeitung zu vereinfachen sollte die Anlage möglichst wenig Komplexität aufweisen, um die Zusammenhänge und Wechselwirkung zwischen den einzelnen Gebieten und Komponenten möglichst einfach begreifbar zu machen. Da jedoch auch Erfahrungen gesammelt werden sollen, wird ein bestimmtes Maß an Komplexität vorausgesetzt, da diese mit einer wachsenden Zahl von Schnittstellen, verschiedener Soft- und Hardware einhergeht. Dadurch ergibt sich die Forderung nach einem Kompromiss zwischen Verständlichkeit und Komplexität, weshalb ein bestimmtes Maß an Komplexität erwünscht ist.
 Das einfache Vergleichen von Ergebnissen soll dadurch ermöglicht werden, dass die Reaktionen/Ergebnisse/Messungen schnell und einfach zu messen sind. Das bedeutet konkret, dass die Anlage zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll. Zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein. Die letzte, sehr wichtige, abgeleitete Anforderung ist eine hohe Funktionalität, um Fehlerquellen außerhalb der Forschung auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungen sehr wahrscheinlich auch Fehler passieren sich einstellen und diese keine Schaden an der Anlage verursachen sollen.
@@ -199,16 +209,7 @@ Das Hauptaugenmerk bei der Konzipierung liegt deshalb auf der Kompabilität und 
 
 
 \section{Räumliche Gegebenheiten}
-Einen ersten Überblick der räumlichen Gegebenheiten sowie deren Lage ist auf der Skizze in Abbildung \ref{fig:skizzek004a} gegeben. Der Raum, dessen Temperatur geregelt werden soll, befindet auf dem Campus der Hochschule Karlsruhe im Gebäude K und ist ein Büro für wissenschaftliche Mitarbeiter. 
-Wie in Abbildung \ref{fig:skizzek004a} zu sehen, ist der Raum von 4 Wänden quaderförmig umgeben. Die beiden dickeren Wände, die grob nach Süden und Westen ausgerichtet sind, grenzen an die Außenumgebung. Die anderen beiden Wände, sowie Decke und Boden, grenzen an anderen Räume im Gebäude. Die Ein- und Ausgangstüre befindet sich in der nordöstlichen Ecke an der Ostwand. Die nach Süden ausgerichtete Außenwand besitzt eine hohe Fensterfront. Außerdem ist unterhalb des Fensters ein Heizkörper installiert, der bisher mit einen Thermostat ausgestattet ist, der die Heizung über ein Ventil  steuert.
-Da der Raum ein Büro ist, sind Innerhalb des Raumes nicht nur eine Büroausstattung aus Schreibtischen und Schränken auch sechs Rechner sowie deren Nutzer zu finden/berücksichtigen.
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{abbildungen/20160102_k004a}
-\caption[Raumskizze K004A vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft]{Raumskizze K004A vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft}
-\label{fig:skizzek004a}
-\end{figure}
 
 \section{Konzipierung der Steuerung}
 Die Steuerung der Anlage 
