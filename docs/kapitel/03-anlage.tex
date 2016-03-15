@@ -27,7 +27,7 @@ Um die Anforderungen an eine MPC-fähige Anlage zu bestimmen, wird zunächst der
 	\item Die Anlage soll eine hohe Funktionalität, also möglichst wartungsarm, und eine hohe Robustheit gegenüber Fehlern und Beschädigungen besitzen, da bei der Einarbeitung eine erhöhte Wahrscheinlichkeit der Fehlbedienung besteht und Schäden dadurch vermieden werden sollen.
 	\item Es soll ein Vergleich verschiedener Regelungsmethodiken beim Einsatz von Modellprädiktiver Regelung ermöglicht werden.
 	\item Außerdem soll ein Vergleich von Ergebnissen bei der Variation von Steuerungsparametern sowie beim Einsatz verschiedener Steuerungs- und Regelungsalgorithmen ermöglicht werden.
-	\item Des Weiteren soll die Anlage möglichst flexibel ansteuerbar und erweiterbar sein, damit der Grad der Kompliziertheit anpassbar ist und die Anlage um weitere Funktionen oder Features ergänzt werden kann.
+	\item Des Weiteren soll die Anlage möglichst flexibel ansteuerbar und erweiterbar sein, damit der Grad der Komplexität anpassbar ist und die Anlage um weitere Funktionen oder Features ergänzt werden kann.
 	\item Der temperaturerhöhende Effekt der Sonneneinstrahlung auf die Raumtemperatur soll untersucht werden können.
 	\item Im Rahmen der Anwendungsforschung soll der Raum zur Temperaturregelung möglichst nahe an der Realität sein, also Störgrößen beinhalten und nicht ungenutzt beziehungsweise leerstehend sein.
 \end{itemize}
@@ -62,13 +62,15 @@ Diese Einsatzziele und Rahmenbedingungen definieren implizit Anforderungen an ei
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
 Raum K004b als Umgebung  & \multirow{3}{\hsize}{
-\begin{minipage}[t]{0.58\textwidth}
-\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=6mm]
+\begin{minipage}[t]{0.57\textwidth}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
+	\item Die Anpassung der Anlage an K004b.
 	\item Die Nutzung bestehender Heizkörper anstatt einer Klimatisierung des Raumes. 
 	\item Die Beschränkung auf eine minimale Funktionalität und Anzahl der einzelnen Komponenten. 
 \end{itemize}
 \end{minipage}
-} \\
+}
+ \\
 	
 \cmidrule[0.1pt](lr{2em}){1-1} 
 Minimaler baulicher Aufwand & \\
@@ -80,16 +82,18 @@ Minimaler finanzieller \newline Aufwand &\\
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
 Einarbeitung in die Thematiken:
-\begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=7mm]
+\begin{minipage}[t]{0.34\textwidth}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=7mm]
 	\item Modellbildung,
-	\item Kommunikation technischer Systeme,
-	\item und Modellprädiktive Regelung.
+	\item Kommunikation technischer \newline Systeme,
+	\item und Modellprädiktive \newline Regelung.
 \end{itemize}
+\end{minipage}
  	& \multirow{2}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
-\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=6mm]
-	\item Die Kompliziertheit ist notwendig, darf jedoch nicht zu hoch gewählt werden.
-	\item Es sind möglichst wenige thematische Überschneidungen erwünscht und es wird eine klare Struktur mit möglichst scharfer Trennung notwendig.
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
+	\item Komplexität ist notwendig, darf jedoch nicht zu hoch sein.
+	\item Es sind möglichst wenige thematische Überschneidungen erwünscht, daher wird eine klare Struktur mit möglichst scharfer Trennung benötigt.
 \end{itemize}
 \end{minipage}
 }  \\
@@ -102,45 +106,56 @@ Know-how für Kommunikation \newline technischer Systeme 	&		\\
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
-Modellprädiktive Regelung mit JModelica.org & \multirow{3}{\hsize}{
+\addlinespace[4mm] Modellprädiktive Regelung mit JModelica.org \newline & \multirow{3}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
-\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=6mm]
-\item Die Kommunikation erfolgt über die Modbus~RTU und Modbus~TCP Protokolle gemäß deren Spezifikationen.
-\item Durch die Kommunikation mit Modbus~TCP ist die Ansteuerung der innerhalb des gesamten lokalen Netzwerks möglich.
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
 \item Die Modellbildung erfolgt in Modelica.
-\item Die Kompabilität aller Softwareschnittstellen ist in Python durch verschiedene, bereits bestehende Pakete gegeben.
+\item Die Kompatibilität aller Softwareschnittstellen ist in Python durch verschiedene, bereits bestehende Pakete gegeben.
+\item Die Kommunikation der Anlage erfolgt gemäß den Modbus~RTU und TCP Protokollspezifikationen.
+\item Über Modbus~TCP erfolgt die Ansteuerung der Anlage innerhalb eines gesamten lokalen Netzwerks.
 \end{itemize}
 \end{minipage}
 }  \\
 
 \cmidrule[0.1pt](lr{2em}){1-1}
-Einsatz der Modbus \newline Technologie 	& 		\\
+\addlinespace[4mm] Einsatz der Modbus \newline Kommunikationstechnologie \newline 	& 		\\
 
 \cmidrule[0.1pt](lr{2em}){1-1}
-Flexible Ansteuerung der Anlage & \\
+\addlinespace[4mm] Flexible Ansteuerung der Anlage \newline & \\
 
 
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
 Vergleich von Ergebnissen durch:
+\begin{minipage}[t]{0.34\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=1pt,leftmargin=7mm]
-	\item die Variation der Steuerungsparameter,
-	\item den Einsatz verschiedener Regelungsmethodiken,
-	\item und den Einsatz verschiedener Algorithmen.
+	\item die Variation von \newline Steuerungsparametern,
+	\item den Einsatz verschiedener \newline Regelungsmethodiken,
+	\item und den Einsatz \newline verschiedener Algorithmen.
 \end{itemize}
+\end{minipage}
 
-& \\
+& \multirow{3}{\hsize}{
+\begin{minipage}[t]{0.57\textwidth}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
+\item Die Reaktion des Systems muss schnell messbar sowie günstig und einfach zu erfassen sein.
+\item Der Einsatz von robusten und einfachen Bauteile.
+\item Nutzung eines wartungsarmen Systems.
+\item Eine einfache, modulare Erweiterbarkeit des Systems für weitere Schritte muss gegeben sein.
+\end{itemize}
+\end{minipage}
+}  \\
 
 \cmidrule[0.1pt](lr{2em}){1-1} 
 
-Hohe Funktionalität und Robustheit & Einfache Anwendung mit geringer Störanfälligkeit \\
+Hohe Funktionalität und \newline Robustheit & \\
 
 \cmidrule[0.1pt](lr{2em}){1-1} 
 
 Erweiterbarkeit der Anlage
 
- & Einfache und robuste Einzelkomponenten \\
+ &  \\
 
 \bottomrule
 \end{tabularx}
