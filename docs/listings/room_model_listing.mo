@@ -203,7 +203,7 @@ package room_model_backup
    /* calculate window surface of the room with the environment */
    window_surface=(window_length*window_height);
    /* calculate inner energy*/
-   room_u = room_mass * cp_air * room_temperature; //?berpr?fen ob ?berhaupt n?tig?!?!?!
+   room_u = room_mass * cp_air * room_temperature;
    /* calculate derival of the inner energy */
    der(room_u) = radiator_qdot + qdot_loss + qdot_sun + qdot_otherfactors;
    /* sum up the lost heat flow */

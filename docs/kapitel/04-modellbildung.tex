@@ -12,6 +12,8 @@
 \chapter{Modellbildung des Raumes}
 \label{chap:modellbildung}
 
+\lstinputlisting[language=Modelica, linerange=194-20, label=lst:room]{listings/room_model_listing.mo}
+
 Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur, basierend auf den thermodynamischen Prozessen mit dessen Umgebung und der Anlage aus Kapitel \ref{chap:anlagendesign}, zu bilden, um damit und unter Zuhilfenahme der Anlage Modellpräditive Regelung zu ermöglichen.
 Dazu wird zunächst ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise an den bestehenden Raum erweitert angepasst wird, bis eine die Qualität des Modells ausreichend ist.
 
@@ -23,9 +25,19 @@ Damit eine Steuerung mit Hilfe von Modellprädiktiver Regelung möglich ist, dar
 Das Modell soll zunächst so simpel wie möglich gestaltet werden um eine Optimierung mit Hilfe von MPC zu ermöglichen. Dessen Verfahren zur Optimierung sind gradientenbasiert und erfordern damit die Erzeugung von stetigen Ableitungen bis zum zweiten Grad. Daher soll die Komlpexität des Modells zunöchgst sehr gering gehalten werdeen und dann Stück für Stück erhöht werden und die damit die Geanuiogkeit des modells erhöht werden
 
 \section{Das Grundmodell des Raumes}
-Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothetischer Raum betrachtet. Dieser Raum bildet zusammen mit der ihn umgebenden Luft ein abgeschlossenes thermodynamisches System, wie in Kapitel \ref{sec:grundlagenmodell} beschrieben. Der Raum ist slebst mit Luft gefüllt und wird zu allen sechs Seiten hin durch Wände begrenzt. Damit bildet der Raum ein geschlossenes System, da lediglich keine Massenströme über die Grenzen hinweg fließen können. An den Grenzflächen kann also lediglich Wärme zwischen der Luft außerhalb und innerhalb des Raumes ausgetauscht werden. 
-Zur Bestimmung der Raumtemperatur muss der Wärmestrom zwischen dem Raum und der ihn umgebenden Luft nach Gleichung \ref{eq:qdot} bestimmt werden. Dazu werden verschiedene modellrelevanten Eigenschaften des Raumes durch physikalische Größen beschrieben. Um die Austauschoberfläche zu berechnen sind die Raumbreite, -länge und -höhe relevant, um den Wärmestrom zu bestimmen wird der U-Wert einer Wand aus Beton benötigt und um die Temperatur mit Hilfe des ersten Hauptsatzes der Thermodynamik zu bestimmen, wird zusätzlich noch die spezifische Wärmekapüazität der Luft innnerhlab des Raumes benötigt.
-Diese modellrelevanten Eigenschaften sind allesamt mit ihren Werten in Tabelle \ref{tab:eigenschaften_raum} zusammengefasst.
+
+Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothetischer Raum betrachtet, der in \ref{fig:grundraum} dargestellt ist. Dieser Raum bildet zusammen mit der ihn umgebenden Luft ein abgeschlossenes thermodynamisches System, wie in Kapitel \ref{sec:grundlagenmodell} beschrieben. Der Raum ist selbst mit Luft gefüllt und wird zu allen sechs Seiten hin durch Wände begrenzt. Damit bildet der Raum ein geschlossenes System, da keine Massenströme über die Grenzen hinweg fließen können. An den Grenzflächen kann also lediglich Wärme zwischen der Luft außerhalb und innerhalb des Raumes ausgetauscht werden. Des Weiteren wird eine homogene Temperatur innerhalb des Raumes und der Umgebung angenommen, was einem eingeschwungenen Zustand/Gleichgewichtszustand in der Realität entspricht. Diese Annahme ist jedoch noch zu überprüfen.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160316_grundraum}
+\caption{Grundmodell eines Raumes}
+\label{fig:grundraum}
+\end{figure}
+
+Zur Bestimmung der Raumtemperatur muss, ausgehend von einer initialen Raumtemperatur und der Umgebungstemperatur, der Ausgleichsprozess zwischen Raum und Umgebung untersucht werden, konkret der ausgetauschte Wärmestrom. Um diesen nach \ref{eq:qdot} zu berechnen, müssen zunächst die verschiedene modellrelevanten Eigenschaften des Raumes durch physikalische Größen und Variablen beschrieben werden. Zur Berechnung der Austauschoberfläche wird die Raumbreite, -länge und -höhe benötigt und weiterhin sind der U-Wert einer Betonwand, die spezifische Wärmekapazität und Dichte von Luft für die Bestimmung des Wärmestroms relevant.
+
+Diese modellrelevanten Eigenschaften sind allesamt mit ihren Zahlenwerten in Tabelle \ref{tab:eigenschaften_raum} zusammengefasst.
 
 \begin{table}[H]
 \centering
@@ -44,7 +56,7 @@ Raumbreite & 7,81\tnote{1)} & $[m]$ \\
 Raumhöhe & 2,99\tnote{1)} & $[m]$ \\
 \ccol Wärmedurchgangskoeffizient & \ccol 2\tnote{2)} & \ccol $[\frac{W}{m^{2}*K}]$\\
 Spezifische Wärmekapazität von Luft & 1.000\tnote{3)} & $[\frac{J}{kg*K}]$\\
-
+\ccol Dichte von Luft & \ccol 1,25 \tnote{3)} & \ccol $[\frac{kg}{m^{3}}]$\\
 \bottomrule
 \end{tabularx}
 \begin{tablenotes}[]\footnotesize\singlespacing\setlength\labelsep{0pt}
@@ -57,9 +69,46 @@ Spezifische Wärmekapazität von Luft & 1.000\tnote{3)} & $[\frac{J}{kg*K}]$\\
 \label{tab:eigenschaften_raum}
 \end{table}
 
-Erfolgt nun die Bilanzierung des Raumes mit Hilfe des ersten Hauptsatzes der Thermodynamik nach Gleichung \ref{eq:hauptsatz} und die Berechnung der inneren Energie des Raumes nach Gleichung \ref{eq:innereenergie} ergibt sich folgendes einfaches Modell/Gleichungssystem:
+Erfolgt nun die Bilanzierung des Raumes mit Hilfe des ersten Hauptsatzes der Thermodynamik nach \ref{eq:hauptsatz} und die Berechnung der inneren Energie des Raumes nach \ref{eq:innereenergie} ergibt sich folgendes, einfaches Gleichungssystem zur Bestimmung der Raumtemperatur im Grundmodell in Modelica:
 
-\lstinputlisting[language=Modelica, linerange=1-20, label=lst:room]{listings/room_model_listing.mo}
+\begin{lstlisting}[language=Modelica, label=lst:grundraum]
+equation
+   /* calculate room volume */
+   room_volume = room_length * room_height * room_breadth;
+   /* calculate room mass */
+   room_mass = room_volume * rho_air;
+   /* calculate surface of heat exchange */
+   exchange_surface = 2 * (room_length * room_breadth) + 2 * (room_length * room_height) + 2 * (room_breadth * room_height);
+   /* calculate inner energy*/
+   room_u = room_mass * cp_air * room_temperature;
+   /* calculate derivative of the inner energy */
+   der(room_u) = environment_qdot;
+   /* calculate heatflow between room and environment */
+   environment_qdot = u_wall * exchange_surface * (environment_temperature - room_temperature);
+\end{lstlisting}
+
+Damit ist das Grundmodell für einen Raum in Modelica beschrieben, das im Folgenden schrittweise erweitert wird um der Realität genpüge zu tragen.
+
+\section{Modellerweiterung durch Berücksichtigung realen Umgebung}
+
+Im nächsten Schritt wird das Raummodell an die realen, räumlichen Gegebenheiten des Raums K004b angepasst. In der \ref{fig:skizzek004a} wird deutlich, dass der Raum lediglich zwei Außenwände besitzt, die an die Umgebungsluft grenzen: Die Wände in Richtung Süden und Westen. Die anderen beiden Wände, sowie die Decke und der Boden, grenzen an weitere Gebäudeteile des K-Gebäudes. Der Raum ist nach wie vor ein geschlossenes System und bildet zusammen mit dem umgebenden K-Gebäude und der Umgebung wiederum ein abgeschlossenes System. Jedoch können nun verschiedene Wärmeströme zwischen dem Raum und der Außenumgebung sowie dem Raum und dem K-Gebäude ausgetauscht werden. Aufgrund der Relation der Wärmeströme im Gegensatz zur großen Energie des K-Gebäudes und der Umgebung, wird der Erwärmungs- bzw Abkühlungseffekt durch den Wärmestrom mit dem Raum vernachlässigt und von konstanten, homogenen Temperaturen innerhalb der Umgebung und des K-Gebäudes ausgegangen.
+
+Durch diese Erweiterung des Modells wird die gesamte Austauschoberfläche zum Wärmeaustauschs aufgeteilt in die Austauschoberfläche mit der Umgebung und die Austauschoberfläche mit dem K-Gebäude, um die Wärmeströme separat berechnen zu können. Des Weiteren werden im Modell die Temperatur der Außenumgebung und die Temperatur innerhalb des K-Gebäudes als externe Steuergrößen berücksichtigt. Das Gleichungssystem des Grundmodells in \ref{lst:grundraum} erweitert sich also um folgende Änderungen:
+
+\begin{lstlisting}[language=Modelica,label=lst:raumeins]
+equation
+   [...]
+   /* calculate surface of heat exchange with environment */
+   environment_exchange_surface = room_length * room_height + room_breadth * room_height;
+   /* calculate surface of heat exchange with the remaining building */
+   building_exchange_surface = 2 * (room_length * room_breadth) + room_length * room_height + room_breadth * room_height;
+   /* calculate derivative of the inner energy */
+   der(room_u) = environment_qdot + building_qdot;
+   /* calculate heatflow between room and environment */
+   environment_qdot = u_wall * environment_exchange_surface * (environment_temperature - room_temperature);
+   /* calculate heatflow between room and building */
+   building_qdot = u_wall * building_exchange_surface * (building_temperature - room_temperature);
+\end{lstlisting}
 
 
 \ref{lst:room}
