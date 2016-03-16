@@ -242,16 +242,6 @@
 \usepackage[a]{esvect}
 \usepackage{units}
 \usepackage{listings}
-\lstset{breaklines=true,label=}
-% \lstset{basicstyle=\ttfamily}
-\newcommand{\code}[1]{\texttt{\hyphenchar%
-\font45%
-\sloppy%
-\fontdimen2\font=0.4em%
-\fontdimen3\font=0.2em%
-\fontdimen4\font=0.1em%
-\fontdimen7\font=0.1em%
-#1}}
 
 \SetAlgorithmName{Alg.}{Alg.}{Algorithmenübersicht}               % Algorithmusname
 
@@ -467,6 +457,7 @@ literate=%
 %----------------------------------------------------------------------------------------------------------------------
 % Listingseinstellungen und Modelica Syntax Highlighting
 %----------------------------------------------------------------------------------------------------------------------
+
 \lstdefinelanguage{Modelica}
 {
 morekeywords=[1]{
@@ -478,7 +469,7 @@ match,matchcontinue,model,not,operator,Option,or,outer,output,package,parameter,
 partial,protected,public,record,redeclare,replaceable,return,stream,
 subtypeof,then,Tuple,type,uniontype,when,while},
 morekeywords=[2]{true, false},
-morekeywords=[3]{Real, Integer,Modelica.Blocks.Interfaces.RealInput,Modelica.Blocks.Interfaces.IntegerInput},
+morekeywords=[3]{Real, Integer,Modelica.Blocks.Interfaces.RealInput,Modelica.Blocks.Interfaces.IntegerInput,Modelica.SIunits.HeatFlowRate },
 % Do not make true,false keywords because fn(true,x, false ) shows up as fn(true,x, *false*)
 sensitive=true,
 comment=[l][\color{stringcolor}]{//},
@@ -487,8 +478,7 @@ alsodigit={.,-},
 morestring=[b]',
 morestring=[b]",
 morestring=[s]{/*}{*/},
-}
-[keywords,comments,strings]
+}[keywords,comments,strings]
 \definecolor{keywordcolor1}{rgb}{0,0,.4}
 \definecolor{keywordcolor2}{rgb}{.90,0,0}
 \definecolor{keywordcolor3}{rgb}{.90,0,0}
@@ -507,7 +497,7 @@ numbers=left,                   % where to put the line-numbers
 numberstyle=\footnotesize\color{gray},  % the style that is used for the line-numbers
 stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
                                   % will be numbered
-numbersep=5pt,                  % how far the line-numbers are from the code
+numbersep=0pt,                  % how far the line-numbers are from the code
 backgroundcolor=\color{white},
 framexleftmargin=5pt,
 xleftmargin=5pt,
@@ -522,4 +512,15 @@ captionpos=b,                   % sets the caption-position to bottom
 breaklines=true,                % sets automatic line breaking
 breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
 aboveskip = \floatsep,
-}
+}
+
+%\lstset{breaklines=true,label=}
+% \lstset{basicstyle=\ttfamily}
+\newcommand{\code}[1]{\texttt{\hyphenchar%
+\font45%
+\sloppy%
+\fontdimen2\font=0.4em%
+\fontdimen3\font=0.2em%
+\fontdimen4\font=0.1em%
+\fontdimen7\font=0.1em%
+#1}}

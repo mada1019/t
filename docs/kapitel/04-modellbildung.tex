@@ -57,22 +57,12 @@ Spezifische Wärmekapazität von Luft & 1.000\tnote{3)} & $[\frac{J}{kg*K}]$\\
 \label{tab:eigenschaften_raum}
 \end{table}
 
-Erfolgt nun die Bilanzierung des Raumes mit Hilfe des ersten Hauptsatzes der Thermodynamik nach Gleichung \ref{eq:hauptsatz} und die Berechnung der inneren Energie des Raumes nach Gleichung \ref{eq:innereenergie} ergibt sich folgende einfache Differenzialgleichung zur Bestimmung der Raumtemperatur
+Erfolgt nun die Bilanzierung des Raumes mit Hilfe des ersten Hauptsatzes der Thermodynamik nach Gleichung \ref{eq:hauptsatz} und die Berechnung der inneren Energie des Raumes nach Gleichung \ref{eq:innereenergie} ergibt sich folgendes einfaches Modell/Gleichungssystem:
 
-\begin{equation*}
-\begin{split}
-	U_{Raum} = m*c_{p}*t_{Raum}+u_{0} \\
-	\Longleftrightarrow \dot{U}_{Raum} = m*c_{p}*\dot{t} \\
-	\dot{U}_{Raum}=\dot{Q}= t_{Raum} *  u * A * t_{Umgebung} \\
-	\Rightarrow \dot{t}_{Raum} = t_{Raum} * \frac{u * A * t_{Umgebung}}{m*c_{p}} 
-\end{split}
-\end{equation*}
+\lstinputlisting[language=Modelica, linerange=1-20, label=lst:room]{listings/room_model_listing.mo}
 
 
-
-
-
-\lstinputlisting[language={Modelica}, linerange={36-37}, label={lst:pump}]{listings/room_model_backup.mo}
+\ref{lst:room}
 
 Die Abgrenzung bzw Wahl der Grenzen zur Bilanzierung eines thermodynamischen Systems erfolgt nach dem gesuchten Zustand und der gesuchten Zustandsgröße, der Raumtemperatur im Raum K004b. Der gesucten hießt zu berechnenenden/unbekannten
 

@@ -1,29 +1,16 @@
-within ;
 package room_model_backup
+
   connector Temperature
   Modelica.SIunits.Conversions.NonSIunits.Temperature_degC t;
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-              {100,100}}), graphics={Ellipse(
-            extent={{98,-98},{-98,98}},
-            lineColor={0,0,255},
-            fillColor={0,128,255},
-            fillPattern=FillPattern.Solid)}));
-  end Temperature;
+    end Temperature;
 
   connector HeatFlow
   Modelica.SIunits.HeatFlowRate qdot;
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-              {100,100}}), graphics={Ellipse(
-            extent={{98,-98},{-98,98}},
-            lineColor={0,0,255},
-            fillColor={255,85,85},
-            fillPattern=FillPattern.Solid)}));
-  end HeatFlow;
+    end HeatFlow;
 
   model CV_Radiator "control volume for a discretized radiator"
-
+    
     /** parameter **/
-
     /* central parameter */
     outer parameter Modelica.SIunits.CoefficientOfHeatTransfer u_radiator
       "heat transfer coefficient of the radiator";
@@ -38,7 +25,7 @@ package room_model_backup
       "heatflowrate over the borders of the control volume";
     Modelica.SIunits.Conversions.NonSIunits.Temperature_degC cv_temperature_out(start=21.2, fixed=true)
       "temperature of the fluid leaving the control volume";
-
+    
     /** states **/
     outer Modelica.SIunits.Conversions.NonSIunits.Temperature_degC room_temperature_cv
       "temperature within the room";
@@ -48,12 +35,6 @@ package room_model_backup
       "temperature of the fluid streaming in the control volume";
     outer Modelica.SIunits.MassFlowRate mdot "massflowrate within the radiator";
 
-    Temperature inlet
-      annotation (Placement(transformation(extent={{-434,-12},{-414,8}}),
-          iconTransformation(extent={{-434,-12},{-414,8}})));
-    Temperature outlet
-      annotation (Placement(transformation(extent={{408,-8},{428,12}}),
-          iconTransformation(extent={{408,-8},{428,12}})));
   equation
     /* calculate inner energy */
     cv_u = cv_m * cp_water * cv_temperature_out;
@@ -63,34 +44,6 @@ package room_model_backup
     cv_qdot = u_radiator * exchange_surface * (cv_temperature_out - room_temperature_cv);
     /* commit calculated temperature */
     outlet.t = cv_temperature_out;
-    annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-460,
-              -440},{460,440}}),
-                           graphics={Rectangle(
-            extent={{-418,340},{416,-330}},
-            lineColor={0,0,0},
-            lineThickness=1),
-          Text(
-            extent={{-192,422},{232,200}},
-            lineColor={0,0,0},
-            lineThickness=1,
-            textStyle={TextStyle.Bold},
-            textString="control volume - cv"),
-          Text(
-            extent={{-406,42},{-296,-4}},
-            lineColor={0,0,255},
-            lineThickness=1,
-            textString="inlet.t"),
-          Text(
-            extent={{280,40},{390,-6}},
-            lineColor={0,0,255},
-            lineThickness=1,
-            textString="outlet.t"),
-          Polygon(
-            points={{-102,-274},{98,-274},{2,-418},{-102,-274}},
-            lineColor={255,0,0},
-            lineThickness=1,
-            smooth=Smooth.None)}),       Diagram(coordinateSystem(
-            preserveAspectRatio=false, extent={{-460,-440},{460,440}}), graphics));
   end CV_Radiator;
 
   model Radiator "model for a discretized radiator within a room"
