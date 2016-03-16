@@ -26,7 +26,7 @@ Das Modell soll zunächst so simpel wie möglich gestaltet werden um eine Optimi
 
 \section{Das Grundmodell des Raumes}
 
-Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothetischer Raum betrachtet, der in \ref{fig:grundraum} dargestellt ist. Dieser Raum bildet zusammen mit der ihn umgebenden Luft ein abgeschlossenes thermodynamisches System, wie in Kapitel \ref{sec:grundlagenmodell} beschrieben. Der Raum ist selbst mit Luft gefüllt und wird zu allen sechs Seiten hin durch Wände begrenzt. Damit bildet der Raum ein geschlossenes System, da keine Massenströme über die Grenzen hinweg fließen können. An den Grenzflächen kann also lediglich Wärme zwischen der Luft außerhalb und innerhalb des Raumes ausgetauscht werden. Des Weiteren wird eine homogene Temperatur innerhalb des Raumes und der Umgebung angenommen, was einem eingeschwungenen Zustand/Gleichgewichtszustand in der Realität entspricht. Diese Annahme ist jedoch noch zu überprüfen.
+Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothetischer Raum betrachtet. Dieser Raum bildet zusammen mit der ihn umgebenden Luft ein abgeschlossenes thermodynamisches System, wie in Kapitel \ref{sec:grundlagenmodell} beschrieben. Der Raum ist selbst mit Luft gefüllt und wird zu allen sechs Seiten hin durch Wände begrenzt. Damit bildet der Raum ein geschlossenes System, da keine Massenströme über die Grenzen hinweg fließen können. An den Grenzflächen kann also lediglich Wärme zwischen der Luft außerhalb und innerhalb des Raumes ausgetauscht werden. Des Weiteren wird eine homogene Temperatur innerhalb des Raumes und der Umgebung angenommen, was einem eingeschwungenen Zustand/Gleichgewichtszustand in der Realität entspricht. Diese Annahme ist jedoch noch zu überprüfen.
 
 \begin{figure}
 \centering
@@ -87,11 +87,11 @@ equation
    environment_qdot = u_wall * exchange_surface * (environment_temperature - room_temperature);
 \end{lstlisting}
 
-Damit ist das Grundmodell für einen Raum in Modelica beschrieben, das im Folgenden schrittweise erweitert wird um der Realität genpüge zu tragen.
+Dieses ist das Grundmodell für einen Raum ist in \ref{fig:grundraum} graphisch dargestellt und wird im Folgenden schrittweise erweitert, um der Realität genüge zu tragen.
 
-\section{Modellerweiterung durch Berücksichtigung realen Umgebung}
+\section{Modellerweiterung durch Berücksichtigung der realen Umgebung}
 
-Im nächsten Schritt wird das Raummodell an die realen, räumlichen Gegebenheiten des Raums K004b angepasst. In der \ref{fig:skizzek004a} wird deutlich, dass der Raum lediglich zwei Außenwände besitzt, die an die Umgebungsluft grenzen: Die Wände in Richtung Süden und Westen. Die anderen beiden Wände, sowie die Decke und der Boden, grenzen an weitere Gebäudeteile des K-Gebäudes. Der Raum ist nach wie vor ein geschlossenes System und bildet zusammen mit dem umgebenden K-Gebäude und der Umgebung wiederum ein abgeschlossenes System. Jedoch können nun verschiedene Wärmeströme zwischen dem Raum und der Außenumgebung sowie dem Raum und dem K-Gebäude ausgetauscht werden. Aufgrund der Relation der Wärmeströme im Gegensatz zur großen Energie des K-Gebäudes und der Umgebung, wird der Erwärmungs- bzw Abkühlungseffekt durch den Wärmestrom mit dem Raum vernachlässigt und von konstanten, homogenen Temperaturen innerhalb der Umgebung und des K-Gebäudes ausgegangen.
+Im nächsten Schritt wird das Raummodell an die reale Umgebung des Raums K004b angepasst. In der \ref{fig:skizzek004a} wird deutlich, dass der Raum lediglich zwei Außenwände besitzt, die an die Umgebungsluft grenzen: Die Wände in Richtung Süden und Westen. Die anderen beiden Wände, sowie die Decke und der Boden, grenzen an weitere Gebäudeteile des K-Gebäudes. Der Raum ist nach wie vor ein geschlossenes System und bildet zusammen mit dem umgebenden K-Gebäude und der Umgebung wiederum ein abgeschlossenes System. Jedoch können nun verschiedene Wärmeströme zwischen dem Raum und der Außenumgebung sowie dem Raum und dem K-Gebäude ausgetauscht werden. Aufgrund der Relation der Wärmeströme im Gegensatz zur großen Energie des K-Gebäudes und der Umgebung, wird der Erwärmungs- bzw Abkühlungseffekt durch den Wärmestrom mit dem Raum vernachlässigt und von konstanten, homogenen Temperaturen innerhalb der Umgebung und des K-Gebäudes ausgegangen.
 
 Durch diese Erweiterung des Modells wird die gesamte Austauschoberfläche zum Wärmeaustauschs aufgeteilt in die Austauschoberfläche mit der Umgebung und die Austauschoberfläche mit dem K-Gebäude, um die Wärmeströme separat berechnen zu können. Des Weiteren werden im Modell die Temperatur der Außenumgebung und die Temperatur innerhalb des K-Gebäudes als externe Steuergrößen berücksichtigt. Das Gleichungssystem des Grundmodells in \ref{lst:grundraum} erweitert sich also um folgende Änderungen:
 
@@ -110,18 +110,26 @@ equation
    building_qdot = u_wall * building_exchange_surface * (building_temperature - room_temperature);
 \end{lstlisting}
 
+Damit wurde er Raum an die reale Umgebung angepasst und im nächsten Schritt werden die räumlichen Gegebenheiten im Modell abgebildet.
+
+\section{Modellerweiterung durch Berücksichtigung der räumlichen Gegebenheiten}
+
+Das Modell wird nun an die realen Gegebenheiten des Raumes K004b angepasst, welche in \ref{fig:skizzek004a} bereits dargestellt wurden. Zum einen ist in der südlichen Außenwand eine Fensterfront vorhanden und zum anderen ein Heizkörper innerhalb des Raumes vorhanden. Da der U-Wert von Glas erheblich von dem Wert einer Wand abweicht, entsteht ein weiterer Wärmestrom durch die Fenster mit der Umgebungsluft. Des weiteren muss im Modell eine Wärmequelle hinzugefügt werden, um den vom Heizkörper eingebrachten Wärmestrom zu berücksichtigen. Graphisch sind diese Erweiterungen des Modells in \ref{fig:raumeins} zu sehen.
+
+%Here We GO with model extension
 
 \ref{lst:room}
 
-Die Abgrenzung bzw Wahl der Grenzen zur Bilanzierung eines thermodynamischen Systems erfolgt nach dem gesuchten Zustand und der gesuchten Zustandsgröße, der Raumtemperatur im Raum K004b. Der gesucten hießt zu berechnenenden/unbekannten
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160316_raumeins}
+\caption{Erweitertes Raummodell}
+\label{fig:raumeins}
+\end{figure}
 
-Zum einen in den zu untersuchenden Raum, der durch die Aussenwände des Raumes begrenzt wird und innerhalb dessen Grenzen die zu betsimmende Raumtemperatur vorherrscht. Zum anderen die Teilsysteme Gebäude und die Umgebung, innerhalb deren Grenzen jeweils auch eine chrakterisierende Temperatur vorherrscht. Die Systemgrenzen des Raumes werden als geschlossen angesehen, dass heißt das Öffnen und schließen von Fenstern und Türen wird nicht explizit berücksichtigt sondern kann nur nur implizit als Störgröße berücksichtigt werden. Die Grenzen zwischen den Teilsystemen 
 
 
 \section{Erweiterung durch Sonneneinstrahlung}
-
-
-\section{Erweiterung durch Heizkörper}
 
 \section{Validierung des Modells}
 
