@@ -74,7 +74,7 @@ listof=nochaptergap			                                   % Kein vertikaler Absta
 \clearpage
 
 % Quelltextverzeichnis
-\renewcommand*{\thelstlisting}{List.~\arabic{lstlisting}}
+%\renewcommand*{\thelstlisting}{List.~\arabic{lstlisting}}
 \renewcommand*{\lstlistlistingname}{Quelltextverzeichnis}
 \lstlistoflistings
 
@@ -90,18 +90,19 @@ listof=nochaptergap			                                   % Kein vertikaler Absta
 \include{kapitel/02-theorie}
 \include{kapitel/03-anlage}
 \include{kapitel/04-modellbildung}
-\include{kapitel/05-schlussteil}
+\include{kapitel/05-mpc}
+\include{kapitel/06-schlussteil}
 
 %----------------------------------------------------------------------------------------------------------------------
 % Anhang 
 %----------------------------------------------------------------------------------------------------------------------
-%\include{anhang/anhang}
-%\captionsetup{list=false}                                    % Inhalts-VZ ohne Anhangbilder, aber im Anhang nummeriert
+\include{anhang/anhang}
+\captionsetup{list=false}                                    % Inhalts-VZ ohne Anhangbilder, aber im Anhang nummeriert
 
 %----------------------------------------------------------------------------------------------------------------------
 % Literaturverzeichnis 
 %----------------------------------------------------------------------------------------------------------------------
-\bibliographystyle{natbib}
+\bibliographystyle{natdin}
 \bibliography{quellverz}
 \clearpage
 
