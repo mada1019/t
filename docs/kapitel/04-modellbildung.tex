@@ -1,5 +1,5 @@
 %
-% Anlagendesign
+% Modellbildung
 %
 % @version 1.0
 % @author dmayer
@@ -14,6 +14,9 @@
 
 Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur, basierend auf den thermodynamischen Prozessen mit dessen Umgebung und der Anlage aus Kapitel \ref{chap:anlagendesign}, zu bilden, um damit und unter Zuhilfenahme der Anlage Modellpräditive Regelung zu ermöglichen.
 Dazu wird zunächst ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise an den bestehenden Raum erweitert angepasst wird, bis eine die Qualität des Modells ausreichend ist.
+
+Physikalisch motiviert.
+Anhand von Zustand, Steuergröße und Parameter/Eigenschaft
 
 \section{Anforderungen an das Raummodell}
 Da MPC die Lösung von Nichtlinearen Gleichungssystemen erfordert wird ein erhöhter Rechenbedarf benötigt. Daher sollte das Modell so einfach wie möglich gehalten werden. Die Krux liegt also darin, einen geeigneten Kompromiss zwischen Komplexität und Genauigkeit des Modells zu finden, der eine sinnvolle MPC Regelung ermöglicht.
@@ -108,43 +111,14 @@ equation
    building_qdot = u_wall * building_surface * (building_temperature - room_temperature);
 \end{lstlisting}
 
-Damit wurde das Raummodell an die reale Umgebung angepasst und um die Temperatur innerhalb des Raumes zu bestimmen wird nun neben der Ausgangstemperatur im Raum und der Umgebungstemperatur noch die Temperatur innerhalb des restlichen K-Gebäudes berücksichtigt. Im nächsten Schritt werden die realen, räumlichen Gegebenheiten im Modell abgebildet.
+Damit wurde das Raummodell an die reale Umgebung angepasst und um die Temperatur innerhalb des Raumes zu bestimmen, wird nun neben der Ausgangstemperatur im Raum und der Umgebungstemperatur noch die Temperatur innerhalb des restlichen K-Gebäudes berücksichtigt. Im nächsten Schritt werden die realen, räumlichen Gegebenheiten im Modell abgebildet.
 
 
 \section{Modellerweiterung durch Berücksichtigung der räumlichen Gegebenheiten}
 
-Das Modell wird nun an die realen Gegebenheiten des Raumes K004b angepasst, welche in \ref{fig:skizzek004a} bereits dargestellt wurden. Zum einen ist in der südlichen Außenwand eine Fensterfront vorhanden und zum anderen ist ein Heizkörper vorhanden. 
+Um das Modell an die realen Gegebenheiten des Raumes K004b anzupassen, müssen zwei bauliche Gegebenheiten beachtet werden. Wie in \ref{fig:skizzek004a} dargestellt ist, ist in der südlichen Außenwand eine Fensterfront vorhanden. Da der U-Wert eines Fensters erheblich von dem U-Wert einer Wand abweicht, entsteht ein zusätzlicher Wärmestrom zwischen dem Raum und der Umgebung durch das Fenster hindurch. Das Öffnen und Schließen der Fenster mit daraus resultieren Massenströmen wird jedoch zunächst nicht explizit berücksichtigt, weshalb das Raummodell weiterhin als geschlossenes System betrachtet wird. Des Weiteren ist es möglich, den Raum über einen Heizkörper zu beheizen. Mit dem Heizkörper, der zunächst als einfache Wärmequelle im Modell ergänzt wird, erhöht sich die Anzahl der externen Steuergrößen erneut, da die Temperatur innerhalb des Raumes auch von dieser abhängig ist.
 
-Da der U-Wert der Fensterfront erheblich von dem U-Wert einer Wand abweicht, entsteht ein weiterer verschiedener Wärmestrom durch die Fenster hindurch mit der Umgebungsluft. Jedoch wird weiterhin von einem geschlossenem System ausgegangen, dass heißt ein Öffnen und schließen der Fenster mit entsprechenden Massenströmen wird nicht berücksichtigt. Des Weiteren wird das Modelica Modell zunächst durch eine einfache Wärmequelle ergänzt, um den vom Heizkörper eingebrachten Wärmestrom zu berücksichtigen. Graphisch sind diese Erweiterungen des Modells in \ref{fig:raumeins} zu sehen. 
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{abbildungen/20160316_raumeins}
-\caption{Erweitertes Raummodell}
-\label{fig:raumeins}
-\end{figure}
-
-Durch diese Änderungen werden die Eigenschaften des Raummodells, um die in Tabelle \ref{tab:eigenschaften_raumerw} gegebenen Größen, dem U-Wert von Glas sowie die Breite und Höhe der Fensterfront, ergänzt. Außerdem ergeben sich durch die Erweiterung des Modells im Vergleich zum bisherigen Gleichungssystems des Modell in \ref{lst:grundraum} folgende Änderungen:
-
-\begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der räumlichen Gegebenheiten in Modelica},label=lst:raumeins]
-equation
-   [...]
-   /* calculate surface of heat exchange with the environment */
-   environment_surface = room_length * room_height + room_breadth * room_height - window-surface;
-   /* calculate surface of heat exchange with the remaining building */
-   building_surface = 2 * (room_length * room_breadth) + room_length * room_height + room_breadth * room_height;
-   /* calculate surface of window with the environment */
-   window_surface=(window_length*window_height);
-   /* calculate derivative of the inner energy */
-   der(room_u) = environment_qdot + building_qdot + window_qdot;
-   /* calculate heatflow between room and environment through the walls */
-   environment_qdot = u_wall * environment_surface * (environment_temperature - room_temperature);
-   /* calculate heatflow between room and environment through the window */
-   building_qdot = u_glass * window_surface * (environment_temperature - room_temperature);
-   /* calculate heatflow between room and building */
-   building_qdot = u_wall * building_surface * (building_temperature - room_temperature);
-\end{lstlisting}
-
+Durch diese Erweiterungen werden auch weitere physikalische Größen zur Beschreibung der Eigenschaften des Raummodells benötigt. Wie bereits erwähnt werden die Eigenschaften um den U-Wert eines Fensters, sowie die Breite und Höhe der Fensterfront ergänzt wie in Tabelle \ref{tab:eigenschaften_raumerw} zusammengefasst.
 
 \begin{table}[H]
 \centering
@@ -172,11 +146,60 @@ Wärmedurchgangskoeffizient Glas & 4,0\tnote{2)} & $[\frac{W}{m^{2}*K}]$\\
 \caption{Weitere Eigenschaften des Raummodells}
 \label{tab:eigenschaften_raumerw}
 \end{table}
+ 
+Durch diese Anpassung verändert sich die Austauschoberfläche mit der Umgebung, die sich nun auf zwei Flächen mit verschiedenen Wärmedurchgangskoeffizienten verteilt. Des Weiteren wird eine Wärmequelle für die Heizung ergänzt, so dass sich folgende Änderungen des Gleichungssystems im Vergleich zum bisherigen Modell in \ref{lst:grundraum} ergeben:
+
+\begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der räumlichen Gegebenheiten in Modelica},label=lst:raumzwei]
+equation
+   [...]
+   /* calculate surface of heat exchange with the environment */
+   environment_surface = room_length * room_height + room_breadth * room_height - window-surface;
+   /* calculate surface of heat exchange with the remaining building */
+   building_surface = 2 * (room_length * room_breadth) + room_length * room_height + room_breadth * room_height;
+   /* calculate surface of window with the environment */
+   window_surface=(window_length*window_height);
+   /* calculate derivative of the inner energy */
+   der(room_u) = environment_qdot + building_qdot + window_qdot + radiator_qdot;
+   /* calculate heatflow between room and environment through the walls */
+   environment_qdot = u_wall * environment_surface * (environment_temperature - room_temperature);
+   /* calculate heatflow between room and environment through the window */
+   building_qdot = u_glass * window_surface * (environment_temperature - room_temperature);
+   /* calculate heatflow between room and building */
+   building_qdot = u_wall * building_surface * (building_temperature - room_temperature);
+\end{lstlisting}
+
+Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschreibt dadurch in groben Zügen die realen Zusammenhänge. Allerdings kann eine Steuerung/Regelung eine Heizung nicht einfach beliebig als einfache Wärmequelle einsetzen, weshalb eine detailliertere, physikalisch motivierte Modellierung folgen wird. Die bisherigen Zusammenhänge des Modells sind in \ref{fig:raumeins} graphisch dargestellt. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160316_raumeins}
+\caption{Erweitertes Raummodell}
+\label{fig:raumeins}
+\end{figure}
+
+Bereits bei den Einsatzzielen der Anlage in \ref{sec:anforderungen} war gefordert, den Zusammenhang zwischen der Sonneneinstrahlung und der Raumtemperatur zu untersuchen sowie Störgrößen explizit in Kauf zu nehmen. Daher ist es passend, dass die Fensterfront in Richtung Süden ausgerichtet ist und der Raum K004b als Büro genutzt wird.
+Daher wird im nächsten Abschnitt das Modell an diese beiden Faktoren angepasst.
 
 
-\section{Modellerweiterung durch Berücksichtigung der räumlichen Gegebenheiten}
+\section{Modellerweiterung durch Berücksichtigung von Störgrößen und der Sonneneinstrahlung}
+
+Der Raum K004b wird regulär als Büro genutzt, weshalb verschiedene Faktoren als Störgrößen in Bezug auf die Raumtemperatur betrachtet werden können. Zum einen wird durch die Menschen und deren Rechner weitere Wärme in den Raum eingebracht und zum Anderen werden die Fenster und die Türen manchmal geöffnet. Des Weiteren trifft insbesondere auf die südseitigen Fenster Sonnenstrahlung, welche ebenfalls Wärme in den Raum einbringen und damit einen Einfluss auf die Raumtemperatur haben.
+
+\begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der Sonneneinstrahlung und Störgrößen},label=lst:raumdrei]
+equation
+   [...]
+   /* calculate derivative of the inner energy */
+   der(room_u) = environment_qdot + building_qdot + window_qdot + radiator_qdot + sun_qdot + otherfactors_qdot;
+  
+\end{lstlisting}
+
 %Here We GO with model extension
-
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160317_raumzwei}
+\caption{Erweitertes Raummodell}
+\label{fig:raumdrei}
+\end{figure}
 
 \section{Validierung des Modells}
 
