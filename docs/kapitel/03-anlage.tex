@@ -180,45 +180,39 @@ Weiterhin dient der Raum als Büro für wissenschaftliche Mitarbeiter, weshalb s
 Damit wird auch der Forderung nach einer anwendungsnahen Umgebung sorge getragen, denn durch die Rechner und Mitarbeiter sind nicht vorhersehbar/ bedingt steuerbare parameter größen innerhalb der Anlage.
 
 Eine weitere restriktive Vorgabe ist, dass die Modellprädiktive Regelung mit Hilfe der Plattform JModelica.org und erfolgen soll. JModelica.rog ist eine Umgebung zur Simulation und Optimierung von dynamischen Systemen \cite[S.~1f.]{jmod15} und besitzt eine eigene Klasse für Modellprädiktive Regelung. Der Compiler übersetzt Modelica Modelle direkt in OptimizationProblem Objekte, welche eine symbolische Repräsentation des Optimierungsproblems dass mit CasADi \cite{An13} zur Optimierung benutzt werden kann \cite[S.~12]{jmod15}. Besitzt eine Python Schnittstelle
-
 Daher die Anforderung an die Modellbildung, da das Modell ebenfalls ein Teil der Anlage für MPC ist, in Kapitel \ref{chap:modellbildung}, dass die Modellbildung in Modelica stattfindet.
-
 CasADi wiederum ist eine Open-Source Software für numerische Optimierung allgemein und für die Optimalsteuerung von nichtlinearen Gleichungssystemen. CasADi eignet sich aufgrund seiner effizienten Ableitungserzeugung durch Algorithmische Differentation besonders für Optimierungszwecke \cite[S.~5f.]{casadi}. und besitzte eine Python Schnittstelle
 
+Die Optimalsteuerung stellt in diesem Fall den begrenzenden Faktor dar, da die Optimierungsumgebund CasADi für dynamische Systeme nur unter JModelica.org läuft. Daher wird darauf aufbauend das benötigte Modell für die MPC in Modelica gebildet unter Berücksichtigung der Restriktionen bezüglich JModelica. Die gemeinsame Schnittstelle beider ist Python, übder die damit auch die Kommunikation mit den Hardwarekomponenten der Heizungstseurung erfolgen muss/soll.
+
 Des Weiteren soll die Kommunikation mit Hilfe der Modbus Kommunikationstechnologie stattfinden, da die große Anlage der HsKa einfacher in Betrieb genommen werden kann. Um weitere Erfahrungen und das Know-how ein wenig breiter werden die beiden Modbus Protokolle RTU und TCP Anwendung finden und über verschiedene elektrische Schnittstellen genutzt werden. Das Modbus Protokoll wurde in verschiedenen Python Paketen bereits umgesetzt.
-
-
-Alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnittstelle beziehungsweise es existieren Python Pakete als Schnittstelle für die freie Verwendung, weshalb die Ansteuerung der gesamten Anlage in python stattfinden soll als gemeinsamer Nenner für Anlage und Optimalsteuerung
-
 
 Damit die Einarbeitung in die Themengebiete Modellbildung, Modellprädiktive Regelung und Kommunikation technischer Systeme vereinfacht wird, sollte die Anlage möglichst wenig Komplexität aufweisen. Damit die Zusammenhänge in den einzelnen und Wechselwirkungen zwischen den Fachgebieten und Komponenten möglichst einfach begreifbar sind, wird außerdem eine klare Abgrenzung und Strukturierung der Anlage gefordert. Im Gegensatz dazu steht die Forderung nach dem Aufbau von Know-how für sie Kommunikation technischer Systeme durch den Einsatz verschiedener Hard- und Software sowie Schnittstellen, denn mit einer wachsenden Anzahl von Schnittstellen, verschiedener Soft- und Hardware geht auch eine Erhöhung der Komplexität einher.
 Deshalb muss nach einem Kompromiss zwischen Verständlichkeit und Komplexität gesucht werden, weshalb ein bestimmtes Maß an Komplexität erwünscht ist.
 
-%Here we go
+Um das Vergleichen von Ergebnissen zu ermöglichen und weitestgehend zu vereinfachen, sollen die Reaktionen auf Veränderungen schnell stattfinden\footnote{Im Kontext von thermischen Systemen heißt schnell im Minutenbereich} und einfach zu messen sein. Das bedeutet konkret, dass die Anlage und Raumtemperatur zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll, zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein. 
+Außerdem sollen eine hohe Funktionalität gegeben sein, dass heißt eine möglichst wartungsarm und Fehlerquellen auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungs- und Regelungsalgorithmen sowie bei der Einarbeitung in die Anlage und Themengebete eine erhöhte Gefahr/Wahrscheinlichkeit in Bezug auf das Fehler passieren besteht und diese keinen Schaden an der Anlage verursachen sollen. Deshalb sollen die einzelnen Komponenten der Anlage möglichst einfach aufegbaut sein und ohne technischen Schnickschnack sein, was auch wiederum zur Forderung der minimalen finanziellen Belastung passt.
 
-Um das Vergleichen von Ergebnissen zu ermöglichen und weitestgehend zu vereinfachen, sollen die Reaktionen auf Veränderungen schnell stattfinden\footnote{Im Kontext von thermischen Systemen heißt schnell im Minutenbereich} und einfach zu messen sein. Das bedeutet konkret, dass die Anlage und Raumtemperatur zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll, zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein.
-
-
-
-Die letzte, sehr wichtige, abgeleitete Anforderung ist eine hohe Funktionalität, um Fehlerquellen außerhalb der Forschung auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungen sehr wahrscheinlich auch Fehler passieren sich einstellen und diese keine Schaden an der Anlage verursachen sollen.
+Da alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnittstelle besitzen beziehungsweise frei nutzbare Pakete in Python als Schnittstelle zur Verfügung stehen, soll auch die Ansteuerung der gesamten Anlage in Python stattfinden. Damit kann Python als gemeinsamer Nenner für Ansteuerung Anlage und Optimalsteuerung genutzt werden und es kann ein minimaler Rechner dazu genutzt werden, wie z.B. ein Raspberry Pie.
 
 
-IDEE vielleicht
-Trotz einer Vielzahl von technischen Anwendungen, die sich für den im vorangegangenen Kapitel beschriebenen Zweck und dessen Anforderungen eignen, qualifiziert sich  sich besonders eine dafür: Die Steuerung einer Raumtemperatur.
+\section{Idee}
+Eine erste, grobe Idee, welche in den folgenden Abschnitten sukzessive an die an die obigen Anforderungen angepasst wird, ist also eine Anlage zur Regelung der Temperatur im Raum, die so minimal wie möglich aufgebaut ist. Konkret gilt es zunächst die Raumtemperatur über Sensoren zu erfassen und diese weiterhin mit Hilfe des Heizkörpers zu steuern. Ein minimaler Aufbau lässt sich in drei Gruppen/Klassen von Anlagenteilen gliedern: Die Sensorik zur Ermittlung des Zustandes im Raum und der Steuergrößen, der Aktorik zur Beeinflussung des Raumzustandes und einen zentralen logischen Controller, der das Zusammenspiel der einzelnen Anlagenteile und Komponenten koordiniert und MPC macht.
+
+\section{Idee weiter konkretisisert}
+
+Nachdem die Anforderungen konkretisiert und erläutert wurden und die Idee der Anlage klar ist, wird diese nun weiter konkretisiert, entsprechend der drei zuvor gebildeten Gruppen.
+
+Der logische Controller ist die zentrale Komponente der Anlage, da dieser die gesamten Steuerungs- und Kommunikationsaufgaben übernimmt und die Sensorik und Aktorik lediglich nutzt um sein Ziel der Temperaturregelung zu erreichen. Um den Aufgabenumfang abarbeiten zu können und um dem minimalen finanziellen Aufwand genüge zu tragen, wird zunächst ein freier Rechner der Hochschule Karlsruhe genutzt.
+
+Bei der Temperaturregelung interessiert lediglich die Raumtemperatur, welche als Zustand aufgefasst wird, und es wird zunächst ein Sensor zur Bestimmung der Raumtemperatur benötigt. Da jedoch die Temperatur innerhalb des Raumes mit hoher Wahrscheinlichkeit nicht homogen ist, werden mehrere Sensoren zur Temperaturmessung benötigt, weshalb mindestens zwei Sensoren benötigt werden.
+
+Für die Erwärmung des Raumes muss gemäß den Anforderungen der Heizkörper innerhalb des Raumes genutzt werden. Um den Heizkörper steuern zu können, wird ein Aktor benötigt, der das Ventil am Heizkörper öffnen und schließen kann. Jedoch ist die eingebrachte Wärmemenge des Heizkörpers in den Raum abhängig von verschiedenen Faktoren, welche der Controller zur Modellprädiktiven Regelung benötigt. Dazu gehören zum einen der Massendurchfluss sowie die Temperatur des Heizwassers am Ein- und Ausgang des Heizkörpers. Um diese zu erfassen werden also zwei weitere Temperatursensoren und ein Durchflusssensor benötigt.
+
+Das Set-Up die Einrichtung ist in \ref{fig:konzept} graphisch dargestellt.
 
 
-\section{Das Konzept der Anlage}
 
- Für den Ausblick dieser Arbeit ist die Baumstruktur ein sehr interessanter Aspekt, da eine Vergrößerung einfach möglich ist durch repeater.
-
-
-Trotz einer Vielzahl von technischen Anwendungen, die sich für den im vorangegangenen Kapitel beschriebenen Zweck und dessen Anforderungen eignen, qualifiziert sich  sich besonders eine dafür: Die Steuerung einer Raumtemperatur.
-
-Diese ist mit schnellen als auch einfachen Messungen ohne großen technischen Aufwand verbunden.
-, sowie deren Komplexität noch überschaubar ist und mit wenig finanziellem Aufwand verbunden ist. Dadurch ergeben sich zwei potentielle technische Anwendungen: Zum einen die Klimatisierung eines Raumes und zum anderen die Beheizung eines Raumes. Beide weisen ein passendes Maß an Komplexität aufweisen und sich auf Grund ihrer Eigenschaften hervorragend für den Einsatz mit \acrlong{mpc} eignen. Da sich die Raumheizung jedoch mit weniger baulichem und finanziellem Aufwand realisieren lies, wurde letztendlich entschieden diese konkrete Anwendung zum Einsatz zu bringen.
-
-
-Die Idee der Anlage ist, es mit möglichst wenig Aufwand und Komplexität ermöglichen im ersten Schritt die Raumtemperatur zu erfassen und im nächsten Schritt die Raumtemperatur durch Beheizung zu steuern. Der Bedarf an Komponenten hierfür lässt sich grob in drei verschiedene Gruppen gliedern. Zum einen in die Sensoren zur Ermittlung des Zustandes innerhalb des Raums, der Aktorik zur Beeinflussung des Raumzustandes und einem logischen Controller der die Steuerung der Sensorik und Aktorik übernimmt.
 Um den Zustand im Raum zu bestimmen, werden zunächst also Raumtemperatursensoren benötigt. Des Weiteren muss für die Steuerung auch der Zustand der Heizung erfassbar sein, was durch Temperatursensoren am Ein- und Ausgang der Heizung und einen Durchflusssensor überwacht werden soll.
 Um den Zustand im Raum beeinflussen zu können, soll der Heizkörper im Raum über einen Aktor am Ventil des Heizkörpers gesteuert werden.
 Der logische Controller soll im Rahmen von \acrlong{mpc} Optimalsteuerungspläne berechnen, wofür aureichende Rechenkapazität zur Verfügung stehen muss -- da Optimierung gradientenbasiert erfolgt -- weshalb diese Aufgabe von einem Rechner übernommen werden soll.
@@ -230,27 +224,3 @@ Bei der Konzipierung müssen neben den Anforderungen, welche in Kapitel \ref{sec
 Dazu werden zunächst die Restriktionen der einzelnen Anlagenteile
 Die Optimalsteuerung 
 Das Hauptaugenmerk bei der Konzipierung liegt deshalb auf der Kompabilität und möglichst großen Einfachheit der einzlenen Komponenten der Heizungstseuerung. 
-
-
-\section{Räumliche Gegebenheiten}
-
-
-\section{Konzipierung der Steuerung}
-Die Steuerung der Anlage 
-Für die Berechnung von Optimalsteuerungsplänen wird 
-Die Optimalsteuerung stellt in diesem Fall den begrenzenden Faktor dar, da die Optimierungsumgebund CasADi für dynamische Systeme nur unter JModelica.org läuft. Daher wird darauf aufbauend das benötigte Modell für die MPC in Modelica gebildet unter Berücksichtigung der Restriktionen bezüglich JModelica. Die gemeinsame Schnittstelle beider ist Python, übder die damit auch die Kommunikation mit den Hardwarekomponenten der Heizungstseurung erfolgen muss/soll.
-
-Bild Hardware ---- Software   Interface Python, da Software darauf angewiesen ist.
-
-
-
-Das Hauptaugenmerk bei der Planung liegt deshalb auf der Kompabilität und möglichst großen Einfachheit der einzlenen Komponenten der Heizungstseuerung. 
-
-Die Optimalsteuerung stellt in diesem Fall den begrenzenden Faktor dar, da die Optimierungsumgebund CasADi für dynamische Systeme nur unter JModelica.org läuft. Daher wird darauf aufbauend das benötigte Modell für die MPC in Modelica gebildet unter Berücksichtigung der Restriktionen bezüglich JModelica. Die gemeinsame Schnittstelle beider ist Python, übder die damit auch die Kommunikation mit den Hardwarekomponenten der Heizungstseurung erfolgen muss/soll.
-
-Bild Hardware ---- Software   Interface Python, da Software darauf angewiesen ist.
-
-\section{Umsetzung der Anlage}
-
-
-\section{Inbetriebnahme und Ansteuerung der Anlage}
