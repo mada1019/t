@@ -78,6 +78,28 @@ Minimaler baulicher Aufwand & \\
 \cmidrule[0.1pt](lr{2em}){1-1} 
 Minimaler finanzieller \newline Aufwand &\\ 
 
+
+
+\cmidrule[0.5pt](r{0.25em}){1-1} 
+\cmidrule[0.5pt](l{0.25em}){2-2}
+
+\addlinespace[4mm] Modellprädiktive Regelung mit JModelica.org und CasADi \newline & \multirow{3}{\hsize}{
+\begin{minipage}[t]{0.57\textwidth}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
+\item Die Modellbildung erfolgt in Modelica.
+\item Die Kompatibilität aller Softwareschnittstellen ist in Python durch verschiedene, bereits bestehende Pakete gegeben.
+\item Die Kommunikation der Anlage erfolgt gemäß den Modbus~RTU und TCP Protokollspezifikationen.
+\item Über Modbus~TCP erfolgt die Ansteuerung der Anlage innerhalb eines gesamten lokalen Netzwerks.
+\end{itemize}
+\end{minipage}
+}  \\
+
+\cmidrule[0.1pt](lr{2em}){1-1}
+\addlinespace[4mm] Einsatz der Modbus \newline Kommunikationstechnologie \newline 	& 		\\
+
+\cmidrule[0.1pt](lr{2em}){1-1}
+\addlinespace[4mm] Flexible Ansteuerung der Anlage \newline & \\
+
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
@@ -101,28 +123,6 @@ Einarbeitung in die Thematiken:
 \cmidrule[0.1pt](lr{2em}){1-1} 
 
 Know-how für Kommunikation \newline technischer Systeme 	&		\\
-
-
-\cmidrule[0.5pt](r{0.25em}){1-1} 
-\cmidrule[0.5pt](l{0.25em}){2-2}
-
-\addlinespace[4mm] Modellprädiktive Regelung mit JModelica.org \newline & \multirow{3}{\hsize}{
-\begin{minipage}[t]{0.57\textwidth}
-\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
-\item Die Modellbildung erfolgt in Modelica.
-\item Die Kompatibilität aller Softwareschnittstellen ist in Python durch verschiedene, bereits bestehende Pakete gegeben.
-\item Die Kommunikation der Anlage erfolgt gemäß den Modbus~RTU und TCP Protokollspezifikationen.
-\item Über Modbus~TCP erfolgt die Ansteuerung der Anlage innerhalb eines gesamten lokalen Netzwerks.
-\end{itemize}
-\end{minipage}
-}  \\
-
-\cmidrule[0.1pt](lr{2em}){1-1}
-\addlinespace[4mm] Einsatz der Modbus \newline Kommunikationstechnologie \newline 	& 		\\
-
-\cmidrule[0.1pt](lr{2em}){1-1}
-\addlinespace[4mm] Flexible Ansteuerung der Anlage \newline & \\
-
 
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
@@ -179,12 +179,28 @@ Weiterhin dient der Raum als Büro für wissenschaftliche Mitarbeiter, weshalb s
 
 Damit wird auch der Forderung nach einer anwendungsnahen Umgebung sorge getragen, denn durch die Rechner und Mitarbeiter sind nicht vorhersehbar/ bedingt steuerbare parameter größen innerhalb der Anlage.
 
+Eine weitere restriktive Vorgabe ist, dass die Modellprädiktive Regelung mit Hilfe der Plattform JModelica.org und erfolgen soll. JModelica.rog ist eine Umgebung zur Simulation und Optimierung von dynamischen Systemen \cite[S.~1f.]{jmod15} und besitzt eine eigene Klasse für Modellprädiktive Regelung. Der Compiler übersetzt Modelica Modelle direkt in OptimizationProblem Objekte, welche eine symbolische Repräsentation des Optimierungsproblems dass mit CasADi \cite{An13} zur Optimierung benutzt werden kann \cite[S.~12]{jmod15}. Besitzt eine Python Schnittstelle
+
+Daher die Anforderung an die Modellbildung, da das Modell ebenfalls ein Teil der Anlage für MPC ist, in Kapitel \ref{chap:modellbildung}, dass die Modellbildung in Modelica stattfindet.
+
+CasADi wiederum ist eine Open-Source Software für numerische Optimierung allgemein und für die Optimalsteuerung von nichtlinearen Gleichungssystemen. CasADi eignet sich aufgrund seiner effizienten Ableitungserzeugung durch Algorithmische Differentation besonders für Optimierungszwecke \cite[S.~5f.]{casadi}. und besitzte eine Python Schnittstelle
+
+Des Weiteren soll die Kommunikation mit Hilfe der Modbus Kommunikationstechnologie stattfinden, da die große Anlage der HsKa einfacher in Betrieb genommen werden kann. Um weitere Erfahrungen und das Know-how ein wenig breiter werden die beiden Modbus Protokolle RTU und TCP Anwendung finden und über verschiedene elektrische Schnittstellen genutzt werden. Das Modbus Protokoll wurde in verschiedenen Python Paketen bereits umgesetzt.
+
+
+Alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnittstelle beziehungsweise es existieren Python Pakete als Schnittstelle für die freie Verwendung, weshalb die Ansteuerung der gesamten Anlage in python stattfinden soll als gemeinsamer Nenner für Anlage und Optimalsteuerung
+
+
 Damit die Einarbeitung in die Themengebiete Modellbildung, Modellprädiktive Regelung und Kommunikation technischer Systeme vereinfacht wird, sollte die Anlage möglichst wenig Komplexität aufweisen. Damit die Zusammenhänge in den einzelnen und Wechselwirkungen zwischen den Fachgebieten und Komponenten möglichst einfach begreifbar sind, wird außerdem eine klare Abgrenzung und Strukturierung der Anlage gefordert. Im Gegensatz dazu steht die Forderung nach dem Aufbau von Know-how für sie Kommunikation technischer Systeme durch den Einsatz verschiedener Hard- und Software sowie Schnittstellen, denn mit einer wachsenden Anzahl von Schnittstellen, verschiedener Soft- und Hardware geht auch eine Erhöhung der Komplexität einher.
 Deshalb muss nach einem Kompromiss zwischen Verständlichkeit und Komplexität gesucht werden, weshalb ein bestimmtes Maß an Komplexität erwünscht ist.
 
 %Here we go
 
-Das einfache Vergleichen von Ergebnissen soll dadurch ermöglicht werden, dass die Reaktionen/Ergebnisse/Messungen schnell und einfach zu messen sind. Das bedeutet konkret, dass die Anlage zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll. Zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein. Die letzte, sehr wichtige, abgeleitete Anforderung ist eine hohe Funktionalität, um Fehlerquellen außerhalb der Forschung auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungen sehr wahrscheinlich auch Fehler passieren sich einstellen und diese keine Schaden an der Anlage verursachen sollen.
+Um das Vergleichen von Ergebnissen zu ermöglichen und weitestgehend zu vereinfachen, sollen die Reaktionen auf Veränderungen schnell stattfinden\footnote{Im Kontext von thermischen Systemen heißt schnell im Minutenbereich} und einfach zu messen sein. Das bedeutet konkret, dass die Anlage und Raumtemperatur zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll, zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein.
+
+
+
+Die letzte, sehr wichtige, abgeleitete Anforderung ist eine hohe Funktionalität, um Fehlerquellen außerhalb der Forschung auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungen sehr wahrscheinlich auch Fehler passieren sich einstellen und diese keine Schaden an der Anlage verursachen sollen.
 
 
 IDEE vielleicht
