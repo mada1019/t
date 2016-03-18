@@ -14,7 +14,7 @@
 
 \renewcommand{\chapterheadstartvskip}{\vspace*{-0.5cm}}
 
-Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung zu planen, zu konkretisieren und im letzten Schritt umzusetzen. Dazu werden zunächst die Anforderungen an die Anlage analysiert. Weiterhin werden die Vorgaben und Rahmenbedingungen zur Anlage von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. Abschließend wird die Installation und dabei aufgetretenen Besonderheiten der Anlage beschrieben.
+Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung zu konzipieren, zu konkretisieren und im letzten Schritt umzusetzen. Dazu werden zunächst die Anforderungen an die Anlage analysiert und weiterhin die Vorgaben und Rahmenbedingungen zur Anlage von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. Abschließend wird die Installation und dabei aufgetretenen Besonderheiten der Anlage beschrieben.
 
 \section{Analyse der Anforderungen und Rahmenbedingungen}
 \label{sec:anforderungen}
@@ -37,7 +37,7 @@ Zusammenfassend wurde festgehalten, dass die Anlage als Forschungsumgebung für 
 Weiterhin wurden von Seiten der Hochschule Karlsruhe\footnote{In Person von Frau Professor \textsc{Angelika Altmann-Dieses}, Herrn Professor \textsc{Marco Braun} und Herrn \textsc{Adrian Bürger}} Rahmenbedingungen definiert, die im Folgenden zusammengefasst sind:
 
 \begin{itemize}
-	\item Der Raum K004b im K Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
+	\item Der Raum K004a im K Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
 	\item Die Installation der Anlage muss mit minimalem baulichem und finanziellem Aufwand zu realisieren sein.
 	\item Für die Kommunikation innerhalb der Anlage soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen Übertragungsprotokollen genutzt werden.
 	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform JModelica.org erfolgen.
@@ -61,10 +61,10 @@ Diese Einsatzziele und Rahmenbedingungen definieren implizit Anforderungen an ei
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
-Raum K004b als Umgebung  & \multirow{3}{\hsize}{
+Raum K004a als Umgebung  & \multirow{3}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
-	\item Die Anpassung der Anlage an K004b.
+	\item Die Anpassung der Anlage an K004a.
 	\item Die Nutzung bestehender Heizkörper anstatt einer Klimatisierung des Raumes. 
 	\item Die Beschränkung auf eine minimale Funktionalität und Anzahl der einzelnen Komponenten. 
 \end{itemize}
@@ -162,10 +162,8 @@ Erweiterbarkeit der Anlage
 \label{tab:anforderungen_umgebung}
 \end{table}
 
-Die Grundlegendste Anforderung ist die angepasste Planung der Anlage an die räumlichen Gegebenheiten des Raumes K004b, welche in \ref{fig:skizzek004a} skizziert sind. Der Raum befindet auf dem Campus der Hochschule Karlsruhe im Gebäude K und ist ein Büro für wissenschaftliche Mitarbeiter. Dadurch wird der Forderung nach einer anwendungsnahen Umgebung nachgekommen. Aufgrund der Lage des Raumes und der großen Fensterfront in Richtung Süden, kann auch der Effekt der Sonneneinstrahlung auf die Raumtemperatur mit Hilfe der Anlage 
-
- Wie in Abbildung \ref{fig:skizzek004a} zu sehen, ist der Raum von 4 Wänden quaderförmig umgeben. Die beiden dickeren Wände, die grob nach Süden und Westen ausgerichtet sind, grenzen an die Außenumgebung. Die anderen beiden Wände, sowie Decke und Boden, grenzen an anderen Räume im Gebäude. Die Ein- und Ausgangstüre befindet sich in der nordöstlichen Ecke an der Ostwand. Die nach Süden ausgerichtete Außenwand besitzt eine hohe Fensterfront. Außerdem ist unterhalb des Fensters ein Heizkörper installiert, der bisher mit einen Thermostat ausgestattet ist, der die Heizung über ein Ventil  steuert.
-Da der Raum ein Büro ist, sind Innerhalb des Raumes nicht nur eine Büroausstattung aus Schreibtischen und Schränken auch sechs Rechner sowie deren Nutzer zu finden/berücksichtigen.
+Die grundlegendste Anforderung an die Planung ist die Anpassung an die räumliche Lage und den Gegebenheiten des Raumes K004a, welche in \ref{fig:skizzek004a} skizziert sind. 
+Der Raum befindet auf dem Campus der Hochschule Karlsruhe an der südwestlichen Ecke des K Gebäudes im Erdgeschoss. Die südliche und westliche Außenwand teilt sich der Raum mit der Außenumgebung. Die östliche und nördliche Innenwand sowie die Decke und der Boden des Raumes teilt der Raum hingegen mit angrenzenden Räumen im K Gebäude. Des Weiteren ist in der südlichen Außenwand eine Fensterfront mit Jalousien zur Verschattung eingebaut und direkt darunter ist ein Heizkörper installiert.
 
 \begin{figure}
 \centering
@@ -174,9 +172,19 @@ Da der Raum ein Büro ist, sind Innerhalb des Raumes nicht nur eine Büroausstat
 \label{fig:skizzek004a}
 \end{figure}
 
-Um die Einarbeitung zu vereinfachen sollte die Anlage möglichst wenig Komplexität aufweisen, um die Zusammenhänge und Wechselwirkung zwischen den einzelnen Gebieten und Komponenten möglichst einfach begreifbar zu machen. Da jedoch auch Erfahrungen gesammelt werden sollen, wird ein bestimmtes Maß an Komplexität vorausgesetzt, da diese mit einer wachsenden Zahl von Schnittstellen, verschiedener Soft- und Hardware einhergeht. Dadurch ergibt sich die Forderung nach einem Kompromiss zwischen Verständlichkeit und Komplexität, weshalb ein bestimmtes Maß an Komplexität erwünscht ist.
+Dadurch werden bereits zwei wichtige Anforderungen erfüllt, denn durch die Fensterfront an der Südseite des Raumes kann der Einfluss der Sonneneinstrahlung auf die Raumtemperatur untersucht werden und der vorhandene Heizkörper kann in die Anlage integriert werden, um einen minimalen baulichen und finanziellen Aufwand sicherzustellen.
+Damit wird auch eine Klimatisierung des Raumes zur Temperaturregelung zunächst ausgeschlossen, weil diese mit einem erheblichen finanziellen und baulichen Aufwand verbunden ist. Da es jedoch eine weitere Anforderung ist, Erweiterungen der Anlage explizit zu berücksichtigen und ermöglichen, wird bei der Planung darauf geachtet, dass eine Klimatisierung und Ansteuerung der Jalousie für weitere Schritte möglich sein soll
+
+Weiterhin dient der Raum als Büro für wissenschaftliche Mitarbeiter, weshalb sich neben sechs Computerarbeitsplätzen auch Büromobiliar, bestehend aus Schränken und Schreibtischen, darin befindet.
+
+Damit wird auch der Forderung nach einer anwendungsnahen Umgebung sorge getragen, denn durch die Rechner und Mitarbeiter sind nicht vorhersehbar/ bedingt steuerbare parameter größen innerhalb der Anlage.
+
+Damit die Einarbeitung in die Themengebiete Modellbildung, Modellprädiktive Regelung und Kommunikation technischer Systeme vereinfacht wird, sollte die Anlage möglichst wenig Komplexität aufweisen. Damit die Zusammenhänge in den einzelnen und Wechselwirkungen zwischen den Fachgebieten und Komponenten möglichst einfach begreifbar sind, wird außerdem eine klare Abgrenzung und Strukturierung der Anlage gefordert. Im Gegensatz dazu steht die Forderung nach dem Aufbau von Know-how für sie Kommunikation technischer Systeme durch den Einsatz verschiedener Hard- und Software sowie Schnittstellen, denn mit einer wachsenden Anzahl von Schnittstellen, verschiedener Soft- und Hardware geht auch eine Erhöhung der Komplexität einher.
+Deshalb muss nach einem Kompromiss zwischen Verständlichkeit und Komplexität gesucht werden, weshalb ein bestimmtes Maß an Komplexität erwünscht ist.
+
+%Here we go
+
 Das einfache Vergleichen von Ergebnissen soll dadurch ermöglicht werden, dass die Reaktionen/Ergebnisse/Messungen schnell und einfach zu messen sind. Das bedeutet konkret, dass die Anlage zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll. Zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein. Die letzte, sehr wichtige, abgeleitete Anforderung ist eine hohe Funktionalität, um Fehlerquellen außerhalb der Forschung auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungen sehr wahrscheinlich auch Fehler passieren sich einstellen und diese keine Schaden an der Anlage verursachen sollen.
-Eine weitere Anforderung, unabhängig von den Einsatzzielen oder den technischen Eigenschaften wurde von Seiten der Hochschule vorgegeben: Die Anlage soll mit einem möglichst geringen finanziellen und baulichen Aufwand verbunden sein.
 
 
 IDEE vielleicht
