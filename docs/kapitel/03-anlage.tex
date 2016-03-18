@@ -193,34 +193,28 @@ Deshalb muss nach einem Kompromiss zwischen Verständlichkeit und Komplexität g
 Um das Vergleichen von Ergebnissen zu ermöglichen und weitestgehend zu vereinfachen, sollen die Reaktionen auf Veränderungen schnell stattfinden\footnote{Im Kontext von thermischen Systemen heißt schnell im Minutenbereich} und einfach zu messen sein. Das bedeutet konkret, dass die Anlage und Raumtemperatur zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll, zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein. 
 Außerdem sollen eine hohe Funktionalität gegeben sein, dass heißt eine möglichst wartungsarm und Fehlerquellen auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungs- und Regelungsalgorithmen sowie bei der Einarbeitung in die Anlage und Themengebete eine erhöhte Gefahr/Wahrscheinlichkeit in Bezug auf das Fehler passieren besteht und diese keinen Schaden an der Anlage verursachen sollen. Deshalb sollen die einzelnen Komponenten der Anlage möglichst einfach aufegbaut sein und ohne technischen Schnickschnack sein, was auch wiederum zur Forderung der minimalen finanziellen Belastung passt.
 
-Da alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnittstelle besitzen beziehungsweise frei nutzbare Pakete in Python als Schnittstelle zur Verfügung stehen, soll auch die Ansteuerung der gesamten Anlage in Python stattfinden. Damit kann Python als gemeinsamer Nenner für Ansteuerung Anlage und Optimalsteuerung genutzt werden und es kann ein minimaler Rechner dazu genutzt werden, wie z.B. ein Raspberry Pie.
+Da alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnittstelle besitzen beziehungsweise frei nutzbare Pakete in Python als Schnittstelle zur Verfügung stehen, soll auch die Ansteuerung der gesamten Anlage in Python stattfinden. Damit kann Python als gemeinsamer Nenner für Ansteuerung Anlage und Optimalsteuerung genutzt werden und es kann ein minimaler Rechner dazu genutzt werden, wie z.B. ein Raspberry Pie. Daher wird die gesamte folgende Planung darauf aufbauen, dass sie sich in/aus Python steuern lässt.
 
 
 \section{Idee}
+
 Eine erste, grobe Idee, welche in den folgenden Abschnitten sukzessive an die an die obigen Anforderungen angepasst wird, ist also eine Anlage zur Regelung der Temperatur im Raum, die so minimal wie möglich aufgebaut ist. Konkret gilt es zunächst die Raumtemperatur über Sensoren zu erfassen und diese weiterhin mit Hilfe des Heizkörpers zu steuern. Ein minimaler Aufbau lässt sich in drei Gruppen/Klassen von Anlagenteilen gliedern: Die Sensorik zur Ermittlung des Zustandes im Raum und der Steuergrößen, der Aktorik zur Beeinflussung des Raumzustandes und einen zentralen logischen Controller, der das Zusammenspiel der einzelnen Anlagenteile und Komponenten koordiniert und MPC macht.
 
 \section{Idee weiter konkretisisert}
 
 Nachdem die Anforderungen konkretisiert und erläutert wurden und die Idee der Anlage klar ist, wird diese nun weiter konkretisiert, entsprechend der drei zuvor gebildeten Gruppen.
 
-Der logische Controller ist die zentrale Komponente der Anlage, da dieser die gesamten Steuerungs- und Kommunikationsaufgaben übernimmt und die Sensorik und Aktorik lediglich nutzt um sein Ziel der Temperaturregelung zu erreichen. Um den Aufgabenumfang abarbeiten zu können und um dem minimalen finanziellen Aufwand genüge zu tragen, wird zunächst ein freier Rechner der Hochschule Karlsruhe genutzt.
+Der logische Controller ist die zentrale Komponente der Anlage, da dieser die gesamten Steuerungs- und Kommunikationsaufgaben übernimmt. Dazu nutzt er die Sensorik und Aktorik um sein Ziel der Temperaturregelung zu erreichen und da dazu Optimalsteuerungspläne berechnet werden müssen wird dazu eine ausreichende Rechenkapazität benötigt. Um diesen Aufgabenumfang abarbeiten zu können und um dem minimalen finanziellen Aufwand genüge zu tragen, wird hierzu zunächst ein freier Rechner der Hochschule Karlsruhe genutzt.
 
 Bei der Temperaturregelung interessiert lediglich die Raumtemperatur, welche als Zustand aufgefasst wird, und es wird zunächst ein Sensor zur Bestimmung der Raumtemperatur benötigt. Da jedoch die Temperatur innerhalb des Raumes mit hoher Wahrscheinlichkeit nicht homogen ist, werden mehrere Sensoren zur Temperaturmessung benötigt, weshalb mindestens zwei Sensoren benötigt werden.
 
 Für die Erwärmung des Raumes muss gemäß den Anforderungen der Heizkörper innerhalb des Raumes genutzt werden. Um den Heizkörper steuern zu können, wird ein Aktor benötigt, der das Ventil am Heizkörper öffnen und schließen kann. Jedoch ist die eingebrachte Wärmemenge des Heizkörpers in den Raum abhängig von verschiedenen Faktoren, welche der Controller zur Modellprädiktiven Regelung benötigt. Dazu gehören zum einen der Massendurchfluss sowie die Temperatur des Heizwassers am Ein- und Ausgang des Heizkörpers. Um diese zu erfassen werden also zwei weitere Temperatursensoren und ein Durchflusssensor benötigt.
 
-Das Set-Up die Einrichtung ist in \ref{fig:konzept} graphisch dargestellt.
+Dieses Set-Up/Einrichtung ist in \ref{fig:konzept} graphisch dargestellt.
 
+Damit steht das Konzept der Anlage und im nächsten Abschnitt kann eine detaillierte Planung der Bauteile, Verdrahtung und Komponenten und Protokolle erfolgen.
 
+\section{Konkretisierte Planung der Anlage/Konkretisierung des Plans}
 
-Um den Zustand im Raum zu bestimmen, werden zunächst also Raumtemperatursensoren benötigt. Des Weiteren muss für die Steuerung auch der Zustand der Heizung erfassbar sein, was durch Temperatursensoren am Ein- und Ausgang der Heizung und einen Durchflusssensor überwacht werden soll.
-Um den Zustand im Raum beeinflussen zu können, soll der Heizkörper im Raum über einen Aktor am Ventil des Heizkörpers gesteuert werden.
-Der logische Controller soll im Rahmen von \acrlong{mpc} Optimalsteuerungspläne berechnen, wofür aureichende Rechenkapazität zur Verfügung stehen muss -- da Optimierung gradientenbasiert erfolgt -- weshalb diese Aufgabe von einem Rechner übernommen werden soll.
+Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommuniktaionsleitungen und das Netzwerk geplant. Da diese über die Modbus Protokolle RTU und TCP geschehen soll und Modbus TCP über ein normales Ethernet auf OSI ebene 0/1 kommuniziert und der Rechner einen Netzwerkanschluss/Ethernetanschluss besitzt wird dieser an ein solches Netzwerk angebunden, damit keine weitere Karte bzw Kein Umsetzer für den Anschluss eines RS 232-Netzwerkes bze RS 483 nicht möglich benötigt wird an dessen COM port. Da ebenfalls Schnittstellen gefordert sind, wird über ein Gateway das Modbus TCP Ethernet Netzwerk mit einem RS 438 verbunden. 
 
-Somit gilt es eine Schnittstelle zu finden um eine Zusammenarbeit aller Gruppen zu ermöglichen.
-
-Die Anforderungen an die Anlage wurden bereits in Kapitel \ref{sec:ziel} erläutert und sollen nun bei der Planung Beachtung finden.
-Bei der Konzipierung müssen neben den Anforderungen, welche in Kapitel \ref{sec:ziel} , weitere Überlegungen angestellt werden um eine reibungslose Zusammenarbeit der verschiedenen Anlagenteile gewährleisten zu können. (Größtmögliche Kompatibilität)
-Dazu werden zunächst die Restriktionen der einzelnen Anlagenteile
-Die Optimalsteuerung 
-Das Hauptaugenmerk bei der Konzipierung liegt deshalb auf der Kompabilität und möglichst großen Einfachheit der einzlenen Komponenten der Heizungstseuerung. 
