@@ -212,9 +212,26 @@ Für die Erwärmung des Raumes muss gemäß den Anforderungen der Heizkörper in
 
 Dieses Set-Up/Einrichtung ist in \ref{fig:konzept} graphisch dargestellt.
 
+Dieses Konzept sieht auch eine Erweiterungsmöglichkeit vor, so dass das öffnen und schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann. Außerdem erlaubt das Konzept auch eine Erweiterung zum Beispiel durch eine Klimatisierung, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln.
+
 Damit steht das Konzept der Anlage und im nächsten Abschnitt kann eine detaillierte Planung der Bauteile, Verdrahtung und Komponenten und Protokolle erfolgen.
 
 \section{Konkretisierte Planung der Anlage/Konkretisierung des Plans}
 
-Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommuniktaionsleitungen und das Netzwerk geplant. Da diese über die Modbus Protokolle RTU und TCP geschehen soll und Modbus TCP über ein normales Ethernet auf OSI ebene 0/1 kommuniziert und der Rechner einen Netzwerkanschluss/Ethernetanschluss besitzt wird dieser an ein solches Netzwerk angebunden, damit keine weitere Karte bzw Kein Umsetzer für den Anschluss eines RS 232-Netzwerkes bze RS 483 nicht möglich benötigt wird an dessen COM port. Da ebenfalls Schnittstellen gefordert sind, wird über ein Gateway das Modbus TCP Ethernet Netzwerk mit einem RS 438 verbunden. 
+Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommunikationsleitungen und das Netzwerk geplant. Da diese über die Modbus Protokolle RTU und TCP geschehen soll und Modbus TCP über ein normales Ethernet auf OSI ebene 0/1 kommuniziert und der Rechner einen Netzwerkanschluss/Ethernetanschluss besitzt wird dieser an ein solches Netzwerk angebunden, damit keine weitere Karte bzw Kein Umsetzer für den Anschluss eines RS 232-Netzwerkes bze RS 483 nicht möglich benötigt wird an dessen COM port. Da ebenfalls Schnittstellen gefordert sind, wird über ein Gateway das Modbus TCP Ethernet Netzwerk mit einem RS 438 verbunden.
 
+Die Temperatursensoren sollen als Raumtemperaturfühler mit Modbusfähigkeit ausgeführt werden und an zwei Stellen des Raumes die Temperatur messen. Jeweils auf einer mittig gedachten Achse in nord-südlicher Richtung, einer in der am Ende der Schreibtische in Richtung der Fenster und der andere gegenüber am anderen Ende der Schreibtische. 
+Um die Heizung mit den benötigten Sensoren auszustatten wird ein Wärmemengenzähler vorgesehen, der zusätzlich zu den Sensoren noch ein Rechenwerk mit Modbusanschluss zum auslesen aller drei Werte enthält. 
+Um den Massendurchfluss im Heizkörper steuern zu können wird ein Stellantrieb benötigt. Dieser kann durch einen Elektromotor oder durch ein thermisches Element, welches wiederum durch elektrische Energie erhitzt wird und durch die Ausdehnung einstellt, angetrieben werden. Um der Forderung nach Weiteren Schnittstellen genüge zu tragen und da es üblich ist solche Aktoren mit einem digitalen oder analogen Signal, also durch eine Spannung oder einen Strom zu steuern, soll Signalwandler von Modbus zu analog/digital eingesetzt werden.
+
+Damit sind die Komponenten spezifiziert und es werden in den folgenden Abschnitten die einzelnen zum Einsatz kommenden Bauteile erläutert bevor die gesamte Anlage und deren Funktion als Ganzes beschrieben werden.
+
+\section{Gateway}
+
+\section{Temperatursensoren}
+
+\section{Wärmemengenzähler}
+
+\section{Signalwandler und Stellantrieb}
+
+\section{Die Gesamtanlage mit Schaltplan und allem}
