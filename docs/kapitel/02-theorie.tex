@@ -25,19 +25,14 @@ Diese umfassen zunächst Bussysteme im Allgemeinen, dann das OSI Modell für tec
 Die Einführung wird an der Struktur von \cite{schn06} anlehnen.
 
 \subsection{Bussysteme} 
-Um allgemein Prozesse zu überwachen, zu steuern oder regeln zu können, müssen zwischen den verschiedenen Prozessbeteiligten/einheiten Informationen ausgetauscht werden. Im Kontext dieser Arbeit gilt es einen Prozess zur Temperatursteuerung/Halten zu regeln. Die Prozessbeteiligten sind hierbei technische Bauteile, Aktoren und Sensoren sowie ein Steuerungsrechner, die zusammen ein technisches System bilden, dass im Folgenden als Anlage bezeichnet wird. Die Anlage zeichnet sich dadurch aus, dass sie eine eigenständige funktionale Einheit bildet einen eigenen Zweck verfolgt, die Raumtemperaturregelung und einen Mehrwert gegenüber ihrer Einzelteile hat, was dem Zusammenspiel der einzelnen Bauteile und Geräte entspricht. 
+Um allgemein Prozesse zu überwachen, zu steuern oder regeln zu können, müssen zwischen den verschiedenen Prozessbeteiligten/einheiten Informationen ausgetauscht werden. Im Kontext dieser Arbeit gilt es einen Prozess zur Temperatursteuerung/Halten zu regeln. Die Prozessbeteiligten sind hierbei technische Bauteile, Aktoren und Sensoren sowie ein Steuerungsrechner/Controller, die zusammen ein technisches System bilden, dass im Folgenden als Anlage bezeichnet wird. Die Anlage zeichnet sich dadurch aus, dass sie eine eigenständige funktionale Einheit bildet einen eigenen Zweck verfolgt, die Raumtemperaturregelung und einen Mehrwert gegenüber ihrer Einzelteile hat, was dem Zusammenspiel der einzelnen Bauteile und Geräte entspricht. 
 Um den Mehrwert zu realisieren und den Zweck zu erfüllen, werden Kommunikationssysteme benötigt. Mit Hilfe derer kann Kommunikation erfolgen und die Anlage ihren Zweck erreichen.
-Diese Kommunikationssysteme werden im technischen Umfeld als Bussysteme realisiert/umgesetzt.
+Diese Kommunikationssysteme werden von technischer Seite oftmals als Bussysteme realisiert/umgesetzt.
 Bussysteme lassen sich anhand ihrer verschiedenen Ausprägungen von Merkmalen klassifizieren. Im folgenden Abschnitt werden zunächst die Merkmale von Bussystemen zum allgemeinen Verständnis dargestellt bevor auf die konkreten Ausprägungen des später eingesetzten Modbus-Bussystems eingegangen wird.
-% Bis hier noch nochmal überarbeiten
 
+\subsubsection{Informationsaustausch}
 
-\subsubsection{Telegramme und Frames}
-Definition Information Nachricht
-Informationen werden als Telegramme untereinander ausgetauscht und bestehen auf unterster Ebene aus einzelnen Bits. Diese Bits werden in vorgegebenen Rahmen ausgetauscht. Die Rahmen werden je nach verwendetem Übertragungsprotokoll verschieden definiert und befüllt und sehen anders aus.
-Quelle noch holen
-
-
+Die Informationen über einen Prozess und dessen Zustand, werden auf höherer Ebene durch Daten und auf unterster Ebene durch einzelne Bits repräsentiert. Der Austausch dieser Daten zwischen den einzelnen Geräten findet in Form von Telegrammen statt. Ein Telegramm besteht grundsätzlich aus den zu übertragenden Daten und zusätzlich aus Informationen zur Übertragung. Die Daten werden vor der Übertragung in Rahmen, sogenannte data frames, eingeteilt, deren genauer Aufbau abhängig vom verwendeten Kommunikationsprotokoll innerhalb des Netzwerks ist \cite[S.~11f.]{schn06}. Der Aufbau eines Telegramms am Beispiel des Modbus-Kommunikationsprotokolls wird in Abschnitt \ref{sub:modbus} erläutert und ist in \ref{fig:modbusframe} graphisch dargestellt.
 
 \subsubsection{Netzwerk und Topologie}
 
@@ -147,28 +142,28 @@ Die physikalische Übertragung der Daten/Telegramme kann über verschiedenste Sc
 Bei der binären Datenübertragung werden lediglich zwei Zustände unterschieden, deren Signalwerte einen High-Pegel \gls{phigh} und einen Low-Pegel \gls{plow} besitzen, die durch einen Bereich, in dem das Signal nicht definiert ist, voneinander getrennt sind \cite[S.~9]{sch08}.
 Die Geschwindigkeit der Datenübertragung wird in der Einheit Baud gemessen und definiert als übertragene Bits pro Sekunde (Bps)\cite[S.~22]{sch08}.
 
-Die gängigsten Übertragungsverfahren sind elektrische und optische Schnittstellen. Die elektrischen Schnittstellen gliedern sich wiederum in Strom- und Spannungs-Schnittstellen auf. Im weiteren Verlauf der Arbeit sind lediglich die Spannungsschnittstellen RS\footnote{Recommended Standard, abgeleitet von der amerikanischen, deutschen und internationalen Norm} 232 und RS 485 relevant, weshalb der interessierte Leser weitere Informationen zu weiteren Schnittstellen in \cite[S.~13ff.]{sch08} und \cite[S.~57ff.]{schn06} findet.
+Die gängigsten Übertragungsverfahren sind elektrische und optische Schnittstellen. Die elektrischen Schnittstellen gliedern sich wiederum in Strom- und Spannungs-Schnittstellen auf. Im weiteren Verlauf der Arbeit sind lediglich die Spannungsschnittstellen EIA\footnote{Abkürzung der Normen und Standards die von der Electronic Industries Alliance entwickelt wurden.} 232 und EIA 485, welche auch als EIA 232 und EIA 485 beziechnet werden, relevant, weshalb der interessierte Leser weitere Informationen zu weiteren Schnittstellen in \cite[S.~13ff.]{sch08} und \cite[S.~57ff.]{schn06} findet.
 
-Die RS 232 Schnittstelle ist wie bereits erwähnt eine Spannungsschnittstelle, die für Punkt-zu-Punkt Verbindungen geeignet ist und deren Pegel in \ref{fig:rs232} zu sehen sind. Die Pegel sind für Spannungen zwischen $-3V<p_{high}<-15V$ als logische \Gun 1\Gob, der Low-Pegel für Spannungen zwischen $-3V<p_{low}<-15V$ als die logische \Gun 0\Gob definiert. Im Intervall $[-3V,3V]$ ist das Signal nicht definiert, weshalb dieser Bereich möglichst schnell durchlaufen werden sollte. Da der Signalpegel von der Datenleitung hin zur Masse gemessen wird kann er nicht symmetrisch sein und ist damit erdunsymmetrisch. \cite[S.~57f.]{schn06}
+Die EIA 232 Schnittstelle ist wie bereits erwähnt eine Spannungsschnittstelle, die für Punkt-zu-Punkt Verbindungen geeignet ist und deren Pegel in \ref{fig:rs232} zu sehen sind. Die Pegel sind für Spannungen zwischen $-3V<p_{high}<-15V$ als logische \Gun 1\Gob, der Low-Pegel für Spannungen zwischen $-3V<p_{low}<-15V$ als die logische \Gun 0\Gob definiert. Im Intervall $[-3V,3V]$ ist das Signal nicht definiert, weshalb dieser Bereich möglichst schnell durchlaufen werden sollte. Da der Signalpegel von der Datenleitung hin zur Masse gemessen wird kann er nicht symmetrisch sein und ist damit erdunsymmetrisch. \cite[S.~57f.]{schn06}
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160314_rs232}
-\caption[Spannungspegel und Stecker der RS 232-Schnittstelle]{Links: Spannungspegel RS 232-Schnittstelle aus \cite[S.~57]{schn06} \newline Rechts: Stecker RS 232-Schnittstelle aus \cite[S.~14]{sch08}}
+\caption[Spannungspegel und Stecker der EIA 232-Schnittstelle]{Links: Spannungspegel EIA 232-Schnittstelle aus \cite[S.~57]{schn06} \newline Rechts: Stecker EIA 232-Schnittstelle aus \cite[S.~14]{sch08}}
 \label{fig:rs232}
 \end{figure}
 
 Typischerweise steht eine solche Schnittstelle jedem Rechner als COM-Port zur Verfügung und in der Automatisierungstechnik werden nur die RxD (Receive Data), TxD (Transmit Data) und GND Leitungen, die ein gemeinsames Bezugspotenzial definiert, verwendet. Wichtig bei der Verkabelung ist, dass die übertragende Leitung TxD immer mit der empfangenden Leitung RxD verbunden ist \cite[S.~14f.]{sch08}.
 
 %Here we go
-Die RS 485 Schnittstelle ist ebenfalls eine Spannungsschnittstelle, die jedoch für Mehrpunktverbindungen geeignet ist und die in der Norm ISO
-8482 beschrieben ist. Die Signalübertragung erfolgt über zwei Übertragungsleitungen, die in der Regel als verdrilltes und abgeschirmtes Zweidrahtleitung ausgeführt sind. Die Signalpegel entsprechen der Differenzialspannung $U_{AB}$ zwischen den beiden Leitungen, die innerhalb des Intervalls von $[-7V,12V]$ bezogen auf die Masse liegen muss. Durch das verdrillte Leitungspaar, wirken sich mögliche Störgrößen auf die Spannung beider Leitungen gleichermaßen aus, wodurch die Spannungsdifferenz unverändert bleibt und eine erhöhte Störfestigkeit gegenüber der RS 232-Schnittstelle erreicht wird.
+Die EIA 485 Schnittstelle ist ebenfalls eine Spannungsschnittstelle, die jedoch für Mehrpunktverbindungen geeignet ist und die in der Norm ISO
+8482 beschrieben ist. Die Signalübertragung erfolgt über zwei Übertragungsleitungen, die in der Regel als verdrilltes und abgeschirmtes Zweidrahtleitung ausgeführt sind. Die Signalpegel entsprechen der Differenzialspannung $U_{AB}$ zwischen den beiden Leitungen, die innerhalb des Intervalls von $[-7V,12V]$ bezogen auf die Masse liegen muss. Durch das verdrillte Leitungspaar, wirken sich mögliche Störgrößen auf die Spannung beider Leitungen gleichermaßen aus, wodurch die Spannungsdifferenz unverändert bleibt und eine erhöhte Störfestigkeit gegenüber der EIA 232-Schnittstelle erreicht wird.
 Bei der Pegelfestlegung werden für Empfänger und Sender gibt es verschiedene Vorgaben, wie in \ref{fig:rs485} graphisch dargestellt. So müssen die Sender eine Differenzspannung zwischen $-1,5V<U_{AB}<-5V$ für logische \Gun 1\Gob und $1,5V<U_{AB}<-5V$ für logische \Gun 0\Gob leisten können. Empfänger hingegen müssen in der Lage sein Spannungsdifferenzen von $U_{AB}<-0,3V$ als logische \Gun 1\Gob und $0,3<VU_{AB}$ als logische \Gun 0\Gob zu detektieren und zu interpretieren \cite[S.~59ff.]{schn06}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160314_rs485}
-\caption[Spannungspegel und Stecker der RS 485-Schnittstelle]{Links: Spannungspegel RS 485-Schnittstelle aus \cite[S.~60]{schn06} \newline Rechts: Stecker RS 485-Schnittstelle aus \cite[S.~19]{sch08}}
+\caption[Spannungspegel und Stecker der EIA 485-Schnittstelle]{Links: Spannungspegel EIA 485-Schnittstelle aus \cite[S.~60]{schn06} \newline Rechts: Stecker EIA 485-Schnittstelle aus \cite[S.~19]{sch08}}
 \label{fig:rs485}
 \end{figure}
 
@@ -237,7 +232,7 @@ Typische Dienste sind Connect, disconnect, data
 
 Im Folgenden wird kurz auf die einzelnen Schichten von Unten nach oben eingegangen bevor das Zusammenwirken der einzelnen Schichten anhand eines Beispiels verdeutlicht wird. %Evtl raus
 
-Die erste, physikalische Schicht stellt die mechanischen und elektrischen Möglichkeiten zur physischen Verbindung von Systemen zur Verfügung, um die Datenübertragung der einzelnen Bits zu ermöglichen \cite[S.~49f.]{osi96}. Sie legt also die mechanischen und elektrischen Eigenschaften der Übertragung fest, also die Endsystemkopplung (Stecker), die Kabelspezifikationen und die Zuordnung der Anschlüsse sowie die Art der Codierung und die Spannungspegel zur Übertragung. In der Regel werden dazu bestehende Normen genutzt, wie zum Beispiel die elektrischen Übertragungsstrecke nach RS485-Norm, welche im Folgenden noch erläutert wird.
+Die erste, physikalische Schicht stellt die mechanischen und elektrischen Möglichkeiten zur physischen Verbindung von Systemen zur Verfügung, um die Datenübertragung der einzelnen Bits zu ermöglichen \cite[S.~49f.]{osi96}. Sie legt also die mechanischen und elektrischen Eigenschaften der Übertragung fest, also die Endsystemkopplung (Stecker), die Kabelspezifikationen und die Zuordnung der Anschlüsse sowie die Art der Codierung und die Spannungspegel zur Übertragung. In der Regel werden dazu bestehende Normen genutzt, wie zum Beispiel die elektrischen Übertragungsstrecke nach EIA 485-Norm, welche im Folgenden noch erläutert wird.
 
 Ein wichtiger Aspekt der Schicht ist es, dass die Spezifikation der Strecke und nicht das physikalisches Medium selbst Teil der Schicht eins ist, denn die Kommunikation ist unabhängig von der konkreten Ausprägung der Schicht \cite[S.~9]{schn06}.
 
@@ -280,15 +275,81 @@ stellt Funktionen bereit, mit denen der Benutzer auf das Kommunikationssystem zu
 Im folgenden werden die verwendeten Modbus Protokolle und Spezifikation ind Anwendung Berzug zum OSI Modell gebracht um den praktischenNutzen davon klar zu machen.
 
 
-\subsection{Modbus Technologie}
+\subsection{Modbus Kommunikationstechnologie}
+\label{sub:modbus}
 
-Hier wird das Modbusprotokoll nach \cite{mod12} und \cite{mod06ser} und \cite{mod06tcp}  
-Und nach hier wird das Modbusprotokoll nach \cite[S.5]{mod12} und \cite[S.5]{mod06ser} und \cite[S.5]{mod06tcp}
-Nach Gliederung wie oben beschrieben und eingeordnet weil sie zum Einsatz kommt.
+Zunächst erfolgt die Einordnung ins OSI Modell und anschließend eine Klassifizierung der Spezifikationen gemäß der zuvor von Bussystemen.
 
-bauteile in osi einordnen
+Das Modbus Protokoll teilt sich auf verschiedene Protokolle auf, zum einen auf das Application Layer Messaging Protocol auf oberster Ebene, welches auf das Modbus Over Serial Line Protocol sowie das Ethernet TCP/IP Protokoll aufbaut.
+Das Application Layer Messaging Protocol lässt sich im OSI Referenzmodell in die siebte und oberste Schicht(Anwendungsschicht) einordnen wie in \ref{fig:modbusosi} dargestellt. Bei der Nutzung des Modbus over Serial line Protocol implementiert diese die zweite Schicht und die Ebenen drei bis sechs sind leer implementiert. Als physikalische Schicht werden die Übertragungsstandards nach EIA 485 oder nach EIA 232 \cite[S.~2]{mod06ser}.
+Anstatt des Over serial line kann auch das Modbus Messaging On TCP/IP Protocol verwendet, dann implementiert dieses zusammen mit den dem TCP/IP Standard zusammen die Netzwerkschicht im OSI-Referenzmodell. Das Ethernet implementiert dabei die Datensicherungsschicht Nummer zwei und dessen physikalische Spezifikationen die unterste physikalische Schicht und deren Schnittstellen. Die Ebenen vier bis sechs sind auch bei Nutzung dieser Kommunikationsweise leer implementiert \cite[S.~2f.]{mod12}. Eine Einführung zum Ethernet und TCP/IP Standard findet sich in \cite{schn06}, detaillierte Ausführungen dazu in \cite{fu03}.
+
+Nun wird das Modbus Application Layer Messaging Protocol erläutert. Anschließend werden die Modbus Protokolle der unteren Ebenen erläutert bis hin zu den physikalischen Schnittstellen.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160319_modbusosi}
+\caption[Die Modbus Kommunikation im OSI-Referenzmodell]{Die Modbus Kommunikation im OSI-Referenzmodell aus \cite[S.~5]{mod06ser}}
+\label{fig:modbusosi}
+\end{figure}
 
 
+Das Modbus Application Layer Messaging protocol ist ein Protokoll, dass verschiedene Netzwerke und Bussysteme zur Master/Slave Kommunikationen von verbundenen Geräten nutzen kann \cite[S.~2f.]{mod12}, jedoch übernimmt im Rahmen des Protokolls der Master die Rolle des Clients und die Slaves die Rollen als Server, da der Client alleinig die Anfragen stellt und die Server lediglich auf Anfragen antworten.Das Modbus Protokoll definiert eine gemeinsame Telegrammstruktur, bezogen auf Inhalte und Rahmen der Nachricht. Damit ermöglicht es die Kommunikation zwischen verschiedenen Geräten innerhalb eines Netzwerks, welche unabhängig von Art und Typ des darunter liegenden Netzwerks sind. Es beschreibt außerdem wie die Kommunikation abläuft, wie der Client eine Anfrage an ein Server stellt und wie diese auf die Anfragen reagieren und antworteten und beschreibt wie Fehler bei der Übertragung entdeckt und darauf hingewiesen werden \cite[S.~2f.]{mod96}.
+Die Kommunikation kann dabei über eine serielle Leitung nach EIA 485 sowie über Ethernet Netzwerk erfolgen. Über Gateways, wie in Abschnitt \ref{sec:grundlagenbus} bereits erläutert, kann die Kommunikation auch über verschiedene Typen von Bussystemen oder Netzwerken geschehen \cite[S.~3f.]{mod12}.
+
+
+Das Modbus Protokoll stellt ein allgemeines Gerüst für Nachrichten zur Verfügung, welches in \ref{fig:modbusframe} dargestellt ist.  Die einfache Protocol Data Unit (PDU) enthält die eigentlichen Informationen die ausgetauscht werden sollen und sind daher unabhängig vom Netzwerk oder dem Bussystems. Zu den Informationen gehören die eigentlichen Daten, welche leer sein können oder Daten enthalten die der Slave, in Rahmen von Modbus auch al Server bezeichnet, benötigt, und ein Funktionscode, der ein Byte groß ist und beschreibt welche Art der Aktion Reaktion gefordert ist/wird. Die sogenannte Application Data Unit (ADU) enthält zusätzlich zur PDU weitere Informationen zur Adressierung im Netzwerk und zur Fehlererkennung und ist daher abhängig vom Netzwerk. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160319_Modbusframe}
+\caption[Allgemeiner Rahmen für Telegramme nach dem Modbus Anwendungsprotokoll]{Allgemeiner Rahmen für Telegramme nach dem Modbus Anwendungsprotokoll aus \cite[S.~3]{mod12}}
+\label{fig:modbusframe}
+\end{figure}
+
+Für die Kommunikation wird innerhalb des Masters, der im Rahmen von Modbus auch als Client bezeichnet wird, die Kommunikation durch eine ADU initialisiert. Das genaue Format der ADU wird ist nach Modbus Protokollspezifikation festgelegt. Das Schema einer Transaktion läuft nach dem Prinzip in \ref{fig:modbustransaktion} ab.
+Wenn eine ADU fehlerfrei empfangen wurde nutzt der Server das Funktioncode Feld um anzuzeigen, ob seine Antwort ebenfalls eine normale, fehlerfrei Antwort, durch eine einfaches Echo des empfangenen Funktionscodes, ist oder ob ein irgendein Fehler aufgetreten ist durch einen Exception code.
+Die Größe der PDU ist grundsätzlich durch die serielle Kommunikation begrenzt auf 256 Bytes, da jedoch noch zwei Bytes für einen Cyclic Redundancy Check und ein Byte für die Server Adresse reserviert werden müssen ist die PDU auf 253 Bytes begrenzt.
+Ein weiterer, wichtiger Aspekt ist, dass Modbus die \Gun big-Endian\Gob Codierung/Repräsentation für Daten verwendet verwendet, falls der numerische Wert größer als ein einzelner Byte ist \cite[S.~3ff.]{mod12}. Anhand des Beispielder Uhrzeit kann die Bedeutung der Big-Endian Repräsentation einfach erläutert werden: Die Daten werden so aufgeteilt, dass zunächst die Daten mit der höchsten Wertigkeit, also den Stunden zuerst gesendet werden, anschließend den Minuten und zum Schluss die Sekunden, unabhängig von deren numerischem Wert. Also werden nacheinander die Code 03, 50, 12 empfangen bedeutet dues dass die Uhrzeit 03:50:12 ist. Der interessierte Leser wird für eine weitere Ausführungen auch zu little-Endian Darstellung in \cite{endian05}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160319_modbusclientserver}
+\caption[Transaktion mit dem Modbus Protokoll]{Transaktion mit dem Modbus Protokoll nach \cite[S.~4]{mod12}}
+\label{fig:modbustransaktion}
+\end{figure}
+
+Das Modbus Datenmodell basiert darauf, dass auf die Daten in vier verschiedenen Tabellen mit unterschiedlichen Funktionen und Datenobjekten zugegriffen werden kann:
+\begin{itemize}
+	\item In die Discretes Input, welche Single Bit Objekte enthält und lediglich gelesen werden kann,
+	\item die Coils, welche ebenfalls Single Bit Objekte enthält jedoch gelesen und beschrieben werden darf,
+	\item die Input Registers, die Datenobjekte als 16-Bit Wort enthält und wiederum nur gelesen werden kann
+	\item und die Holding Registers, dessen 16-Bit Wort Objekte wiederum gelesen und beschrieben werden dürfen.
+\end{itemize}
+
+Die Daten selbst können auch innerhalb einer Tabelle abgelegt sein, müssen lediglich über die vier angegebenen Tabellen zugreifbar sein, also die Referenz auf die Daten muss gegeben sein, der Rest ist egal. Jede Tabelle besitzt Daten adressiert zwischen 0 und 65535 und ist damit auch nach oben begrenzt was Daten angeht. Welche Daten wo genau stehen, also unter welcher Adresse kann von Gerät zu Gerät unterschiedlich sein und wird vom Gerätehersteller festgelegt. \cite[S.~6ff.]{mod12}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160319_modbusadresse}
+\caption[Datenmodell und Adressierung nach dem Modbus Protokoll]{Datenmodell und Adressierung nach dem Modbus Protokoll aus \cite[S.~8]{mod12}}
+\label{fig:modbusadresse}
+\end{figure}
+
+Die Funktionscodes starten bei 1 und können bis 255 genutzt werden und sind wie bereits angesprochen in der PDU enthalten und definieren welche Aktion ein Server ausführen soll. In erster Linie dienen sie dem Datenzugriff in den Tabellen, können aber auch für Diagnosen oder nutzerdefinierte Aktionen benutzt werden. Daher lassen sich die Funktionscodes in drei große Gruppen aufteilen, die öffentlichen, nutzerdefinierbaren und die reservierten Funktionscodes. Die öffentlichen sind wohldefiniert, unique, dokumentiert und sind auf Konformität getestet und sind daher einfach, schnell und sicher nutzbar. Die vom Nutzer definierbaren Funktionscodes können genutzt werden um von den öffentlich bereitgestellten nicht bereitgestellte Funktionen eigens zu definieren/nutzbar zu machen. Die reservierten Codes sind von wenigen Unternehmen, welche an der Entwicklung des Modbus Protokolls beteiligt waren, für deren hinterlassene Produkte reserviert und daher nicht öffentlich nutzbar\cite[S.~10ff.]{mod12}.
+
+Als nächstes folgen die beiden verschiedenen Modbus Over Serial Line Protocol und Modbus Messaging On TCP/IP Protocol
+
+Beide nutzen eine Bus-Struktur für die Kommunikation, Möglichkeit über Baumstruktur und Gateway zu erweitern bzw verbinden.
+
+RTU und TCP
+Rahmen und Adressierung sowie Kabel etc ansprechen evtl.
+
+Die Kommunikation wird durch eine Master/Slave stattfinden und daher ist auch der Buszugriff so geregelt
+
+Die Datensicherung unterscheidet sich leicht, beide Parität jedoch nur RTU einen CRC check.
+
+Außerdem unterschiedliche Schnittstellen, EIA 485 und EIA 232 zum einen, Ethernet TCP/IP auf der anderen Seite.
 
 \section{Technische Grundlagen zur Modellbildung}
 \label{sec:grundlagenmodell}

@@ -16,7 +16,10 @@
 
 Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung zu konzipieren, zu konkretisieren und im letzten Schritt umzusetzen. Dazu werden zunächst die Anforderungen an die Anlage analysiert und weiterhin die Vorgaben und Rahmenbedingungen zur Anlage von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. Abschließend wird die Installation und dabei aufgetretenen Besonderheiten der Anlage beschrieben.
 
-\section{Analyse der Anforderungen und Rahmenbedingungen}
+\section{Idee und Konzept der Anlage}
+
+
+\subsection{Analyse der Anforderungen und Rahmenbedingungen}
 \label{sec:anforderungen}
 
 Um die Anforderungen an eine MPC-fähige Anlage zu bestimmen, wird zunächst der Zweck und die Einsatzziele der Anlage untersucht. In Kapitel \ref{sec:motivation} wurde bereits darauf hingewiesen, dass es die Vorgabe von Seiten der Hochschule war, die Einsatzziele in Einklang zu der bisherigen Forschung zu bringen und komplementär zu wählen. Daher wurden im Dialog mit den Projektverantwortlichen\footnote{In Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}} für die Forschung im Bereich solarer Anwendungen an der Hochschule Karlsruhe gemeinsam konkrete Einsatzziele der Anlage erarbeitet. Als Ergebnis wurden die folgenden, konkreten Ziele vereinbart:
@@ -45,7 +48,6 @@ Weiterhin wurden von Seiten der Hochschule Karlsruhe\footnote{In Person von Frau
 
 Diese Einsatzziele und Rahmenbedingungen definieren implizit Anforderungen an eine Anlage, welche im Nachfolgenden explizit ausgeführt werden und aus Gründen der Übersichtlichkeit die wichtigsten in Tabelle \ref{tab:anforderungen_umgebung} zusammengefasst sind.
 
-%Here we go
 
 \begin{table}[H]
 \centering
@@ -196,11 +198,11 @@ Außerdem sollen eine hohe Funktionalität gegeben sein, dass heißt eine mögli
 Da alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnittstelle besitzen beziehungsweise frei nutzbare Pakete in Python als Schnittstelle zur Verfügung stehen, soll auch die Ansteuerung der gesamten Anlage in Python stattfinden. Damit kann Python als gemeinsamer Nenner für Ansteuerung Anlage und Optimalsteuerung genutzt werden und es kann ein minimaler Rechner dazu genutzt werden, wie z.B. ein Raspberry Pie. Daher wird die gesamte folgende Planung darauf aufbauen, dass sie sich in/aus Python steuern lässt.
 
 
-\section{Idee}
+\subsection{Idee}
 
 Eine erste, grobe Idee, welche in den folgenden Abschnitten sukzessive an die an die obigen Anforderungen angepasst wird, ist also eine Anlage zur Regelung der Temperatur im Raum, die so minimal wie möglich aufgebaut ist. Konkret gilt es zunächst die Raumtemperatur über Sensoren zu erfassen und diese weiterhin mit Hilfe des Heizkörpers zu steuern. Ein minimaler Aufbau lässt sich in drei Gruppen/Klassen von Anlagenteilen gliedern: Die Sensorik zur Ermittlung des Zustandes im Raum und der Steuergrößen, der Aktorik zur Beeinflussung des Raumzustandes und einen zentralen logischen Controller, der das Zusammenspiel der einzelnen Anlagenteile und Komponenten koordiniert und MPC macht.
 
-\section{Idee weiter konkretisisert}
+\subsection{Idee weiter konkretisisert}
 
 Nachdem die Anforderungen konkretisiert und erläutert wurden und die Idee der Anlage klar ist, wird diese nun weiter konkretisiert, entsprechend der drei zuvor gebildeten Gruppen.
 
@@ -216,7 +218,7 @@ Dieses Konzept sieht auch eine Erweiterungsmöglichkeit vor, so dass das öffnen
 
 Damit steht das Konzept der Anlage und im nächsten Abschnitt kann eine detaillierte Planung der Bauteile, Verdrahtung und Komponenten und Protokolle erfolgen.
 
-\section{Konkretisierte Planung der Anlage/Konkretisierung des Plans}
+\subsection{Konkretisierte Planung der Anlage/Konkretisierung des Plans}
 
 Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommunikationsleitungen und das Netzwerk geplant. Da diese über die Modbus Protokolle RTU und TCP geschehen soll und Modbus TCP über ein normales Ethernet auf OSI ebene 0/1 kommuniziert und der Rechner einen Netzwerkanschluss/Ethernetanschluss besitzt wird dieser an ein solches Netzwerk angebunden, damit keine weitere Karte bzw Kein Umsetzer für den Anschluss eines RS 232-Netzwerkes bze RS 483 nicht möglich benötigt wird an dessen COM port. Da ebenfalls Schnittstellen gefordert sind, wird über ein Gateway das Modbus TCP Ethernet Netzwerk mit einem RS 438 verbunden.
 
@@ -226,12 +228,14 @@ Um den Massendurchfluss im Heizkörper steuern zu können wird ein Stellantrieb 
 
 Damit sind die Komponenten spezifiziert und es werden in den folgenden Abschnitten die einzelnen zum Einsatz kommenden Bauteile erläutert bevor die gesamte Anlage und deren Funktion als Ganzes beschrieben werden.
 
-\section{Gateway}
+\section{Bauteile}
 
-\section{Temperatursensoren}
+\subsection{Gateway}
 
-\section{Wärmemengenzähler}
+\subsection{Temperatursensoren}
 
-\section{Signalwandler und Stellantrieb}
+\subsection{Wärmemengenzähler}
 
-\section{Die Gesamtanlage mit Schaltplan und allem}
+\subsection{Signalwandler und Stellantrieb}
+
+\subsection{Die Gesamtanlage mit Schaltplan und allem}
