@@ -340,6 +340,18 @@ Die Funktionscodes starten bei 1 und können bis 255 genutzt werden und sind wie
 
 Als nächstes folgen die beiden verschiedenen Modbus Over Serial Line Protocol und Modbus Messaging On TCP/IP Protocol
 
+Beim Modbus Over Serial Line Protocol können die Daten über zwei unterschiedliche Modi übertragen werden, der RTU und ASCII Modus. Näheres Der ASCII Modus ist optional und wird in \cite{mod06ser} detailliert beschrieben. Der RTU Modus wird von allen modbusfähigen Komponenten unterstützt und spezifiziert das folgende Format zur Übertragung der einzelnen Bytes: Jede Byteübertragung beginnt mit einem Startbit, auf das zu übertragende Byte, bsetehend aus acht einzelnen Bits, folgt, bevor die Übertragung optional von einem Paritätsbit und einem Stoppbit beziehungsweise lediglich von zwei Stoppbits abgeschlossen wird. Dabei wird jedes zu übertragende Byte als zwei 4-bit hexadezimales Zeichen übertragen\cite[S.~12f.]{mod06ser}. Die Paritätsprüfung ist optional und dient der Fehlerüberprüfung des Telegramms, wie bereits in Abschnitt \ref{sec:grundlagenbus} erläutert.
+Der Rahmen eines gesamten Modbus RTU Telegramms besteht aus der Slave Adresse und dem Function Code, die jeweils aus einem Byte bestehen. Darauf folgen die eigentlichen Informationen für die 0 bis 252 Bytes vorgesehen sind. Abgeschlossen wird der Rahmen durch ein CRC Feld, dass aus einem CRC Low und einem CRC High byte aufgebaut ist. Die Übertragung einer ganzen Nachricht erfolgt byteweise wie zuvor beschrieben.
+Die genaue Übertragungszeit eines Bytes und einer Nachricht hängt von der Baudrate ab. Um den Beginn und den Abschluss eines RTU Rahmens eindeutig zu definieren, geschieht dies in Abhängigkeit von der Übertragungsgeschwindigkeit. Zwischen einzelnen Bytes innerhalb eines Rahmens folgt ein stilles Intervall, dass je nach Länge angibt ob das Telegramm beendet ist. Auf eine Intervall kleiner gleich der anderthalbfachen Übertragung eines Bytes folgt eine weiteres Byte. Ist das stille Intervall länger als die dreieinhalbfache Byteübertragungszeit markiert dies das Ende eines Telegramms und den Beginn eines nächsten Telegramms \cite[S.~13]{mod06ser}. Diese Zusammenhänge sind zur Veranschaulichung in \ref{fig:modbusrtu} zusammengefasst.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160321_rtu}
+\caption[Modbus RTU Telegrammformat und Rahmen]{Modbus RTU Telegrammformat und Rahmen nach \cite[S.~12f.]{mod06ser}}
+\label{fig:modbusrtu}
+\end{figure}
+
+
 Beide nutzen eine Bus-Struktur für die Kommunikation, Möglichkeit über Baumstruktur und Gateway zu erweitern bzw verbinden.
 
 RTU und TCP
