@@ -224,24 +224,28 @@ Damit steht das Konzept der Anlage und im nächsten Abschnitt kann eine detailli
 
 Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommunikationsleitungen und das Netzwerk geplant. Die Kommunikation soll gemäß den Spezifikationen über die Modbus Protokolle RTU und TCP geschehen. Da der Rechner einen Netzwerkanschluss für ein Ethernet besitzt, soll darauf basierend das Netzwerk aufgebaut werden. Für den zusätzlichen Einsatz des Modbus RTU Protokolls wird ein weiteres serielles Netzwerk aufgebaut, dass mit Hilfe eines Gateways an das modbus Ethernet angeschlossen wird. Dieses übernimmt die Aufgabe der Übersetzung der Kommunikation zwischen dem Ethernet und dem seriellen Teil des Netzwerks übersetzt.
 
-Die Temperatursensoren sollen als Raumtemperaturfühler ausgeführt werden und an zwei Stellen des Raumes die Temperatur messen. Des Weiteren sollen sie möglichst günstig sein und eines der beiden eingesetzten Modbus Protokolle unterstützen. Die Positionierung ist in Abbildung REFXXXX graphisch dargestellt und erfolgt auf einer raummmittig gedachten Achse in nord-südlicher Richtung, jeweils am Ende der Schreibtische. Einer in Richtung der Fenster, der andere gegenüber am Ende der Schreibtische.
+Die Temperatursensoren sollen als Raumtemperaturfühler ausgeführt werden und an zwei Stellen des Raumes die Temperatur messen. Des Weiteren sollen sie möglichst günstig sein und eines der beiden eingesetzten Modbus Protokolle unterstützen. Die Positionierung ist in Abbildung REFXXXX graphisch dargestellt und erfolgt auf einer raummittig gedachten Achse in nord-südlicher Richtung, jeweils am Ende der Schreibtische. Einer in Richtung der Fenster, der andere gegenüber am Ende der Schreibtische.
 
 Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich ein Wärmemengenzähler an. Dieser integriert die benötigten Sensoren und hat zusätzlich ein Rechenwerk, dass mit einem mit Modbus-Kommunikationsmodul ausgestattet werden kann zum Auslesen der einzelnen Messwerte.
 
-%&Here we go
-
-Um den Massendurchfluss im Heizkörper steuern zu können wird ein Stellantrieb benötigt. Dieser kann durch einen Elektromotor oder durch ein thermisches Element, welches wiederum durch elektrische Energie erhitzt wird und durch die Ausdehnung einstellt, angetrieben werden. Um der Forderung nach Weiteren Schnittstellen genüge zu tragen und da es üblich ist solche Aktoren mit einem digitalen oder analogen Signal, also durch eine Spannung oder einen Strom zu steuern, soll Signalwandler von Modbus zu analog/digital eingesetzt werden.
+Um den Massenfluss im Heizkörper über das Ventil ansteuern zu können wird ein Stellantrieb benötigt. Dieser kann durch einen Elektromotor oder durch ein thermisches Element angetrieben werden. Die Ansteuerung des Stellantriebs erfolgt üblicherweise durch ein digitales oder analoges Signal, wodurch sich eine weitere Schnittstelle ergibt und ein Modbus-Signalwandler eingesetzt werden kann.
 
 Damit sind die Komponenten spezifiziert und es werden in den folgenden Abschnitten die einzelnen zum Einsatz kommenden Bauteile erläutert bevor die gesamte Anlage und deren Funktion als Ganzes beschrieben werden.
+%&Here we go
 
 \section{Bauteile}
+In diesem Abschnitt werden die eingesetzten Bauteile und deren Funktionsweisen vorgestellt, bevor die Anlage als ganzes im Einsatz geschildert wird.
 
-\subsection{Gateway}
 
 \subsection{Temperatursensoren}
+Eine kostengünstige Möglichkeit, die Raumtemperatur zu erfassen und über eine serielle Modbus RTU Schnittstelle abzufragen bietet der eingesetzte Raumtemperaturmessumformer THERMASGARD RTM1-Modbus von S+S Regeltechnik. Zwei Stück davon kommen i n der Ausführung ohne LCD Anzeige zum Einsatz. 
+Des Weiteren wurden bei der Installation der Anlage noch zusätzliche Temperatursensoren von Seiten der Hochschule Karlsruhe zur Verfügung gestellt. Diese haben keine Modbusanschluss, können aber über ein Ethernet Lokales Netzwerk über das http Protokoll vom Controller ausgelesen werden. Daher wurden diese in die Anlage integriert und die Anordnung der Anlage verändert wie in REFXXXXXX dargestellt. Die Sensoren werden entlang der westlichen Außenwand und der östlichen Innenwand gleichmäßig verteilt und auf einer Höhe von 2m installiert, um ein gutes Bild der Raumtemp verteilung zu erhalten. Die sechs Sensoren wurden zur Identifizierung gemäch REF XXXXXXXXX bezeichnet
 
 \subsection{Wärmemengenzähler}
 
 \subsection{Signalwandler und Stellantrieb}
+
+\subsection{Gateway}
+Das Gateway bietet eine einfache und kostengünstige Möglichkeit, um ein serielles Netzwerk in ein Lokales Netzwerk zu integrieren. Dadurch ist es möglich Modbus RTU Geräte von einem Modbus TCP/IP Clienten zu steuern. Zum Einsatz in der Anlage kommt das EX9132C-2-MTCP Gateway von ExpertDAQ, welches übe über zwei serielle Ports verfügt, ein EIA-232 und ein EIA 232/422/485 Port. Die genauen Spezifikationen können dem Datenblatt im Anhang REFXXXXXXXX entnommen werden. Damit kann 
 
 \subsection{Die Gesamtanlage mit Schaltplan und allem}
