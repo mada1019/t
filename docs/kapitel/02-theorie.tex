@@ -212,7 +212,7 @@ Die Ebenen werden Schichten genannt und haben klar definierte Aufgaben und Schni
 
 Die Schnittstellen/Dienste zwischen den Schichten werden als Service Access Points bezeichnet und besitzen jeweils eine eindeutige Adresse, die oberhalb liegende Schicht ist der Service user, da er den Service daer unterhalb liegenden Schicht nutzt, dem service provider. Die Dienste können in verbindungsorientierte und verbindungsunabhängige unterschieden werden.
 Für den Datenausatausch stehen folgende Dienste zur Verfügung
-Bei der Abhandlung der Dienstaufgaben stehen vier Dienstvorgänge zur Verfügung, die zusammengefasst in \ref{fig:vorgang} abgebildet sind:
+Bei der Abhandlung der Dienstaufgaben stehen die vier Dienstvorgänge der Client/Server Architektur zur Verfügung, die zusammengefasst in \ref{fig:vorgang} abgebildet sind \cite[S.~2f.]{mod06tcp} :
 
 request - Anforderung
 indication - Meldung
@@ -326,6 +326,8 @@ Das Modbus Datenmodell basiert darauf, dass auf die Daten in vier verschiedenen 
 	\item und die Holding Registers, dessen 16-Bit Wort Objekte wiederum gelesen und beschrieben werden dürfen.
 \end{itemize}
 
+16 bit wort entspricht einer Folge von 16 bits/binärzeichen das also einen dezimalen Zahlenwert zwischen 0 und 65.536. Nach der IEC 61131-3 Norm entspricht es in iim Rechner einem Integer Wert.
+
 Die Daten selbst können auch innerhalb einer Tabelle abgelegt sein, müssen lediglich über die vier angegebenen Tabellen zugreifbar sein, also die Referenz auf die Daten muss gegeben sein, der Rest ist egal. Jede Tabelle besitzt Daten adressiert zwischen 0 und 65535 und ist damit auch nach oben begrenzt was Daten angeht. Welche Daten wo genau stehen, also unter welcher Adresse kann von Gerät zu Gerät unterschiedlich sein und wird vom Gerätehersteller festgelegt. \cite[S.~6ff.]{mod12}
 
 \begin{figure}
@@ -354,12 +356,46 @@ Der Implementierungsleitfaden legt auch die Spezifikationen der physikalischen S
 
 XXXXXXXX
 
-Beim Modbus Messaging on TCP/IP Protocol stellt die Möglichkeit zur Verfügung, Geräte, die über ein Ethernet (IP Netzwerk) miteinander verbunden sind, über ein Client/Server Modell kommunizieren zu lassen. Des Weiteren erlaubt es dieses Protokoll explizit über Bridges, Gateways oder Router Netzwerke miteinander zu verbinden. Dabei dürfen auch serielle Subnetzwerke zu verbinden und erlaubt auch zwischen diesen Endgeräten die Kommunikation \cite[S.~2f.]{mod06tcp}.
-Die Kommunikationsarchitektur ist auf in REF ARCHITEKTUR dargestellt. Außerdem ist eine leicht verschiedne ADU vorhanden, wie in Abbildung REF ADU TCP zu sehen. Modbus Application Protocol Header MBAP Header, enthält unit identifier ähnlich slave adress/id, adresse für modbus routing, ein bytecount, der die länge des folgenden Telegramms angibt(inklusive Unit identifier und Daten) auch wenn gesplittet, CRC-32 error check, protocol identifier mit modbus 0, transaction identifier vom client, der nur kopiert wird vom server um transaktionen einander zuzuordnen. Alle Kommunikation erfolgt über TCP Port 502 \cite[S.~4f.]{mod06tcp}
+Beim Modbus Messaging on TCP/IP Protocol stellt die Möglichkeit zur Verfügung, Geräte, die über ein Ethernet miteinander verbunden sind, über ein Client/Server Modell kommunizieren zu lassen. Des Weiteren erlaubt es dieses Protokoll explizit über Bridges, Gateways oder Router Netzwerke miteinander zu verbinden. Dabei dürfen auch serielle Subnetzwerke zu verbinden und erlaubt auch zwischen diesen Endgeräten die Kommunikation \cite[S.~2f.]{mod06tcp}.
+Diese Kommunikationsarchitektur ist auf in \ref{fig:tcparchiktektur} dargestellt. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160322_tcparchitektur}
+\caption[Die Modbus TCP/IP Kommunikationsarchitektur]{Die Modbus TCP/IP Kommunikationsarchitektur aus \cite[S.~4]{mod06tcp}}
+\label{fig:tcparchiktektur}
+\end{figure}
+
+Außerdem ist eine leicht verschiedne ADU vorhanden, wie in Abbildung REF ADU TCP zu sehen. Modbus Application Protocol Header MBAP Header ist 7 bytes lang und enthält unit identifier ähnlich slave adress/id, adresse für modbus routing, ein bytecount, der die länge des folgenden Telegramms angibt(inklusive Unit identifier und Daten) auch wenn gesplittet, CRC-32 error check, protocol identifier mit modbus 0, transaction identifier vom client, der nur kopiert wird vom server um transaktionen einander zuzuordnen. Alle Kommunikation erfolgt über TCP Port 502 \cite[S.~4f.]{mod06tcp}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160319_Modbusframe}
+\caption[Angepasster Rahmen für Telegramme nach dem Modbus TCP/IP Protokoll]{Angepasster Rahmen für Telegramme nach dem Modbus TCP/IP Protokoll aus \cite[S.~4]{mod06tcp}}
+\label{fig:modbusframe}
+\end{figure}
+
+Alle Modbus /TCP ADU werden via TCP zum Modbus rgeistrierten Port 502 geschickt.
 
 Modbus tcp Komponenten können sowohl client als auch server interface haben. \cite[S.~7f.]{mod06tcp}
 
+Der Modbus Client erlaubt den Informationsaustausch indem er eine ADU erstellt
+Der Modbus Server wartet auf Anfragen über den TCP Port 502
 
+Transmission control protocol TCP und IP ist Internet Protcol. TCP als Transportschicht verbindungsorientiert: Teilt Daten in Datenblöcke, sogeannte Pakete, zum Transport. IP regelt Netzwerkaufgaben, siehe OSI Modell Netzwerkschicht, und versendet die Daten über Telegrammservice und packt den MBAP Header an jedes Paket dran dran. Der Port erlaubt die parallele Nutzung von Ethernet Netzwerken, da er den Übertragungsprozess eindeutig kennzeichnet. Verbindungsorientiert heisst über ein Socket weren zwei prozesse miteinander verbunden und die empfangenen Telegrammen werden/müssen quittiert \cite[S.~16ff.]{schn06}. Der interessierte Leser findet eine deatillierte Beschreibung des Ethernet TCP/IP Standards in \cite{fu03}.
+
+
+TCP übernimmt Netzwerkmanagement - TCP Management:
+Hauptaufgabe ist das connection management. Das managen von Verbindungen kann entweder durch ein Modul erfolgen oder durch die Nutzeranwendung selbst durch die Zugriffsüberwachung der sockets. Der Port 502 ist für Modbus Kommunikation reserviert, jedoch können auch andere Ports genutzt werden falls die Modbusgeräte eine Portkonfiguration unterstützen. Weiterhin wird der Datenfluss und der Einsatz der Netzwerkressourcen überwacht. \cite[S.~7ff.]{mod06tcp}
+
+Generell, Verbindungsmanagement wichtig, da Modbus/TCP Kommunikation zwischen einem Server und einem Clienten eine Verbindung benötigt.
+Hinweise gibt der Guide, das die Verbindungen nicht dauernd geöffnet und geshclossen werden und auch mehrere viele Modbus Transaktionen während der Verbindung stattfinden. Außerdem sollte sich auf ein Minimum von Verbindungen beschränkt werden für den gleichen Server. \cite[S.~9f.]{mod06tcp}
+Das Nutzer TCP Management umfasst folgende Aufgaben, die aktive und passive Herstellung von Verbindungen sowie das schließen dieser und das festlegen von maximalen Verbindungen \cite[S.~11ff.]{mod06tcp}. Verbindungsherstellung über Ethernet IP, also der eindeutigen Adresse, des Geräts und Portnummer und die Socket Nummer. Der Socket ist ein Endpunkt innerhalb eines Rechners, über den die Kommunikation läuft und der einem Port eindeutig zugewiesen ist \cite[S.~15f.]{mod06tcp} .
+
+Physikalisch bedient sich der Ethernet Schnitstelle also einem normalen Netzwerkkabel.
+
+Diese Kommunikationstechnologie und die verschiedenen Protokolle finden im Rahmen der Anlage in Kapitel dann An
+wendung
 
 
 \section{Technische Grundlagen zur Modellbildung}
@@ -458,11 +494,38 @@ Unterschiedliche geometrische Ausprägungen, wie zum Beispiel ein Wärmeaustausc
 
 \section{Technische Grundlagen zur Solar- und Gebäudetechnik}
 
-\subsection{Klima}
+\subsection{Außenklima und Komponenten}
 
-\cite[S.~295ff.]{ha13}
+Der Begriff Außenklima wird häufig im Zusammenhang mit dem Thema Umwelt und deren Einflüsse auf Gebäude gebraucht.  Der allgemeine Begriff des Klimas wird von \cite[S.~295]{ha13} definiert als:
+\begin{quote}
+\Gun die Summe aller Umweltfaktoren, die unmittelbar oder mittelbar Einfluss nehmen auf die Gesundheit und das Befinden von Menschen und Tieren, auf die Entwicklung von Pflanzen sowie auf den Zustand von Lagergütern, Produktionsverfahren, Maschinen, Apparaten und Bauwerken.\Gob
+\end{quote}
 
-\subsection{Sonnenbahn und Strahlung}
+Daraus lässt sich ableiten, dass das Außenklima ein Aspekt des Klimas ist und den meteorologischen Umweltzustand außerhalb von Gebäuden, an einem bestimmten, lokalen Ort meint. Abhängig vom Außenklima stellt sich innerhalb von Gebäuden ein Innenklima ein, welches direkten Einfluss auf das Wohlbefinden von Menschen hat und wodurch der mittelbare Einfluss des Außenklimas gegeben ist. Um den Zustand zu beschreiben werden viele Zustandsgrößen herangezogen. Um einen Überblick zu bekommen, lassen sich diese in verschiedene Bereiche gliedern \cite[S.~295f.]{ha13} :
+Schall
+Licht
+Temperatur
+und Feuchte
+ 
+Im Hinblick auf die Modellbildung in Kapitel \ref{chap:modellbildung} sind lediglich die Größen zur Beschreibung der Temperatur und des Lichts von Interesse, eine detaillierte Ausführung in die Bereiche Schall und Feuchte und deren Zustandsgrößen ist in \cite{ha13} gegeben.
+
+Je nach Größe des Gebietes wird von einem Regional- bwziehungsweise Makroklima, das große Gebiete umfasst, oder von einem Lokal- beziehungsweise Mikroklima gesprochen, dass kleine Gebiete wie eine Straße oder einen Park umfasst und von deren Besonderheiten abhängig ist. So kann z.B. die Außentemperatur je nach Verschattungsgrad einer Straße lokal erhöht oder erniedrigt sein.
+Das Klima folgt in verschiedenen Regionen der Erde bestimmten Charakteristiken, welche sich in Klimazonen zusammenfassen lassen. Die Erde besteht aus vierzehn verschiedenen Klimazonen und in Europa wird von einem Übergangsklima gesprochen \cite[S.~296f.]{ha13}. 
+
+Eine Übersicht der Außenklimakomponenten, die einen Einfluss auf die Gebäudetechnik und damit auch auf die Raumtemperatur haben ist in \ref{fig:aussenklima} gegeben. Für die Modellbildung ist weiterhin eine Quantifizierung der relevanten Größen des Außenklimas in den Bereichen Licht und Temperatur erforderlich. Wie bereits im vorherigen Abschnitt erwähnt, werden Wärmeströme durch Temperaturdifferenzen bedingt, weshalb die Außenlufttemperatur $Hier Symbol$ einen großen Einfluss auf die Raumtemperatur hat und durch Messung quantifiziert werden muss. Des Weiteren werden die lichttechnischen Größen der kurzwelligen direkten und diffusen Strahlung durch die beiden Strahlungsintensitäten $G_{dif}$ und $G_{dir}$ beschrieben, da sie Energie durch einen Wärmestrom in ein System einbringen und damit auch einen Einfluss ausüben.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160322_aussenklima}
+\caption[Komponenten des Außenklimas]{Komponenten des Außenklimas aus \cite[S.~298]{ha13}}
+\label{fig:aussenklima}
+\end{figure}
+
+\subsubsection{Die Außenlufttemperatur}
+Eine Übersicht über die Außenlufttemperatur  
+
+
+\subsubsection{Sonnenstrahlung}
 
 \cite{therakles13}
 \cite[S.~63ff.]{qu11}
