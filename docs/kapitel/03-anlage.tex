@@ -16,13 +16,13 @@
 
 Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung zu konzipieren, zu konkretisieren und im letzten Schritt umzusetzen. Dazu werden zunächst die Anforderungen an die Anlage analysiert und weiterhin die Vorgaben und Rahmenbedingungen zur Anlage von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. Abschließend wird die Installation und dabei aufgetretenen Besonderheiten der Anlage beschrieben.
 
-\section{Idee und Konzept der Anlage}
+\section{Anforderungen und Konzept Anlage}
 
 
 \subsection{Analyse der Anforderungen und Rahmenbedingungen}
 \label{sec:anforderungen}
 
-Um die Anforderungen an eine MPC-fähige Anlage zu bestimmen, wird zunächst der Zweck und die Einsatzziele der Anlage untersucht. In Kapitel \ref{sec:motivation} wurde bereits darauf hingewiesen, dass es die Vorgabe von Seiten der Hochschule war, die Einsatzziele in Einklang zu der bisherigen Forschung zu bringen und komplementär zu wählen. Daher wurden im Dialog mit den Projektverantwortlichen\footnote{In Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}} für die Forschung im Bereich solarer Anwendungen an der Hochschule Karlsruhe gemeinsam konkrete Einsatzziele der Anlage erarbeitet. Als Ergebnis wurden die folgenden, konkreten Ziele vereinbart:
+Um die Anforderungen an eine Anlage zu bestimmen, die sich sich für die Anwendung mit Modellprädiktiver Regelung eignet, wird zunächst der Zweck und die Einsatzziele der Anlage untersucht und definiert. In Kapitel \ref{sec:motivation} wurde bereits darauf hingewiesen, dass es die Vorgabe von Seiten der Hochschule ist, die Einsatzziele in Einklang mit der großen Anlgae zu bringen und komplementär zu wählen. Daher wurden im Dialog mit den Projektverantwortlichen\footnote{In Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}} für die Forschung im Bereich solarer Anwendungen an der Hochschule Karlsruhe gemeinsam konkrete Einsatzziele der Anlage erarbeitet. Als Ergebnis wurden die folgenden, konkreten Ziele vereinbart:
  
 \begin{itemize}
 	\item Die Einarbeitung in die Thematiken Modellbildung, Kommunikation von technischen Systemen und Modellprädiktive Regelung soll durch eine praktisches Anwendung unterstützt werden.
@@ -42,11 +42,11 @@ Weiterhin wurden von Seiten der Hochschule Karlsruhe\footnote{In Person von Frau
 \begin{itemize}
 	\item Der Raum K004a im K Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
 	\item Die Installation der Anlage muss mit minimalem baulichem und finanziellem Aufwand zu realisieren sein.
-	\item Für die Kommunikation innerhalb der Anlage soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen Übertragungsprotokollen genutzt werden.
+	\item Für die Kommunikation innerhalb der Anlage soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen übertragungsprotokollen genutzt werden.
 	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform JModelica.org erfolgen.
 \end{itemize}
 
-Diese Einsatzziele und Rahmenbedingungen definieren implizit Anforderungen an eine Anlage, welche im Nachfolgenden explizit ausgeführt werden und aus Gründen der Übersichtlichkeit die wichtigsten in Tabelle \ref{tab:anforderungen_umgebung} zusammengefasst sind.
+Diese Einsatzziele und Rahmenbedingungen definieren implizit Anforderungen an eine Anlage, welche im Nachfolgenden explizit ausgeführt werden und aus Gründen der übersichtlichkeit die wichtigsten in Tabelle \ref{tab:anforderungen_umgebung} zusammengefasst sind.
 
 
 \begin{table}[H]
@@ -91,7 +91,7 @@ Minimaler finanzieller \newline Aufwand &\\
 \item Die Modellbildung erfolgt in Modelica.
 \item Die Kompatibilität aller Softwareschnittstellen ist in Python durch verschiedene, bereits bestehende Pakete gegeben.
 \item Die Kommunikation der Anlage erfolgt gemäß den Modbus~RTU und TCP Protokollspezifikationen.
-\item Über Modbus~TCP erfolgt die Ansteuerung der Anlage innerhalb eines gesamten lokalen Netzwerks.
+\item über Modbus~TCP erfolgt die Ansteuerung der Anlage innerhalb eines gesamten lokalen Netzwerks.
 \end{itemize}
 \end{minipage}
 }  \\
@@ -117,7 +117,7 @@ Einarbeitung in die Thematiken:
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
 	\item Komplexität ist notwendig, darf jedoch nicht zu hoch sein.
-	\item Es sind möglichst wenige thematische Überschneidungen erwünscht, daher wird eine klare Struktur mit möglichst scharfer Trennung benötigt.
+	\item Es sind möglichst wenige thematische überschneidungen erwünscht, daher wird eine klare Struktur mit möglichst scharfer Trennung benötigt.
 \end{itemize}
 \end{minipage}
 }  \\
@@ -164,8 +164,7 @@ Erweiterbarkeit der Anlage
 \label{tab:anforderungen_umgebung}
 \end{table}
 
-Die grundlegendste Anforderung an die Planung ist die Anpassung an die räumliche Lage und den Gegebenheiten des Raumes K004a, welche in \ref{fig:skizzek004a} skizziert sind. 
-Der Raum befindet auf dem Campus der Hochschule Karlsruhe an der südwestlichen Ecke des K Gebäudes im Erdgeschoss. Die südliche und westliche Außenwand teilt sich der Raum mit der Außenumgebung. Die östliche und nördliche Innenwand sowie die Decke und der Boden des Raumes teilt der Raum hingegen mit angrenzenden Räumen im K Gebäude. Des Weiteren ist in der südlichen Außenwand eine Fensterfront mit Jalousien zur Verschattung eingebaut und direkt darunter ist ein Heizkörper installiert.
+Die grundlegendste Anforderung an die Planung, ist die Anpassung an die Lage und die Gegebenheiten des Raumes K004a, welche in \ref{fig:skizzek004a} skizziert sind. Der Raum befindet auf dem Campus der Hochschule Karlsruhe, an der südwestlichen Ecke des K Gebäudes im Erdgeschoss. Die südliche und westliche Wand teilt sich der Raum mit der Außenumgebung und wird im Folgenden als Außenwand bezeichnet. Die östliche und nördliche Wand sowie die Decke und der Boden des Raumes grenzen an andere Räume im K Gebäude. Außerdem ist in der südlichen Außenwand eine Fensterfront mit Jalousien zur Verschattung eingebaut und direkt darunter ein Heizkörper installiert.
 
 \begin{figure}
 \centering
@@ -174,16 +173,17 @@ Der Raum befindet auf dem Campus der Hochschule Karlsruhe an der südwestlichen 
 \label{fig:skizzek004a}
 \end{figure}
 
-Dadurch werden bereits zwei wichtige Anforderungen erfüllt, denn durch die Fensterfront an der Südseite des Raumes kann der Einfluss der Sonneneinstrahlung auf die Raumtemperatur untersucht werden und der vorhandene Heizkörper kann in die Anlage integriert werden, um einen minimalen baulichen und finanziellen Aufwand sicherzustellen.
-Damit wird auch eine Klimatisierung des Raumes zur Temperaturregelung zunächst ausgeschlossen, weil diese mit einem erheblichen finanziellen und baulichen Aufwand verbunden ist. Da es jedoch eine weitere Anforderung ist, Erweiterungen der Anlage explizit zu berücksichtigen und ermöglichen, wird bei der Planung darauf geachtet, dass eine Klimatisierung und Ansteuerung der Jalousie für weitere Schritte möglich sein soll
+Durch die Raumwahl werden bereits zwei wichtige Anforderungen erfüllt, denn durch die Fensterfront kann der Einfluss der Sonneneinstrahlung auf die Raumtemperatur untersucht werden und der bestehende Heizkörper kann in die Anlage integriert werden, um einen minimalen baulichen Aufwand sicherzustellen. Damit wird zunächst eine Klimatisierung zur Temperaturregelung des Raumes ausgeschlossen, weil diese mit einem erheblichen finanziellen und baulichen Aufwand verbunden ist. Um der Forderung nach einer Erweiterbarkeit nachzukommen, wird jedoch die Möglichkeit der Nachrüstung einer Klimatisierung und der Ansteuerung der Jalousien bei der Planung explizit berücksichtigt.
 
-Weiterhin dient der Raum als Büro für wissenschaftliche Mitarbeiter, weshalb sich neben sechs Computerarbeitsplätzen auch Büromobiliar, bestehend aus Schränken und Schreibtischen, darin befindet.
+Durch die Nutzung des Raumes als Büro für wissenschaftliche Mitarbeiter befinden sich in K004a sechs Computerarbeitsplätze sowie das typische Büro-Mobiliar, wie in \ref{fig:skizzek004a} abgebildet. Damit wird auch die Anforderung einer anwendungsnahen Umgebung erfüllt und durch die Menschen und Rechner sind verschiedene Störgrößen zu berücksichtigen.
 
-Damit wird auch der Forderung nach einer anwendungsnahen Umgebung sorge getragen, denn durch die Rechner und Mitarbeiter sind nicht vorhersehbar/ bedingt steuerbare parameter größen innerhalb der Anlage.
+Eine weitere, sehr einschränkende Vorgabe ist es, dass die Modellprädiktive Regelung unter Zuhilfenahme der Plattform \textsc{JModelica.org} erfolgen soll. \textsc{JModelica.org} ist eine kostenlose Open-Source Plattform	 zur Analyse, Simulation und Optimierung von komplexen, dynamischen Systemen, die auf der Modellierungssprache Modelica basiert. Aufbauend auf den mathematischen Modellen physikalischer Systeme in Modelica, lassen sich, dank der Unterstützung der Spracherweiterung Optimica, Optimierungsprobleme durch einfache Konstrukte das Optimierungsintervall, die Kostenfunktion und die Nebenbedingungen einfach formulieren. JModelica.org wird über eine Python Nutzerschnittstelle genutzt und besitzt eine eigene Klasse für die Modellprädiktive Regelung, auch wenn diese bisher noch experimenteller Art ist \cite[S.~1f.]{jmod15}.
+Der Compiler kann die Modelle und Optimierungsprobleme in verschiedene Formate übersetzen. Zum einen in direkt ausführbaren C Code, der die Modellgleichungen und Optimierungsparameter enthält, und ein XML Code, der die Meta-Daten des Modells enthält. Zum anderen kann das Modell aber auch in ein \textit{OptimizationProblem} Objekt transferiert werden, welches eine symbolische Repräsentation des Optimierungsproblems ist \cite[S.~12ff.]{jmod15}.
 
-Eine weitere restriktive Vorgabe ist, dass die Modellprädiktive Regelung mit Hilfe der Plattform JModelica.org und erfolgen soll. JModelica.rog ist eine Umgebung zur Simulation und Optimierung von dynamischen Systemen \cite[S.~1f.]{jmod15} und besitzt eine eigene Klasse für Modellprädiktive Regelung. Der Compiler übersetzt Modelica Modelle direkt in OptimizationProblem Objekte, welche eine symbolische Repräsentation des Optimierungsproblems dass mit CasADi \cite{An13} zur Optimierung benutzt werden kann \cite[S.~12]{jmod15}. Besitzt eine Python Schnittstelle
+Die \textit{OptimizationProblem} Objekte können direkt mit den Optimierungswerkzeugen von \textsc{CasADi} bearbeitet werden und damit zur Lösung des Optimierungsprobleme eingesetzt werden. \textsc{CasADi} ist ein Open-Source Softwaretool, das einzelne Bausteine für die numerische Optimierung im Allgemeinen und für die Optimalsteuerung im Speziellen zur Verfügung stellt. Es eignet sich besonders für die gradientenbasierte, numerische Optimierung von nichtlinearen Gleichungssystemen, aufgrund seiner effizienten Ableitungserzeugung durch die Algorithmische Differentiation und und der Möglichkeit der Integration differential-algebraischer Gleichungen. Die Interaktion mit dem Nutzer soll aus Stabilitätsgründen über die Python Schnittstelle erfolgen \cite[S.~5f.]{casadi}.
+
 Daher die Anforderung an die Modellbildung, da das Modell ebenfalls ein Teil der Anlage für MPC ist, in Kapitel \ref{chap:modellbildung}, dass die Modellbildung in Modelica stattfindet.
-CasADi wiederum ist eine Open-Source Software für numerische Optimierung allgemein und für die Optimalsteuerung von nichtlinearen Gleichungssystemen. CasADi eignet sich aufgrund seiner effizienten Ableitungserzeugung durch Algorithmische Differentation besonders für Optimierungszwecke \cite[S.~5f.]{casadi}. und besitzte eine Python Schnittstelle
+
 
 Die Optimalsteuerung stellt in diesem Fall den begrenzenden Faktor dar, da die Optimierungsumgebund CasADi für dynamische Systeme nur unter JModelica.org läuft. Daher wird darauf aufbauend das benötigte Modell für die MPC in Modelica gebildet unter Berücksichtigung der Restriktionen bezüglich JModelica. Die gemeinsame Schnittstelle beider ist Python, übder die damit auch die Kommunikation mit den Hardwarekomponenten der Heizungstseurung erfolgen muss/soll.
 
@@ -201,10 +201,6 @@ Da alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnit
 \subsection{Idee}
 
 Eine erste, grobe Idee, welche in den folgenden Abschnitten sukzessive an die an die obigen Anforderungen angepasst wird, ist also eine Anlage zur Regelung der Temperatur im Raum, die so minimal wie möglich aufgebaut ist. Konkret gilt es zunächst die Raumtemperatur über Sensoren zu erfassen und diese weiterhin mit Hilfe des Heizkörpers zu steuern. Ein minimaler Aufbau lässt sich in drei Gruppen/Klassen von Anlagenteilen gliedern: Die Sensorik zur Ermittlung des Zustandes im Raum und der Steuergrößen, der Aktorik zur aktiven Beeinflussung des Raumzustandes und einen zentralen logischen Controller, der das Zusammenspiel der einzelnen Anlagenteile und Komponenten koordiniert und die Modellprädiktive Regelung steuert.
-
-\subsection{Idee weiter konkretisisert}
-
-
 Nachdem die Anforderungen konkretisiert und erläutert wurden und die Idee der Anlage klar ist, wird diese nun weiter konkretisiert, entsprechend der drei zuvor gebildeten Gruppen.
 
 Der logische Controller ist die zentrale Komponente der Anlage, da dieser die gesamten Steuerungs- und Kommunikationsaufgaben übernimmt. Dazu nutzt er die Sensorik und Aktorik um sein Ziel der Temperaturregelung zu erreichen und wird genutzt um  Optimalsteuerungspläne berechnet werden müssen wird dazu eine ausreichende Rechenkapazität benötigt. Um diesen Aufgabenumfang abarbeiten zu können und um dem minimalen finanziellen Aufwand genüge zu tragen, wird hierzu zunächst ein freier Rechner der Hochschule Karlsruhe genutzt.
@@ -216,13 +212,15 @@ Durch das ansteuern des Heizkörpers kann die eingebrachte Wärmemenge in den Ra
 
 Dieses Set-Up/Einrichtung ist in \ref{fig:konzept} graphisch dargestellt.
 
-Dieses Konzept bietet langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das Öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
+Dieses Konzept bietet langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
 
 Damit steht das Konzept der Anlage und im nächsten Abschnitt kann eine detaillierte Planung der Bauteile, Verdrahtung und Komponenten und Protokolle erfolgen.
 
-\subsection{Konkretisierte Planung der Anlage/Konkretisierung des Plans}
+\section{Planung und Umsetzung der Anlage}
 
-Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommunikationsleitungen und das Netzwerk geplant. Die Kommunikation soll gemäß den Spezifikationen über die Modbus Protokolle RTU und TCP geschehen. Da der Rechner einen Netzwerkanschluss für ein Ethernet besitzt, soll darauf basierend das Netzwerk aufgebaut werden. Für den zusätzlichen Einsatz des Modbus RTU Protokolls wird ein weiteres serielles Netzwerk aufgebaut, dass mit Hilfe eines Gateways an das modbus Ethernet angeschlossen wird. Dieses übernimmt die Aufgabe der Übersetzung der Kommunikation zwischen dem Ethernet und dem seriellen Teil des Netzwerks übersetzt.
+\subsection{Planung der Anlage}
+
+Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommunikationsleitungen und das Netzwerk geplant. Die Kommunikation soll gemäß den Spezifikationen über die Modbus Protokolle RTU und TCP geschehen. Da der Rechner einen Netzwerkanschluss für ein Ethernet besitzt, soll darauf basierend das Netzwerk aufgebaut werden. Für den zusätzlichen Einsatz des Modbus RTU Protokolls wird ein weiteres serielles Netzwerk aufgebaut, dass mit Hilfe eines Gateways an das modbus Ethernet angeschlossen wird. Dieses übernimmt die Aufgabe der übersetzung der Kommunikation zwischen dem Ethernet und dem seriellen Teil des Netzwerks übersetzt.
 
 Die Temperatursensoren sollen als Raumtemperaturfühler ausgeführt werden und an zwei Stellen des Raumes die Temperatur messen. Des Weiteren sollen sie möglichst günstig sein und eines der beiden eingesetzten Modbus Protokolle unterstützen. Die Positionierung ist in Abbildung REFXXXX graphisch dargestellt und erfolgt auf einer raummittig gedachten Achse in nord-südlicher Richtung, jeweils am Ende der Schreibtische. Einer in Richtung der Fenster, der andere gegenüber am Ende der Schreibtische.
 
@@ -230,22 +228,34 @@ Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich ein Wärme
 
 Um den Massenfluss im Heizkörper über das Ventil ansteuern zu können wird ein Stellantrieb benötigt. Dieser kann durch einen Elektromotor oder durch ein thermisches Element angetrieben werden. Die Ansteuerung des Stellantriebs erfolgt üblicherweise durch ein digitales oder analoges Signal, wodurch sich eine weitere Schnittstelle ergibt und ein Modbus-Signalwandler eingesetzt werden kann.
 
-Damit sind die Komponenten spezifiziert und es werden in den folgenden Abschnitten die einzelnen zum Einsatz kommenden Bauteile erläutert bevor die gesamte Anlage und deren Funktion als Ganzes beschrieben werden.
+Auf Basis dieser Spezifikationen werden die folgenden zum Einsatz kommenden Bauteile eingesetzt
 %&Here we go
 
-\section{Bauteile}
-In diesem Abschnitt werden die eingesetzten Bauteile und deren Funktionsweisen vorgestellt, bevor die Anlage als ganzes im Einsatz geschildert wird.
-
-
 \subsection{Temperatursensoren}
-Eine kostengünstige Möglichkeit, die Raumtemperatur zu erfassen und über eine serielle Modbus RTU Schnittstelle abzufragen bietet der eingesetzte Raumtemperaturmessumformer THERMASGARD RTM1-Modbus von S+S Regeltechnik. Zwei Stück davon kommen i n der Ausführung ohne LCD Anzeige zum Einsatz. 
-Des Weiteren wurden bei der Installation der Anlage noch zusätzliche Temperatursensoren von Seiten der Hochschule Karlsruhe zur Verfügung gestellt. Diese haben keine Modbusanschluss, können aber über ein Ethernet Lokales Netzwerk über das http Protokoll vom Controller ausgelesen werden. Daher wurden diese in die Anlage integriert und die Anordnung der Anlage verändert wie in REFXXXXXX dargestellt. Die Sensoren werden entlang der westlichen Außenwand und der östlichen Innenwand gleichmäßig verteilt und auf einer Höhe von 2m installiert, um ein gutes Bild der Raumtemp verteilung zu erhalten. Die sechs Sensoren wurden zur Identifizierung gemäch REF XXXXXXXXX bezeichnet
+Eine kostengünstige und  dingens Möglichkeit, die Raumtemperatur zu erfassen und über eine serielle Modbus RTU Schnittstelle abzufragen bietet der eingesetzte Raumtemperaturmessumformer THERMASGARD RTM1-Modbus von S+S Regeltechnik. Zwei Stück davon kommen in der Ausführung ohne LCD Anzeige zum Einsatz. 
+Bei der Installation der Anlage konnten von Seiten der HSKA noch zusätzliche Temperatursensoren zur Verfügung gestellt werden. Diese haben keine Modbusanschluss, können aber über ein Ethernet Lokales Netzwerk über das http Protokoll vom Controller ausgelesen werden. Daher wurden diese in die Anlage integriert und die Anordnung der Anlage verändert wie in REFXXXXXX dargestellt. Die Sensoren werden entlang der westlichen Außenwand und der östlichen Innenwand gleichmäßig verteilt und auf einer Höhe von 2m installiert, um ein gutes Bild der Raumtemp verteilung zu erhalten. Die sechs Sensoren wurden zur Identifizierung gemäß REF XXXXXXXXX bezeichnet
 
 \subsection{Wärmemengenzähler}
 
+Ein mutlifunktionelles und kostengünstiger Wärmemengenzähler ist das MULTICAL 602 Rechenwerk zur Wärmemessung zusammen mit einem impulsgebenden Durchflusssensor sowie einem Temperatursensorpaar. 
+Dank seiner hohen Messgenauigkeit registriert der Zähler den genauen Verbrauch über die ganze Lebensdauer des Zählers. Der Zähler ist wartungsfrei, hat eine lange Lebensdauer, und garantiert so- mit minimale jährliche Betriebskosten.
+zusammen mit dem Durchflusssensor ULTRAFLOW 54 verwendet. Die Durchflussgrößen decken den Bereich von qp 0,6 m3/h bis qp 1.000 m3/h.
+MULTICAL® 602 auszeichnet sich durch die komplette Auswahl von Kommunikationsmodulen und die eingebaute RTC (Echtzeituhr), die es leicht machen, den Zähler in allen Applikationen anzupassen, unabhängig von der Auslesemethode.Für drahtgebundene Kommunikation kann der Zähler mit Modbus, Datenmodul ausgestattet werden.
+Schließlich garantiert MULTICAL® 602 mit ULTRAFLOW® und den genau gepaarten Temperaturfühlern präzise Messergebnisse eben bei minimalen Temperaturunterschieden. Die Langzeitstabilität und Genauigkeit des Durchflusssensors wird nicht von Durchflussgeschwindigkeit, Durchflussstörungen und Verschleiß beeinflusst, was für einer optimalen Betrieb sorgt.
+
 \subsection{Signalwandler und Stellantrieb}
+
+Das EX9024 Analog Out 14bit Modul lässt sich leicht in ein RS485-Netzwerk einbinden. Das Analog Out RS485 Modul hat vier analoge Ausgänge die Spannungen in den Bereichen ±5VDC, ±10VDC, 0~5VAC und 0~10VAC ausgeben können. Das RS485 Analog Out Modul ist für den erweiterten Temperaturbereich ausgelegt.
+
+Thermischer stellantrieb ABNM-LIN, 0-10 Vdc, proportional
+Der antrieb ABNM ist ein thermoelektrischer Stellantrieb zum Öffnen und Schließen vonn Ventilen im Bereich Heizungs-, Lüftungs- und Klimatechnik.
+Die Regelung erfolgt über ein 0-10 Vdc Signal, das entweder von einem Raumthermostat oder in den meisten Fällen von der zentralen Leittechnik (DDC) bereitgestellt wird. Der Stellantrieb wandelt das 0-10 Vdc Signal in einen proportionalen Stellweg um, der linear oder logarithmisch sein kann.
+
+
 
 \subsection{Gateway}
 Das Gateway bietet eine einfache und kostengünstige Möglichkeit, um ein serielles Netzwerk in ein Lokales Netzwerk zu integrieren. Dadurch ist es möglich Modbus RTU Geräte von einem Modbus TCP/IP Clienten zu steuern. Zum Einsatz in der Anlage kommt das EX9132C-2-MTCP Gateway von ExpertDAQ, welches übe über zwei serielle Ports verfügt, ein EIA-232 und ein EIA 232/422/485 Port. Die genauen Spezifikationen können dem Datenblatt im Anhang REFXXXXXXXX entnommen werden. Damit kann 
 
-\subsection{Die Gesamtanlage mit Schaltplan und allem}
+\section{Umsetzung und Installation}
+
+
