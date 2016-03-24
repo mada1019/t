@@ -217,12 +217,12 @@ Nachdem die Raumtemperatur bekannt ist und eine Möglichkeit für deren Manipula
 Diese umfassende Aufgabe wird von einer Anlage übernommen, die sich dazu grob in drei Teile gliedern lässt. Den größten Umfang besitzt die Sensorik, die zur quantitativen Erfassung der Zuständsgrößen dient. Die aktive Beeinflussung dieser Größen erfolgt durch die Aktorik. Die Regelungsaufgabe wird von einem Controller durch seine interne Logik und der Koordination des Zusammenspiels zwischen Sensorik und Aktorik gelöst.
 
 Um den Anforderungen gerecht zu werden, muss der logische Controller als zentrale Komponente der Anlage Python unterstützen und die gesamten Steuerungs- und Kommunikationsaufgaben übernehmen. Weiterhin müssen im Rahmen der Modellprädiktiven Regelung in regelmäßigen Zeitabständen wiederholt Optimalsteuerungsprobleme gelöst werden, weshalb eine ausreichende große Rechenkapazität benötigt wird. Um diesen Aufgaben übernehmen zu können und um keinen zusätzlichen finanziellen Aufwand zu generieren, wird zunächst ein freier Rechner der Hochschule Karlsruhe als Controller genutzt.  
-%Merker
+
 Wie bereits beschrieben hat die Sensorik den größten Umfang, da sie neben der Raumtemperatur auch den Massenstrom und die Temperaturen am Heizkörper erfasst. Die Temperatur innerhalb des Raumes wird durch mehrere Sensoren erfasst, um die unterstellte Homogenität zu überprüfen und für die Modellberechnungen herzustellen. Für die Erfassung der Heizleistung wird ein Wärmemengenzähler eingesetzt, der wiederum aus einem Rechenwerk, zwei weiteren Temperatursensoren und einem Durchflusssensor aufgebaut ist. Für die Modellprädiktive Regelung werden die einzelnen Werte aller Sensoren benötigt, weshalb das Rechenwerk einen Zugriff darauf ermöglichen muss.
 
 Die Aktorik umfasst lediglich die Ansteuerung des Heizungsventils. Wie zuvor bereits erwähnt wird dazu ein Stellantrieb genutzt, um das Ventil stufenlos zu Öffnen und zu Schließen und damit den Massenstrom bis hin zu einem Maximalwert zu steuern. 
 
-Eine Prinzipskizze dieser Idee in \ref{fig:konzept} graphisch dargestellt.
+Eine Prinzipskizze dieser Idee ist in \ref{fig:konzept} graphisch dargestellt.
 
 \begin{figure}
 \centering
@@ -231,30 +231,50 @@ Eine Prinzipskizze dieser Idee in \ref{fig:konzept} graphisch dargestellt.
 \label{fig:konzept}
 \end{figure}
 
+\section{Konzept und Planung}
+ 
+Das folgende Konzept erfüllt die in Abschnitt  \ref{sec:anforderungen} definierten Anforderungen und konkretisiert die zuvor geschilderte Idee. Zunächst das Netzwerk, dann xxx bis xxx
 
-Dieses Konzept bietet langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
+\subsection{Netzwerkarchitektur}
 
-Damit ist die Idee der Anlage umrissen und im nächsten Abschnitt wird ein Konzept vorgestellt, dass diese Idee implementiert.
+Der Rechner stellt das Zentrum der Anlage dar, deshalb werden darauf aufbauend die Kommunikationsleitungen und der Aufbau des Netzwerk geplant. Die Kommunikation erfolgt gemäß den Spezifikationen der beiden Modbus Protokolle RTU und TCP, deren Besonderheiten im Abschnitt \ref{sub:modbus} beschrieben wurden. Da der Rechner standardmäßig mit einem Ethernet-Netzwerkanschluss ausgestattet ist, wird der Rechner über ein Netzwerkkabel mit dem ersten Subnetzwerk verbunden. Das erste Netzwerk ist also ein lokales Netzwerk, das gemäß dem Ethernet/IP Protokoll ausgeführt ist und damit die Kommunikation über das Modbus TCP Protokoll ermöglicht.
 
-\section{Konzept}
+Das zweite Subnetz ist ein serielles RS 485 Netzwerk und erlaubt den Einsatz des Modbus RTU Protokolls. Die beiden Netzwerke werden durch ein Gateway miteinander verbunden, welches die Übersetzung Kommunikation in beiderlei Richtungen übernimmt. Die Übersetzung beinhaltet im Detail das Umwandeln der elektrischen Signale und der verschiedenen Modbus Telegramme ineinander.
 
-Eine Anlage die diese Idee in die Praxis umsetzt und den Anforderungen in Abschnitt \ref{sec:anforderungen} genügt, ist in Abbildung REFXXXXXX dargestellt.
+Im dritten Subnetz wird über analoge Spannungssignale zwischen 0 und 10~V kommuniziert, welche von einem Signalwandler erzeugt werden. Der Signalwandler wiederum ist kein Gateway, da die Spannungssignale nicht implizit übersetzt, sondern explizit durch Modbus RTU Befehlstelegramme festgelegt werden. Eine graphische Zusammenfassung der Netzwerkarchitektur ist in \ref{fig:netzwerk} abgebildet.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160324_netzwerk}
+\caption{Aufbau des Netzwerks}
+\label{fig:netzwerk}
+\end{figure}
+
+\subsection{Erfassung der Raumtemperatur}
+
+Die Raumtemperatur kann einfach und günstig durch Raumtemperaturfühler gemessen werden. Weiterhin soll der gemessene Wert über eine der beiden Modbus Schnittstellen dem Controller zur Verfügung gestellt werden. Innerhalb der Anlage kommen zwei \textsc{THERMASGARD RTM1-Modbus} Raumtemperaturfühler von \textsc{S+S Regeltechnik} zum Einsatz, weil sich dieser durch weitere Eigenschaften auszeichnet. Diese und weitere Eigenschsafte lassen sich dem Datenblatt im Anhang \ref{att:rtm1} entnehmen.
+%Evtl Bild oder Übersicht
+
+%Here We GO!!!!!
 
 
-Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommunikationsleitungen und das Netzwerk geplant. Die Kommunikation soll gemäß den Spezifikationen über die Modbus Protokolle RTU und TCP geschehen. Da der Rechner einen Netzwerkanschluss für ein Ethernet besitzt, soll darauf basierend das Netzwerk aufgebaut werden. Für den zusätzlichen Einsatz des Modbus RTU Protokolls wird ein weiteres serielles Netzwerk aufgebaut, dass mit Hilfe eines Gateways an das modbus Ethernet angeschlossen wird. Dieses übernimmt die Aufgabe der übersetzung der Kommunikation zwischen dem Ethernet und dem seriellen Teil des Netzwerks übersetzt.
+Die Positionierung ist in Abbildung REFXXXX graphisch dargestellt und erfolgt auf einer raummittig gedachten Achse in nord-südlicher Richtung, jeweils am Ende der Schreibtische. Einer in Richtung der Fenster, der andere gegenüber am Ende der Schreibtische.
 
-Die Temperatursensoren sollen als Raumtemperaturfühler ausgeführt werden und an zwei Stellen des Raumes die Temperatur messen. Des Weiteren sollen sie möglichst günstig sein und eines der beiden eingesetzten Modbus Protokolle unterstützen. Die Positionierung ist in Abbildung REFXXXX graphisch dargestellt und erfolgt auf einer raummittig gedachten Achse in nord-südlicher Richtung, jeweils am Ende der Schreibtische. Einer in Richtung der Fenster, der andere gegenüber am Ende der Schreibtische.
-
+ 
+Bei der Installation der Anlage konnten von Seiten der HSKA noch zusätzliche Temperatursensoren zur Verfügung gestellt werden. Diese haben keine Modbusanschluss, können aber über ein Ethernet Lokales Netzwerk über das http Protokoll vom Controller ausgelesen werden. Daher wurden diese in die Anlage integriert und die Anordnung der Anlage verändert wie in REFXXXXXX dargestellt. Die Sensoren werden entlang der westlichen Außenwand und der östlichen Innenwand gleichmäßig verteilt und auf einer Höhe von 2m installiert, um ein gutes Bild der Raumtemp verteilung zu erhalten. Die sechs Sensoren wurden zur Identifizierung gemäß REF XXXXXXXXX bezeichnet
 Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich ein Wärmemengenzähler an. Dieser integriert die benötigten Sensoren und hat zusätzlich ein Rechenwerk, dass mit einem mit Modbus-Kommunikationsmodul ausgestattet werden kann zum Auslesen der einzelnen Messwerte.
 
 Um den Massenfluss im Heizkörper über das Ventil ansteuern zu können wird ein Stellantrieb benötigt. Dieser kann durch einen Elektromotor oder durch ein thermisches Element angetrieben werden. Die Ansteuerung des Stellantriebs erfolgt üblicherweise durch ein digitales oder analoges Signal, wodurch sich eine weitere Schnittstelle ergibt und ein Modbus-Signalwandler eingesetzt werden kann.
 
 Auf Basis dieser Spezifikationen werden die folgenden zum Einsatz kommenden Bauteile eingesetzt
+
+
+Dieses Konzept bietet langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
+
+Damit ist die Idee der Anlage umrissen und im nächsten Abschnitt wird ein Konzept vorgestellt, dass diese Idee implementiert.
 %&Here we go
 
-\subsection{Temperatursensoren}
-Eine kostengünstige und  dingens Möglichkeit, die Raumtemperatur zu erfassen und über eine serielle Modbus RTU Schnittstelle abzufragen bietet der eingesetzte Raumtemperaturmessumformer THERMASGARD RTM1-Modbus von S+S Regeltechnik. Zwei Stück davon kommen in der Ausführung ohne LCD Anzeige zum Einsatz. 
-Bei der Installation der Anlage konnten von Seiten der HSKA noch zusätzliche Temperatursensoren zur Verfügung gestellt werden. Diese haben keine Modbusanschluss, können aber über ein Ethernet Lokales Netzwerk über das http Protokoll vom Controller ausgelesen werden. Daher wurden diese in die Anlage integriert und die Anordnung der Anlage verändert wie in REFXXXXXX dargestellt. Die Sensoren werden entlang der westlichen Außenwand und der östlichen Innenwand gleichmäßig verteilt und auf einer Höhe von 2m installiert, um ein gutes Bild der Raumtemp verteilung zu erhalten. Die sechs Sensoren wurden zur Identifizierung gemäß REF XXXXXXXXX bezeichnet
+
 
 \subsection{Wärmemengenzähler}
 
