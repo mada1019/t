@@ -89,7 +89,7 @@ Minimaler finanzieller \newline Aufwand &\\
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
 \item Die Modellbildung erfolgt in Modelica.
-\item Die Ansteuerung und Kommunikation innerhalb der Anlage soll in Python stattfinden	.
+\item Die Ansteuerung und Kommunikation innerhalb der Anlage soll in Python stattfinden.
 \item Die Kommunikation der Anlage erfolgt gemäß den Modbus~RTU und TCP Protokollspezifikationen.
 \item Über Modbus~TCP soll die Ansteuerung der Anlage innerhalb des gesamten lokalen Netzwerks möglich sein.
 \end{itemize}
@@ -141,7 +141,7 @@ Vergleich von Ergebnissen durch:
 & \multirow{3}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
-\item Die Reaktion des Systems muss schnell messbar sowie günstig und einfach zu erfassen sein.
+\item Die Reaktion des Systems muss schnell sowie günstig und einfach zu erfassen sein.
 \item Der Einsatz von robusten und einfachen Bauteile.
 \item Nutzung eines wartungsarmen Systems.
 \item Eine einfache, modulare Erweiterbarkeit des Systems für weitere Schritte muss gegeben sein.
@@ -189,20 +189,25 @@ Weil die vorgegebene Softwareplattform zur Modellprädiktiven Regelung und deren
 
 Der Vorgabe der Modbus Kommunikationsprotokolle für die Kommunikation ist von ebenfalls von großer Relevanz, da die komplementäre Forschungsanlage zur solaren Klimatisierung dasselbe Kommunikationsprotokoll unterstützt und durch die gewonnenen Erkenntnisse eine beschleunigte Inbetriebnahme erfolgen kann. Um das Know-how breit zu fächern, sollen die beiden Modbus RTU und Modbus TCP Protokolle Anwendung finden. Außerdem soll das Kommunikationsnetzwerk aus mehreren Subnetzwerken aufgebaut sein, die durch verschiedene elektrische und mechanische Schnittstellen implementiert werden. Für die Kommunikation über Modbus werden in den Python Paketen pymodbus, minimalmodbus und modbus-tk bereits Bausteine zur Verfügung gestellt.
 
-Die Anlage sollte möglichst wenig Komplexität aufweisen, damit die Einarbeitung in die einzelnen Themengebiete Modellbildung, Kommunikation von technischen Systemen und Modellprädiktive Regelung vereinfacht wird. Dies soll durch eine klare Abgrenzung der Funktionen von verschiedenen Anlagenteilen und durch die Strukturierung sowie den Aufbau der Anlage erreicht werden. %Merker
-Im Gegensatz dazu, steht die Forderung nach dem Aufbau von speziellem Know-how bei der Kommunikation technischer Systeme. Um Know-how zu generieren sollen verschiedene Hard- und Software-Schnittstellen kombiniert eingesetzt werden. Allerdings mit einer wachsenden Anzahl von Schnittstellen auch eine Erhöhung der Komplexität einhergeht.
-Deshalb muss nach einem Kompromiss zwischen Verständlichkeit und Komplexität gesucht werden, weshalb ein bestimmtes Maß an Komplexität erwünscht ist.
+Die Anlage sollte möglichst wenig Komplexität aufweisen, damit die Einarbeitung in die einzelnen Themengebiete Modellbildung, Kommunikation von technischen Systemen und Modellprädiktive Regelung vereinfacht wird. Dies soll durch eine klare Abgrenzung der verschiedenen Anlagenteile und deren Funktionen sowie durch die Strukturierung und den Aufbau der Anlage erreicht werden.Im Gegensatz dazu steht die Forderung nach dem Aufbau von Know-how auf dem Gebiet der Kommunikation technischer Systeme. Deshalb muss ein Kompromiss zwischen Verständlichkeit und Komplexität gefunden werden, um beiden Anforderungen gerecht zu werden. Dieser besteht darin, dass die Kommunikation nur über Modbus stattfindet, jedoch unter Nutzung von verschiedenen Hard- und Software-Schnittstellen, um einen gewissen Grad an Komplexität zu erreichen. Zudem können dadurch bereits Erfahrungen gesammelt werden, die für die Inbetriebnahme der solaren Klimatisierungsanlage sehr nützlich sind. 
 
+Um das Vergleichen von Ergebnissen zu ermöglichen, soll das System auf eine Änderung der Steuergrößen schnell\footnote{Im Kontrast zu den langsamen Reaktionen der solaren Klimatisierungsanlage, welche im oberen Minutenbereich liegen, bedeutet schnell in diesem Kontext im unteren Minutenbereich.} reagieren und die Reaktionen sollen möglichst einfach messbar sein. 
+Konkret lässt sich daraus ableiten, dass die Aktorik auf Steuersignale möglichst ohne zeitliche Verzögerung agieren sowie die gesamte Anlage einen möglichst direkten Einfluss auf die Raumtemperatur haben soll. 
+Die Messung der Raumtemperatur kann durch einfache Temperatursensoren erfolgen die ohne großen technischen und monetären Aufwand auskommen und damit die Anforderung erfüllen.
 
-Um das Vergleichen von Ergebnissen zu ermöglichen und weitestgehend zu vereinfachen, sollen die Reaktionen auf Veränderungen schnell stattfinden\footnote{Im Kontext von thermischen Systemen heißt schnell im Minutenbereich} und einfach zu messen sein. Das bedeutet konkret, dass die Anlage und Raumtemperatur zum einen \Gun schnell\Gob eine Reaktion auf Steuerungsimpulse zeigen soll, zum anderen soll die Reaktion einfach, dass heißt ohne großen technischen und monetären Aufwand und möglichst direkt, messbar sein. 
-Außerdem sollen eine hohe Funktionalität gegeben sein, dass heißt eine möglichst wartungsarm und Fehlerquellen auszuschließen und damit die wissenschaftliche Arbeit zu erleichtern. Entsprechend wird auch eine Robustheit gegenüber Fehlern gefordert, da bei Testeinsätzen von Steuerungs- und Regelungsalgorithmen sowie bei der Einarbeitung in die Anlage und Themengebete eine erhöhte Gefahr/Wahrscheinlichkeit in Bezug auf das Fehler passieren besteht und diese keinen Schaden an der Anlage verursachen sollen. Deshalb sollen die einzelnen Komponenten der Anlage möglichst einfach aufegbaut sein und ohne technischen Schnickschnack sein, was auch wiederum zur Forderung der minimalen finanziellen Belastung passt.
+Es soll außerdem eine hohe Funktionalität erreicht werden, um die wissenschaftliche Arbeit -- durch den Ausschluss von Fehlerquellen außerhalb der Forschung -- zu erleichtern. 
+Zusätzlich ist eine Robustheit gegenüber Bedienungsfehlern und Beschädigungen erforderlich, da durch den Test- und Entwicklungsauftrag der Anlage hierzu eine erhöhte Gefahr besteht. Dies lässt sich durch wartungsarme, robuste und einfache Bauteile sowie den Aufbau der Anlage berücksichtigen, was wiederum im Einklang mit der Forderung nach einer minimalen finanziellen Belastung steht.
 
-Da alle bereits genannten Hard- und Softwarekomponenten haben eine Python Schnittstelle besitzen beziehungsweise frei nutzbare Pakete in Python als Schnittstelle zur Verfügung stehen, soll auch die Ansteuerung der gesamten Anlage in Python stattfinden. Damit kann Python als gemeinsamer Nenner für Ansteuerung Anlage und Optimalsteuerung genutzt werden und es kann ein minimaler Rechner dazu genutzt werden, wie z.B. ein Raspberry Pie. Daher wird die gesamte folgende Planung darauf aufbauen, dass sie sich in/aus Python steuern lässt.
-
+Wie an passender Stelle bereits erwähnt, stellt Python Schnittstellen und Funktionalitäten für die Aufgaben der Anlage zur Verfügung. Darüberhinaus bietet sich Python, durch die weitgehende Unabhängigkeit vom Betriebssystem, als zentrales Steuerungstool an, um den Controller in einem nächsten Schritt durch einen vergleichsweise günstigen Einplatinenrechner zu realisieren, wie zum Beispiel ein Raspberry Pi. Daher basiert die folgende Planung und Auslegung der Anlage auf einer zentralen Steuerung in Python.
 
 \subsection{Idee}
 
-Eine erste, grobe Idee, welche in den folgenden Abschnitten sukzessive an die an die obigen Anforderungen angepasst wird, ist also eine Anlage zur Regelung der Temperatur im Raum, die so minimal wie möglich aufgebaut ist. Konkret gilt es zunächst die Raumtemperatur über Sensoren zu erfassen und diese weiterhin mit Hilfe des Heizkörpers zu steuern. Ein minimaler Aufbau lässt sich in drei Gruppen/Klassen von Anlagenteilen gliedern: Die Sensorik zur Ermittlung des Zustandes im Raum und der Steuergrößen, der Aktorik zur aktiven Beeinflussung des Raumzustandes und einen zentralen logischen Controller, der das Zusammenspiel der einzelnen Anlagenteile und Komponenten koordiniert und die Modellprädiktive Regelung steuert.
+Die Ziel ist es die Temperatur innerhalb eines Raumes mit Hilfe eines technischen Systems zu regeln, das den zuvor ausgeführten Anforderungen genügt. Dazu gilt es zunächst die Raumtemperatur über einfache Raumtemperaturfühler zu erfassen. Wenn die Raumtemperatur bekannt ist, soll diese mit Hilfe eines Heizkörpers beeinflusst werden, sodass diese einer vorgegebener Temperaturkurve folgt.
+%Merker
+
+Eine erste Idee die den Anforderungen in Abschnitt \ref{sec:anforderungen} genügt ist in Abbildung REFXXXXXX dargestellt.
+
+Eine erste, grobe Idee, welche in den folgenden Abschnitten sukzessive an die an die obigen Anforderungen angepasst wird, ist also eine Anlage zur Regelung der Temperatur im Raum, die so minimal wie möglich aufgebaut ist. K Ein minimaler Aufbau lässt sich in drei Gruppen/Klassen von Anlagenteilen gliedern: Die Sensorik zur Ermittlung des Zustandes im Raum und der Steuergrößen, der Aktorik zur aktiven Beeinflussung des Raumzustandes und einen zentralen logischen Controller, der das Zusammenspiel der einzelnen Anlagenteile und Komponenten koordiniert und die Modellprädiktive Regelung steuert.
 Nachdem die Anforderungen konkretisiert und erläutert wurden und die Idee der Anlage klar ist, wird diese nun weiter konkretisiert, entsprechend der drei zuvor gebildeten Gruppen.
 
 Der logische Controller ist die zentrale Komponente der Anlage, da dieser die gesamten Steuerungs- und Kommunikationsaufgaben übernimmt. Dazu nutzt er die Sensorik und Aktorik um sein Ziel der Temperaturregelung zu erreichen und wird genutzt um  Optimalsteuerungspläne berechnet werden müssen wird dazu eine ausreichende Rechenkapazität benötigt. Um diesen Aufgabenumfang abarbeiten zu können und um dem minimalen finanziellen Aufwand genüge zu tragen, wird hierzu zunächst ein freier Rechner der Hochschule Karlsruhe genutzt.
