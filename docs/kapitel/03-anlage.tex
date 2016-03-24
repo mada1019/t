@@ -16,12 +16,10 @@
 
 Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung zu konzipieren, zu konkretisieren und im letzten Schritt umzusetzen. Dazu werden zunächst die Anforderungen an die Anlage analysiert und weiterhin die Vorgaben und Rahmenbedingungen zur Anlage von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. Abschließend wird die Installation und dabei aufgetretenen Besonderheiten der Anlage beschrieben.
 
-\section{Anforderungen und Konzept Anlage}
-
-
-\subsection{Analyse der Anforderungen und Rahmenbedingungen}
+\section{Analyse der Anforderungen}
 \label{sec:anforderungen}
 
+\subsection{Einsatzziele und Rahmenbedingungen}
 Um die Anforderungen an eine Anlage zu bestimmen, die sich sich für die Anwendung mit Modellprädiktiver Regelung eignet, wird zunächst der Zweck und die Einsatzziele der Anlage untersucht und definiert. In Kapitel \ref{sec:motivation} wurde bereits darauf hingewiesen, dass es die Vorgabe von Seiten der Hochschule ist, die Einsatzziele in Einklang mit der großen Anlgae zu bringen und komplementär zu wählen. Daher wurden im Dialog mit den Projektverantwortlichen\footnote{In Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}} für die Forschung im Bereich solarer Anwendungen an der Hochschule Karlsruhe gemeinsam konkrete Einsatzziele der Anlage erarbeitet. Als Ergebnis wurden die folgenden, konkreten Ziele vereinbart:
  
 \begin{itemize}
@@ -45,6 +43,8 @@ Weiterhin wurden von Seiten der Hochschule Karlsruhe\footnote{In Person von Frau
 	\item Für die Kommunikation innerhalb der Anlage soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen übertragungsprotokollen genutzt werden.
 	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform JModelica.org erfolgen.
 \end{itemize}
+
+\subsection{Definition der Anforderungen}
 
 Diese Einsatzziele und Rahmenbedingungen definieren implizit Anforderungen an eine Anlage, welche im Nachfolgenden explizit ausgeführt werden und aus Gründen der übersichtlichkeit die wichtigsten in Tabelle \ref{tab:anforderungen_umgebung} zusammengefasst sind.
 
@@ -200,32 +200,46 @@ Zusätzlich ist eine Robustheit gegenüber Bedienungsfehlern und Beschädigungen
 
 Wie an passender Stelle bereits erwähnt, stellt Python Schnittstellen und Funktionalitäten für die Aufgaben der Anlage zur Verfügung. Darüberhinaus bietet sich Python, durch die weitgehende Unabhängigkeit vom Betriebssystem, als zentrales Steuerungstool an, um den Controller in einem nächsten Schritt durch einen vergleichsweise günstigen Einplatinenrechner zu realisieren, wie zum Beispiel ein Raspberry Pi. Daher basiert die folgende Planung und Auslegung der Anlage auf einer zentralen Steuerung in Python.
 
-\subsection{Idee}
+\section{Ziel und die Idee der Anlage}
 
-Die Ziel ist es die Temperatur innerhalb eines Raumes mit Hilfe eines technischen Systems zu regeln, das den zuvor ausgeführten Anforderungen genügt. Dazu gilt es zunächst die Raumtemperatur über einfache Raumtemperaturfühler zu erfassen. Wenn die Raumtemperatur bekannt ist, soll diese mit Hilfe eines Heizkörpers beeinflusst werden, sodass diese einer vorgegebener Temperaturkurve folgt.
+
+\subsection{Aufgabe der Anlage}
+Das Ziel ist es, die Temperatur innerhalb eines Raumes mit Hilfe eines technischen Systems zu regeln, welches den zuvor ausgeführten Anforderungen genügt.
+
+Dazu gilt es zunächst, die Raumtemperatur über einfache Raumtemperaturfühler zu erfassen. Ist die Raumtemperatur bekannt so soll diese mit Hilfe eines Heizkörpers beeinflusst werden, damit sie einer vorgegebener Temperaturkurve folgen kann. 
+
+Die Heizleistung wiederum hängt von weiteren Eigenschaften des Heizkörpers ab und wird über das Einlassventil gesteuert. Sie wird von einem Wärmemengenzähler gemessen und indirekt über den Massenstrom und die Temperaturen des Heizwassers am Ein- und Auslass bestimmt. Dazu werden ein Durchflusssensor sowie zwei Temperatursensoren an den jeweiligen Enden des Heizkörpers eingesetzt. Um die Heizleistung zu steuern, muss also der Massenstrom gemessen und gesteuert werden sowie beide Temperaturen am Heizkörper bekannt sein. Über das Ventil kann der Massenstrom mit Hilfe eines Stellantriebs eingestellt werden. Zusammen mit der Temperatur am Einlass und den Eigenschaften des Heizkörpers, lässt sich die Temperatur am Auslass und damit die aktuelle Heizleistung bestimmen. Dadurch wird eine gezielte Beeinflussung der Raumtemperatur ermöglicht.
+
+Nachdem die Raumtemperatur bekannt ist und eine Möglichkeit für deren Manipulation besteht, wird weiterhin eine intelligentee Steuerung benötigt. Dieser soll den Heizkörper möglichst ressourcenschonend einsetzen, um das Ziel der Temperaturregelung zu erreichen.
+
+\subsection{Idee der Anlage}
+
+Diese umfassende Aufgabe wird von einer Anlage übernommen, die sich dazu grob in drei Teile gliedern lässt. Den größten Umfang besitzt die Sensorik, die zur quantitativen Erfassung der Zuständsgrößen dient. Die aktive Beeinflussung dieser Größen erfolgt durch die Aktorik. Die Regelungsaufgabe wird von einem Controller durch seine interne Logik und der Koordination des Zusammenspiels zwischen Sensorik und Aktorik gelöst.
+
+Um den Anforderungen gerecht zu werden, muss der logische Controller als zentrale Komponente der Anlage Python unterstützen und die gesamten Steuerungs- und Kommunikationsaufgaben übernehmen. Weiterhin müssen im Rahmen der Modellprädiktiven Regelung in regelmäßigen Zeitabständen wiederholt Optimalsteuerungsprobleme gelöst werden, weshalb eine ausreichende große Rechenkapazität benötigt wird. Um diesen Aufgaben übernehmen zu können und um keinen zusätzlichen finanziellen Aufwand zu generieren, wird zunächst ein freier Rechner der Hochschule Karlsruhe als Controller genutzt.  
 %Merker
+Wie bereits beschrieben hat die Sensorik den größten Umfang, da sie neben der Raumtemperatur auch den Massenstrom und die Temperaturen am Heizkörper erfasst. Die Temperatur innerhalb des Raumes wird durch mehrere Sensoren erfasst, um die unterstellte Homogenität zu überprüfen und für die Modellberechnungen herzustellen. Für die Erfassung der Heizleistung wird ein Wärmemengenzähler eingesetzt, der wiederum aus einem Rechenwerk, zwei weiteren Temperatursensoren und einem Durchflusssensor aufgebaut ist. Für die Modellprädiktive Regelung werden die einzelnen Werte aller Sensoren benötigt, weshalb das Rechenwerk einen Zugriff darauf ermöglichen muss.
 
-Eine erste Idee die den Anforderungen in Abschnitt \ref{sec:anforderungen} genügt ist in Abbildung REFXXXXXX dargestellt.
+Die Aktorik umfasst lediglich die Ansteuerung des Heizungsventils. Wie zuvor bereits erwähnt wird dazu ein Stellantrieb genutzt, um das Ventil stufenlos zu Öffnen und zu Schließen und damit den Massenstrom bis hin zu einem Maximalwert zu steuern. 
 
-Eine erste, grobe Idee, welche in den folgenden Abschnitten sukzessive an die an die obigen Anforderungen angepasst wird, ist also eine Anlage zur Regelung der Temperatur im Raum, die so minimal wie möglich aufgebaut ist. K Ein minimaler Aufbau lässt sich in drei Gruppen/Klassen von Anlagenteilen gliedern: Die Sensorik zur Ermittlung des Zustandes im Raum und der Steuergrößen, der Aktorik zur aktiven Beeinflussung des Raumzustandes und einen zentralen logischen Controller, der das Zusammenspiel der einzelnen Anlagenteile und Komponenten koordiniert und die Modellprädiktive Regelung steuert.
-Nachdem die Anforderungen konkretisiert und erläutert wurden und die Idee der Anlage klar ist, wird diese nun weiter konkretisiert, entsprechend der drei zuvor gebildeten Gruppen.
+Eine Prinzipskizze dieser Idee in \ref{fig:konzept} graphisch dargestellt.
 
-Der logische Controller ist die zentrale Komponente der Anlage, da dieser die gesamten Steuerungs- und Kommunikationsaufgaben übernimmt. Dazu nutzt er die Sensorik und Aktorik um sein Ziel der Temperaturregelung zu erreichen und wird genutzt um  Optimalsteuerungspläne berechnet werden müssen wird dazu eine ausreichende Rechenkapazität benötigt. Um diesen Aufgabenumfang abarbeiten zu können und um dem minimalen finanziellen Aufwand genüge zu tragen, wird hierzu zunächst ein freier Rechner der Hochschule Karlsruhe genutzt.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160318_Konzept}
+\caption{Prinzipskizze eines technischen Systems zur Raumtemperaturregelung des Raumes K004b}
+\label{fig:konzept}
+\end{figure}
 
-Bei der Temperaturregelung interessiert lediglich die Raumtemperatur, welche als Zustand aufgefasst wird. Daher wird zunächst ein Sensor zur Bestimmung der Raumtemperatur benötigt. Da jedoch die Temperatur innerhalb des Raumes mit hoher Wahrscheinlichkeit nicht homogen ist, werden mehrere Sensoren zur Temperaturmessung benötigt, weshalb mindestens zwei Sensoren benötigt werden.
-
-Für die Erwärmung des Raumes muss gemäß den Anforderungen der Heizkörper innerhalb des Raumes genutzt werden. Um den Heizkörper ansteuern zu können, wird ein Aktor benötigt, der das Ventil am Heizkörper öffnen und schließen kann. 
-Durch das ansteuern des Heizkörpers kann die eingebrachte Wärmemenge in den Raum kontrolliert werden, jedoch ist die eingebrachte Wärmemenge des Heizkörpers in den Raum abhängig von verschiedenen Faktoren. Dazu gehören zum einen der Massendurchfluss sowie die Temperatur des Heizwassers am Ein- und Auslass des Heizkörpers, welche der Controller zur Modellprädiktiven Regelung benötigt. Um diese zu erfassen werden also zwei weitere Temperatursensoren und ein Durchflusssensor benötigt.
-
-Dieses Set-Up/Einrichtung ist in \ref{fig:konzept} graphisch dargestellt.
 
 Dieses Konzept bietet langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
 
-Damit steht das Konzept der Anlage und im nächsten Abschnitt kann eine detaillierte Planung der Bauteile, Verdrahtung und Komponenten und Protokolle erfolgen.
+Damit ist die Idee der Anlage umrissen und im nächsten Abschnitt wird ein Konzept vorgestellt, dass diese Idee implementiert.
 
-\section{Planung und Umsetzung der Anlage}
+\section{Konzept}
 
-\subsection{Planung der Anlage}
+Eine Anlage die diese Idee in die Praxis umsetzt und den Anforderungen in Abschnitt \ref{sec:anforderungen} genügt, ist in Abbildung REFXXXXXX dargestellt.
+
 
 Wie bereits erwähnt stellt der Rechner das Zentrum der Anlage dar. Deshalb wird darauf aufbauend zunächst die Kommunikationsleitungen und das Netzwerk geplant. Die Kommunikation soll gemäß den Spezifikationen über die Modbus Protokolle RTU und TCP geschehen. Da der Rechner einen Netzwerkanschluss für ein Ethernet besitzt, soll darauf basierend das Netzwerk aufgebaut werden. Für den zusätzlichen Einsatz des Modbus RTU Protokolls wird ein weiteres serielles Netzwerk aufgebaut, dass mit Hilfe eines Gateways an das modbus Ethernet angeschlossen wird. Dieses übernimmt die Aufgabe der übersetzung der Kommunikation zwischen dem Ethernet und dem seriellen Teil des Netzwerks übersetzt.
 
@@ -264,5 +278,7 @@ Die Regelung erfolgt über ein 0-10 Vdc Signal, das entweder von einem Raumtherm
 Das Gateway bietet eine einfache und kostengünstige Möglichkeit, um ein serielles Netzwerk in ein Lokales Netzwerk zu integrieren. Dadurch ist es möglich Modbus RTU Geräte von einem Modbus TCP/IP Clienten zu steuern. Zum Einsatz in der Anlage kommt das EX9132C-2-MTCP Gateway von ExpertDAQ, welches übe über zwei serielle Ports verfügt, ein EIA-232 und ein EIA 232/422/485 Port. Die genauen Spezifikationen können dem Datenblatt im Anhang REFXXXXXXXX entnommen werden. Damit kann 
 
 \section{Umsetzung und Installation}
+
+\section{Software}
 
 
