@@ -91,7 +91,7 @@ Minimaler finanzieller \newline Aufwand &\\
 \item Die Modellbildung erfolgt in Modelica.
 \item Die Ansteuerung und Kommunikation innerhalb der Anlage soll in Python stattfinden.
 \item Die Kommunikation der Anlage erfolgt gemäß den Modbus~RTU und TCP Protokollspezifikationen.
-\item Über Modbus~TCP soll die Ansteuerung der Anlage innerhalb des gesamten lokalen Netzwerks möglich sein.
+\item über Modbus~TCP soll die Ansteuerung der Anlage innerhalb des gesamten lokalen Netzwerks möglich sein.
 \end{itemize}
 \end{minipage}
 }  \\
@@ -191,7 +191,7 @@ Der Vorgabe der Modbus Kommunikationsprotokolle für die Kommunikation ist von e
 
 Die Anlage sollte möglichst wenig Komplexität aufweisen, damit die Einarbeitung in die einzelnen Themengebiete Modellbildung, Kommunikation von technischen Systemen und Modellprädiktive Regelung vereinfacht wird. Dies soll durch eine klare Abgrenzung der verschiedenen Anlagenteile und deren Funktionen sowie durch die Strukturierung und den Aufbau der Anlage erreicht werden.Im Gegensatz dazu steht die Forderung nach dem Aufbau von Know-how auf dem Gebiet der Kommunikation technischer Systeme. Deshalb muss ein Kompromiss zwischen Verständlichkeit und Komplexität gefunden werden, um beiden Anforderungen gerecht zu werden. Dieser besteht darin, dass die Kommunikation nur über Modbus stattfindet, jedoch unter Nutzung von verschiedenen Hard- und Software-Schnittstellen, um einen gewissen Grad an Komplexität zu erreichen. Zudem können dadurch bereits Erfahrungen gesammelt werden, die für die Inbetriebnahme der solaren Klimatisierungsanlage sehr nützlich sind. 
 
-Um das Vergleichen von Ergebnissen zu ermöglichen, soll das System auf eine Änderung der Steuergrößen schnell\footnote{Im Kontrast zu den langsamen Reaktionen der solaren Klimatisierungsanlage, welche im oberen Minutenbereich liegen, bedeutet schnell in diesem Kontext im unteren Minutenbereich.} reagieren und die Reaktionen sollen möglichst einfach messbar sein. 
+Um das Vergleichen von Ergebnissen zu ermöglichen, soll das System auf eine änderung der Steuergrößen schnell\footnote{Im Kontrast zu den langsamen Reaktionen der solaren Klimatisierungsanlage, welche im oberen Minutenbereich liegen, bedeutet schnell in diesem Kontext im unteren Minutenbereich.} reagieren und die Reaktionen sollen möglichst einfach messbar sein. 
 Konkret lässt sich daraus ableiten, dass die Aktorik auf Steuersignale möglichst ohne zeitliche Verzögerung agieren sowie die gesamte Anlage einen möglichst direkten Einfluss auf die Raumtemperatur haben soll. 
 Die Messung der Raumtemperatur kann durch einfache Temperatursensoren erfolgen die ohne großen technischen und monetären Aufwand auskommen und damit die Anforderung erfüllen.
 
@@ -208,7 +208,7 @@ Das Ziel ist es, die Temperatur innerhalb eines Raumes mit Hilfe eines technisch
 
 Dazu gilt es zunächst, die Raumtemperatur über einfache Raumtemperaturfühler zu erfassen. Ist die Raumtemperatur bekannt so soll diese mit Hilfe eines Heizkörpers beeinflusst werden, damit sie einer vorgegebener Temperaturkurve folgen kann. 
 
-Die Heizleistung wiederum hängt von weiteren Eigenschaften des Heizkörpers ab und wird über das Einlassventil gesteuert. Sie wird von einem Wärmemengenzähler gemessen und indirekt über den Massenstrom und die Temperaturen des Heizwassers am Ein- und Auslass bestimmt. Dazu werden ein Durchflusssensor sowie zwei Temperatursensoren an den jeweiligen Enden des Heizkörpers eingesetzt. Um die Heizleistung zu steuern, muss also der Massenstrom gemessen und gesteuert werden sowie beide Temperaturen am Heizkörper bekannt sein. Über das Ventil kann der Massenstrom mit Hilfe eines Stellantriebs eingestellt werden. Zusammen mit der Temperatur am Einlass und den Eigenschaften des Heizkörpers, lässt sich die Temperatur am Auslass und damit die aktuelle Heizleistung bestimmen. Dadurch wird eine gezielte Beeinflussung der Raumtemperatur ermöglicht.
+Die Heizleistung wiederum hängt von weiteren Eigenschaften des Heizkörpers ab und wird über das Einlassventil gesteuert. Sie wird von einem Wärmemengenzähler gemessen und indirekt über den Massenstrom und die Temperaturen des Heizwassers am Ein- und Auslass bestimmt. Dazu werden ein Durchflusssensor sowie zwei Temperatursensoren an den jeweiligen Enden des Heizkörpers eingesetzt. Um die Heizleistung zu steuern, muss also der Massenstrom gemessen und gesteuert werden sowie beide Temperaturen am Heizkörper bekannt sein. über das Ventil kann der Massenstrom mit Hilfe eines Stellantriebs eingestellt werden. Zusammen mit der Temperatur am Einlass und den Eigenschaften des Heizkörpers, lässt sich die Temperatur am Auslass und damit die aktuelle Heizleistung bestimmen. Dadurch wird eine gezielte Beeinflussung der Raumtemperatur ermöglicht.
 
 Nachdem die Raumtemperatur bekannt ist und eine Möglichkeit für deren Manipulation besteht, wird weiterhin eine intelligentee Steuerung benötigt. Dieser soll den Heizkörper möglichst ressourcenschonend einsetzen, um das Ziel der Temperaturregelung zu erreichen.
 
@@ -220,7 +220,7 @@ Um den Anforderungen gerecht zu werden, muss der logische Controller als zentral
 
 Wie bereits beschrieben hat die Sensorik den größten Umfang, da sie neben der Raumtemperatur auch den Massenstrom und die Temperaturen am Heizkörper erfasst. Die Temperatur innerhalb des Raumes wird durch mehrere Sensoren erfasst, um die unterstellte Homogenität zu überprüfen und für die Modellberechnungen herzustellen. Für die Erfassung der Heizleistung wird ein Wärmemengenzähler eingesetzt, der wiederum aus einem Rechenwerk, zwei weiteren Temperatursensoren und einem Durchflusssensor aufgebaut ist. Für die Modellprädiktive Regelung werden die einzelnen Werte aller Sensoren benötigt, weshalb das Rechenwerk einen Zugriff darauf ermöglichen muss.
 
-Die Aktorik umfasst lediglich die Ansteuerung des Heizungsventils. Wie zuvor bereits erwähnt wird dazu ein Stellantrieb genutzt, um das Ventil stufenlos zu Öffnen und zu Schließen und damit den Massenstrom bis hin zu einem Maximalwert zu steuern. 
+Die Aktorik umfasst lediglich die Ansteuerung des Heizungsventils. Wie zuvor bereits erwähnt wird dazu ein Stellantrieb genutzt, um das Ventil stufenlos zu öffnen und zu Schließen und damit den Massenstrom bis hin zu einem Maximalwert zu steuern. 
 
 Eine Prinzipskizze dieser Idee ist in \ref{fig:konzept} graphisch dargestellt.
 
@@ -239,9 +239,13 @@ Das folgende Konzept erfüllt die in Abschnitt  \ref{sec:anforderungen} definier
 
 Der Rechner stellt das Zentrum der Anlage dar, deshalb werden darauf aufbauend die Kommunikationsleitungen und der Aufbau des Netzwerk geplant. Die Kommunikation erfolgt gemäß den Spezifikationen der beiden Modbus Protokolle RTU und TCP, deren Besonderheiten im Abschnitt \ref{sub:modbus} beschrieben wurden. Da der Rechner standardmäßig mit einem Ethernet-Netzwerkanschluss ausgestattet ist, wird der Rechner über ein Netzwerkkabel mit dem ersten Subnetzwerk verbunden. Das erste Netzwerk ist also ein lokales Netzwerk, das gemäß dem Ethernet/IP Protokoll ausgeführt ist und damit die Kommunikation über das Modbus TCP Protokoll ermöglicht.
 
-Das zweite Subnetz ist ein serielles RS 485 Netzwerk und erlaubt den Einsatz des Modbus RTU Protokolls. Die beiden Netzwerke werden durch ein Gateway miteinander verbunden, welches die Übersetzung Kommunikation in beiderlei Richtungen übernimmt. Die Übersetzung beinhaltet im Detail das Umwandeln der elektrischen Signale und der verschiedenen Modbus Telegramme ineinander.
+Das zweite Subnetz ist ein serielles RS 485 Netzwerk und erlaubt den Einsatz des Modbus RTU Protokolls. Die beiden Netzwerke werden durch ein Gateway miteinander verbunden, welches die Übersetzung der Kommunikation in beiderlei Richtungen übernimmt. Die Übersetzung beinhaltet im Detail das Umwandeln der elektrischen Signale und der verschiedenen Modbus Telegramme ineinander.
 
-Im dritten Subnetz wird über analoge Spannungssignale zwischen 0 und 10~V kommuniziert, welche von einem Signalwandler erzeugt werden. Der Signalwandler wiederum ist kein Gateway, da die Spannungssignale nicht implizit übersetzt, sondern explizit durch Modbus RTU Befehlstelegramme festgelegt werden. Eine graphische Zusammenfassung der Netzwerkarchitektur ist in \ref{fig:netzwerk} abgebildet.
+Das Gateway bietet , um ein serielles Netzwerk in ein Lokales Netzwerk zu integrieren. Dadurch ist es möglich Modbus RTU Geräte von einem Modbus TCP/IP Clienten zu steuern. 
+Das eingesetzte \textsc{EX9132C-2-MTCP} Gateway von \textsc{ExpertDAQ} bietet hierzu eine einfache und kostengünstige Möglichkeit, da es über zwei serielle Ports verfügt.
+, ein EIA-232 und ein EIA 232/422/485 Port. Die genauen Spezifikationen können dem Datenblatt im Anhang REFXXXXXXXX entnommen werden. Damit kann 
+
+Im dritten Subnetz wird über analoge Spannungssignale ud Stromsignale kommuniziert, welche von einem Signalwandler erzeugt werden. Der Signalwandler wiederum ist kein Gateway, da die Spannungssignale nicht implizit übersetzt, sondern explizit durch Modbus RTU Befehlstelegramme festgelegt werden. Eine graphische Zusammenfassung der Netzwerkarchitektur ist in \ref{fig:netzwerk} abgebildet.
 
 \begin{figure}
 \centering
@@ -252,50 +256,49 @@ Im dritten Subnetz wird über analoge Spannungssignale zwischen 0 und 10~V kommu
 
 \subsection{Erfassung der Raumtemperatur}
 
-Die Raumtemperatur kann einfach und günstig durch Raumtemperaturfühler gemessen werden. Weiterhin soll der gemessene Wert über eine der beiden Modbus Schnittstellen dem Controller zur Verfügung gestellt werden. Innerhalb der Anlage kommen zwei \textsc{THERMASGARD RTM1-Modbus} Raumtemperaturfühler von \textsc{S+S Regeltechnik} zum Einsatz, weil sich dieser durch weitere Eigenschaften auszeichnet. Diese und weitere Eigenschsafte lassen sich dem Datenblatt im Anhang \ref{att:rtm1} entnehmen.
-%Evtl Bild oder Übersicht
+Die Raumtemperatur kann einfach und günstig mit Raumtemperaturfühlern gemessen werden. Zudem soll der gemessene Wert über eine der beiden Modbus Schnittstellen dem Controller zur Verfügung gestellt werden. Innerhalb der Anlage kommen zwei \textsc{THERMASGARD RTM1-Modbus} Raumtemperaturfühler ohne Display von \textsc{S+S Regeltechnik} zum Einsatz, weil sich diese durch weitere Eigenschaften, wie zum Beispiel der Kalibrierfähigkeit, auszeichnen. Die detaillierten Funktionen und Daten können dem Datenblatt im Anhang \ref{att:rtm1} entnommen werden.
 
-%Here We GO!!!!!
+Ursprünglich sollten die beiden Temperatursensoren auf einer mittig gedachten Achse im Raum in nord-südlicher Richtung platziert werden, jeweils am Ende des mittigen Schreibtischs. Jedoch wurden während der Installation der Anlage noch vier weitere Temperatursensoren zusammen mit einem Messumformer von Seiten der Hochschule Karlsruhe zur Verfügung gestellt. 
+Bei den Sensoren handelt es sich um vier PT1000 Temperatursensoren die über den \textsc{Webthermograph 8x} von \textsc{WuT} die Messwerte zur Verfügung stellen. Der Webthermograph besitzt keine Modbus Schnittstelle, jedoch kann er über ein Netzwerkkabel in das Ethernet Netzwerk integriert werden und unter Verwendung des HTTP Protokolls vom Controller ausgelesen werden.
+Um die Messwerte mit dem Controller auszulesen, bietet sich das Python Paket \textit{httplib} an, welches das HTTP Protokoll implementiert und einfache Funktionen zur Verfügung stellt. 
+Die Anordnung der Temperatursensoren wurde daher angepasst, sodass jeweils drei Sensoren an gegenüberliegenden Wänden angeordnet sind. Die Sensoren wurden entlang der westlichen Außenwand und der östlichen Innenwand gleichmäßig verteilt und auf einer Höhe von 2~m installiert. Die Identifizierung der Sensoren erfolgt über ID´s, die zusammen mit der Anordnung in \ref{fig:raumtempsensors} visualisiert sind.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160324_sensors}
+\caption{Verteilung der Raumtemperaturfühler}
+\label{fig:raumtempsensors}
+\end{figure}
+
+\subsection{Steuerung des Heizkörpers}
+
+Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich wie bereits erwähnt ein Wärmemengenzähler an. Die Temperaturmessung am Ein- und Auslass der Heizung gestaltet sich jedoch etwas aufwendiger als zuvor. Dazu werden Tauchhülsen im Vor- und Rücklauf des Heizkörpers benötigt, welche vom Heizwasser direkt umflossen werden. Die Tauchhülsen bedingen geringe bauliche Änderungen und können beispielsweise in einen Kugelhahn eingeschraubt werden. Sie sind jeweils mit einem Temperaturfühler bestückt und ermöglichen dadurch die Messung der Heizwassertemperatur. Der Einbau des Durchflusssensors erfordert ebenfalls bauliche Maßnahmen. Dazu wird im Vor- oder Rücklauf, je nach Spezifikation Herstellers, ein Stück Rohrleitung entfernt und durch den Durchflusssensor ersetzt. Dieser wird beim Einbau entweder fest integriert oder kann durch eine Anschlussverschraubung beziehungsweise einen Flanschanschluss einfach demontierbar sein.
+%fine until here
+
+In der Anlage kommt der Wärmemengenzähler \textsc{MULTICAL 602} von \textsc{Kamstrup} zum Einsatz, da er neben einem geforderten Modbus Kommunikationsmodul weitere besondere Eigenschaften mit sich bringt. 
+Die berechneten und gemessenen Werte können damit einfach einzeln ausgelesen werden.
+PT500 Sensoren
+Zum einen ist er kostengünstig und umfasst alle aufeinander abgestimmte Komponenten/Sensoren, zum anderen ist er wartungsfrei, da der Durchfluss über Ultraschall gemessen wird. Der Durchflusssensor \textsc{ULTRAFLOW 54} ist bereits mit einer Tauchhülse ausgestattet, sodass lediglich eine weitere Tauchhülse montiert werden muss. Der \textsc{ULTRAFLOW 54} ermittelt den Durchfluss, indem er die Laufzeitdifferenz zwischen wechselseitig gesendeten und empfangenen Signalen zweier integrierter Ultraschallsensoren auswertet.
+
+%Merker
+
+Die Steuerung des Durchflusses im Heizkörper erfolgt über das Heizungsventil, welches mit Hilfe eines Stellantriebs geöffnet und geschlossen wird. Dazu kann ein Elektromotor eingesetzt werden, der sich durch eine schnelle Reaktion auszeichnet jedoch gleichzeitig mit hohen Anschaffungskosten verbunden ist. Außerdem kann auch ein thermoelektrisches Element als Antrieb genutzt werden, welches sich durch geringe Anschaffungskosten auszeichnet jedoch eine langsamere Reaktionszeit besitzt.
+Die Ansteuerung des Stellantriebs erfolgt üblicherweise unabhängig von der Ausführung durch ein digitales oder analoges Spannungs- oder Stromsignal.
+
+Um dem Controller die Steuerung zu ermöglichen, wird ein Signalwandler eingesetzt der Modbustelegramme in elektrische Signale umwandeln kann. Dazu wird innerhalb der Anlage das \textit{EX9024-M} Modul von \textsc{ExpertDAQ} eingesetzt, welches sich leicht in ein serielles RS485-Netzwerk einbinden lässt. Das Modul ist Modbus RTU-fähig und hat vier analoge Ausgänge die Spannungen und Ströme in verschiedenen Bereichen ausgeben können. Da für den Stellantrieb lediglich ein Ausgang genutzt wird, besteht explizit die Möglichkeit einer einfachen Erweiterung der Anlage um 3 weitere analoge Komponenten, beispielsweise um die Jalousien zu bedienen.
+Der thermoelektrische Stellantrieb \textit{ABNM-LIN} von \textit{Danfoss} wird zur stufenlosen Betätigung des Ventils eingesetzt. Die Ansteuerung erfolgt über ein 0-10~V Signal, innerhalb der Anlage vom EX9024-M bereitgestellt wird, welches Signal in einen proportionalen, linearen Stellweg umwandelt.
 
 
-Die Positionierung ist in Abbildung REFXXXX graphisch dargestellt und erfolgt auf einer raummittig gedachten Achse in nord-südlicher Richtung, jeweils am Ende der Schreibtische. Einer in Richtung der Fenster, der andere gegenüber am Ende der Schreibtische.
 
- 
-Bei der Installation der Anlage konnten von Seiten der HSKA noch zusätzliche Temperatursensoren zur Verfügung gestellt werden. Diese haben keine Modbusanschluss, können aber über ein Ethernet Lokales Netzwerk über das http Protokoll vom Controller ausgelesen werden. Daher wurden diese in die Anlage integriert und die Anordnung der Anlage verändert wie in REFXXXXXX dargestellt. Die Sensoren werden entlang der westlichen Außenwand und der östlichen Innenwand gleichmäßig verteilt und auf einer Höhe von 2m installiert, um ein gutes Bild der Raumtemp verteilung zu erhalten. Die sechs Sensoren wurden zur Identifizierung gemäß REF XXXXXXXXX bezeichnet
-Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich ein Wärmemengenzähler an. Dieser integriert die benötigten Sensoren und hat zusätzlich ein Rechenwerk, dass mit einem mit Modbus-Kommunikationsmodul ausgestattet werden kann zum Auslesen der einzelnen Messwerte.
-
-Um den Massenfluss im Heizkörper über das Ventil ansteuern zu können wird ein Stellantrieb benötigt. Dieser kann durch einen Elektromotor oder durch ein thermisches Element angetrieben werden. Die Ansteuerung des Stellantriebs erfolgt üblicherweise durch ein digitales oder analoges Signal, wodurch sich eine weitere Schnittstelle ergibt und ein Modbus-Signalwandler eingesetzt werden kann.
-
-Auf Basis dieser Spezifikationen werden die folgenden zum Einsatz kommenden Bauteile eingesetzt
-
-
-Dieses Konzept bietet langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
+Dieses Konzept bietet durch immer darauf hingewiesen die explizite Möglichkeit zur Erweitunrng auch die offene Architektur und die gewählten Komponenten 
+langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
 
 Damit ist die Idee der Anlage umrissen und im nächsten Abschnitt wird ein Konzept vorgestellt, dass diese Idee implementiert.
-%&Here we go
 
 
 
-\subsection{Wärmemengenzähler}
-
-Ein mutlifunktionelles und kostengünstiger Wärmemengenzähler ist das MULTICAL 602 Rechenwerk zur Wärmemessung zusammen mit einem impulsgebenden Durchflusssensor sowie einem Temperatursensorpaar. 
-Dank seiner hohen Messgenauigkeit registriert der Zähler den genauen Verbrauch über die ganze Lebensdauer des Zählers. Der Zähler ist wartungsfrei, hat eine lange Lebensdauer, und garantiert so- mit minimale jährliche Betriebskosten.
-zusammen mit dem Durchflusssensor ULTRAFLOW 54 verwendet. Die Durchflussgrößen decken den Bereich von qp 0,6 m3/h bis qp 1.000 m3/h.
-MULTICAL® 602 auszeichnet sich durch die komplette Auswahl von Kommunikationsmodulen und die eingebaute RTC (Echtzeituhr), die es leicht machen, den Zähler in allen Applikationen anzupassen, unabhängig von der Auslesemethode.Für drahtgebundene Kommunikation kann der Zähler mit Modbus, Datenmodul ausgestattet werden.
-Schließlich garantiert MULTICAL® 602 mit ULTRAFLOW® und den genau gepaarten Temperaturfühlern präzise Messergebnisse eben bei minimalen Temperaturunterschieden. Die Langzeitstabilität und Genauigkeit des Durchflusssensors wird nicht von Durchflussgeschwindigkeit, Durchflussstörungen und Verschleiß beeinflusst, was für einer optimalen Betrieb sorgt.
-
-\subsection{Signalwandler und Stellantrieb}
-
-Das EX9024 Analog Out 14bit Modul lässt sich leicht in ein RS485-Netzwerk einbinden. Das Analog Out RS485 Modul hat vier analoge Ausgänge die Spannungen in den Bereichen ±5VDC, ±10VDC, 0~5VAC und 0~10VAC ausgeben können. Das RS485 Analog Out Modul ist für den erweiterten Temperaturbereich ausgelegt.
-
-Thermischer stellantrieb ABNM-LIN, 0-10 Vdc, proportional
-Der antrieb ABNM ist ein thermoelektrischer Stellantrieb zum Öffnen und Schließen vonn Ventilen im Bereich Heizungs-, Lüftungs- und Klimatechnik.
-Die Regelung erfolgt über ein 0-10 Vdc Signal, das entweder von einem Raumthermostat oder in den meisten Fällen von der zentralen Leittechnik (DDC) bereitgestellt wird. Der Stellantrieb wandelt das 0-10 Vdc Signal in einen proportionalen Stellweg um, der linear oder logarithmisch sein kann.
 
 
-
-\subsection{Gateway}
-Das Gateway bietet eine einfache und kostengünstige Möglichkeit, um ein serielles Netzwerk in ein Lokales Netzwerk zu integrieren. Dadurch ist es möglich Modbus RTU Geräte von einem Modbus TCP/IP Clienten zu steuern. Zum Einsatz in der Anlage kommt das EX9132C-2-MTCP Gateway von ExpertDAQ, welches übe über zwei serielle Ports verfügt, ein EIA-232 und ein EIA 232/422/485 Port. Die genauen Spezifikationen können dem Datenblatt im Anhang REFXXXXXXXX entnommen werden. Damit kann 
 
 \section{Umsetzung und Installation}
 
