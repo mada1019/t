@@ -239,13 +239,11 @@ Das folgende Konzept erfüllt die in Abschnitt  \ref{sec:anforderungen} definier
 
 Der Rechner stellt das Zentrum der Anlage dar, deshalb werden darauf aufbauend die Kommunikationsleitungen und der Aufbau des Netzwerk geplant. Die Kommunikation erfolgt gemäß den Spezifikationen der beiden Modbus Protokolle RTU und TCP, deren Besonderheiten im Abschnitt \ref{sub:modbus} beschrieben wurden. Da der Rechner standardmäßig mit einem Ethernet-Netzwerkanschluss ausgestattet ist, wird der Rechner über ein Netzwerkkabel mit dem ersten Subnetzwerk verbunden. Das erste Netzwerk ist also ein lokales Netzwerk, das gemäß dem Ethernet/IP Protokoll ausgeführt ist und damit die Kommunikation über das Modbus TCP Protokoll ermöglicht.
 
-Das zweite Subnetz ist ein serielles RS 485 Netzwerk und erlaubt den Einsatz des Modbus RTU Protokolls. Die beiden Netzwerke werden durch ein Gateway miteinander verbunden, welches die Übersetzung der Kommunikation in beiderlei Richtungen übernimmt. Die Übersetzung beinhaltet im Detail das Umwandeln der elektrischen Signale und der verschiedenen Modbus Telegramme ineinander.
+Das zweite Subnetz ist ein serielles RS 485 Netzwerk und erlaubt somit den Einsatz des Modbus RTU Protokolls. Die beiden Netzwerke werden durch ein Gateway miteinander verbunden, welches die Übersetzung der Kommunikation in beiderlei Richtungen übernimmt. Die Übersetzung beinhaltet im Detail das Umwandeln der elektrischen Signale und der verschiedenen Modbus Telegrammformate ineinander.
 
-Das Gateway bietet , um ein serielles Netzwerk in ein Lokales Netzwerk zu integrieren. Dadurch ist es möglich Modbus RTU Geräte von einem Modbus TCP/IP Clienten zu steuern. 
-Das eingesetzte \textsc{EX9132C-2-MTCP} Gateway von \textsc{ExpertDAQ} bietet hierzu eine einfache und kostengünstige Möglichkeit, da es über zwei serielle Ports verfügt.
-, ein EIA-232 und ein EIA 232/422/485 Port. Die genauen Spezifikationen können dem Datenblatt im Anhang REFXXXXXXXX entnommen werden. Damit kann 
+Das eingesetzte \textsc{EX9132C-2-MTCP} Gateway von \textsc{ExpertDAQ} bietet hierzu eine einfache und kostengünstige Möglichkeit, um von einem Modbus TCP/IP Clienten aus mit Modbus RTU Servern zu kommunizieren. Es verfügt über zwei serielle Ports verfügt, jeweils ein EIA-232 und ein EIA 485 Port. Die genauen Spezifikationen können dem Datenblatt im Anhang \ref{att:ex9132} entnommen werden.
 
-Im dritten Subnetz wird über analoge Spannungssignale ud Stromsignale kommuniziert, welche von einem Signalwandler erzeugt werden. Der Signalwandler wiederum ist kein Gateway, da die Spannungssignale nicht implizit übersetzt, sondern explizit durch Modbus RTU Befehlstelegramme festgelegt werden. Eine graphische Zusammenfassung der Netzwerkarchitektur ist in \ref{fig:netzwerk} abgebildet.
+Im dritten Subnetz wird über analoge Spannungssignale und Stromsignale kommuniziert, welche von einem Signalwandler erzeugt werden. Der Signalwandler wiederum ist kein Gateway, da die Spannungssignale nicht implizit übersetzt, sondern explizit durch Modbus RTU Befehlstelegramme festgelegt werden. Eine graphische Zusammenfassung der Netzwerkarchitektur ist in \ref{fig:netzwerk} abgebildet.
 
 \begin{figure}
 \centering
