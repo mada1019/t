@@ -270,36 +270,88 @@ Die Anordnung der Temperatursensoren wurde daher angepasst, sodass jeweils drei 
 
 \subsection{Steuerung des Heizkörpers}
 
-Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich wie bereits erwähnt ein Wärmemengenzähler an. Die Temperaturmessung am Ein- und Auslass der Heizung gestaltet sich jedoch etwas aufwendiger als zuvor. Dazu werden Tauchhülsen im Vor- und Rücklauf des Heizkörpers benötigt, welche vom Heizwasser direkt umflossen werden. Die Tauchhülsen bedingen geringe bauliche Änderungen und können beispielsweise in einen Kugelhahn eingeschraubt werden. Sie sind jeweils mit einem Temperaturfühler bestückt und ermöglichen dadurch die Messung der Heizwassertemperatur. Der Einbau des Durchflusssensors erfordert ebenfalls bauliche Maßnahmen. Dazu wird im Vor- oder Rücklauf, je nach Spezifikation Herstellers, ein Stück Rohrleitung entfernt und durch den Durchflusssensor ersetzt. Dieser wird beim Einbau entweder fest integriert oder kann durch eine Anschlussverschraubung beziehungsweise einen Flanschanschluss einfach demontierbar sein.
-%fine until here
+Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich wie bereits erwähnt ein Wärmemengenzähler an. Die Temperaturmessung am Ein- und Auslass der Heizung gestaltet sich jedoch etwas aufwendiger als zuvor. Dazu werden Tauchhülsen im Vor- und Rücklauf des Heizkörpers benötigt, welche vom Heizwasser direkt umflossen werden. Die Tauchhülsen bedingen geringe bauliche Änderungen und können beispielsweise in einen Kugelhahn eingeschraubt werden. Sie sind jeweils mit einem Temperaturfühler bestückt und ermöglichen dadurch die Messung der Heizwassertemperatur. Der Einbau des Durchflusssensors erfordert ebenfalls bauliche Maßnahmen. Dazu wird entweder im Vor- oder Rücklauf, je nach Spezifikation Herstellers, ein Stück Rohrleitung entfernt und durch den Durchflusssensor ersetzt. Dieser kann beim Einbau entweder fest integriert oder durch eine Anschlussverschraubung beziehungsweise einen Flanschanschluss einfach demontierbar eingebaut werden.
 
-In der Anlage kommt der Wärmemengenzähler \textsc{MULTICAL 602} von \textsc{Kamstrup} zum Einsatz, da er neben einem geforderten Modbus Kommunikationsmodul weitere besondere Eigenschaften mit sich bringt. 
-Die berechneten und gemessenen Werte können damit einfach einzeln ausgelesen werden.
-PT500 Sensoren
-Zum einen ist er kostengünstig und umfasst alle aufeinander abgestimmte Komponenten/Sensoren, zum anderen ist er wartungsfrei, da der Durchfluss über Ultraschall gemessen wird. Der Durchflusssensor \textsc{ULTRAFLOW 54} ist bereits mit einer Tauchhülse ausgestattet, sodass lediglich eine weitere Tauchhülse montiert werden muss. Der \textsc{ULTRAFLOW 54} ermittelt den Durchfluss, indem er die Laufzeitdifferenz zwischen wechselseitig gesendeten und empfangenen Signalen zweier integrierter Ultraschallsensoren auswertet.
-
-%Merker
-
-Die Steuerung des Durchflusses im Heizkörper erfolgt über das Heizungsventil, welches mit Hilfe eines Stellantriebs geöffnet und geschlossen wird. Dazu kann ein Elektromotor eingesetzt werden, der sich durch eine schnelle Reaktion auszeichnet jedoch gleichzeitig mit hohen Anschaffungskosten verbunden ist. Außerdem kann auch ein thermoelektrisches Element als Antrieb genutzt werden, welches sich durch geringe Anschaffungskosten auszeichnet jedoch eine langsamere Reaktionszeit besitzt.
-Die Ansteuerung des Stellantriebs erfolgt üblicherweise unabhängig von der Ausführung durch ein digitales oder analoges Spannungs- oder Stromsignal.
-
-Um dem Controller die Steuerung zu ermöglichen, wird ein Signalwandler eingesetzt der Modbustelegramme in elektrische Signale umwandeln kann. Dazu wird innerhalb der Anlage das \textit{EX9024-M} Modul von \textsc{ExpertDAQ} eingesetzt, welches sich leicht in ein serielles RS485-Netzwerk einbinden lässt. Das Modul ist Modbus RTU-fähig und hat vier analoge Ausgänge die Spannungen und Ströme in verschiedenen Bereichen ausgeben können. Da für den Stellantrieb lediglich ein Ausgang genutzt wird, besteht explizit die Möglichkeit einer einfachen Erweiterung der Anlage um 3 weitere analoge Komponenten, beispielsweise um die Jalousien zu bedienen.
-Der thermoelektrische Stellantrieb \textit{ABNM-LIN} von \textit{Danfoss} wird zur stufenlosen Betätigung des Ventils eingesetzt. Die Ansteuerung erfolgt über ein 0-10~V Signal, innerhalb der Anlage vom EX9024-M bereitgestellt wird, welches Signal in einen proportionalen, linearen Stellweg umwandelt.
+In der Anlage kommt der Wärmemengenzähler \textsc{MULTICAL 602} von \textsc{Kamstrup} zum Einsatz, da er neben einem geforderten Modbus Kommunikationsmodul weitere besondere Eigenschaften mit sich bringt. Die Temperaturen werden von zwei PT500 Sensoren erfasst und der Durchfluss von einem \textsc{ULTRAFLOW 54} Ultraschallsensor gemessen. Die gemessenen und  berechneten Werte der Heizungsleistung lassen sich einfach einzeln durch das Rechenwerk einfach auslesen.
+Der \textsc{MULTICAL 602} ist zum einen kostengünstig und umfasst alle benötigten Sensoren, die außerdem bereits präzise aufeinander abgestimmt sind. Zum anderen ist er wartungsfrei, da der Durchfluss über kontaktlose Ultraschallmessungen bestimmt wird, indem er die Laufzeitdifferenz zwischen wechselseitig gesendeten und empfangenen Signalen zweier integrierter Ultraschallsensoren auswertet. Zudem ist der Durchflusssensor \textsc{ULTRAFLOW 54} bereits mit einer Tauchhülse ausgestattet, sodass lediglich eine weitere Tauchhülse montiert werden muss.
 
 
+Die Steuerung des Durchflusses im Heizkörper erfolgt über das Heizungsventil, welches mit Hilfe eines Stellantriebs geöffnet und geschlossen wird. Dieser kann von einem Elektromotor angetrieben werden, der sich durch eine schnelle Reaktion aber hohe Anschaffungskosten  auszeichnet. Alternativ kann ein thermoelektrisches Element als Antrieb genutzt werden, welches sich durch geringe Anschaffungskosten auszeichnet jedoch eine langsamere Reaktionszeit besitzt. Die Ansteuerung des Stellantriebs erfolgt üblicherweise unabhängig von der Ausführung durch ein digitales oder analoges Spannungs- oder Stromsignal.
 
-Dieses Konzept bietet durch immer darauf hingewiesen die explizite Möglichkeit zur Erweitunrng auch die offene Architektur und die gewählten Komponenten 
-langfristig auch die Möglichkeit die Anlage durch eine Klimatisierung zu erweitern, um die Raumtemperatur ganzjährig beziehungsweise in beide Richtungen zu regeln zu können. Außerdem besteht die Möglichkeit in diesem Zuge auch das öffnen und Schließen der Jalousien ebenfalls von der Anlage aus gesteuert werden kann.
+Um dem Controller die Steuerung zu ermöglichen, wird ein Signalwandler eingesetzt, der Modbustelegramme in elektrische Signale umwandeln kann. Dazu wird innerhalb der Anlage das \textit{EX9024-M} Modul von \textsc{ExpertDAQ} eingesetzt, welches sich leicht in ein serielles RS485-Netzwerk einbinden lässt. Das Modul ist Modbus RTU-fähig und besitzt vier analoge Ausgänge die verschiedene Spannungs und Strombereiche ausgeben können. Da für den Stellantrieb lediglich ein Ausgang genutzt wird, besteht explizit die Möglichkeit einer einfachen Erweiterung der Anlage um 3 weitere, analoge Komponenten, beispielsweise einem Schalter zur Bedienung  der Jalousien.
 
-Damit ist die Idee der Anlage umrissen und im nächsten Abschnitt wird ein Konzept vorgestellt, dass diese Idee implementiert.
-
-
+Der thermoelektrische Stellantrieb \textit{ABNM-LIN} von \textit{Danfoss} wird zur stufenlosen Betätigung des Heizkörperventils eingesetzt. Die Ansteuerung erfolgt über ein analoges 0-10~V Signal, welches innerhalb der Anlage vom EX9024-M bereitgestellt wird. Der Stellantrieb wandelt das angelegte Signal in einen proportionalen, linearen Stellweg um und steuert damit den Durchfluss im Heizkörper.
 
 
+Das beschriebene Konzept zeichnet sich dadurch aus, dass es eine kostengünstige Umsetzung erlaubt und eine größtmögliche Kompabilität der Anlageteile und Bauteile sicherstellt. Die explizit Forderung nach der Erweiterbarkeit wird explizit durch die offene Architektur und die eingesetzten Komponenten ebenfalls berückscihtigt, sodass langfristig die Möglichkeit besteht die Raumtemperatur beispielsweise unter Zuhilfenahme einer Raumklimatisierung und der Ansteuerung der Jalousien ganzjährig zu regeln zu können.
+
+\section{Installation und Inbetriebnahme}
+
+Eine Übersicht über den Aufbau der Anlage findet sich in Abbildung REFXXXXX. Die ionstallation gliedert sich ein zwei Bereiche, zunöchst der Hardware Installation, die die  Montage der einzelnen Kompononten, deren Stromversorgung und die Verkabelung im Netzwerk umfasst.
+Der zweite Teil beschäftigt sich mit der Inbetriebnhame der Anlage durch die Softwareseitige Ansteuerung und Benutzung der Anlage.
 
 
-\section{Umsetzung und Installation}
+\subsection{Hardware}
 
-\section{Software}
+Der Aufbau des Netzwerks wurde bereits in \ref{fig:netzwerk} dargestellt. Als Ethernet-Netzwerk wird das lokale Netzwerk der Hochschule Karlsruhe genutzt. Dadurch ist die flexible Ansteuerung der Anlage innerhalb des gesamten lokalen Netzwerks und über eine VPN-Verbindung auch außerhalb vom Campus möglich, auch wenn dadurch zusätzlich ein Passwortschutz erforderlich wird. Der Rechner ist bereits im Netzwerk integriert, sodass ledglich das Gateway beim IZ der Hochschule Karlsruhe registriert werden musste, um eine IP Adressierung gemäß dem Ethernet/IP Protokoll zu erhalten.
+Für den Webthermographen wurde dasselbe Procedere durchlaufen, um diesen in die Anlage zu integrieren.
 
+Der Schaltplan des seriellen RS-485 Netzwerk wird in \ref{fig:schaltplan} dargestellt. Zur Verkabelung de Netzwerks wird eine Busleitung von LappKabel eingesetzt, welche zwei jeweils paarweise verdrillte Leitungspaare
+besitzt die durch ein Kupfergeflecht von Störungen abgeschirmt sind. Das Datenblatt der Busleitung ist in nahang XXXX zu finden.
+Gemäß der Spezifuikationen im Modbus seriell Protokoll ZITAT erfolgt die Verkabelung der D0 Leitung die braubne sowie der D1 Leitung die gelbe Ader zugewiesen. Die GNC Common wird über die weißgraue Ader verdrahtet. Das grüne Kabel kann für die gemeinsame Stromversogung der Komponenten genutzt werden, was im Rahmen dieser anlage durch die verschiedenen benötigten Spannungen nicht genutzt wurde. Daher hat jede Komponente ihre eigene Stromversorgung durch jeweils ein eigenes Netzteil gemäß dem Schaltplan. 
+
+Die Kabel wurden gemäß der Übersicht in REFFFFXXXX verlegt und mit den Bauteilen gemäß dem Schaltplan in ref{fig:schaltplan} verbunden. Die kurzen Stichleitungen wurden über flexibel einsetzbare sowie wiederverwendbare Hebelklemmen an die lange Busleitung angeschlossen.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160326_schaltplan}
+\caption{Schaltplan der Raumtemperaturregelungsanlage}
+\label{fig:schaltplan}
+\end{figure}
+
+Die Konfiguration des RS 485 Netzwerks geschieht über das Gateway und dessen Einstellungen sind in Tabelle \ref{tab:konfport} zusammengefasst.
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{1\textwidth}{m{0.3\textwidth}m{0.3\textwidth}m{0.3\textwidth}}
+
+\toprule
+
+\textbf{Konfigurationsmerkmal} & \textbf{Werte Port 1} & \textbf{Werte Port 2} \\
+
+\cmidrule[0.5pt](r{0.25em}){1-1} 
+\cmidrule[0.5pt](l{0.25em}){2-2}
+\cmidrule[0.5pt](l{0.25em}){3-3}
+
+Port & 502\\
+
+\ccol Baudrate & \ccol	19200 [$\frac{bits}{S}$]& \ccol	9600 [$\frac{bits}{S}$]	\\
+
+Parität	& Gerade & Keine		\\
+
+\ccol Datenbitlänge & \ccol 8 & \ccol 8	\\
+
+Stoppbitlänge & 1 &	1	\\
+
+\ccol Timeoutzeit &	\ccol 10 [$mS$] & \ccol 10 [$mS$]	\\
+
+Betriebsweise 	&	Modbus TCP zu RTU\newline Server &	Modbus TCP zu RTU\newline Server \\
+
+
+\bottomrule
+\end{tabularx}
+\caption{Netzwerkkonfiguration der Ports des EX9132M-MTCP Gatways}
+\label{tab:konfport}
+\end{table}
+
+
+Bei der Inbetriebnahme der Anlage ergab sich jedoch eine Schwierigkeit bei der Kommunikation. Es hat sich herausgestellt, dass der Signalwandler EX9024M nicht streng nach den Modbus Spezifikationen für serielle Kommunikation hergestellt wird. Dadurch ergibt sich keine kompatible Netzwerkkonfiguration, um diesen zusammen mit den beiden Raumtemperaturfühlern in einem Netzwerk zu betreiben. Da das Gateway jedoch mit zwei Ports ausgestattet ist, wurde dieser genutzt, um ein zweites serielles Netzwerk aufzubauen und damit das Problem zu lösen. Hierfür wurde ein Bridge in der Form eines einfachen Adapters eingesetzt, der die Spannungspegel und Steckbelegungen des RS 232 Ports auf die einer RS 485 Schnittstelle umsetzt, wie im Schaltplan in \ref{fig:schaltplan} dargestellt.
+
+
+
+
+\subsection{Software}
 

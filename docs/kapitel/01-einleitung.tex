@@ -1,11 +1,3 @@
-%
-% Einleitung
-%
-% @version 1.0
-% @author wipatrick
-% @created 22. November 2015
-% @edited 
-
 \setchapterpreamble[o]{%
 \dictum[--- \textsc{Johann Wolfgang von Goethe}]{\Gun Erfolgreich zu sein setzt zwei Dinge voraus: Klare Ziele und den brennenden Wunsch, sie zu erreichen.\Gob}}
 \renewcommand{\chapterheadstartvskip}{\vspace*{2cm}}
@@ -20,35 +12,46 @@
 \section{Motivation und Problemstellung}
 \label{sec:motivation}
 
-Von allgemein solare Anwendung hin zu Forschung HSKA wird das Ziel sein.
+Die neueren Entwicklungen in den südlichen und östlichen Staaten Asiens, allen voran China und Indien, haben einen starken Einfluss auf den enormen Anstieg des weltweiten, zukünftigen Energiebedarfs. In einem zentralen Prognoseszenario, schätzt die Internationale Energie-Agentur den Energieverbrauch im Jahr 2040 um ein Drittel höher ein als im vergangenen Jahr 2015.  (World Energy outlook 2015 S1)
 
-Hinführung und Forschung der HSKA aufzeigen und daher einordnen Forschen derzeit bereits auf dem Gebiet (MPC mit) der solaren Anwendungen. Derzeit wird eine große Solaranlage zur Kühlung des Atriums installiert. Die Anlage nutzt die in Solarkollektoren gewonnene Wärmeenergie um eine Adsorptionskälteanlage anzutreiben. Die Anlage ist aufgrund ihrer Größe träge in der Reaktion und bisher noch im Aufbau. Komplementär dazu soll eine kleine Anlage mit solarem Bezug aufgebaut werden um die Forschung auch für ergänzende Dinge betreiben zu können.
+Zudem sieht das Intergovermental Panel on climate change im Climate Change Report 2014 den Menschen als eine der Hauptursachen für den Klimawandel, insbesondere für die globale Erderwärmung (Climatechangereport 2014 S. V). Eine Schlüsselrolle bei der globalen Erwärmung nimmt der Ausstoss von Treibhausgasen ein. Besonders bei der Erzeugung von Elektrizitäts- und Wärmeenergie werden große Mengen an CO2 freigesetzt.
+(Climatechangereport 2014 S. 47)
 
-Die Modellprädiktive Regelung beschäftigt sich damit, ein technisches System oder allgemeiner einen Prozess -- im mathematisch exakten Sinne -- optimal zu regeln.
+Daher wird der Bedeutung der Energieerzeugung auch in Zukunft eine immer weiter steigen/zunehmen. Den erneuerbaren Energien, welche ohne den Ausstoss schädlicher Treibhausgase auskommen, bietet sich damit ein enorme Chance. Dies wird beispielsweise durch die Zielsetzung der Bundesregierung in Deutschland belegt, deren Ziel es ist im Jahre 2050 den Energiebedarf zu 80 prozent aus Erneuerbaren Energien zu decken (Bilanz Energiewende Regierung S.2)
+Als Erneuerbare Energien werden Energiequellen bezeichnet, die die nach menschlichem Zeithorizont unerschöpflich sind, worin sich ihr enormes Potenzial befindet. Sie umfassen die Planetenenergie durch Gravitation und die geothermische Energie, das mit Abstand größte Energieangebot bietet jedoch die Sonnenenergie.
+Das Angebot an Sonnenenergie übersteigt den gesamten, weltweiten Energiebedarf um ein vielfaches und könnte diesen theoretisch vollständig decken, worin/womit sich ihr gewaltiges Potenzial begründet.
 
-Im Dialog mit den Projektverantwortlichen der Hochschule Karlsruhe für die Erforschung von solaren Anwendungen, in Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}, die Einsatzziele gemeinsam erarbeitet und sind im Detail in Kapitel \ref{sec:anforderungen} ausgeführt.
+Um dieses Potenzial zu nutzen und den Weltenergiebedarf aus Regenerativen Energiequellen zu decken, gilt es jedoch noch einige Probleme zu lösen. Eines davon ist die Frage, wie die sich die technische Umwandlung der Solarenergie in eine nutzbare Energieform wie beispielsweise Wärme oder Elektrizität realisieren und weiter optimieren lässt. Wichtige Technologien hierzu sind die solarthermischen Kraftwerke, welche die Solarenergie zunächst in Wärme und anschließend in elektrische Energie umwandeln, sowie Solarkollektoren und -zellen zur Erzeugung von Wärme und Strom. (quashning regenerative s. 34ff.)
 
-Wichtigste Ergebnisse aus Dialog ist die Motivation dieser Forschungsarbeit:
+Einen weiteren Ansatzpunkt bietet der steigende globale Energiebedarf, welchem durch die Verbesserung der Energieeffizienz von Verbrauchernentegengewirkt werden kann. Die Einsparpotenziale bestehen bei privaten Hasuhalten, wie auch in der Industrie. Die Bundesregierung in Deutschland sieht darin außerdem einen Investitionsmotor, denn durch die Einsparungen entsteht mehr monbetärer Spielraum für Investitoinen und Konsum (Bilanz Energiewende Regierung S.2)
 
-Die Motivation dieser Arbeit ist also, einen komplementären Forschungsbeitrag für solare Anwendungen zu leisten im Hinblick auf die große Anlage.
+Damit ganzheitliche Lösungsansätze entwickelt und die Energiewende erfolgreich gemanagt werden kann, nimmt die Forschung eine zentrale Rolle ein. Diese umfasst das Erforschen neuer Technologien und das Optimieren und kontinuierliche Verbessern bestehender Technologien sowie die Verbesserung der Energieeffizienz. Die Bundesregierung maßt dabei Deutschalnd eine Vorreiterolle zu und fördert diese durch Forschungsprogramme zur Energieversorgung aus Erneuerbaren Energiequellen, der Energiepseuiceherung , und der Verbesserung der Energieeffizienz (Bilanz Energiewende Regierung S.11)
+ 
+Einen Teil zu dieser Forschung und damit zur Vebesserung von solaren Anwendungen und deren Effizienz trägt die Hochschule Karlsruhe mit ihrem Forschungsprojekt bei, welches die Modellprädiktive Regelung einer Anlage zur solaren Klimatisierung des Fakultätsgebäude zum Ziel hat.
 
-Dass heißt jene Chancen zu nutzen, die die große Anlage nicht bieten kann einen möglichst großen Nutzen zu realisieren, also was die große Anlage nicht leisten kann und die große Anlage zu entlasten im Sinne von Empfindlichkeit/Versuche.
+Die Modellprädiktive Regelung beschäftigt sich damit, wie ein allgemeiner Prozess oder ein technisches System, unter Zhilfenahme eines mathematischen Modells desselben, anhand eines gewählten Optimimalitätskriterium optimal -- im mathematisch exakten Sinne -- geregelt werden kann und trägt damit zur Verbesserung der Energieffizienz bei. Um  physikalisch motivierte Modelle der zur Regelung von Anlagen zu bilden, ist ein grundlegendes Verständnis der ablaufenden Prozesse unumgänglich wodurch weitere Verbesserungspotenizale einzelner Prozesse aufgedeckt werden können.
 
-Außerdem sollen möglichst Erfahrungen gesammelt werden, die beim Anlauf der großen Anlage von Nutzen sein können.
+Die Anlage nutzt die in Solarkollektoren gewonnene Wärmeenergie, um eine Adsorptionskälteanlage anzutreiben. Da sich jedoch die Planung und Installation der Anlage aufgrund einiger Probleme verzögert hat, befindet sich diese derzeit noch im Aufbau. 
+(https://www.hs-karlsruhe.de/fakultaeten/w/projekte.html)
 
+Um bereits vorab nützliche Erfahrungen für die Inbetriebnahme der Solaranlage zu sammeln und erste Forschungsergebnisse  zu erzielen, soll diese durch eine kleine Anlage mit solarer Anwendung ergänzt werden. Die kleinen Anlage sollen komplementäre Eigeschaften zur großen Solaranlage besitzen und sich ebenfalls für die Modellprädiktive Regelung eignen.
 
-!!!!!!!!!!!!!!! Forschungsfrage, vorher Begriffe klären: MPC, Anlage, Modell, Steuerung/Regelung
-Als Forschungsfrage und Problemstelltung dieser Arbeit ergibt sich die Frage, wie eine Anlage und ein Modell derselben aufgebaut sein müssen, um die Regelung einer Raumtemperatur mit Modellprädiktiver Regelung zu ermöglichen.
-!!!!!!!!!!!!!!!
+Die Arbeit dient also dazu, Erfahrungen bei der Inbetriebnahme zu sammeln, um die Inbetriebnahme den Anlauf der solaren Klimatisierungsnanlage zu beschleunigen, und einen komplementären Forschungsbeitrag für die Modellprädiktive Regeluing von solaren Anwendungen zu leisten. 
 
 \section{Zielsetzung und Aufbau der Arbeit}
 \label{sec:ziel}
 
-Das übergeordnete Ziel dieser Arbeit ist es, eine Test- und Anwendungsumgebung zu schaffen, um die Forschung der Hochschule Karlsruhe auf dem Gebiet der Modellprädiktiven Regelung von solaren Anwendungen weitere Forschung weiter voran zu treiben und komplementär zu ergänzen.
+Das übergeordnete Ziel dieser Arbeit ist es also, die Forschung der Hochschule Karlsruhe auf dem Gebiet der Modellprädiktiven Regelung von solaren Anwendungen zu erweitern.
+Konkret soll mit Hilfe einer kleiner Anlage mit solarer Anwendung jene Chancen nutzen, die die große Anlage nicht bieten kann und somit möglichst großen Nutzen zu realisieren. 
 
-Aus der Forschungsfrage lässt sich als konkretes Ziel der Arbeit ableiten, die Konzeption, Planung und Umsetzung einer Anlage und Bildung eines Modells zur Regelung einer Raumtemperatur mit Modellprädiktiver Regelung.
-Also ein Labor
-Weiterhin soll mit dieder Arbeit Know-How und Erfahrung generiert werden das bei der weiteren Forschung von Nutzen sein kann/ist.
+Als Problemstellung dieser Arbeit stellt sich damit die Forschungsfrage, wie eine Anlage zur Raumtemperaturregelung und ein mathematische Modell derselben aufgebaut sein müssen, um die Regelung einer Raumtemperatur mit Modellprädiktiver Regelung zu ermöglichen.
+
+
+Aus der Forschungsfrage lässt sich das konkretes Ziel ableiten, eine entsprechende Anlage zu Konzipieren, zu Planen und Umzusetzen. Des Weiteren erfolgt die Bildung eines Modells für die Nutzung mit Modellprädiktiver Regelung.
+Damit soll also eine Forschungsumgebung geschaffen werden, um verschiedene Steuerungs- und Regelungssystematiken zu untersuchen sowie eigene Regelungsalgorithmen zu entwickeln. Weiterhin soll mit dieder Arbeit Know-How generiert werden, dass bei der weiteren Forschung von Nutzen ist. Die konkreten Einsatzziele der Anlage wurden gemeinsam mit den beiden Forschungsprojektverangtwortlichen der Hochschule Karlsruhe, in Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}, definiert und sind in Kapitel \ref{sec:anforderungen} detailliert beschrieben.
+
+
+%Here We go!!!! Nur noch verknüpfen welches kapitelk was und wie dem ziel dient. und der Forschungsfrage
 
 
 Im Rahmen dieser Arbeit werden -- anschließend an die Einleitung in \ref{chap:einleitung} -- die theoretischen Grundlagen in \ref{chap:theoretischegrundlagen} ausgeführt. Zunächst wird die grundlegenden Theorie zu \acrlong{mpc} vorgestellt bevor anschließend weitere technische Grundlagen erklärt, welche für das weitere Verständnis dieser Arbeit benötigt werden. 
