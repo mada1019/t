@@ -486,15 +486,19 @@ morestring=[s]{/*}{*/},
 % \definecolor{listingbgcolor}{rgb}{0.95,0.95,0.95}
 
 \lstset{
+commentstyle=\color{gray},
+lineskip={-0.1pt},
 breaklines=true,
+keepspaces=false,
 language=Modelica,
-basicstyle=\scriptsize\ttfamily,
+%basicstyle=\scriptsize\ttfamily,
+basicstyle=\footnotesize\sffamily,
 keywordstyle=[1]\color{keywordcolor1}\bfseries,
 keywordstyle=[2]\color{keywordcolor2},
 keywordstyle=[3]\color{keywordcolor2},
 stringstyle=\color{stringcolor},
 numbers=left,                   % where to put the line-numbers
-numberstyle=\footnotesize\color{gray},  % the style that is used for the line-numbers
+numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
 stepnumber=2,                   % the step between two line-numbers. If it's 1, each line 
                                   % will be numbered
 numbersep=0pt,                  % how far the line-numbers are from the code
@@ -505,11 +509,10 @@ xrightmargin=5pt,
 showstringspaces=false,
 showspaces=false,               % show spaces adding particular underscores
 showtabs=false,                 % show tabs within strings adding particular underscores
-frame=single,                   % adds a frame around the code
+frame=zb,                   % adds a frame around the code
 rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
 tabsize=2,                      % sets default tabsize to 2 spaces
 captionpos=b,                   % sets the caption-position to bottom
-breaklines=true,                % sets automatic line breaking
 breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
 aboveskip = \floatsep,
 }

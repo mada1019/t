@@ -355,21 +355,28 @@ Bei der Inbetriebnahme der Anlage ergab sich jedoch eine Schwierigkeit bei der K
 
 Um die zentral Steuerung vom Controller aus vorzunehmen, müssen die Schnittstellen der einzelnen Komponenten und deren Protokolle genutzt werden um alle von einer Python Konsole aus genutzt werden zu können. Wie bereits erwähnt bietet Python sehr viele Pakete die Funktionalitäten bereitstellen. Nichtsdestrotrotz muss eine eigene anlagenspezifische Software entwickelt werden, die diese Funktionalitäten jedoch nutzen kann.
 
-Um die vier Temperatursensoren über den Webthermograph8x auszulesen wurde das Python Paket httlib genutzt. Die Abfrage der einzelnen Temperatursensoren über das HTTP Protokoll wurde in einer eigenen Klasse SensorsHttp implementiert und nutzt das HTTPConnection Objekt aus der httplib. Die Progammierung erfolgt objektorientiert und versucht eine klare Struktur und Wiederverwendbarkeit der Methoden und Objekte zu gewährleisten. Die konkrete Umsetzung der Klasse ist in Listing \ref{lst:webtemp} dargestellt.
+Um die vier Temperatursensoren über den Webthermograph8x auszulesen wurde das Python Paket httlib genutzt. Die Abfrage der einzelnen Temperatursensoren über das HTTP Protokoll wurde in einer eigenen Klasse SensorsHttp implementiert und nutzt das HTTPConnection Objekt aus der httplib. Die gesamte folgende Progammierung erfolgt sehr stark objektorientiert und versucht eine klare Struktur und Wiederverwendbarkeit der Methoden und Klassen zu gewährleisten. Die konkrete Umsetzung der Klasse ist in Listing \ref{lst:webtemp} dargestellt.
 
 Um die Verbindung zum Thermograph8x herzustellen wird dessen IP Adresse benötigt und die Port Nummer, über die die Telegramme gesendet und empfangen werden. Aus Gründen des Zugriffsschutzes sind diese Werte nicht im Code hinterlegt, sondern in den Umgebungsvariablen server-address und server-port der Pythonkonsole des Controllers.
 Bei der Initialisierung wird mit der init-Methode ein HTTPConnection Objekt server erstellt, welches als Host und Port die Adressen des Webthermographen übergeben bekommt.
 Des Weiteren wird jeweils eine Methode zur Herstellung und zur Trennung der Verbindung definiert sowie eine abstrakte Methode get-wt, welche die allgemeine Abfragesyntax der Messwerte enthält. Die Messwerte können lediglich einzeln abgefragt werden, über eine einfache Serveranfrage request, welche die Messwerte durch einen einfachen Befehls-string, \Gun GET\textbackslash Single \Gob zusammen mit der ID des gewünschten Temperatursensors, anfordert. Nachdem der Messwert in einen float Datentyp umgewandelt zurückgegeben wurde wird am Ende die Verbindung zum Server wieder getrennt. Die Methoden zum Auslesen der einzelnen Messwerte rufen lediglich die abstrakte Methode auf und übergeben dabei die ID des gewünschten Temperatursensors.
 
-\lstinputlisting[language=Python ,caption={Klasse SensorHttp zur Abfrage der Temperaturen vom Webthermograph8x}, label=lst:webtemp]{listings/sensors_http.py}
+\lstinputlisting[language=Python ,caption={Klasse SensorsHttp zur Abfrage der Temperaturen vom Webthermograph8x}, label=lst:webtemp]{listings/sensors_http.py}
+
+Für die Kommunikation mit den Modbus Komponenten stehen drei verschiedene Python Pakete zur Verfügung. Da Minimalmodbus leider keine Unterstützung für das Mobus TCP Protkoll bietet, kann es nicht zum Einsatz kommen. Nach ausführlicher Recherche über die beiden verbleibenden Pakete, fiel die Entscheidung pymodbus einzusetzen, da dessen Funktionsumfang viel umfangreicher und Dokumentation ausführlicher gestaltet und mit einfachen Beispielen gespickt ist.
+Mit Hilfe der des pymodbus Pakets wurde daher zunächst wieder eine eigene Klasse ModbusConnection für die Kommunikation programmiert, welche in \ref{lst:modconnect} zu sehen ist.
+
+Damit über das Modbus TCP Protokoll kommuniziert werden kann, muss auch hier zunächst eine Verbindung zwischen Client/Master und Server/Slave hergestellt werden. Für die Kommunikation wird das ModbusClient Objekt genutzt, da der Controller als Client über das Modbus TCP Protokol Anfargen an die Server stellt. Konkret stellt der Controller lediglich an das Gateway als Server Anfragen, welches die Telegramme in das serielle Modbus RTU Protokoll übersetzt um mit den Komponenten in den seriellen Netzwerken zu kommunizieren. Bei der Initialisierung werden wiederum die IP Adresse client-adress und der Port client-port benötigt über den die Kommunikation stattfindet. Des Weiteren wurden eigene Methoden zum Verbinden und Trennen implementiert, welche bei der Initilisierung genutzt werden. Eine Besonderheit stellt die delete-Methode dar, die im Falle eines Fehlers oder sterben einer Instanz der Klasse die Verbindung trennt und den Clienten damit anderen freigibt.
+Zudem sind Methoden für die benötigten Zugriffe gemäß dem Modbus Datenmodell auf die Tabellen implementiert. Diese umfassen das Auslesen von input und holding-registers und liefern ein register zurück, was je nach Datenmodell einen Datentyp besitzt. Für die beiden Lesemethoden wird ein maximales probieren von 10 mal vorgesehen, bei ienem fehlversuch wird eine Pause von 1,5 sekunden gemacht bevor der nöchste versuch gestartet wird. Für die Abfrage wird die Adresse in der Tabelle benötigt, die Anzahl der auszulesenden worte/register/Datentypen sowie die Slave/Server-ID. Die letzte Methode um Register zu schreiben wird auf 3 Versuche begrenzt, ebenfalls mit Pause bei Fehler. Auch hier wird die Adresse in der Tabelle sowie die Slave/Server ID um den ebenfalls mitzugebenden Wert zu schreiben benötigt.
+Damit ModbusConnection fertig und das Auslesen und Schreiben der Werte wird genutzt.
+
+\lstinputlisting[language=Python ,caption={Klasse zum Verbindungsaufbau über Modbus TCP}, label=lst:modconnect]{listings/modbus_connection.py}
 
 
 
-\lstinputlisting[language=Python ,caption={Klasse }, label=lst:modconnect]{listings/modbus_connection.py}
 
 
 
 
 
-
-
+\lstinputlisting[language=Python ,caption={Klasse zum Auslesen über Modbus TCP}, label=lst:modread]{listings/sensors_modbus.py}
