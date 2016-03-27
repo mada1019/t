@@ -16,6 +16,8 @@
 
 Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betrieb mit Modellprädiktiver Regelung zu konzipieren, zu konkretisieren und im letzten Schritt umzusetzen. Dazu werden zunächst die Anforderungen an die Anlage analysiert und weiterhin die Vorgaben und Rahmenbedingungen zur Anlage von Seiten der Hochschule Karlsruhe spezifiziert und ausgeführt. Daraus wird eine Idee abgeleitet, die anschließend zu einem Konzept weiterentwickelt und in ein konkretes Anlagendesign umgesetzt wird. Dabei werden die einzelnen Anlagenteile und deren Funktionsweisen näher beschrieben und auf die realen Einsatzbedingungen ausgelegt. Abschließend wird die Installation und dabei aufgetretenen Besonderheiten der Anlage beschrieben.
 
+Die These, welche es in diesem Kapitel zu belegen gilt, ist, dass sich die beschriebene und umgesetzte Anlage dazu eignet, um die Temperatur innerhalb eines zu regeln. Im nächsten Schritt gilt es zu zeigen, dass sich die Anlage gemeinsam mit dem Einsatz eines in Kapitel \ref{chap:modellbildung} gebildeten Modells, für die Modellprädiktive Regelung eignet.
+
 \section{Analyse der Anforderungen}
 \label{sec:anforderungen}
 
@@ -282,7 +284,6 @@ Um dem Controller die Steuerung zu ermöglichen, wird ein Signalwandler eingeset
 
 Der thermoelektrische Stellantrieb \textit{ABNM-LIN} von \textit{Danfoss} wird zur stufenlosen Betätigung des Heizkörperventils eingesetzt. Die Ansteuerung erfolgt über ein analoges 0-10~V Signal, welches innerhalb der Anlage vom EX9024-M bereitgestellt wird. Der Stellantrieb wandelt das angelegte Signal in einen proportionalen, linearen Stellweg um und steuert damit den Durchfluss im Heizkörper.
 
-
 Das beschriebene Konzept zeichnet sich dadurch aus, dass es eine kostengünstige Umsetzung erlaubt und eine größtmögliche Kompabilität der Anlageteile und Bauteile sicherstellt. Die explizit Forderung nach der Erweiterbarkeit wird explizit durch die offene Architektur und die eingesetzten Komponenten ebenfalls berückscihtigt, sodass langfristig die Möglichkeit besteht die Raumtemperatur beispielsweise unter Zuhilfenahme einer Raumklimatisierung und der Ansteuerung der Jalousien ganzjährig zu regeln zu können.
 
 \section{Installation und Inbetriebnahme}
@@ -372,13 +373,48 @@ Damit sind die grundlegenden Funktionen für die Modbus Kommunikation implementi
 
 \lstinputlisting[language=Python ,caption={Klasse zum Verbindungsaufbau und Für die Grundfunktionen über Modbus TCP}, label=lst:modconnect]{listings/modbus_connection.py}
 
-Diese Grundfunktionen werden von der SensorsModbus Klasse genutzt, um die Messwerte einzeln von den Geräten abzufragen. Der Code dazu ist in Listing \ref{lst:modread} abgebildet.
-Eine Besonderheit ist beim Auslesen der Werte aus dem Wärmemengenzähler gegeben, da dessen einzelne Messwerte die Größe eines Registers übersteigt. Wie in Abschnitt XXXXX bereits erwähnt, werden die Daten dann gemäß der Big-Endian Codierung verschlüsselt und müssen decodiert werden. Dazu bietet pymodbus ebenfalls eine entsprechende Funktion durch den BinaryPayload Decodierer mit der Besonderheit an, dass die Codierung little und big vertauscht sind bzw dass das gewünschte format angegeben werden muss. Die Länge von 2 Registern der Daten ist im Count angegeben und die ID des Wärmemengenzählers ist ebenfalls angegeben. Die konkreten einzelnen Messwerte haben verschiedene Adressen in der Datentabelle welche in den Methoden gespeichert sind.
+Diese Grundfunktionen werden von der SensorsModbus Klasse genutzt, um die Messwerte einzeln von den Sensoren abzufragen. Der Code dazu ist in Listing \ref{lst:modread} abgebildet.
+Eine Besonderheit ist beim Auslesen der Werte aus dem Wärmemengenzähler gegeben, da dessen einzelne Messwerte die Größe eines Registers übersteigt. Wie in Abschnitt XXXXX bereits erwähnt, werden die Daten dann gemäß der Big-Endian Codierung verschlüsselt und müssen decodiert werden. Dazu bietet pymodbus ebenfalls eine entsprechende Funktion durch den BinaryPayload Decodierer mit der Besonderheit an, dass die Codierung little und big vertauscht sind bzw dass das gewünschte format angegeben werden muss. Die Länge von 2 Registern der Daten ist im Count angegeben und die ID im seriellen Netzwerk des Wärmemengenzählers ist ebenfalls angegeben. Die konkreten einzelnen Messwerte haben verschiedene Adressen in der Datentabelle welche in den Methoden gespeichert sind.
 Die Adressen finden sich in Tabelle im Datenblatt im Anhang bzw in Tabelle.
 Die beiden Temperatursensoren geben den Temperaturwert als integer ganzzahligen Wert zurück um eine Zehnerpotenz erhöht. Daher müssen auch dessen Werte decodiert werden durch eine Division durch zehn. Sie stehen jeweils in derselben Tabelle unter der gleichen Adresse, jedoch haben die beiden Temperatursensoren unterschiedliche IDs zugewiesen bekommen, durch die Schalterstellung gemäß Datenblatt/Adressmapping.
 
 \lstinputlisting[language=Python ,caption={Klasse zum Auslesen über Modbus TCP}, label=lst:modread]{listings/sensors_modbus.py}
 
-Die Klasse AcuatorsModbus
+Die Klasse AcuatorsModbus erweitert ebenfalls die ModbusConnection Klasse, allerdings um die Aktuatoren anzusteuern. Dazu wird der Spannungsausgang am EX9024M mithilfe der dezimalen Registerwerten zwischen 8191 und 16383 gesteuert, die sich aus den Hexadezimalwerten im Datenblatt REFXXX ergeben. Der Maximalwert entspricht einer Ausgangsspannung von 10 V, der Minimalwert entsprechend 0 V. Im Rahmen der Anlagensteuerung soll jedoch nicht die Ausgangsspannung, sondern die Ventilstellung gesetzt werden. Um die Ventilstellung opening-level direkt anzugeben, 0 für Ventil zu und 1 für voll offen, erfolgt eine Umrechnung, zunächst in den entsprechenden Spannungswert und anschließend in den Registerwert der in die Datentabelle geschrieben wird. Außerdem wurde eine Methode zur Abfrage der Ventilstellung implementiert.
 
 \lstinputlisting[language=Python ,caption={Klasse zum Auslesen über Modbus TCP}, label=lst:modact]{listings/actuators_modbus.py}
+
+Um nun eine Bedienoberfläche zu schaffen die Plattformunabhängig bzw Kommunikationstechnologieunabhängig ist, wurden zwei weitere Klasse implementiert, die die jeweils vorausgegangenen Sensor und Aktor Klassen ein letztes Mal erweitert. Die Klassen Sensors und Actuators schaffen dies, indem sie die zuvor definierten Klassen importieren und bei der Initalisierung jeweils eine Instanz der Klasse bilden/instanzieren. Um die Unabhängigkeit von Kommunikationstechnologie zu erreichen, wird für jeden einzelnen Messwert eine eigene Methode mit eindeutiger Bezeichnung der Funktion und des Geräts definiert ohne dass ersichtlich ist welche Kommunikation darunter steckt. Damit ist ein Interface bze eine Oberfläche geschaffen die von Steuerungen genutzt werden können.
+
+\lstinputlisting[language=Python ,caption={Die Actutators und Sensors Klassen zur Bedienung der Anlage}, label=lst:anlage]{listings/actuators.py}
+
+\subsection{Inbetriebnahme mit Zweipunktregler}
+Um die Funktion der Anlage zu überprüfen und bereits Messdaten zu sammeln, wurde ein erstes, einfaches Programm zur Regelung erstellt, welches bis zum Einsatz der Modellprädiktiven Regelung die Raumtemperaturregelugn übernimmt. Anhand dessen Programmablauf wird im Folgenden das Zusammenspiel der Anlage und die Ansteuerung der Anlagekomponenten erläutert.
+
+Das Programm ist in Listing \ref{lst:oven} dargestellt und implementiert einen einfachen Zweipunktregler, der nach dem bekannten Backofenprinzip arbeitet und eine Schalthysterese von einem Grad Celsius besitzt. Zunächst werden die beiden Bedienoberflächen Sensors und Actuators importiert, gemeinsam mit einem Paket zum einfügen der Messwerte in eine Datenbank. Anschließend werden die verschiedenen Verbindungsparameter aus den Umgebungsvariablen der Pythonkonsole ausgelesen und zum Aufbau der Verbindung zu den Anlagenteilen und zur Datenbank genutzt. Dies geschieht durch die Instanzierung der Bedinoberflächeklassen Sensors und Actuators, die den Variablen s und a zugeiwesen werden.
+ Des Weiteren werden die beiden Ventilstellungen für die Schaltpunkte definiert. Nun startet der eigentliche Steueralgorithmus innerhalb einer while-Schleife. Die dauerhafte Laufzeit wird über die Schleifenbedingung true erreicht, welche durch eine Tastenkombination oder bei Auftreten eines Fehlers gestoppt wird.
+ Dabei werden die Verbindungen zu den Anlagenteilen trennt damit wird eine schnelle Wiederaufnahme des Betriebs gewährleistet wird und die Komponenten nicht durch eine bestehende Verbindung blockiert sind.
+Zu Beginn werden alle Messwerte innerhalb der Anlage ausgelesen und das arithmetische Mittel der Raumtemperaturen einfach ermittelt. Die angenommene Raumtemperatur lässt sich über den Gewichtungsvektor weightings auch als gewichtetes arithmetisches Mittel berechnen.
+Zum Auslesen der Werte, werden die Methoden des Sensors Objekts s und des Actuators Objekts a aufgerufen.
+Das Abfangend von Fehlern wurde bereits in den unteren Klassen implementiert, sodass die Methoden zu Anlagenbedeinung einfach und robust sind. Außerdem wurden möglich eFehlebbdieungen ebenfalls ausgeschlossen an gegebenen Stellen, sodass z.B. unmögliche Ventilstellungen oder Werte nicht geschrieben oder angefordert werden können.
+
+Anhand des Mittelwerts wird dann entschieden, ob der Heizkörper zur Raumerwärmung eingeschalten, weiter genutzt oder abgeschalten werden soll. Ist die Temperatur unter 21 Grad Celsius gestiegen und der Heizkörper wird noch nicht genutzt, erfolgt eine Ausgabe in der Konsole, dass es zu kalt ist und das Heizungsventil wird vollständig geöffnet. Ist die Temperatur über 22 Grad Celsius gestiegen und der Heizkörper wird genutzt, erfolgt eine Ausgabe, dass es zu warm ist, und das Heizungsventil wird geschlossen.
+Danach erfolgt ein Update der Ventilstellung, bevor die Messdaten in der Konsole ausgegeben und in eine Datenbank eingefügt werden. Abschließend wartet die Steuerung für 60 Sekunden, bevor der Algorithmus von vorne beginnt/abläuft.
+
+\lstinputlisting[language=Python ,caption={Zweipunktregler Programm zur Inbetriebnahme der Anlage}, label=lst:oven]{listings/oven_greedy_db.py}
+
+Aus Gründen der Übersichtlichkeit sind die Abhängigkeiten zwischen den Klassen in Abbildung in einem UML Klassendiagramm in \ref{fig:uml} graphisch dargestellt. Eine llternative Modellprädiktive Regelung würde 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160327_uml}
+\caption{UML Klassendiagramm der zentralen Anlagensteuerung}
+\label{fig:uml}
+\end{figure}
+
+Die Anlage konnte aufgrund von Lieferschwierigkeiten des Wärmemengenzählers erst am 16.12.2015 erfolgreich in Betrieb genommen werden. Seither siond lediglich kleinere Fehler aufgetreten, wodurch die Programmierung der Anlage stetig und sukszessive verbessert wurde.
+Seit Mitte Januar läuft der Betrieb der Anlage durchgängig stabil und fehlerfrei und leistet einen sehr zuverlässigen Dienst.
+Damit wird der Forderung nach einer hohen Funktionalität genüge getragen. Zudem wird auch die gewünschte Robustheit erfüllt, durch die fehlerabfangende Software.
+
+Der gemessene Raumtemperaturverlauf über den Zeitraum von Mitte Januar bis Mitte April ist in REFXXXXX dargestellt und die These bestätigt werden, dass die Anlage eine Raumtemperatur regeln kann.
+Aufgrund der zentralen Steuerung der Anlage, welche in Python umgesetzt wurde und fehlerfrei funktioniert, sind die Voraussetzungen für eine Regelbarkeit mit Hilfe von Modellprädiktiver Regelung erfüllt. Um die Eignung zu überprüfen, wird jedoch noch ein Modell des Raumes und der Anlage benötigt, welches im nachfolgenden Kapitel gebildet wird.

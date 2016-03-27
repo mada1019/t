@@ -13,6 +13,7 @@
 \label{chap:modellbildung}
 
 Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur, basierend auf den thermodynamischen Prozessen mit dessen Umgebung und der Anlage aus Kapitel \ref{chap:anlagendesign}, zu bilden, um damit und unter Zuhilfenahme der Anlage Modellpräditive Regelung zu ermöglichen.
+
 Dazu wird zunächst ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise an den bestehenden Raum erweitert angepasst wird, bis eine die Qualität des Modells ausreichend ist.
 
 Physikalisch motiviert.
@@ -25,6 +26,8 @@ Die triviale Aufgabe ist die hinreichend genaue Beschreibung der Realität bzw r
 Damit eine Steuerung mit Hilfe von Modellprädiktiver Regelung möglich ist, darf das Modell keine hohe Kompliziertheit aufweisen und sollte durch möglichst wenig Gleichunge trotzdem ein möglichst genaues Abbild der Realität abbilden.
 Das Modell soll zunächst so simpel wie möglich gestaltet werden um eine Optimierung mit Hilfe von MPC zu ermöglichen. Dessen Verfahren zur Optimierung sind gradientenbasiert und erfordern damit die Erzeugung von stetigen Ableitungen bis zum zweiten Grad. Daher soll die Komlpexität des Modells zunöchgst sehr gering gehalten werdeen und dann Stück für Stück erhöht werden und die damit die Geanuiogkeit des modells erhöht werden
 Die Optimalsteuerung stellt in diesem Fall den begrenzenden Faktor dar, da die Optimierungsumgebund CasADi für dynamische Systeme nur unter JModelica.org läuft. Daher wird darauf aufbauend das benötigte Modell für die MPC in Modelica gebildet unter Berücksichtigung der Restriktionen bezüglich JModelica.
+
+Ziel: Hohe Modellgüte bei gleichzeitig geringer Komplexität und Steigkeit
 
 \section{Das Grundmodell des Raumes}
 
