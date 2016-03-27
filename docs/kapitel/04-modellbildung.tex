@@ -12,29 +12,24 @@
 \chapter{Modellbildung des Raumes}
 \label{chap:modellbildung}
 
-Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur, basierend auf den thermodynamischen Prozessen mit dessen Umgebung und der Anlage aus Kapitel \ref{chap:anlagendesign}, zu bilden, um damit und unter Zuhilfenahme der Anlage Modellpräditive Regelung zu ermöglichen.
+Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur in K004b zu bilden. Die Modellbildung soll physikalisch motiviert sein und daher auf den thermodynamischen Prozessen mit der Außenumgebung und der Anlage aus Kapitel \ref{chap:anlagendesign} basieren. Des Weiteren soll das Modell speziellen Anforderungen genügen, um eine Modellprädiktive Regelung der Anlage zu ermöglichen.
 
-Dazu wird zunächst ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise an den bestehenden Raum erweitert angepasst wird, bis eine die Qualität des Modells ausreichend ist.
-
-Physikalisch motiviert.
-Anhand von Zustand, Steuergröße und Parameter/Eigenschaft
+Dazu wird zunächst ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise an den bestehenden Raum erweitert angepasst wird, bis eine die Qualität/Güte des Modells ausreichend ist.
 
 \section{Anforderungen an das Raummodell}
+Die triviale Aufgabe des Modells ist eine hinreichend genaue Beschreibung der realen Vorgänge und des Temperaturverlaufs. Hinreichend bedeutet, dass das Modell eine ausreichende Güte für den Einsatz mit Modellprädiktiver Regelung besitzt. In Kapitel \ref{sec:mpc} wurden bereits die Grundlagen zur Modellprädiktiven Regelung erläutert, wodurch sich Einschränkungen bei der Modellbildung ergeben. Dabei wurde festgestellt, dass die Lösung von Optimalsteuerungsproblemen gradientenbasiert erfolgt und die zweifache Erzeugung von Ableitung erfordert. Damit ergibt sich die Anforderung, dass das Modell keine Unstetigkeiten aufweist und sich zweimal stetig differenzieren lässt.
+Zudem ist Berechnung von Lösungen für Optimalsteuerungsprobleme sehr rechenintensiv und muss während des laufenden Betriebs der Anlage wiederholt stattfinden. Da die Lösung zudem wiederholt stattfinden muss
+, wird eine erhöhte Rechenkapazität benötigt, 
+um die Lösung in ausreichender Zeit zu berechnen. 
 
-Geringe Komplexität aus Anwendung/arebitsweise mit MPC, da wiederholte Lösung nötig des Opt Problems
-Stetig differenzierbar notwendig aus gradientenbasierter optimierung
-Um MPC durchzuführen ist es tribiel dass modell entsprechende Güte besitzt und auch die -steuergrößen einen Einfluss.
-Da Gegenläufig muss ein Kompromiss gefunden werden.
+Daraus ergibt sich eine weitere Anforderung, denn um den Rechenbedarf möglichst gering zu halten, soll das Modell möglichst wenig KOmplexität besitzen.
+Wie bereits bei den Anforderungen an die Anlage in Abschnitt \ref{sec:anforderungen} festgestellt wurde, stellt die Umgebung zur Optimalsteuerung einen begrenzenden Faktor dar, wodurch das Modell mit der Modellierungssprache Modelica gebildet wird.
 
+Da diese Anforderungen teils gegenläufig sind, gilt es einen Kompromiss zu finden, ein stetig differenzierbares Modell,
+, um eine ausreichende Modellgüte zu erhalten, gleichzeitig jedoch keine hohe Komplexität oder einen großen Umfang an Gleichungen besitzt.
+Ziel: Hohe Modellgüte bei gleichzeitig geringer Komplexität und Stetigkeit
 
-Da MPC die Lösung von Nichtlinearen Gleichungssystemen erfordert wird ein erhöhter Rechenbedarf benötigt. Daher sollte das Modell so einfach wie möglich gehalten werden. Die Krux liegt also darin, einen geeigneten Kompromiss zwischen Komplexität und Genauigkeit des Modells zu finden, der eine sinnvolle MPC Regelung ermöglicht.
-Des Weiteren werden gradientenbasierte Ableitungen zweifach bei der Optmierung/Lösung des LGS generiert weshalb auch keine Unstetigkeiten im Modell vorkommen dürfen.
-Die triviale Aufgabe ist die hinreichend genaue Beschreibung der Realität bzw realen Vorgänge. hinreichend definieren.
-Damit eine Steuerung mit Hilfe von Modellprädiktiver Regelung möglich ist, darf das Modell keine hohe Kompliziertheit aufweisen und sollte durch möglichst wenig Gleichunge trotzdem ein möglichst genaues Abbild der Realität abbilden.
-Das Modell soll zunächst so simpel wie möglich gestaltet werden um eine Optimierung mit Hilfe von MPC zu ermöglichen. Dessen Verfahren zur Optimierung sind gradientenbasiert und erfordern damit die Erzeugung von stetigen Ableitungen bis zum zweiten Grad. Daher soll die Komlpexität des Modells zunöchgst sehr gering gehalten werdeen und dann Stück für Stück erhöht werden und die damit die Geanuiogkeit des modells erhöht werden
-Die Optimalsteuerung stellt in diesem Fall den begrenzenden Faktor dar, da die Optimierungsumgebund CasADi für dynamische Systeme nur unter JModelica.org läuft. Daher wird darauf aufbauend das benötigte Modell für die MPC in Modelica gebildet unter Berücksichtigung der Restriktionen bezüglich JModelica.
-
-Ziel: Hohe Modellgüte bei gleichzeitig geringer Komplexität und Steigkeit
+Daher wird im Folgenden zunächst ein simples Raummodell gebildet, dass anschließend sukzessive erweitert und damit die Komlpexität des Modells schrittweise erhöht wird, bis eine ausreichende Beschreibung der Realität mit dem Modell möglich ist.
 
 \section{Das Grundmodell des Raumes}
 
@@ -211,6 +206,9 @@ equation
 \caption{Erweitertes Raummodell}
 \label{fig:raumdrei}
 \end{figure}
+
+
+Sonneneinstrahlung komplexe Berechnungen wie in Kapitel gegeben. Um Komplexität des Modells zu schonen und unstetigkeiten zu vermeiden, wurde ein eigenes Skript erstellt in Python mit pysolar, das eine effiziente und sehr exakte berechnung der benötigten Größen implementiert hat.
 
 \section{Validierung des Modells}
 

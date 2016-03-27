@@ -8,13 +8,15 @@
 In diesem Kapitel werden die theoretischen Grundlagen erläutert die benötigt werden, um die Forschungsfrage zu beantworten.
 Zunächst MPC dann eher technisch
 
-\section{Modellprädiktive Regelung}
-\label{chap:mpc}
+\section{Grundlagen zur Modellprädiktiven Regelung}
+\label{sec:mpc}
 
 Die Modellprädiktive Regelung ist ein Teilgebiet der angewandten Mathematik zur Regelung von Prozessen oder technischen Systemen hinsichtlich gewählter Optimierungskriterien. Hierzu bedient sie sich mathematischer Modelle des zu steuernden Prozesses sowie einem Teilbereich der angewandten Mathematik, der Optimalsteuerung. Zur optimalen Regelung eines Prozesses, werden wiederholt Optimalsteuerungsprobleme gelöst, die jedoch besondere Anforderungen an das Modell erfordern \cite[S.~10]{di14}. Daher erfolgt zunächst eine kurze Einführung in die Optimalsteuerung bevor die Modellprädiktive Regelung genauer beschrieben wird.
 
+\subsection{Optimalsteuerung}
+
 Die Optimalsteuerung ist ebenfalls ein Teilgebiet der angewandten Mathematik und dient dazu, dynamische Systeme optimal zu steuern hinsichtlich spezifizierter Optimalitätskriterien. Dazu sollen also Steuersignale bestimmt werden, sodass das System eventuell vorgegebenen physikalischen und nutzerdefinierten Rahmen- sowie Randbedingungen genügt und zudem ein Leistungskriterium minimiert beziehungsweise maximiert wird \cite[S.~3f.]{ki04}.
-Die modellierten Prozesse dynamischer Systeme lassen sich durch Zustände und Parameter beschreiben. Das Modell dann beschreibt das Verhalten des Prozesses, welches Rand- und Nebenbedingungen beschränkt sein kann. Weiterhin werden die Zustände von Steuergrößen beeinflusst. Diese Steuergrößen können frei oder innerhalb bestimmter Grenzen wählbar sein oder durch reale Einschränkungen fest vorgegeben sein. Des Weiteren wird das Leistungskriterium durch die Kostenfunktion zum Ausdruck gebracht. Das Optimalsteuerungsproblem lässt sich dann durch die Kostenfunktion, Zustände, Parameter, Rand- und Nebenbedingungen und Steuergrößen wie folgt beschreiben \cite[S.~61]{di14}:
+Die modellierten Prozesse dynamischer Systeme lassen sich durch Zustände und Parameter beschreiben. Das Modell dann beschreibt das Verhalten des Prozesses, welches durch Rand- und Nebenbedingungen beschränkt sein kann. Weiterhin werden die Zustände von Steuergrößen beeinflusst. Diese Steuergrößen können frei oder innerhalb bestimmter Grenzen wählbar sein oder durch reale Einschränkungen fest vorgegeben. Des Weiteren wird das Leistungskriterium durch die Kostenfunktion zum Ausdruck gebracht. Das Optimalsteuerungsproblem lässt sich dann durch die Kostenfunktion, Zustände, Parameter, Rand- und Nebenbedingungen und Steuergrößen wie folgt beschreiben \cite[S.~61]{di14}:
 
 \begin{eqnarray}
 \label{eq:opt}
@@ -40,22 +42,12 @@ Für die Lösung dieses zeitkontinuierlichen Optimierungsproblems, müssen Bedin
 Konkret können mehrere, numerische Ansätze zur Lösung des Optimalsteuerungsproblems verfolgt werden, die sich in den Zustandsraum, die indirekten und direkten Verfahren einteilen lassen. Für reale Probleme, welche sich meist durch eine Vielzahl an Nebenbedingungen auszeichnen, eignen sich insbesondere die direkten Verfahren, die auch in der Praxis am weitesten verbreitet sind \cite[S.~63]{di14}. Die Lösung beschreibt einen hinsichtlich der gewählten Kriterien optimalen Einsatz von Steuergrößen Lösung und wird als Optimalsteuerungsplan bezeichnet.
 Da die Modellprädiktive Regelung nur den Rahmen dieser Arbeit beschreibt wird nicht näher darauf eingegangen und für eine theoretische fundierte Einführung in die gesamte Thematik und die einzelnen Lösungsmethoden von Optimalsteuerungsproblemen auf \cite{di14} verwiesen.
 
-Da Modelle in der Realität den tatsächlichen Prozess nicht vollends beschreiben, wird sich der reale Prozess durch die Umsetzung des berechneten Optimalsteuerungsplans mit höchster Wahrscheinlichkeit auch nicht wie gewünscht/berechnet/vorhergesagt verhalten. Dies wird als Model-Plant-mismatch bezeichnet. Um diesen Fehler auszugleichen wurde Modellprädiktive Regelung aus der Optimalsteuerung weiterentwickelt.
-Dadurch wird das Verhalten eines Prozesses in eine immer gleichweit in die zukünftige Periode hineinreichende Periode -- zu beschreiben. Hierzu bedient \acrlong{mpc} sich der Kenntnis des aktuellen Zustandes und eines physikalischen-mathematischen Modells des Systems, um dessen zukünftiges Verhalten \Gun vorherzusagen \Gob bzw. abzubilden. Des Weiteren wird versucht das Verhalten des Systems mit minimalem Aufwand zu beeinflussen, um einem eigens- oder vordefinierten Zielkriterium zu folgen \acrlong{bzw} diesem zu entsprechen.
-\cite[S.~71]{di14}
+\subsection{Modellprädiktive Regelung}
 
-Modell und MPC
-Modelle reales Verhalten beschreiben,  komplexität nicht zu hoch sein um Rechenzeit gering zu  Steuerung im laufenden Betrieb zu ermöglichen.
-Steuerung der Raumtemperaturregelung MPC mit Steuerungsproblem im laufenden Betrieb, jedoch nicht online, nur quasi. Immer auf Basis der aktuellen Messungen des Systemzustandes, nächster Schritt vorhersage Werte Controls. Durch dauernde Lösung können Modellfehler und Störungen ausgeglichen werden
+Da zwischen realen Modellen und den tatsächlichen Prozessen immer Diskrepanzen bestehen, wird sich der reale Prozess durch die Umsetzung des berechneten Optimalsteuerungsplans mit höchster Wahrscheinlichkeit auch nicht exakt der Berechnung folgen. Dies wird auch als Model-Plant-Mismatch bezeichnet. Die Modellprädiktive Regelung eignet sich hervorragend, um diese Modellfehler sowie Störungen auszugleichen ohne eine umfassende Echtzeitregelung einzusetzen. Eine Echtzeitregelung lässt sich aufgrund des enormen Rechenaufwands ohnehin nur durch Näherungen und Vereinfachungen für sehr einfache Anwendungen umsetzen. Diese Lücke wird durch Modellprädiktive Regelung geschlossen, die ein beschränktes, immer gleich weit in die Zukunft schauendes Zeitintervall betrachtet. Zu diskret wiederholten Zeitpunkten wird das Verhalten eines Prozesses durch Kenntnis des aktuellen Zustandes und mit Hilfe eines Modells in dem Intervall vorhergesagt und versucht, dieses mit Optimalsteuerungsplänen dem gewählten Optimierungskriterium entsprechend zu beeinflussen. Dadurch kann auf Abweichungen, egal ob durch Modellabweichungen oder Störungen des Prozesses, zum Optimalsteuerungsplan zu den diskreten Zeitpunkten reagiert werden \cite[S.~71]{di14}.
 
-Hohe Modellgüte bei gleichzeitig geringer Komplexität und Steigkeit
-
-
-Geringe Komplexität aus Anwendung/arebitsweise mit MPC, da wiederholte Lösung nötig des Opt Problems
-Stetig differenzierbar notwendig aus gradientenbasierter optimierung
-Um MPC durchzuführen ist es tribiel dass modell entsprechende Güte besitzt und auch die -steuergrößen einen Einfluss.
-Da Gegenläufig muss ein Kompromiss gefunden werden.
-
+Im Rahmen dieser Arbeit wird eine Anlage aufgebaut und ein Modell gebildet, die eine Raumtemperaturregelung während des laufenden Betriebs mit Modellprädiktiver Regelung ermöglicht. Im ersten Schritt werden auf Basis von aktuellen Messungen des Systemzustandes und Kenntnis der nicht beeinflussbaren Steuergrößen zu jedem diskreten Steuerungszeitpunkt optimale Steuerungspläne bestimmt. Im nächsten Schritt soll die Modellprädiktive Regelung Vorhersagewerte für den äußeren, nicht beeinflussbaren Steuergrößen zur die Bestimmung der optimalen Steuersignale nutzen.
+Die Anforderungen die sich daraus an ein Modell ableiten, werden bei der Modellbildung in Kapitel \ref{chap:modellbildung} explizit spezifiziert.
 
 \section{Technische Grundlagen zur Kommunikation mit Bussystemen}
 \label{sec:grundlagenbus}
