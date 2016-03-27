@@ -20,6 +20,13 @@ Physikalisch motiviert.
 Anhand von Zustand, Steuergröße und Parameter/Eigenschaft
 
 \section{Anforderungen an das Raummodell}
+
+Geringe Komplexität aus Anwendung/arebitsweise mit MPC, da wiederholte Lösung nötig des Opt Problems
+Stetig differenzierbar notwendig aus gradientenbasierter optimierung
+Um MPC durchzuführen ist es tribiel dass modell entsprechende Güte besitzt und auch die -steuergrößen einen Einfluss.
+Da Gegenläufig muss ein Kompromiss gefunden werden.
+
+
 Da MPC die Lösung von Nichtlinearen Gleichungssystemen erfordert wird ein erhöhter Rechenbedarf benötigt. Daher sollte das Modell so einfach wie möglich gehalten werden. Die Krux liegt also darin, einen geeigneten Kompromiss zwischen Komplexität und Genauigkeit des Modells zu finden, der eine sinnvolle MPC Regelung ermöglicht.
 Des Weiteren werden gradientenbasierte Ableitungen zweifach bei der Optmierung/Lösung des LGS generiert weshalb auch keine Unstetigkeiten im Modell vorkommen dürfen.
 Die triviale Aufgabe ist die hinreichend genaue Beschreibung der Realität bzw realen Vorgänge. hinreichend definieren.
