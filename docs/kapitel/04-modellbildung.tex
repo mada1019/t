@@ -9,14 +9,16 @@
 \dictum[--- \textsc{Norbert Wiener}]{\Gun Das beste Modell für eine Katze ist eine Katze; möglichst dieselbe Katze. \Gob}}
 \renewcommand{\chapterheadstartvskip}{\vspace*{2cm}}
 
-\chapter{Modellbildung des Raumes}
+\chapter{Modellbildung und Simulation}
 \label{chap:modellbildung}
 
 Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur in K004b zu bilden. Die Modellbildung soll physikalisch motiviert sein und daher auf den thermodynamischen Prozessen mit der Außenumgebung und der Anlage aus Kapitel \ref{chap:anlagendesign} basieren. Des Weiteren soll das Modell speziellen Anforderungen genügen, um eine Modellprädiktive Regelung der Anlage zu ermöglichen.
 
 Dazu wird zunächst ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise an den bestehenden Raum erweitert angepasst wird, bis eine die Qualität/Güte des Modells ausreichend ist.
 
-\section{Anforderungen an das Raummodell}
+\section{Modellbildung}
+
+\subsection{Anforderungen an das Raummodell}
 Die triviale Aufgabe des Modells ist eine hinreichend genaue Beschreibung der realen Vorgänge und des Temperaturverlaufs. Hinreichend bedeutet, dass das Modell eine ausreichende Güte für den Einsatz mit Modellprädiktiver Regelung besitzt. In Kapitel \ref{sec:mpc} wurden bereits die Grundlagen zur Modellprädiktiven Regelung erläutert, wodurch sich Einschränkungen bei der Modellbildung ergeben. Dabei wurde festgestellt, dass die Lösung von Optimalsteuerungsproblemen gradientenbasiert erfolgt und die zweifache Erzeugung von Ableitung erfordert. Damit ergibt sich die Anforderung, dass das Modell keine Unstetigkeiten aufweist und sich zweimal stetig differenzieren lässt.
 Zudem ist Berechnung von Lösungen für Optimalsteuerungsprobleme sehr rechenintensiv und muss während des laufenden Betriebs der Anlage wiederholt stattfinden. Da die Lösung zudem wiederholt stattfinden muss
 , wird eine erhöhte Rechenkapazität benötigt, 
@@ -31,7 +33,7 @@ Ziel: Hohe Modellgüte bei gleichzeitig geringer Komplexität und Stetigkeit
 
 Daher wird im Folgenden zunächst ein simples Raummodell gebildet, dass anschließend sukzessive erweitert und damit die Komplexität des Modells schrittweise erhöht wird, bis eine ausreichende Beschreibung der Realität mit dem Modell möglich ist.
 
-\section{Das Grundmodell des Raumes}
+\subsection{Das Grundmodell des Raumes}
 
 Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothetischer Raum betrachtet. Dieser Raum bildet zusammen mit der ihn umgebenden Luft ein abgeschlossenes thermodynamisches System, wie in Kapitel \ref{sec:grundlagenmodell} beschrieben. Der Raum ist selbst mit Luft gefüllt und wird zu allen sechs Seiten hin durch Wände begrenzt. Damit bildet der Raum ein geschlossenes System, da keine Massenströme über die Grenzen hinweg fließen können. An den Grenzflächen kann also lediglich Wärme zwischen der Umgebung und dem  Raum ausgetauscht werden. Des Weiteren wird eine homogene Temperatur innerhalb des Raumes und der Umgebung angenommen, welche in der Realität eingeschwungenen Gleichgewichtszuständen innerhalb der beiden Teilsysteme entspricht. Um die Annahme für den Raum zu überprüfen, muss noch festgestellt werden auf welcher zeitlichen Skala der Einschwingvorgang für eine homogene Temperatur innerhalb des Raumes stattfindet und ob dieser damit eine Relevanz für die Modellbildung besitzt.
 
@@ -68,7 +70,7 @@ Spezifische Wärmekapazität von Luft & 1.000,0\tnote{3)} & $[\frac{J}{kg*K}]$\\
 \begin{tablenotes}[]\footnotesize\singlespacing\setlength\labelsep{0pt}
 \item[1)] Werte durch eigene Vermessung des Raumes K004b vom 07.12.2015.
 \item[2)] Schätzwert, geschätzt nach \cite[S.~409]{re14} mit Richtwerten aus \cite[S.~194ff.]{re14}.
-\item[3)] Tabellenwert aus \cite[S.~139]{ha13}.
+\item[3)] Tabellenwert aus \cite[S.~68]{ha13}.
 \end{tablenotes}
 \end{threeparttable}
 \caption{Eigenschaften des Raummodells}
@@ -96,7 +98,7 @@ equation
 Damit ist ein Grundmodell für einen Raum gebildet, wie in \ref{fig:grundraum} graphisch dargestellt, um die Temperatur innerhalb eines Raumes zu berechnen. Dieses wird im Folgenden nun schrittweise erweitert und zum Abschluss überprüft, ob es der Realität genüge zu trägt.
 
 
-\section{Modellerweiterung durch Berücksichtigung der realen Umgebung}
+\subsection{Modellerweiterung durch Berücksichtigung der realen Umgebung}
 
 Im nächsten Schritt wird das einfache Raummodell zunächst an die reale Umgebung des Raums K004b angepasst. Die Lage von K00b ist in \ref{fig:skizzek004a} ersichtlich und es ist zu erkennen, dass der Raum lediglich zwei Außenwände besitzt, die an die Umgebungsluft grenzen: Die Wände in Richtung Süden und Westen. Die anderen beiden Wände, sowie die Decke und der Boden, grenzen an weitere Gebäudeteile des K~Gebäudes. Somit entspricht der Raum im Modell nach wie vor einem geschlossenen System und bildet weiterhin, zusammen mit dem umgebenden K~Gebäude und der Umgebungsluft, ein abgeschlossenes System. Jedoch müssen nun potenziell verschiedene Wärmeströme zwischen dem Raum und der Außenumgebung sowie dem Raum und dem K~Gebäude betrachtet werden. Da die fließenden Wärmeströme im Vergleich zur sehr großen Energie innerhalb des gesamten K~Gebäudes und der Umgebung nur verschwindend gering sind, wird der erwärmende beziehungsweise kühlende Effekt der Wärmeströme auf die beiden Teilsysteme vernachlässigt und es wird von konstanten, homogenen Temperaturen beider ausgegangen.
 
@@ -120,7 +122,7 @@ equation
 Damit wurde das Raummodell an die reale Umgebung angepasst und um die Temperatur innerhalb des Raumes zu bestimmen, wird nun neben der Ausgangstemperatur im Raum und der Umgebungstemperatur noch die Temperatur innerhalb des restlichen K~Gebäudes berücksichtigt. Im nächsten Schritt werden die realen, räumlichen Gegebenheiten im Modell abgebildet.
 
 
-\section{Modellerweiterung durch Berücksichtigung der räumlichen Gegebenheiten}
+\subsection{Modellerweiterung durch Berücksichtigung der räumlichen Gegebenheiten}
 
 Um das Modell an die realen Gegebenheiten des Raumes K004b anzupassen, müssen zwei bauliche Gegebenheiten beachtet werden. Wie in \ref{fig:skizzek004a} bereits dargestellt ist, ist in der südlichen Außenwand eine Fensterfront vorhanden. Da der U-Wert eines Fensters erheblich von dem U-Wert einer Wand abweicht, entsteht ein zusätzlicher Wärmestrom zwischen dem Raum und der Umgebung durch das Fenster hindurch. Das Öffnen und Schließen der Fenster mit daraus resultieren Massenströmen wird zunächst nicht explizit berücksichtigt, weshalb das Raummodell weiterhin als geschlossenes System betrachtet wird. Des Weiteren ist es möglich, den Raum über einen Heizkörper zu beheizen. Mit dem Heizkörper, der zunächst als einfache Wärmequelle im Modell ergänzt wird, erhöht sich die Anzahl der externen Steuergrößen erneut, da die Temperatur innerhalb des Raumes auch von dieser abhängig ist.
 
@@ -185,11 +187,12 @@ Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschre
 
 
 
-\section{Das Heizkörpermodell}
+\subsection{Das Heizkörpermodell}
 
-Der Heizkörper im Raum K004b lässt sich nach \cite[S.~824f.]{re14} als Stahlrohrradiator identifizieren. Er besteht aus genormten zwei-säuligen Gliedern jeweils am Sammler oben und unten miteinander verschweißt den Heizkörper bilden.
+Der Heizkörper im Raum K004b lässt sich nach \cite[S.~824f.]{re14} als Stahlrohrradiator identifizieren. Er besteht aus genormten zwei-säuligen Gliedern, die jeweils am Sammler oben und unten miteinander verschweißt den Heizkörper bilden. Dabei sind die Temperatur des Heizwassers am Einlass des Heizkörpers und der Massenstrom wiederum Steuergrößen für das Modell. Die Temperatur am Einlass wird durch die Heizanlage vorgegeben und ist damit eine externe Steuergröße. Der Massenstrom wird direkt durch den Stellantrieb gesteuert und ist daher eine Steuergröße, die vom Controller mittelbar genutzt werden kann, um aktiv einen Einfluss auf die Raumtemperatur zu nehmen. Da der eingebrachte Wärmestrom nicht linear von der Temperaturdifferenz abhängt, erfolgt eine Diskretisierung des Heizkörpers in Volumenelemente, um den Heizkörper adäquat im Modell abzubilden. 
 
-
+Zur Berechnung des in den Raum eingebrachten Wärmestroms, erfolgt wiederum eine Bilanzierung von jedem diskreten Volumenelement durch den ersten Hauptsatz der Thermodynamik nach \ref{eq:hauptsatz}. Der gesamte Wärmestrom berechnet sich dann aus der Summe der einzelnen Wärmestrome zwischen Raum und den Volumenelementen, welche sich nach \ref{eq:qdot} berechnen. Bei der Diskretisierung wird mit Hilfe der Heizwassertemperatur am Einlass des Volumenelements die Temperatur am Auslass berechnet und zusammen mit dem Massenstrom an das nächste Volumenelement weitergereicht.
+Allerdings müssen für die Berechnung zunächst noch weitere Eigenschaften in das Raummodell mit aufgenommen werden, welche in \ref{tab:eigenschaften_heiz} zusammen mit ihren Werten dargestellt sind.
 
 \begin{table}[H]
 \centering
@@ -203,35 +206,41 @@ Der Heizkörper im Raum K004b lässt sich nach \cite[S.~824f.]{re14} als Stahlro
 \cmidrule[0.5pt](l{0.25em}){2-2}
 \cmidrule[0.5pt](l{0.25em}){3-3}
 
-Zahl der Glieder & 106\tnote{1)} & $Stück$ \\ 
-\ccol Säulen pro Glied & \ccol 2 \tnote{1)} & \ccol $Stück$ \\
-Rohrdurchmesser Vertikal & 0,0255\tnote{1)} & $[m}$\\
-\ccol Rohrdurchmesser Horizontal & 0,05 \ccol 2 \tnote{1)} & \ccol $m$ \\
-Höhe der Glieder & 0,4\tnote{1)} & $[m}$\\
-\ccol Länge des Glieds & 0,045 \ccol 2 \tnote{2)} & \ccol $[m]$ \\
 
-Höhe der Glieder & 0,4\tnote{1)} & $[m}$\\
-\ccol Länge des Glieds & 0,045 \ccol 2 \tnote{2)} & \ccol $[m]$ \\
-Wärmedurchgangskoeffizient Heizkörper & 16\tnote{2)} & $[\frac{W}{m^{2}*K}]$\\
+Zahl der Glieder & 106\tnote{1)} & Stück \\ 
+\ccol Säulen pro Glied & \ccol 2\tnote{1)} & \ccol Stück \\
+Rohrdurchmesser Vertikal & 0,0255\tnote{1)} & $[m]$\\
+\ccol Rohrdurchmesser Horizontal & 0,05 \ccol 2\tnote{1)} & \ccol $[m]$ \\
+Höhe der Glieder & 0,4\tnote{1)} & $[m]$\\
+\ccol Länge des Glieds & 0,045 \ccol 2\tnote{2)} & \ccol $[m]$ \\
+Wassermasse innerhalb eines Gliedes & 0,35\tnote{2)} & $[kg]$\\
+\ccol Spezifische Wärmekapazität von Wasser &\ccol 4.200,0\tnote{4)} &\ccol $[\frac{J}{kg*K}]$\\
+Wärmedurchgangskoeffizient Heizkörper & 16\tnote{3)} & $[\frac{W}{m^{2}*K}]$\\
+\ccol Anzahl Volumenelemente & \ccol 10&\ccol  Stück\\
 
 \bottomrule
 \end{tabularx}
 \begin{tablenotes}[]\footnotesize\singlespacing\setlength\labelsep{0pt}
 \item[1)] Wert aus eigener Vermessung des Raumes K004b vom 07.12.2015.
-\item[2)] Tabellenwert aus \cite[S.~825]{re14}.
+\item[2)] Tabellenwert, entnommen aus \cite[S.~825]{re14}.
 \item[3)] Tabellenwert, geschätzt nach \cite[S.~191ff.]{re14}.
+\item[4)] Tabellenwert, entnommen aus \cite[S.~619]{ba12}.
 \end{tablenotes}
 \end{threeparttable}
 \caption{Eigenschaften des Heizkörpermodells}
 \label{tab:eigenschaften_heiz}
 \end{table}
 
+Die realen Eigenschaften des Heizkörpers werden eins zu eins im Modell abgebildet und anschließend im Heizkörpermodell zentral auf die einzelnen diskretisierten Volumenelemente umgerechnet, wie in Listing \ref{lst:heiz} in Zeile  zu sehen. Dazu gehört die Zahl und Wassermasse der Glieder, die Höhe des Heizkörpers sowie die Anzahl, Durchmesser und Längen der verschiedenen Rohre, um die Wärmeaustauschoberfläche zu bestimmen. Zudem werden die spezifische Wärmekapazität des Heizwassers und der Wärmedurchgangskoeffizient des Heizkörpers benötigt.
+
+\lstinputlisting[language=Modelica ,caption={Auszüge des Modelica Modells vom Heizkörper in K004b}, label=lst:heiz, linerange={20-20, 47-57,58-60, 106-120}]{listings/room_model_listing.mo}
+
+Das Modell des Heizkörpers ist als Subkomponente in den Raum integriert und die Steuergrößen werden über einen eigenen Port am Raummodell an den Heizkörper übergeben. Mit dem Modell des Heizkörpers wird ein physikalisch motivierter, mittelbarer Zusammenhang zwischen der Heizleistung und dem Massenstrom hergestellt, welcher insbesondere von einem modellprädiktiv regelnden Controller genutzt werden kann.
+
+Bereits bei den Einsatzzielen der Anlage in Abschnitt\ref{sec:anforderungen} war gefordert, den Zusammenhang zwischen der Sonneneinstrahlung und der Raumtemperatur zu untersuchen sowie Störgrößen explizit in Kauf zu nehmen. Daher ist es passend, dass die Fensterfront in Richtung Süden ausgerichtet ist und der Raum K004b als Büro genutzt wird. Um jedoch das Modell darauf anzupassen, erfolgt im nächsten Abschnitt erfolgt weitere Erweiterung des Modells.
 
 
-Bereits bei den Einsatzzielen der Anlage in \ref{sec:anforderungen} war gefordert, den Zusammenhang zwischen der Sonneneinstrahlung und der Raumtemperatur zu untersuchen sowie Störgrößen explizit in Kauf zu nehmen. Daher ist es passend, dass die Fensterfront in Richtung Süden ausgerichtet ist und der Raum K004b als Büro genutzt wird und im nächsten Abschnitt erfolgt eine Anpassung an diese beiden Faktoren.
-
-
-\section{Modellerweiterung durch Berücksichtigung der Sonneneinstrahlung und Störgrößen}
+\subsection{Modellerweiterung durch Berücksichtigung der Sonneneinstrahlung und Störgrößen}
 
 Der Raum K004b wird regulär als Büro genutzt, weshalb verschiedene Faktoren als Störgrößen in Bezug auf die Raumtemperatur betrachtet werden können. Zum einen wird durch die Menschen und deren Rechner weitere Wärme in den Raum eingebracht und zum Anderen werden die Fenster und die Türen geöffnet und geschlossen. Dabei werden Massenströme zwischen Raum und Außenumgebung sowie K~Gebäude ausgetauscht, welche jedoch zunächst nicht modelliert werden sollen, sondern als Störgröße betrachtet die es durch die Modellprädiktive Regelung zu auszugleichen gilt. Die Wärme von Rechnern und Menschen werden als einfache Wärmequelle im Modell berücksichtigt. 
 Zudem trifft auf die südseitigen Fenster Sonnenstrahlung, welche ebenfalls einen Wärmestrom in den Raum einbringt und damit ebenfalls einen Einfluss auf die Raumtemperatur hat. Dieser wird zunächst ebenfalls als eine einfache Wärmequelle aufgefasst.
@@ -282,8 +291,8 @@ Das Modell wurde dadurch weiter an die realen Gegebenheiten angepasst
 
 
 
+\section{Simulation und Modellanpassung}
 
+\subsection{Validierung des Modells}
 
-\section{Validierung des Modells}
-
-\section{Anpassung des Modells mit Parameterschätzung}
+\subsection{Anpassung des Modells mit Parameterschätzung}

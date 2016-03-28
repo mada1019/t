@@ -44,14 +44,14 @@ package room_model_backup
       "temperature of the fluid streaming in the control volume";
     outer Modelica.SIunits.MassFlowRate mdot 
       "massflowrate within the radiator";
-
+[...]
   equation
-    /* calculate inner energy */
+    /* calculate inner energy within one control volume*/
     cv_u = cv_m * cp_water * cv_temperature_out;
-    /* calculate derival of the inner energy */
+    /* calculate derival of the inner energy of one control volume*/
     der(cv_u) = mdot * cp_water * (cv_temperature_in - cv_temperature_out) - cv_qdot;
-    /* calculate heatflowrate */
-    cv_qdot = u_radiator * exchange_surface * (cv_temperature_out - room_temperature_cv);
+    /* calculate heatflowrate of the control volume*/
+    cv_qdot = u_radiator * exchange_surface_cv * (cv_temperature_out - room_temperature_cv);
     /* commit calculated temperature */
     outlet.t = cv_temperature_out;
   end CV_Radiator;
@@ -103,26 +103,20 @@ package room_model_backup
       "massflowrate within the radiator";
     Modelica.SIunits.Conversions.NonSIunits.Temperature_degC radiator_inlet = inlet.t
       "temperature of the inflowing fluid";
-
+[...]
   equation
-    /* calculate surface of one control volume */
-    exchange_surface = (radiator_element_number * radiator_element_length * 2 * Modelica.Constants.pi * tube_diameter_horizontal + radiator_element_number * radiator_tubes_element * tube_length_vertical * Modelica.Constants.pi * tube_diameter_vertical)/cv_number;
+    /* calculate exchange surface of one control volume */
+    exchange_surface_cv = (radiator_element_number * radiator_element_length * 2 * Modelica.Constants.pi * tube_diameter_horizontal + radiator_element_number * radiator_tubes_element * tube_length_vertical * Modelica.Constants.pi * tube_diameter_vertical)/cv_number;
     /* calculate mass within one control volume */
-    cv_m = (radiator_element_mass * radiator_element_number)/cv_number;
+    cv_m = (radiator_elment_mass * radiator_element_number)/cv_number;
     /* commit temperature of radiator fluid inlet to the first control volume */
     cv_radiator[1].inlet.t = radiator_inlet;
-    /* commit fluid temperatures within the radiator control volumes */
+    /* connect the control volumes within the radiator */
     for i in 1 : (cv_number-1) loop
      connect( cv_radiator[i].outlet, cv_radiator[i+1].inlet);
     end for;
-    /* save fluid temperature of the last radiator control volumes */
-    radiator_temperature_out=cv_radiator[cv_number].outlet.t;
-    /* calculate and save the heatflowrate which is leaving the radiator*/
-    radiator_qdot_out = sum(cv_radiator.cv_qdot);
-    /* commit roomtemperature*/
-    room_temperature=room_temperature_cv;
-    outlet.mdot = mdot;
-    outlet.t = radiator_temperature_out;
+    /* calculate and commit the heatflow which is leaving the radiator*/
+    radiator_qdot = sum(cv_radiator.cv_qdot);
   end Radiator;
 
   model Room_radiator_window "model of a room for mpc purpose with JModelica.org"
