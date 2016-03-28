@@ -295,10 +295,64 @@ Weitere Effekte die explizit nicht berücksichtigt wurden sind die Energie inner
 
 
 \section{Simulation und Modellanpassung}
-In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Verwendung des Modells. Dazu werden für die Steuergrößen reale Messwerte vorgegeben, um die Güte des Modells abzuschätzen, durch einen Vergleich der berechneten und tatsächlichen gemessen Werte. Abschließend erfolgt eine Anpassung der Modellparameter mit Hilfe von um die Modellgüte
- und der Vergleich mit gemessen Werte
 
-\subsection{Validierung des Modells}
+In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Verwendung des Modells. Dazu werden für die Steuergrößen reale Messwerte vorgegeben, um die Güte des Modells abzuschätzen, durch einen Vergleich der berechneten und tatsächlichen gemessen Werte. Abschließend erfolgt eine Anpassung der Modellparameter mit Hilfe von \cite{casiopeia}, um die Modellgüte zu verbessern.
+
+\subsection{Simulation und Validierung des Modells}
+
+Die Validation des Modells erfolgt in zwei Schritten. Zunächst wird das Raummodell ohne Verwendung des Heizkörpers simuliert. Im nächsten Schritt wird erfolgt eine Simulation, bei der der Heizkörper zum Einsatz kommt.
+Somit gilt es für den ersten Schritt Zeitintervall zu identifizieren, welches möglichst langer Dauer ist und währenddessen möglichst wenig Störfaktoren aufgetreten sind und weiterhin der Heizkörper nicht genutzt wurde. Ein solches Zeitintervall findet sich über die Weihnachten vom 23.12.2105 bis zum 28.12.2015, da aufgrund der Feiertage das Büro nicht genutzt wurde.
+Das Intervall umfasst mehr als 5 Tage, von denen an den ersten Tage eine sehr milde Außentemperatur zwischen $8^{\circ}C$ und $16^{\circ}C$ vorgeherrscht hat. Erst am letzten Tag nähert sich die Außenlufttemperatur dem Gefrierpunkt von $0^{\circ}C$. Außerdem hat die Sonne gegen mittag geschienen und den Raum dadurch erwärmt.
+Die genauen Messdaten der Globalstrahlung und Außentemperatur für diesen Zeitraum wurden von \cite{wetter} zur Verfügung gestellt und sind in REFXXXXBILD visualisiert sowie auf der angehängten CD in der Datei XXXXXX zu finden.
+Der Simulation wurde außerdem eine Temperatur von $22^{\circ}C$ im K~Gebäude und die gemessene Initialtemperatur von $22,8^{\circ}C$ zugrunde gelegt. Die Ergebnisse der Simulation sind im Plot in Abbildung \ref{fig:valid1} abgebildet und werden im Folgenden analysiert.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160328_validierung1}
+\caption{Simulation des Raummodells ohne Einsatz der Heizung}
+\label{fig:valid1}
+\end{figure}
+
+Zu beachten ist die Skalierung der Abzisse, welche in Minutenschritte eingeteilt ist und die Simulation erstreckt über einen Zeitraum von 7500 Minuten. Im Rahmen der Modellprädiktiven Regelung werden die Simulationszeiträume deutlich kürzer betrachtet, jedoch soll durch diese Simulation ein Abgleich des Modells mit der Realität ermöglicht werden, worin sich die lange Periode begründet.
+
+Der erste Blick lässt bereits erkennen, dass die simulierte Temperaturkurve eine ähnliche Dynamik wie der gemessene Temperaturverlauf aufweist. Von Beginn der Simulation bis hin zum 26.02.2016 stimmt das Systemverhalten sehr gut mit der Realität überein. Danach erfolgt ein leichter Knick bei der simulierten Kurve, der bis Ende der Simulation erhalten bleibt und nicht weiter erklärt werden kann. 
+Außerdem ist eine minimale zeitliche Verzögerung des Modells zur Realität erkennbar, was auf einen Unterschied in der Trägheit zwischen Realität und Modell hindeutet.
+Die simulierte Temperaturkurve liegt während des gesamten Intervalls unterhalb der Messwerte, was einen Hinweis auf einen zu hohen Wärmeverlust im Modell liefert.  
+Des Weiteren lässt sich der Einfluss der Solarstrahlung auf die Raumtemperatur deutlich erkennen, der täglich etwa zur Mittagszeit einsetzt und den Raum dadurch bis Nachmittags erwärmt.
+
+Insgesamt ist zu hervorheben, dass die simulierte von der tatsächlich gemessenen Temperatur innerhalb der ersten beiden Tag um nicht mehr als $0,4^{\circ}C$ und während der gesamten Simulationsdauer um nicht mehr als $1^{\circ}C$ abweicht, wobei die Temperatursensoren des \textsc{Webthermograph8x} eine Messabweichung von $\pm 0,26^{\circ}C$ und die beiden RTM1 Temperaturfühler eine Messabweichung von $\pm 0,5^{\circ}C$ besitzen.
+
+Im Rahmen der Modellprädikitiven Regelung werden jedoch wie zuvor erwähnt kürzere Simulationszeiträume im unteren Stunden beziehungsweise höheren Minutenbereich betrachtet, weshalb die Güte des Modells ohne Einsatz des Heizkörpers dazu ausreichend ist.
+
+Im nächsten Schritt findet eine Simulation mit Einsatz des Heizkörpers statt, um das vollständige Modell mit der Realität abzugleichen.
+Für diese Simulation wurde ein Zeitintervall gesucht, indem die Raumtemperatur unter die untere Schalttemperatur von $20^{\circ}C$ fällt, damit der Controller den Heizkörper zum Erwärmen des Raumes bis zum oberen Schaltpunkt von $21,5^{\circ}C$ nutzt und der Raum nach schließen des Heizkörperventils wieder abkühlt. Ein passendes Intervall findet sich vom 28.12.2015 bis zum 30.12.2015. 
+Die Messdaten für die Globalstrahlung und Außenlufttemperatur wurden auch hier von \cite{wetter} zur Verfügung gestellt und sind auf der angehängten CD in der Datei XXX zu finden. Die Sonne hat gegen Nachmittag des 29.12.2016 leicht geschienen und die Außenlufttemperatur hat sich zwischen 6 Grad leicht unter den Gefrierpunkt bewegt. Die Heizkörper wird gegen NAchmittag des 29.12.2015 bis bis gegen Abend genutzt.
+Auch bei dieser Simulation wurde eine Temperatur von $22^{\circ}C$ im K~Gebäude und die gemessene Initialtemperatur von $21,25^{\circ}C$ zugrunde gelegt. Die Simulationsergebnisse sind im Plot \ref{fig:valid2} abgebildet und werden wiederum im Folgenden analysiert.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160328_validierung2}
+\caption{Simulation des Raummodells mit Einsatz des Heizkörpers}
+\label{fig:valid2}
+\end{figure}
+
+
+
+Lange Intervalle um Systemverahlten zu überprüfen und zu hinterfragen
 
 \subsection{Anpassung des Modells}
+
+Wie bereits erwähnt wird für MPC kürzere Intervalle benötigt, daher erfolgt die Modelloptimierung über Pamaterschätzung anhand kürzerer Intervalle.
+
+Parameterschätzung mit casiopeia durch Untertsützung von Herrn \textsc{Adrian Bürger}
+
+
+
+step1 nur nacht ohne strögun, heizung solar
+
+step2 schätzung mit Solarstrahlung und teilweise störgrößen
+
+step3 schätzung mit heizung und teilweise störgrößen
+
+Simulation wie mpc rein
 
