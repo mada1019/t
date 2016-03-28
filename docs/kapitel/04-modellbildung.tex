@@ -29,7 +29,7 @@ Da diese Anforderungen teils gegenläufig sind, gilt es einen Kompromiss zu find
 , um eine ausreichende Modellgüte zu erhalten, gleichzeitig jedoch keine hohe Komplexität oder einen großen Umfang an Gleichungen besitzt.
 Ziel: Hohe Modellgüte bei gleichzeitig geringer Komplexität und Stetigkeit
 
-Daher wird im Folgenden zunächst ein simples Raummodell gebildet, dass anschließend sukzessive erweitert und damit die Komlpexität des Modells schrittweise erhöht wird, bis eine ausreichende Beschreibung der Realität mit dem Modell möglich ist.
+Daher wird im Folgenden zunächst ein simples Raummodell gebildet, dass anschließend sukzessive erweitert und damit die Komplexität des Modells schrittweise erhöht wird, bis eine ausreichende Beschreibung der Realität mit dem Modell möglich ist.
 
 \section{Das Grundmodell des Raumes}
 
@@ -98,9 +98,9 @@ Damit ist ein Grundmodell für einen Raum gebildet, wie in \ref{fig:grundraum} g
 
 \section{Modellerweiterung durch Berücksichtigung der realen Umgebung}
 
-Im nächsten Schritt wird das einfache Raummodell zunächst an die reale Umgebung des Raums K004b angepasst. Die Lage von K00b ist in \ref{fig:skizzek004a} ersichtlich und es ist zu erkennen, dass der Raum lediglich zwei Außenwände besitzt, die an die Umgebungsluft grenzen: Die Wände in Richtung Süden und Westen. Die anderen beiden Wände, sowie die Decke und der Boden, grenzen an weitere Gebäudeteile des K-Gebäudes. Somit entspricht der Raum im Modell nach wie vor einem geschlossenen System und bildet weiterhin, zusammen mit dem umgebenden K-Gebäude und der Umgebungsluft, ein abgeschlossenes System. Jedoch müssen nun potenziell verschiedene Wärmeströme zwischen dem Raum und der Außenumgebung sowie dem Raum und dem K-Gebäude betrachtet werden. Da die fließenden Wärmeströme im Vergleich zur sehr großen Energie innerhalb des gesamten K-Gebäudes und der Umgebung nur verschwindend gering sind, wird der erwärmende beziehungsweise kühlende Effekt der Wärmeströme auf die beiden Teilsysteme vernachlässigt und es wird von konstanten, homogenen Temperaturen beider ausgegangen.
+Im nächsten Schritt wird das einfache Raummodell zunächst an die reale Umgebung des Raums K004b angepasst. Die Lage von K00b ist in \ref{fig:skizzek004a} ersichtlich und es ist zu erkennen, dass der Raum lediglich zwei Außenwände besitzt, die an die Umgebungsluft grenzen: Die Wände in Richtung Süden und Westen. Die anderen beiden Wände, sowie die Decke und der Boden, grenzen an weitere Gebäudeteile des K~Gebäudes. Somit entspricht der Raum im Modell nach wie vor einem geschlossenen System und bildet weiterhin, zusammen mit dem umgebenden K~Gebäude und der Umgebungsluft, ein abgeschlossenes System. Jedoch müssen nun potenziell verschiedene Wärmeströme zwischen dem Raum und der Außenumgebung sowie dem Raum und dem K~Gebäude betrachtet werden. Da die fließenden Wärmeströme im Vergleich zur sehr großen Energie innerhalb des gesamten K~Gebäudes und der Umgebung nur verschwindend gering sind, wird der erwärmende beziehungsweise kühlende Effekt der Wärmeströme auf die beiden Teilsysteme vernachlässigt und es wird von konstanten, homogenen Temperaturen beider ausgegangen.
 
-Durch diese Erweiterung des Modells hängt die Raumtemperatur nun von zwei Wärmeströmen und damit indirekt von zwei externen Steuergrößen, den Temperaturen in der Umgebung und im K-Gebäude, ab. Um die Wärmeströme separat berechnen zu können, wird die gesamte Oberfläche zum Wärmeaustausch aufgeteilt in die Austauschoberfläche mit der Umgebung und die Austauschoberfläche mit dem K-Gebäude. Des Weiteren werden im Modell die Temperatur der Außenumgebung und die Temperatur innerhalb des K-Gebäudes als externe Steuergrößen berücksichtigt. Das Gleichungssystem des Grundmodells in \ref{lst:grundraum} erweitert sich also um folgende Änderungen:
+Durch diese Erweiterung des Modells hängt die Raumtemperatur nun von zwei Wärmeströmen und damit indirekt von zwei externen Steuergrößen, den Temperaturen in der Umgebung und im K~Gebäude, ab. Um die Wärmeströme separat berechnen zu können, wird die gesamte Oberfläche zum Wärmeaustausch aufgeteilt in die Austauschoberfläche mit der Umgebung und die Austauschoberfläche mit dem K~K~GebäudeGebäude. Des Weiteren werden im Modell die Temperatur der Außenumgebung und die Temperatur innerhalb des K~Gebäudes als externe Steuergrößen berücksichtigt. Das Gleichungssystem des Grundmodells in \ref{lst:grundraum} erweitert sich also um folgende Änderungen:
 
 \begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der realen Umgebung in Modelica}, label=lst:raumeins]
 equation
@@ -117,14 +117,14 @@ equation
    building_qdot = u_wall * building_surface * (building_temperature - room_temperature);
 \end{lstlisting}
 
-Damit wurde das Raummodell an die reale Umgebung angepasst und um die Temperatur innerhalb des Raumes zu bestimmen, wird nun neben der Ausgangstemperatur im Raum und der Umgebungstemperatur noch die Temperatur innerhalb des restlichen K-Gebäudes berücksichtigt. Im nächsten Schritt werden die realen, räumlichen Gegebenheiten im Modell abgebildet.
+Damit wurde das Raummodell an die reale Umgebung angepasst und um die Temperatur innerhalb des Raumes zu bestimmen, wird nun neben der Ausgangstemperatur im Raum und der Umgebungstemperatur noch die Temperatur innerhalb des restlichen K~Gebäudes berücksichtigt. Im nächsten Schritt werden die realen, räumlichen Gegebenheiten im Modell abgebildet.
 
 
 \section{Modellerweiterung durch Berücksichtigung der räumlichen Gegebenheiten}
 
-Um das Modell an die realen Gegebenheiten des Raumes K004b anzupassen, müssen zwei bauliche Gegebenheiten beachtet werden. Wie in \ref{fig:skizzek004a} dargestellt ist, ist in der südlichen Außenwand eine Fensterfront vorhanden. Da der U-Wert eines Fensters erheblich von dem U-Wert einer Wand abweicht, entsteht ein zusätzlicher Wärmestrom zwischen dem Raum und der Umgebung durch das Fenster hindurch. Das Öffnen und Schließen der Fenster mit daraus resultieren Massenströmen wird jedoch zunächst nicht explizit berücksichtigt, weshalb das Raummodell weiterhin als geschlossenes System betrachtet wird. Des Weiteren ist es möglich, den Raum über einen Heizkörper zu beheizen. Mit dem Heizkörper, der zunächst als einfache Wärmequelle im Modell ergänzt wird, erhöht sich die Anzahl der externen Steuergrößen erneut, da die Temperatur innerhalb des Raumes auch von dieser abhängig ist.
+Um das Modell an die realen Gegebenheiten des Raumes K004b anzupassen, müssen zwei bauliche Gegebenheiten beachtet werden. Wie in \ref{fig:skizzek004a} bereits dargestellt ist, ist in der südlichen Außenwand eine Fensterfront vorhanden. Da der U-Wert eines Fensters erheblich von dem U-Wert einer Wand abweicht, entsteht ein zusätzlicher Wärmestrom zwischen dem Raum und der Umgebung durch das Fenster hindurch. Das Öffnen und Schließen der Fenster mit daraus resultieren Massenströmen wird zunächst nicht explizit berücksichtigt, weshalb das Raummodell weiterhin als geschlossenes System betrachtet wird. Des Weiteren ist es möglich, den Raum über einen Heizkörper zu beheizen. Mit dem Heizkörper, der zunächst als einfache Wärmequelle im Modell ergänzt wird, erhöht sich die Anzahl der externen Steuergrößen erneut, da die Temperatur innerhalb des Raumes auch von dieser abhängig ist.
 
-Durch diese Erweiterungen werden auch weitere physikalische Größen zur Beschreibung der Eigenschaften des Raummodells benötigt. Wie bereits erwähnt werden die Eigenschaften um den U-Wert eines Fensters, sowie die Breite und Höhe der Fensterfront ergänzt wie in Tabelle \ref{tab:eigenschaften_raumerw} zusammengefasst.
+Durch diese Erweiterungen werden auch weitere physikalische Größen zur Beschreibung der Eigenschaften des Raummodells benötigt. Wie bereits erwähnt werden die Eigenschaften um den U-Wert eines Fensters, sowie die Breite und Höhe der Fensterfront ergänzt, wie in Tabelle \ref{tab:eigenschaften_raumerw} zusammengefasst.
 
 \begin{table}[H]
 \centering
@@ -155,7 +155,7 @@ Wärmedurchgangskoeffizient Glas & 4,0\tnote{2)} & $[\frac{W}{m^{2}*K}]$\\
  
 Durch diese Anpassung verändert sich die Austauschoberfläche mit der Umgebung, die sich nun auf zwei Flächen mit verschiedenen Wärmedurchgangskoeffizienten verteilt. Des Weiteren wird eine Wärmequelle für die Heizung ergänzt, so dass sich folgende Änderungen des Gleichungssystems im Vergleich zum bisherigen Modell in \ref{lst:grundraum} ergeben:
 
-\begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der räumlichen Gegebenheiten in Modelica},label=lst:raumzwei]
+\begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem des Raumes unter Berücksichtigung der räumlichen Gegebenheiten in Modelica},label=lst:raumzwei]
 equation
    [...]
    /* calculate surface of heat exchange with the environment */
@@ -174,7 +174,7 @@ equation
    building_qdot = u_wall * building_surface * (building_temperature - room_temperature);
 \end{lstlisting}
 
-Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschreibt dadurch in groben Zügen die realen Zusammenhänge. Allerdings kann eine Steuerung/Regelung eine Heizung nicht einfach beliebig als einfache Wärmequelle einsetzen, weshalb eine detailliertere, physikalisch motivierte Modellierung folgen wird. Die bisherigen Zusammenhänge des Modells sind in \ref{fig:raumeins} graphisch dargestellt. 
+Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschreibt dadurch die realen Zusammenhänge in groben Zügen. Allerdings kann ein Controller die Heizung nicht beliebig als einfache Wärmequelle einsetzen, weshalb eine detailliertere, physikalisch motivierte Modellierung in Abschnitt XXXXXXXXX folgen wird. Die bisherigen Zusammenhänge des Modells sind in \ref{fig:raumeins} graphisch dargestellt. 
 
 \begin{figure}
 \centering
@@ -183,23 +183,20 @@ Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschre
 \label{fig:raumeins}
 \end{figure}
 
-Bereits bei den Einsatzzielen der Anlage in \ref{sec:anforderungen} war gefordert, den Zusammenhang zwischen der Sonneneinstrahlung und der Raumtemperatur zu untersuchen sowie Störgrößen explizit in Kauf zu nehmen. Daher ist es passend, dass die Fensterfront in Richtung Süden ausgerichtet ist und der Raum K004b als Büro genutzt wird.
-Daher wird im nächsten Abschnitt das Modell an diese beiden Faktoren angepasst.
+Bereits bei den Einsatzzielen der Anlage in \ref{sec:anforderungen} war gefordert, den Zusammenhang zwischen der Sonneneinstrahlung und der Raumtemperatur zu untersuchen sowie Störgrößen explizit in Kauf zu nehmen. Daher ist es passend, dass die Fensterfront in Richtung Süden ausgerichtet ist und der Raum K004b als Büro genutzt wird und im nächsten Abschnitt erfolgt eine Anpassung an diese beiden Faktoren.
 
 
-\section{Modellerweiterung durch Berücksichtigung von Störgrößen und der Sonneneinstrahlung}
+\section{Modellerweiterung durch Berücksichtigung der Sonneneinstrahlung und Störgrößen}
 
-Der Raum K004b wird regulär als Büro genutzt, weshalb verschiedene Faktoren als Störgrößen in Bezug auf die Raumtemperatur betrachtet werden können. Zum einen wird durch die Menschen und deren Rechner weitere Wärme in den Raum eingebracht und zum Anderen werden die Fenster und die Türen manchmal geöffnet. Des Weiteren trifft insbesondere auf die südseitigen Fenster Sonnenstrahlung, welche ebenfalls Wärme in den Raum einbringen und damit einen Einfluss auf die Raumtemperatur haben.
+Der Raum K004b wird regulär als Büro genutzt, weshalb verschiedene Faktoren als Störgrößen in Bezug auf die Raumtemperatur betrachtet werden können. Zum einen wird durch die Menschen und deren Rechner weitere Wärmeströme in den Raum eingebracht und zum Anderen werden die Fenster und die Türen manchmal geöffnet. Dabei werden Massenströme zwischen Raum und Außenumgebung sowie K~Gebäude ausgetauscht, welche jedoch zunächst nicht modelliert werden sollen, sondern als Störgröße betrachtet die es durch die Modellprädiktive Regelung zu auszugleichen gilt. Des Weiteren trifft auf die südseitigen Fenster Sonnenstrahlung, welche ebenfalls einen Wärmestrom in den Raum einbringt und damit einen Einfluss auf die Raumtemperatur hat. Dadurch ergeben sich zwei weitere äußere Steuergrößen, die vom Modell nicht beeinflusst werden können, jedoch berücksichtigt werden müssen. Damit erweitert sich das Modell wie folgt:
 
 \begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der Sonneneinstrahlung und Störgrößen},label=lst:raumdrei]
 equation
    [...]
    /* calculate derivative of the inner energy */
    der(room_u) = environment_qdot + building_qdot + window_qdot + radiator_qdot + sun_qdot + otherfactors_qdot;
-  
 \end{lstlisting}
 
-%Here We GO with model extension
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160317_raumzwei}
@@ -208,7 +205,22 @@ equation
 \end{figure}
 
 
-Sonneneinstrahlung komplexe Berechnungen wie in Kapitel gegeben. Um Komplexität des Modells zu schonen und unstetigkeiten zu vermeiden, wurde ein eigenes Skript erstellt in Python mit pysolar, das eine effiziente und sehr exakte berechnung der benötigten Größen implementiert hat.
+Damit lassen sich die Zusammenhänge des Modells wie in \ref{fig:raumdrei} visualisieren. Der Einfluss der Sonnenstrahlung wurde bereits in Kapitel \ref{sub:sonne} erläutert und muss nun an die Gegebenheiten des Raumes K004b angepasst werden. Als Messwerte stehen Werte der Globalstrahlung zur Verfügung, welche umgerechnet werden müssen in die effektive Strahlungsintensität an der Fenstersfront.
+
+Da zur Berechnung der effektiven Strahlungsintensität neben der Globalstrahlung auch der Azitmuth und Höhenwinkel der Sonne bekannt sein muss, werden komplexe Berechnungen nötig. Da die Sonnenstrahlung eine Steuergröße darstellt und um die Komplexität des Modells zu schonen, werden die Effektivwerte der Sonnenstrahlung von einem Python Skript berechnet und anschließend dem Modell übergeben. Zudem hat dies den Vorteil, dass im pysolar Package bereits sehr exakte Algorithmen implementiert sind. 
+Das Programm ist in Listing \ref{lst:sonne} dargestellt. 
+Zur Berechnung des Azimuth- und Sonnenhöhenwinkels wird der Längen- und Breitengrad des K-Gebäudes sowie die Höhe über dem Meerespiegel benötigt. Um die effektive Solarstrahlung zu Bestimmen wird zusätzlich die Ausrichtung der Fensterfläche benötigt. Die Werte sind in Listing \ref{lst:sonne} in Zeile sieben bis zehn zu finden und wurden mit Hilfe von \cite{go15} ermittelt.
+
+\lstinputlisting[language=Python ,caption={Programm zur Umrechnung der Globalstrahlung in die effektive Solarstrahlung an der Fensterfront am Rum K004b}, label=lst:sonne]{listings/radiation_conversion_k004b.py}
+
+Außerdem wird der Startzeitpunkt und der Abstand zwischen den Messpunkten für die gemessenen Daten benötigt, da der Stand der Sonne von der Uhrzeit abhängig ist. Nach dem Einlesen der Messdaten aus der Datei globalstrahlung.csv wird anschließend für jeden einzelnen Messwert und -zeitpunkt der Azimuth- und Sonnenhöhenwinkel berechnet. Darauf basierend wird geprüft, ob die Sonne senkrecht am Himmel steht, noch nicht aufgegangen ist oder die Fläche verschattet ist. Ist dies der Fall trifft keine effektive Strahlung auf das Fenster. Des Weiteren würden sich für niedrige Sonnenstände sehr hohe und unrelistische effektive Strahlungswerte ergeben, weshalb diese für Sonnenstandswinkel kleiner als fünf Grad begrenzt werden.
+Ansonsten wird der effektive Strahlungswert nach REFXXXXXgleichung berechnet und in der Datei qdotsun-effective gespeichert. Dieses Programm kann in leicht abgewandelter Form einfach zur Umrechnung einzelner Messwerte genutzt werden, indem das Einlesen und Speichern der umgerechneten Daten durch eine Abfrage eines Messwertes und Übergabe einer Variable mit umgerechnetem Messwert ersetzt wird.
+
+Der effektive Strahlungswert wird allerdings durch den Transmissionsgrad des Fensters weiter geschwächt, der durch einen weiteren Paramater/ eine weitere Eigenschaft 
+
+\subsection{Heizungsmodell}
+
+
 
 \section{Validierung des Modells}
 
