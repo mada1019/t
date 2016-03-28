@@ -285,14 +285,20 @@ model Window
 end Window;
 \end{lstlisting}
 
-Das Modell wurde dadurch weiter an die realen Gegebenheiten angepasst 
+Die Modellkomplexität ist bis zu diesem Punkt noch überschaubar und weiterhin berücksichtigt das Modell die physikalischen Effekte mit dem größten bzw. mit relevanten Einfluss. Damit ist die Modellbildung abgeschlossen und das gesamte Modell des Raumes findet sich im Anhang \ref{att:raummod}. Bei der Modellbildung wurde auf eine Programmierung mit klarer Struktur wert gelegt. Daher sind die Variablen der Modelle strikt nach Parametern, Controls und Zuständen gegliedert/sortiert.
 
+ Das Schaltbild in Dymola, welches als Umgebung zur Modellbildung und Simulation genutzt wurde ist in REFXXXXX abgebildet. Darauf wird auch deutlich, dass das Modell 6 verschiedene Steuergrößen und damit Freiheitsgrade besitzt. Jedoch werden fünf davon durch äußere Bedingungen festgelegt, durch die Außentemperatur, die Temperatur im K~Gebäude, die Temperatur am Einlass der Heizung, die anderen Faktoren sowie die Solarstrahlung. Damit kann der Controller lediglich den Massenstrom zur Beeinflussung der Raumtemperatur nutzen um auf Änderungen der anderen Steuergrößen zu reagieren. 
 
+FIG MOPDELICA
 
+Weitere Effekte die explizit nicht berücksichtigt wurden sind die Energie innerhalb der Wände und des Mobiliars von Raum K004b, welche bei abrupter Abkühlung der Raumlufttemperatur einen stark erwärmenden Einfluss durch die Abstrahlung von Wärme, also Wärmekonvektion wie in Kapitel \ref{chap:theoretischegrundlagen} beschrieben. Da sich eine solch starke Abkühlung der Raumluft jedoch über einen längeren Zeithorizont erstreckt, wird diese als Störgröße wahrgenommen die ein Modellprädiktiver Regler ausgleichen können sollte.
 
 
 \section{Simulation und Modellanpassung}
+In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Verwendung des Modells. Dazu werden für die Steuergrößen reale Messwerte vorgegeben, um die Güte des Modells abzuschätzen, durch einen Vergleich der berechneten und tatsächlichen gemessen Werte. Abschließend erfolgt eine Anpassung der Modellparameter mit Hilfe von um die Modellgüte
+ und der Vergleich mit gemessen Werte
 
 \subsection{Validierung des Modells}
 
-\subsection{Anpassung des Modells mit Parameterschätzung}
+\subsection{Anpassung des Modells}
+
