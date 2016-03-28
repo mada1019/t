@@ -174,7 +174,7 @@ equation
    building_qdot = u_wall * building_surface * (building_temperature - room_temperature);
 \end{lstlisting}
 
-Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschreibt dadurch die realen Zusammenhänge in groben Zügen. Allerdings kann ein Controller die Heizung nicht beliebig als einfache Wärmequelle einsetzen, weshalb eine detailliertere, physikalisch motivierte Modellierung in Abschnitt XXXXXXXXX folgen wird. Die bisherigen Zusammenhänge des Modells sind in \ref{fig:raumeins} graphisch dargestellt. 
+Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschreibt dadurch die realen Zusammenhänge in groben Zügen. Allerdings kann ein Controller die Heizung nicht beliebig als einfache Wärmequelle einsetzen. Daher wird im folgenden Abschnitt ein detaillierteres Modell gebildet. Die bisherigen Zusammenhänge des Modells sind in \ref{fig:raumeins} graphisch dargestellt. 
 
 \begin{figure}
 \centering
@@ -183,12 +183,19 @@ Damit ist das Modell auch an die räumlichen Gegebenheiten angepasst und beschre
 \label{fig:raumeins}
 \end{figure}
 
+\section{Das Heizungsmodell}
+
+
+
+
 Bereits bei den Einsatzzielen der Anlage in \ref{sec:anforderungen} war gefordert, den Zusammenhang zwischen der Sonneneinstrahlung und der Raumtemperatur zu untersuchen sowie Störgrößen explizit in Kauf zu nehmen. Daher ist es passend, dass die Fensterfront in Richtung Süden ausgerichtet ist und der Raum K004b als Büro genutzt wird und im nächsten Abschnitt erfolgt eine Anpassung an diese beiden Faktoren.
 
 
 \section{Modellerweiterung durch Berücksichtigung der Sonneneinstrahlung und Störgrößen}
 
-Der Raum K004b wird regulär als Büro genutzt, weshalb verschiedene Faktoren als Störgrößen in Bezug auf die Raumtemperatur betrachtet werden können. Zum einen wird durch die Menschen und deren Rechner weitere Wärmeströme in den Raum eingebracht und zum Anderen werden die Fenster und die Türen manchmal geöffnet. Dabei werden Massenströme zwischen Raum und Außenumgebung sowie K~Gebäude ausgetauscht, welche jedoch zunächst nicht modelliert werden sollen, sondern als Störgröße betrachtet die es durch die Modellprädiktive Regelung zu auszugleichen gilt. Des Weiteren trifft auf die südseitigen Fenster Sonnenstrahlung, welche ebenfalls einen Wärmestrom in den Raum einbringt und damit einen Einfluss auf die Raumtemperatur hat. Dadurch ergeben sich zwei weitere äußere Steuergrößen, die vom Modell nicht beeinflusst werden können, jedoch berücksichtigt werden müssen. Damit erweitert sich das Modell wie folgt:
+Der Raum K004b wird regulär als Büro genutzt, weshalb verschiedene Faktoren als Störgrößen in Bezug auf die Raumtemperatur betrachtet werden können. Zum einen wird durch die Menschen und deren Rechner weitere Wärme in den Raum eingebracht und zum Anderen werden die Fenster und die Türen geöffnet und geschlossen. Dabei werden Massenströme zwischen Raum und Außenumgebung sowie K~Gebäude ausgetauscht, welche jedoch zunächst nicht modelliert werden sollen, sondern als Störgröße betrachtet die es durch die Modellprädiktive Regelung zu auszugleichen gilt. Die Wärme von Rechnern und Menschen werden als einfache Wärmequelle im Modell berücksichtigt. 
+Zudem trifft auf die südseitigen Fenster Sonnenstrahlung, welche ebenfalls einen Wärmestrom in den Raum einbringt und damit ebenfalls einen Einfluss auf die Raumtemperatur hat. Dieser wird zunächst ebenfalls als eine einfache Wärmequelle aufgefasst.
+Damit ergeben sich zwei weitere äußere Steuergrößen, die von der Anlage beziehungsweise dem Modell nicht beeinflusst werden können. Damit erweitert sich das Modell wie folgt:
 
 \begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der Sonneneinstrahlung und Störgrößen},label=lst:raumdrei]
 equation
@@ -216,9 +223,24 @@ Zur Berechnung des Azimuth- und Sonnenhöhenwinkels wird der Längen- und Breite
 Außerdem wird der Startzeitpunkt und der Abstand zwischen den Messpunkten für die gemessenen Daten benötigt, da der Stand der Sonne von der Uhrzeit abhängig ist. Nach dem Einlesen der Messdaten aus der Datei globalstrahlung.csv wird anschließend für jeden einzelnen Messwert und -zeitpunkt der Azimuth- und Sonnenhöhenwinkel berechnet. Darauf basierend wird geprüft, ob die Sonne senkrecht am Himmel steht, noch nicht aufgegangen ist oder die Fläche verschattet ist. Ist dies der Fall trifft keine effektive Strahlung auf das Fenster. Des Weiteren würden sich für niedrige Sonnenstände sehr hohe und unrelistische effektive Strahlungswerte ergeben, weshalb diese für Sonnenstandswinkel kleiner als fünf Grad begrenzt werden.
 Ansonsten wird der effektive Strahlungswert nach REFXXXXXgleichung berechnet und in der Datei qdotsun-effective gespeichert. Dieses Programm kann in leicht abgewandelter Form einfach zur Umrechnung einzelner Messwerte genutzt werden, indem das Einlesen und Speichern der umgerechneten Daten durch eine Abfrage eines Messwertes und Übergabe einer Variable mit umgerechnetem Messwert ersetzt wird.
 
-Der effektive Strahlungswert wird allerdings durch den Transmissionsgrad des Fensters weiter geschwächt, der durch einen weiteren Paramater/ eine weitere Eigenschaft 
+Der effektive Strahlungswert wird allerdings durch den Transmissionsgrad des Fensters weiter abgeschwächt, der durch einen weiteren Paramater/ eine weitere Eigenschaft der $window\_transmission$ beschrieben wird. Der Schätzwert für eine zweischeibige Verglasung des Fensters stammt aus \cite[S.~63]{ha13}. Dadurch erweitert sich das Modell um ein Fenster als Subomponente:
 
-\subsection{Heizungsmodell}
+\begin{lstlisting}[language=Modelica, caption={Fenster als Subkomponente des Raummodells},label=lst:raumdrei]
+model Window
+	Modelica.SIunits.DensityOfHeatFlowRate qdotsun_effective;
+	Modelica.SIunits.HeatFlowRate qdot_effective;
+	parameter Real window_transmission = 0.5;
+	Modelica.SIunits.Area window_surface;
+  equation
+  	qdot_effective = qdotsun_effective * window_transmission * window_surface;
+end Window;
+\end{lstlisting}
+
+Das Modell wurde dadurch weiter an die realen Gegebenheiten angepasst 
+
+
+
+
 
 
 
