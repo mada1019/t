@@ -65,20 +65,21 @@ Aus dieser Theorie ergeben sich weitere Anforderungen, welche bei der Modellbild
 \section{Technische Grundlagen zur Kommunikation mit Bussystemen}
 \label{sec:grundlagenbus}
 
-In diesem Kapitel werden die technischen Grundlagen von Hard- und Software beleuchtet, welche die für die Kommunikation der Steuerung mit den einzelnen Anlagenteilen benötigt werden.
-Diese umfassen zunächst Bussysteme im Allgemeinen, dann das OSI Modell für techn. Kommunikation und werden anhand des spezifischen/konkreten Anwendungsfalls Modbus erläutert.
+In diesem Abschnitt werden die technischen Grundlagen von Hard- und Software beleuchtet, die zur Kommunikation technischer Systeme benötigt werden. Die Kommunikation findet zumeist über Bussysteme statt, deren Grundlagen zuerst erklärt werden. Anschließend wird das allgemeine \acrlong{osi} (\acrshort{osi}) zur Kommunikation beschrieben. Abschließend werden die zuvor erläuterten Grundlagen anhand der \textit{Modbus Kommunikationstechnologie} in einen Anwendungsbezug gesetzt.
 
-Die Einführung wird an der Struktur von \cite{schn06} anlehnen.
+\subsection{Bussysteme}
 
-\subsection{Bussysteme} 
-Um allgemein Prozesse zu überwachen, zu steuern oder regeln zu können, müssen zwischen den verschiedenen Prozessbeteiligten/einheiten Informationen ausgetauscht werden. Im Kontext dieser Arbeit gilt es einen Prozess zur Temperatursteuerung/Halten zu regeln. Die Prozessbeteiligten sind hierbei technische Bauteile, Aktoren und Sensoren sowie ein Steuerungsrechner/Controller, die zusammen ein technisches System bilden, dass im Folgenden als Anlage bezeichnet wird. Die Anlage zeichnet sich dadurch aus, dass sie eine eigenständige funktionale Einheit bildet einen eigenen Zweck verfolgt, die Raumtemperaturregelung und einen Mehrwert gegenüber ihrer Einzelteile hat, was dem Zusammenspiel der einzelnen Bauteile und Geräte entspricht. 
-Um den Mehrwert zu realisieren und den Zweck zu erfüllen, werden Kommunikationssysteme benötigt. Mit Hilfe derer kann Kommunikation erfolgen und die Anlage ihren Zweck erreichen.
-Diese Kommunikationssysteme werden von technischer Seite oftmals als Bussysteme realisiert/umgesetzt.
-Bussysteme lassen sich anhand ihrer verschiedenen Ausprägungen von Merkmalen klassifizieren. Im folgenden Abschnitt werden zunächst die Merkmale von Bussystemen zum allgemeinen Verständnis dargestellt bevor auf die konkreten Ausprägungen des später eingesetzten Modbus-Bussystems eingegangen wird.
+Um ganz allgemein Prozesse zu überwachen, zu steuern oder regeln zu können, müssen zwischen Prozessbeteiligten Informationen ausgetauscht werden. 
+Die Prozessbeteiligten können technische Bauteile, Aktoren oder Sensoren sowie Controller sein, die zusammen ein technisches System bilden, welches im Folgenden als Anlage bezeichnet wird. Eine Anlage ist eine eigenständige funktionale Einheit, welche einen eigenen Zweck verfolgt. Sie zeichnet sich durch einen Mehrwert gegenüber der Summe der einzelnen Komponenten aus, der durch Zusammenspiel der Komponenten erreicht wird. Diese Emergenz wird durch die Kommunikation realisiert und ermöglicht der Anlage ihren Zweck zu erreichen.
+Es zeichnet sich allerdings ein Trend hin zur drahtlosen Kommunikation ab, die jedoch noch stark vom Einsatzort und der Störanfälligkeit begrenzt wird. Im Kontext von technischen Systemen erfolgt die Kommunikation zumeist über Bussysteme, da sie eine hohe Robustheit gegenüber Störungen besitzen und auch in unfreundlichen Umgebungen eingesetzt werden können. Sie lassen sich anhand von verschiedenen Merkmalen klassifizieren. Im Folgenden werden die wichtigsten Merkmale beschrieben in Anlehnung an die Struktur von \cite{schn06}.
+
 
 \subsubsection{Informationsaustausch}
 
-Die Informationen über einen Prozess und dessen Zustand, werden auf höherer Ebene durch Daten und auf unterster Ebene durch einzelne Bits repräsentiert. Der Austausch dieser Daten zwischen den einzelnen Geräten findet in Form von Telegrammen statt. Ein Telegramm besteht grundsätzlich aus den zu übertragenden Daten und zusätzlich aus Informationen zur Übertragung. Die Daten werden vor der Übertragung in Rahmen, sogenannte data frames, eingeteilt, deren genauer Aufbau abhängig vom verwendeten Kommunikationsprotokoll innerhalb des Netzwerks ist \cite[S.~11f.]{schn06}. Der Aufbau eines Telegramms am Beispiel des Modbus-Kommunikationsprotokolls wird in Abschnitt \ref{sub:modbus} erläutert und ist in \ref{fig:modbusframe} graphisch dargestellt.
+Die \textit{Informationen} über einen Prozess und dessen Zustand werden auf hoher Ebene durch \textit{Daten} repräsentiert. Auf der unterster Ebene jedoch wird eine Information durch mehrere \textit{Bits} repräsentiert. Der Austausch von Daten findet in Form von \textit{Telegrammen} statt. Ein Telegramm besteht grundsätzlich aus zwei Teilen, den zu übertragenden Daten und den Informationen zur Übertragung. Die Daten werden vor der Übertragung in \textit{Rahmen}, sogenannte \textit{Data Frames}, eingeteilt. Der detaillierte Aufbau eines Telegramms wird vom eingesetzten Kommunikationsprotokoll innerhalb des Netzwerks definiert \cite[S.~11f.]{schn06}.
+
+Im Detail wird die Struktur eines Telegramms in Abschnitt \ref{sub:modbus} am Beispiel von zwei Modbus Kommunikationsprotokollen erläutert. Eine graphische Illustration dazu findet sich in \ref{fig:modbusframe}.
+
 
 \subsubsection{Netzwerk und Topologie}
 

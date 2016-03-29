@@ -63,7 +63,7 @@
 		\setentrycounter[]{page}\glsnumberformat{32}}}%
 \subglossentry{1}{w}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{VI}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{33}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{32}}}\glsgroupskip
 \glsgroupheading{G}\relax \glsresetentrylist %
 \glossentry{greekletter}\relax \glsresetentrylist
 \subglossentry{1}{kappa}{\glossaryentrynumbers{\relax 
