@@ -359,7 +359,7 @@ Wie bereits zuvor, erfolgt auch die Parameterschätzung systematisch, um die ein
 
 Es muss weiterhin beachtet werden, dass die Erhöhung der Modellgüte durch den Einsatz realer Messwerte ebenfalls mit einer Abweichung der physikalischen Schätzparameter zur Realität einhergehen können, da Störgrößen und Messfehler implizit berücksichtigt werden.
 
-Zunächst wird der Wärmedurchgangskoeffizient der Wand bestimmt, wozu Intervalle genutzt wurden die möglichst ohne Störgrößen sind und ohne Einsatz der Heizung auskommen. Dazu bieten sich Zeitintervalle am Abend an, an denen das Büro nicht mehr genutzt wird und keine Solarstrahlung mehr auf die Fenster trifft. Das Ergebnis der Parameterschätzung für zwei Intervalle ist in den Plots in \ref{fig:step1} dargestellt. Das Skript zur Parameterschätzung findet sich im Anhang REFXXXX.
+Zunächst wird der Wärmedurchgangskoeffizient der Wand bestimmt, wozu Intervalle genutzt wurden die möglichst ohne Störgrößen sind und ohne Einsatz der Heizung auskommen. Dazu bieten sich Zeitintervalle am Abend an, an denen das Büro nicht mehr genutzt wird und keine Solarstrahlung mehr auf die Fenster trifft. Das Ergebnis der Parameterschätzung für zwei Intervalle ist in den Plots in \ref{fig:step1} dargestellt. Das Skript zur Parameterschätzung findet sich im Anhang \ref{att:cd} in der Datei $room_pe_step1_night.py$.
 
 \begin{figure}
 \centering
@@ -369,16 +369,34 @@ Zunächst wird der Wärmedurchgangskoeffizient der Wand bestimmt, wozu Intervall
 \end{figure}
 
 Die Plots auf der linken Seite stellen das Ergebnis für ein 100-minütiges Intervall vom Abend des 05.01.2016, auf der rechten Seite vom Abend des 23.01.2016 dar. Mit dem vorab fixierten U-Wert für Glas ergab sich ein Schätzwert für den Wärmedurchgangskoeffizient der Wand von $U_{wall}=0.612986$ 
-Die oberen beiden Plots enthalten die Verläufe der Steuergröße Außenlufttemperatur im Intervall, wobei die Solarstrahlung und die Heizung keinen Einfluss hatten. Die genauen Messdaten sind den Dateien auf der angehängten CD in \ref{att:cd} im Ordner enthalten. Die mitlleren
+Die oberen beiden Plots enthalten die Verläufe der Steuergröße Außenlufttemperatur im Intervall, wobei die Solarstrahlung und die Heizung keinen Einfluss hatten. Die genauen Messdaten sind den Dateien auf der angehängten CD in \ref{att:cd} im Ordner enthalten. Die mittleren Plots zeigen einen Vergleich der gemessen Raumtemperatur mit der Simulation des geschätzten Intervalls über 100 Minuten. Darin ist gut zu erkennen, dass die Dynamik des Modells durch eine Anpassung des Parameters weiter verbessert werden konnte. Die unteren Plots zeigen die Abweichung zwischen Simulation und Messwerten. Im linken Intervall beschreibt die Simulation bis auf minimale Abweichungen das reale System sehr genau, im Rechten ergibt sich bei der Simulation ein leicht erhöhte Temperatur im Vergleich zur Messung, die mit einer Abweichung von etwa $0,35^{\circ}C$ nach 100 Minuten immer noch eine ausreichende Güte besitzt.
 
+Im nächsten Schritt wird der Transmissionsgrad der Fensterscheiben geschätzt. Dazu wurden wiederum Intervalle identifiziert, an denen die Sonne geschienen hat und die Störgrößen und den Einsatz der Heizung möglichst ausschließen. Dazu bieten sich zwei Intervalle Anfang Januar an, am 02.01.2016 und 05.01.2016 gegen die Mittagszeit, an denen das Büro nur teilweise genutzt wurde. Die Ergebnisse der Schätzung für die knapp 250 Minuten umfassenden Intervalle sind in \ref{fig:step2} zusammengefasst. Das Skript zur Parameterschätzung findet sich im Anhang \ref{att:cd} in der Datei $room_pe_step2_day.py$.
 
-step2 schätzung mit Solarstrahlung und teilweise störgrößen
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160329_pestep2}
 \caption{Parameterschätzung}
 \label{fig:step2}
 \end{figure}
+
+%Here WE GO!!!!
+
+
+
+
+Einen besseren Vergleich der Modellgüte ermöglicht die erneute Simulation des ersten Intervalls ohne Heizkörper. Die Ergebnisse sind in \ref{fig:valid1pe} dargestellt.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160329_validierung1pe}
+\caption{Simulation des Raummodells ohne Einsatz der Heizung mit geschätztem Parameter}
+\label{fig:valid1pe}
+\end{figure}
+
+Abgesehen von einem Fehler bei der Initialisierung der Raumtemperatur zu Beginn der Simulation beschreibt das Modell ohne Einsatz der Heizung ist eindeutig zu erkennen, dass es das Verhalten des realen Systems sehr gut beschreibt.
+
+
 
 step3 schätzung mit heizung und teilweise störgrößen
 
@@ -391,6 +409,8 @@ step3 schätzung mit heizung und teilweise störgrößen
 
 
 
+window-transmission = 0.00687213
+u-radiator = 12.9872
 
-Simulation wie mpc rein
+JMODELICA fähig beweisen, also nächster Schritt MPC implementierung prüfen.
 
