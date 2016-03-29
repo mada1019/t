@@ -7,47 +7,52 @@
 
 Die folgenden Abschnitte dienen dazu, die grundlegende Zusammenhänge verschiedener Fachgebiete zu beschreiben, um dem weiteren Verlauf der Arbeit (besser) folgen zu können.
 
- Dazu erfolgt zunächst eine allgemeine Einführung in die Theorie der Optimalsteuerung und der darauf aufbauenden \acrlong{mpr}, um die Rahmenbedingungen für die folgenden Kapitel zu definieren. 
+ Dazu erfolgt zunächst eine allgemeine Einführung in die \textit{Theorie der Optimalsteuerung} und der darauf aufbauenden \textit{\acrlong{mpr}}, um die Rahmenbedingungen für die folgenden Kapitel zu definieren. 
  
-Im darauffolgenden Abschnitt werden die Grundlagen zur Kommunikation über Bussysteme ausführlich beschrieben. Sie umfassen elektrotechnische Grundlagen zur Datenübertragung und Vernetzung von technischen Systemen sowie Aspekte der Nachrichtentechnik und Informatik. Anschließend werden die Grundlagen mit Hilfe der Modbus Kommunikationstechnologie in einen Anwendungskontext gebracht, damit sie in Kapitel \ref{chap:anlagendesign} bei der Installation der Anlage angewendet werden können.
+Im darauffolgenden Abschnitt werden die \textit{Grundlagen zur Kommunikation über Bussysteme} ausführlich beschrieben. Sie umfassen elektrotechnische Grundlagen zur Datenübertragung und Vernetzung von technischen Systemen sowie Aspekte der Nachrichtentechnik und Informatik. Anschließend werden die Grundlagen mit Hilfe der \textit{Modbus Kommunikationstechnologie} in einen Anwendungskontext gebracht, damit sie in Kapitel \ref{chap:anlagendesign} bei der Installation der Anlage angewendet werden können.
 
-Weiterhin erfolgt eine Beschreibung der thermodynamischen Grundlagen, die bei der Beschreibung der Prozesse und Modellbildung in Kapitel \ref{chap:modellbildung} angewandt werden. 
+Weiterhin erfolgt eine Beschreibung der \textit{thermodynamischen Grundlagen}, die bei der Beschreibung der Prozesse und Modellbildung in Kapitel \ref{chap:modellbildung} angewandt werden. 
 
-Abschließend erfolgt eine allgemeine Einführung in die Solar- und Gebäudetechnik, um den Einfluss der Solarstrahlung auf die Raumtemperatur in Abschnitt \ref{sub:modsonne} beschreiben zu können.
+Abschließend erfolgt eine allgemeine \textit{Einführung in die Solar- und Gebäudetechnik}, um den Einfluss der Solarstrahlung auf die Raumtemperatur in Abschnitt \ref{sub:modsonne} beschreiben zu können.
 
 \section{Grundlagen zur Modellprädiktiven Regelung}
 \label{sec:mpc}
 
-Die Modellprädiktive Regelung ist ein Teilgebiet der angewandten Mathematik zur Regelung von Prozessen oder technischen Systemen hinsichtlich gewählter Optimierungskriterien. Hierzu bedient sie sich mathematischer Modelle des zu steuernden Prozesses sowie einem Teilbereich der angewandten Mathematik, der Optimalsteuerung. Zur optimalen Regelung eines Prozesses, werden wiederholt Optimalsteuerungsprobleme gelöst, die jedoch besondere Anforderungen an das Modell erfordern \cite[S.~10]{di14}. Daher erfolgt zunächst eine kurze Einführung in die Optimalsteuerung bevor die Modellprädiktive Regelung genauer beschrieben wird.
+Die \textit{\acrlong{mpr}} ist ein Teilgebiet der angewandten Mathematik, welche sich mit der Regelung von Prozessen oder technischen Systemen hinsichtlich gewählter Optimierungskriterien beschäftigt. Hierzu bedient sie sich mathematischer Modelle des zu steuernden Prozesses sowie den \textit{Grundlagen der Optimalsteuerung}. Zur optimalen Regelung eines Prozesses werden wiederholt Optimalsteuerungsprobleme gelöst, wodurch sich besondere Anforderungen an das Modell ergeben \cite[S.~10]{di14}. Daher erfolgt zunächst eine kurze Einführung in die Optimalsteuerung, bevor die Modellprädiktive Regelung genauer beschrieben wird.
 
 \subsection{Optimalsteuerung}
 
-Die Optimalsteuerung ist ebenfalls ein Teilgebiet der angewandten Mathematik und dient dazu, dynamische Systeme optimal zu steuern hinsichtlich spezifizierter Optimalitätskriterien. Dazu sollen also Steuersignale bestimmt werden, sodass das System eventuell vorgegebenen physikalischen und nutzerdefinierten Rahmen- sowie Randbedingungen genügt und zudem ein Leistungskriterium minimiert beziehungsweise maximiert wird \cite[S.~3f.]{ki04}.
-Die modellierten Prozesse dynamischer Systeme lassen sich durch Zustände und Parameter beschreiben. Das Modell dann beschreibt das Verhalten des Prozesses, welches durch Rand- und Nebenbedingungen beschränkt sein kann. Weiterhin werden die Zustände von Steuergrößen beeinflusst. Diese Steuergrößen können frei oder innerhalb bestimmter Grenzen wählbar sein oder durch reale Einschränkungen fest vorgegeben, stellen jedoch einen Freiheitsgrad dar. Des Weiteren wird das Leistungskriterium durch die Kostenfunktion zum Ausdruck gebracht. Das Optimalsteuerungsproblem lässt sich dann durch die Kostenfunktion, Zustände, Parameter, Rand- und Nebenbedingungen und Steuergrößen wie folgt beschreiben \cite[S.~61]{di14}:
+Die \textit{Optimalsteuerung} ist ebenfalls ein Teilgebiet der angewandten Mathematik und dient dazu, dynamische Systeme anhand von spezifizierten Optimalitätskriterien optimal zu steuern. Durch die Lösung eines Optimalsteuerungsproblems werden Steuersignale bestimmt, sodass die spezifizierten Leistungskriterien minimiert beziehungsweise maximiert werden und das Systeme eventuell vorgegebenen physikalischen und nutzerdefinierten Neben- sowie Randbedingungen genügt \cite[S.~3f.]{ki04}.
+Die Prozesse dynamischer Systeme lassen sich durch \textit{Zustände} und \textit{Parameter} modellhaft beschreiben. Erstgenannte stellen die zu steuernden Größen dar und gemeinsam mit den Parametern beschreiben sie das \textit{Systemverhalten}. Das Modell kann wie zuvor erwähnt durch \textit{Rand- und Nebenbedingungen} beschränkt werden. Weiterhin können die Zustände von \textit{Steuergrößen} beeinflusst werden, welche frei wählbar oder vorgegeben sein können. Diese werden auch als \textit{Controls} bezeichnet und können durch Grenzen eingeschränkt werden. Sie stellen einen Freiheitsgrad des Systems dar. Des Weiteren wird das Leistungskriterium durch die \textit{Kostenfunktion} zum Ausdruck gebracht. Das Optimalsteuerungsproblem lässt sich dann wie folgt beschreiben \cite[S.~61]{di14}:
 
 \begin{eqnarray}
 \label{eq:opt}
 		{\text{minimize} \atop \vec{x}(.),\vec{u}(.)} & &\int_0^T L(\vec{x}(t),\vec{u}(t)) dt + E(\vec{x}(T)) \quad ,t \in [0,T] \\
 \nonumber		&&\\
 \nonumber		\text{subject}\; \text{to} & &\\
-\nonumber		\vec{x}(0)-\vec{x}_{0} & = & 0,	\qquad \text{(fixed initial value)}\\
-\nonumber		\stackrel{.}{\vec{x}}-f(\vec{x}(t),\vec{u}(t)) & = & 0,\qquad \text{(ODE model)}\\
-\nonumber		h(\vec{x}(t),\vec{u}(t)) & \leq & 0, \qquad \text{(path constraints)}\\
-\nonumber		r(\vec{x}(T)) & \leq & 0,\qquad \text{(terminal constraints).}
+\nonumber		\vec{x}(0)-\vec{x}_{0} & = & 0,	\qquad \text{(Fixed Initial Value)}\\
+\nonumber		\stackrel{.}{\vec{x}}-f(\vec{x}(t),\vec{u}(t)) & = & 0,\qquad \text{(ODE Model)}\\
+\nonumber		h(\vec{x}(t),\vec{u}(t)) & \leq & 0, \qquad \text{(Path Constraints)}\\
+\nonumber		r(\vec{x}(T)) & \leq & 0,\qquad \text{(Terminal Constraints).}
 \end{eqnarray}
 
-Die Zustände werden vom Zustandsvektor $\vec{x}$ und die Steuergrößen vom Vektor $\vec{u}$, welche häufig als Controls bezeichnet werden, beschrieben. Die Parameter und das Prozessverhalten sind implizit im Modell beschrieben, welches durch ein Gleichungssystem aus gewöhnlichen Differenzialgleichungen (ODE Model) besteht. Die Kostenfunktion, die das Optimalitätskriterium hinsichtlich der Minimierung beschriebt, wird auch als Bolza Ziel bezeichnet und besteht aus dem Lagrange- und den Mayer-Term. Die Randbedingungen werden durch die Initialwerte $(fixed inital value)$ und die Endbedingungen $(terminal constraints)$ berücksichtigt. Die physikalischen und nutzerdefinierten Nebenbedingungen sind in den path constraints enthalten. Anschaulich werden diese Zusammenhänge in \ref{fig:opt} dargestellt.
+Die Zustände werden vom Zustandsvektor $\vec{x}$ und die Controls vom Vektor $\vec{u}$ beschrieben. Die Parameter sind implizit im Modell enthalten, welches durch ein Gleichungssystem aus gewöhnlichen Differenzialgleichungen (ODE Model) beschrieben wird. Die Kostenfunktion wird auch als \textit{Bolza Ziel} bezeichnet und besteht aus dem \textit{Lagrange-} und den \textit{Mayer-Term}. Letzterer beschreibt die Kosten zum Endzeitpunkt $T$ des Optimierungsintervalls wohingegen der Lagrange-Term den integralen Kostenanteil umfasst. Die Randbedingungen werden von den Initialwerten $\vec{x}(0)-\vec{x}_{0} = 0$ (Fixed Inital Value) und den Endbedingungen $r(\vec{x}(T)) \leq 0$ (Terminal Constraints) berücksichtigt. Die physikalischen und nutzerdefinierten Nebenbedingungen sind durch die Path Constraints $h(\vec{x}(t),\vec{u}(t)) \leq 0$ beschrieben. Anschaulich sind diese Zusammenhänge in \ref{fig:opt} dargestellt.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160327_mpc}
-\caption[Variablen und Nebenbedingungen eines optimalen Steuerungsproblems]{Variablen und Nebenbedingungen eines optimalen Steuerungsproblems \cite[S.61]{di14}}
+\caption[Variablen, Neben- und Randbedingungen eines optimalen Steuerungsproblems]{Variablen, Neben- und Randbedingungen eines optimalen Steuerungsproblems \cite[S.61]{di14}}
 \label{fig:opt}
 \end{figure}
 
-Für die Lösung dieses zeitkontinuierlichen Optimierungsproblems, müssen Bedingungen für die erste und zweite Ableitung erfüllt sein. Daher ist es nötig, dass das nichtlineare Optimalsteuerungsproblem zweifach stetig differenzierbar ist und damit auch das mathematische Modell des Prozesses \cite[S.~21ff.]{di14}.
-Konkret können mehrere, numerische Ansätze zur Lösung des Optimalsteuerungsproblems verfolgt werden, die sich in den Zustandsraum, die indirekten und direkten Verfahren einteilen lassen. Für reale Probleme, welche sich meist durch eine Vielzahl an Nebenbedingungen auszeichnen, eignen sich insbesondere die direkten Verfahren, die auch in der Praxis am weitesten verbreitet sind \cite[S.~63]{di14}. Die Lösung beschreibt einen hinsichtlich der gewählten Kriterien optimalen Einsatz von Steuergrößen Lösung und wird als Optimalsteuerungsplan bezeichnet.
-Da die Modellprädiktive Regelung nur den Rahmen dieser Arbeit beschreibt wird nicht näher darauf eingegangen und für eine theoretische fundierte Einführung in die gesamte Thematik und die einzelnen Lösungsmethoden von Optimalsteuerungsproblemen auf \cite{di14} verwiesen.
+Um eine \textit{optimale Lösung} dieses zeitkontinuierlichen Optimierungsproblems zu betsimmen, muss die erste Ableitung die \textit{notwendigen} \textit{Karush-Kuhn-Tucker} Bedingungen erfüllen. Weiterhin muss die zweite Ableitung einer \textit{hinreichenden} Bedingung genügen. Daher ist es notwendig, dass das nichtlineare Optimalsteuerungsproblem zweifach stetig differenzierbar ist und damit auch das mathematische Modell des Prozesses \cite[S.~21ff.]{di14}.
+
+Eine \textit{optimale Lösung} beschreibt einen optimalen Einsatz von Steuergrößen -- hinsichtlich der formulierten Kostenfunktion -- zur Beeinflussung des Systems und wird auch als \textit{Optimalsteuerungsplan} bezeichnet.
+
+Konkret können mehrere, numerische Ansätze zur Lösung des Optimalsteuerungsproblems verfolgt werden, die sich in den \textit{Zustandsraum}, die \textit{indirekten} sowie \textit{direkten Verfahren} einteilen lassen. Reale Probleme zeichnen sich durch eine Vielzahl an Nebenbedingungen aus. Diese eigenen sich besonders zur Optimierung mit direkten Verfahren, weshalb sie in der Praxis am weitesten verbreitet sind \cite[S.~63]{di14}. 
+Da die \acrlong{mpr} nur den Rahmen dieser Arbeit bildet, wird nicht näher auf die Optimalsteuerung eingegangen. Der interessierte Leser findet in \cite{di14} eine theoretische fundierte Einführung zur Optimalsteuerung sowie eine ausführliche Beschreibung der einzelnen Lösungsverfahren.
+
+%finito
 
 \subsection{Modellprädiktive Regelung}
 
