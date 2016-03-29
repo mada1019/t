@@ -6,7 +6,7 @@
 % @created 29. Dezember 2015
 
 \setchapterpreamble[o]{%
-\dictum[--- \textsc{Norbert Wiener}]{\Gun Das beste Modell für eine Katze ist eine Katze; möglichst dieselbe Katze. \Gob}}
+\dictum[--- \textsc{Norbert Wiener}, \emph{US-amerikanischer Mathematiker}]{\Gun Das beste Modell für eine Katze ist eine Katze; möglichst dieselbe Katze. \Gob}}
 \renewcommand{\chapterheadstartvskip}{\vspace*{2cm}}
 
 \chapter{Modellbildung und Simulation}
@@ -241,6 +241,7 @@ Bereits bei den Einsatzzielen der Anlage in Abschnitt\ref{sec:anforderungen} war
 
 
 \subsection{Modellerweiterung durch Berücksichtigung der Sonneneinstrahlung und Störgrößen}
+\label{sub:modsonne}
 
 Der Raum K004b wird regulär als Büro genutzt, weshalb verschiedene Faktoren als Störgrößen in Bezug auf die Raumtemperatur betrachtet werden können. Zum einen wird durch die Menschen und deren Rechner weitere Wärme in den Raum eingebracht und zum Anderen werden die Fenster und die Türen geöffnet und geschlossen. Dabei werden Massenströme zwischen Raum und Außenumgebung sowie K~Gebäude ausgetauscht, welche jedoch zunächst nicht modelliert werden sollen, sondern als Störgröße betrachtet die es durch die Modellprädiktive Regelung zu auszugleichen gilt. Die Wärme von Rechnern und Menschen werden als einfache Wärmequelle im Modell berücksichtigt. 
 Zudem trifft auf die südseitigen Fenster Sonnenstrahlung, welche ebenfalls einen Wärmestrom in den Raum einbringt und damit ebenfalls einen Einfluss auf die Raumtemperatur hat. Dieser wird zunächst ebenfalls als eine einfache Wärmequelle aufgefasst.
