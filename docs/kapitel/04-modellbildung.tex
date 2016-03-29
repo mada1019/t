@@ -296,11 +296,11 @@ Weitere Effekte die explizit nicht berücksichtigt wurden sind die Energie inner
 
 \section{Simulation und Modellanpassung}
 
-In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Verwendung des Modells. Dazu werden für die Steuergrößen reale Messwerte vorgegeben, um die Güte des Modells abzuschätzen, durch einen Vergleich der berechneten und tatsächlichen gemessen Werte. Abschließend erfolgt eine Anpassung der Modellparameter mit Hilfe von \cite{casiopeia}, um die Modellgüte zu verbessern.
+In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Verwendung des Modells. Dazu werden für die Steuergrößen reale Messwerte vorgegeben, um die Güte des Modells abzuschätzen zu können, durch einen Vergleich der berechneten und tatsächlichen gemessen Werte. Abschließend erfolgt eine Anpassung der Modellparameter mit Hilfe von \cite{casiopeia}, um die Modellgüte zu verbessern.
 
 \subsection{Simulation und Validierung des Modells}
 
-Die Validation des Modells erfolgt in zwei Schritten. Zunächst wird das Raummodell ohne Verwendung des Heizkörpers simuliert. Im nächsten Schritt wird erfolgt eine Simulation, bei der der Heizkörper zum Einsatz kommt.
+Die Validation des Modells wird in zwei Schritte aufgeteilt. Zunächst wird das Raummodell ohne Verwendung des Heizkörpers simuliert, um das Grundmodell des Raumes zu überprüfen und ein Gefühl dafür zu bekommen ob alle wichtigen physikialischen Effekte berücksichtigt wurden. Im nächsten Schritt wird erfolgt eine Simulation, bei der der Heizkörper zum Einsatz kommt, die dazu dienen soll die Güte der Abbildung des Heizkörpers zu bestimmen.
 Somit gilt es für den ersten Schritt Zeitintervall zu identifizieren, welches möglichst langer Dauer ist und währenddessen möglichst wenig Störfaktoren aufgetreten sind und weiterhin der Heizkörper nicht genutzt wurde. Ein solches Zeitintervall findet sich über die Weihnachten vom 23.12.2105 bis zum 28.12.2015, da aufgrund der Feiertage das Büro nicht genutzt wurde.
 Das Intervall umfasst mehr als 5 Tage, von denen an den ersten Tage eine sehr milde Außentemperatur zwischen $8^{\circ}C$ und $16^{\circ}C$ vorgeherrscht hat. Erst am letzten Tag nähert sich die Außenlufttemperatur dem Gefrierpunkt von $0^{\circ}C$. Außerdem hat die Sonne gegen mittag geschienen und den Raum dadurch erwärmt.
 Die genauen Messdaten in 10 minütigen Intervallen der Globalstrahlung und Außentemperatur für diesen Zeitraum wurden von \cite{wetter} zur Verfügung gestellt und sind in REFXXXXBILD visualisiert sowie auf der angehängten CD in der Datei XXXXXX zu finden.
@@ -341,7 +341,7 @@ Auch bei dieser Simulation wurde eine Temperatur von $22^{\circ}C$ im K~Gebäude
 
 Der Simulationszeitraum beginnt gegen späten Abend am 28.02.2015 und erstreckt sich über 2000 Minuten bis zum frühen Morgen des 30.12.2015. Die Simulationsergebnisse bestätigen zunächst die vorherigen Ergebnisse, indem das Modell zunächst schneller auskühlt als der reale Raum. Dies liefert wiederum einen Hinweis auf einen zu hohen Wärmeverlust im Modell.
 Die Systemdynamik des Modells folgt in etwa der Realität bis zur Nutzung des Heizkörpers nach etwa 950 simulierten Minuten. 
-Das Öffnen des Heizkörperventils ist sowohl im Modell, als auch in den Messwerten sehr gut zu sehen und führt zu einem signifikanten Anstieg der Raumtemperatur. Es wird zudem deutlich, dass die Modellreaktion zum einen gleichzeitig einsetzt, jedoch deutlich langsamer/träger abläuft als in der Realität. Zum anderen wird im Modell weitaus mehr Wärme in den Raum abgegeben als in der Realität.
+Das Öffnen des Heizkörperventils ist sowohl im Modell, als auch in den Messwerten sehr gut zu sehen und führt zu einem signifikanten Anstieg der Raumtemperatur. Es wird zudem deutlich, dass die Modellreaktion zum einen gleichzeitig einsetzt, jedoch deutlich langsamer/träger abläuft als in der Realität. Zum anderen wird im Modell weitaus mehr Wärme in den Raum eingebracht als in der Realität, was auf eine erhöhte Wärmezufuhr durch den Heizkörper oder durch die Solarstrahlung hinweist, da wie zuvor erwähnt die lokale Bewölkung für Fehler sorgen könnte.
 Die Trägheit des Modells kann auf eine unzureichende Diskretisierung hinweisen, weshalb die Anzahl der Volumenelemente auf 10 erhöht wurde. Die anschließenden Untersuchungen zeigen, dass die Modellgüte damit gesteigert werden konnte.
 
 Insbesondere im Zusammenhang mit den zuvor festgestellten Unsicherheiten bei den Messwerten lässt sich feststellen, dass die  Simulationskurve die Dynamik des realen Systems erkennbar widerspiegelt, wenn auch mit einer gewissen Trägheit verbunden durch die Nutzung der Heizung.
@@ -352,18 +352,38 @@ Zusammenfassend lässt sich feststellen, dass das Modell die grundlegende System
 
 
 \subsection{Anpassung des Modells}
+Ziel des Abschnittes ist eine Verbesserung des Raummodells, welche durch eine Parameterschätzung mit \cite{casiopeia}, einer freien Softwareumgebung für die optimale Versuchsplanung und Parameterschätzung.
+Wie bereits erwähnt, werden beim Einsatz des Modells mit Modellprädiktiver Regelung kürzere Intervalle betrachtet, weshalb die Modelloptimierung anhand von kürzeren Intervallen erfolgt. Die Durchführung der Parameterschätzung erfolgte mit freundlicher Unterstützung von Herrn \textsc{Adrian Bürger}, der das Übersetzen des Modell und die Ausführung übernommen hat.
 
-Wie bereits erwähnt wird für MPC kürzere Intervalle benötigt, daher erfolgt die Modelloptimierung über Pamaterschätzung anhand kürzerer Intervalle.
-
-Parameterschätzung mit casiopeia durch Untertsützung von Herrn \textsc{Adrian Bürger}
-
-
+Wie bereits zuvor, erfolgt auch die Parameterschätzung systematisch mit einer stückweise vergrößerten Komplexität bzw. Überlagerung von Effekten.
 
 step1 nur nacht ohne strögun, heizung solar
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160329_pestep1}
+\caption{Parameterschätzung}
+\label{fig:step1}
+\end{figure}
 
 step2 schätzung mit Solarstrahlung und teilweise störgrößen
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160329_pestep2}
+\caption{Parameterschätzung}
+\label{fig:step2}
+\end{figure}
 
 step3 schätzung mit heizung und teilweise störgrößen
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160329_pestep3}
+\caption{Parameterschätzung}
+\label{fig:step3}
+\end{figure}
+
+
+
 
 Simulation wie mpc rein
 
