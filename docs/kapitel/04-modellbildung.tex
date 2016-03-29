@@ -62,7 +62,7 @@ Diese modellrelevanten Eigenschaften sind allesamt mit ihren Zahlenwerten in Tab
 Raumbreite & 7,81\tnote{1)} & $[m]$ \\ 
 \ccol Raumlänge & \ccol 5,78\tnote{1)} & \ccol $[m]$ \\
 Raumhöhe & 2,99\tnote{1)} & $[m]$ \\
-\ccol Wärmedurchgangskoeffizient Betonwand & \ccol 2,0\tnote{2)} & \ccol $[\frac{W}{m^{2}*K}]$\\
+\ccol Wärmedurchgangskoeffizient Betonwand & \ccol 1,0\tnote{2)} & \ccol $[\frac{W}{m^{2}*K}]$\\
 Spezifische Wärmekapazität von Luft & 1.000,0\tnote{3)} & $[\frac{J}{kg*K}]$\\
 \ccol Dichte von Luft & \ccol 1,25 \tnote{3)} & \ccol $[\frac{kg}{m^{3}}]$\\
 \bottomrule
@@ -142,7 +142,7 @@ Durch diese Erweiterungen werden auch weitere physikalische Größen zur Beschre
 
 Fensterbreite & 7,0\tnote{1)} & $[m]$ \\ 
 \ccol Fensterhöhe & \ccol 2,08\tnote{1)} & \ccol $[m]$ \\
-Wärmedurchgangskoeffizient Glas & 4,0\tnote{2)} & $[\frac{W}{m^{2}*K}]$\\
+Wärmedurchgangskoeffizient Glas & 2,0\tnote{2)} & $[\frac{W}{m^{2}*K}]$\\
 
 \bottomrule
 \end{tabularx}
@@ -355,15 +355,22 @@ Zusammenfassend lässt sich feststellen, dass das Modell die grundlegende System
 Ziel des Abschnittes ist eine Verbesserung des Raummodells, welche durch eine Parameterschätzung mit \cite{casiopeia}, einer freien Softwareumgebung für die optimale Versuchsplanung und Parameterschätzung.
 Wie bereits erwähnt, werden beim Einsatz des Modells mit Modellprädiktiver Regelung kürzere Intervalle betrachtet, weshalb die Modelloptimierung anhand von kürzeren Intervallen erfolgt. Die Durchführung der Parameterschätzung erfolgte mit freundlicher Unterstützung von Herrn \textsc{Adrian Bürger}, der das Übersetzen des Modell und die Ausführung übernommen hat.
 
-Wie bereits zuvor, erfolgt auch die Parameterschätzung systematisch mit einer stückweise vergrößerten Komplexität bzw. Überlagerung von Effekten.
+Wie bereits zuvor, erfolgt auch die Parameterschätzung systematisch, um die einzelnen Modellparameter anzupassen. Als zu schätzende Parameter wird der Wärmedurchgangskoeffizient der Raumwände und des Heizkörpers sowie der Transmissionsgrad der Fensterscheiben betrachtet, welche im Folgenden in drei Schritten berechnet werden. Der Wärmedurchgangskoeffizient der Glasscheibe wird als fester Wert angenommen, da sich aufgrund der offensichtlichen Korrelation zwischen den beiden Wärmedurchgangskoeffizienten voneinander nicht-physikalische Schätzwerte ergeben können.
 
-step1 nur nacht ohne strögun, heizung solar
+Es muss weiterhin beachtet werden, dass die Erhöhung der Modellgüte durch den Einsatz realer Messwerte ebenfalls mit einer Abweichung der physikalischen Schätzparameter zur Realität einhergehen können, da Störgrößen und Messfehler implizit berücksichtigt werden.
+
+Zunächst wird der Wärmedurchgangskoeffizient der Wand bestimmt, wozu Intervalle genutzt wurden die möglichst ohne Störgrößen sind und ohne Einsatz der Heizung auskommen. Dazu bieten sich Zeitintervalle am Abend an, an denen das Büro nicht mehr genutzt wird und keine Solarstrahlung mehr auf die Fenster trifft. Das Ergebnis der Parameterschätzung für zwei Intervalle ist in den Plots in \ref{fig:step1} dargestellt. Das Skript zur Parameterschätzung findet sich im Anhang REFXXXX.
+
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160329_pestep1}
-\caption{Parameterschätzung}
+\caption{Parameterschätzung des Wärmedurchgangskoeffizienten der Wand von zwei Intervallen}
 \label{fig:step1}
 \end{figure}
+
+Die Plots auf der linken Seite stellen das Ergebnis für ein 100-minütiges Intervall vom Abend des 05.01.2016, auf der rechten Seite vom Abend des 23.01.2016 dar. Mit dem vorab fixierten U-Wert für Glas ergab sich ein Schätzwert für den Wärmedurchgangskoeffizient der Wand von $U_{wall}=0.612986$ 
+Die oberen beiden Plots enthalten die Verläufe der Steuergröße Außenlufttemperatur im Intervall, wobei die Solarstrahlung und die Heizung keinen Einfluss hatten. Die genauen Messdaten sind den Dateien auf der angehängten CD in \ref{att:cd} im Ordner enthalten. Die mitlleren
+
 
 step2 schätzung mit Solarstrahlung und teilweise störgrößen
 \begin{figure}
