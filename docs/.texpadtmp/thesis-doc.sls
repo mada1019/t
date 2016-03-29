@@ -36,7 +36,7 @@
 		\setentrycounter[]{page}\glsnumberformat{32}}}%
 \subglossentry{1}{p}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{VI}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{32}}}%
+		\setentrycounter[]{page}\glsnumberformat{33}}}%
 \subglossentry{1}{phigh}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{VI}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{14}}}%
@@ -45,11 +45,10 @@
 		\setentrycounter[]{page}\glsnumberformat{14}}}%
 \subglossentry{1}{q}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{VI}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{32}}}%
+		\setentrycounter[]{page}\glsnumberformat{33}}}%
 \subglossentry{1}{qdot}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{VI}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{32}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{34}}}%
+		\setentrycounter[]{page}\glsnumberformat{33\delimN 34}}}%
 \subglossentry{1}{t}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{VI}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{32}}}%
@@ -64,7 +63,7 @@
 		\setentrycounter[]{page}\glsnumberformat{32}}}%
 \subglossentry{1}{w}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{VI}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{32}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{33}}}\glsgroupskip
 \glsgroupheading{G}\relax \glsresetentrylist %
 \glossentry{greekletter}\relax \glsresetentrylist
 \subglossentry{1}{kappa}{\glossaryentrynumbers{\relax 

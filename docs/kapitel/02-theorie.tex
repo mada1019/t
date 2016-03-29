@@ -18,7 +18,7 @@ Abschließend erfolgt eine allgemeine \textit{Einführung in die Solar- und Geb�
 \section{Grundlagen zur Modellprädiktiven Regelung}
 \label{sec:mpc}
 
-Die \textit{\acrlong{mpr}} ist ein Teilgebiet der angewandten Mathematik, welche sich mit der Regelung von Prozessen oder technischen Systemen hinsichtlich gewählter Optimierungskriterien beschäftigt. Hierzu bedient sie sich mathematischer Modelle des zu steuernden Prozesses sowie den \textit{Grundlagen der Optimalsteuerung}. Zur optimalen Regelung eines Prozesses werden wiederholt Optimalsteuerungsprobleme gelöst, wodurch sich besondere Anforderungen an das Modell ergeben \cite[S.~10]{di14}. Daher erfolgt zunächst eine kurze Einführung in die Optimalsteuerung, bevor die Modellprädiktive Regelung genauer beschrieben wird.
+Die \textit{\acrlong{mpr}} ist ein Teilgebiet der angewandten Mathematik, welche sich mit der Regelung von Prozessen oder technischen Systemen hinsichtlich gewählter Optimalitätskriterien beschäftigt. Hierzu bedient sie sich mathematischer Modelle des zu steuernden Prozesses sowie den \textit{Grundlagen der Optimalsteuerung}. Zur optimalen Regelung eines Prozesses werden wiederholt Optimalsteuerungsprobleme gelöst, wodurch sich besondere Anforderungen an das Modell ergeben \cite[S.~10]{di14}. Daher erfolgt zunächst eine kurze Einführung in die Optimalsteuerung, bevor die Modellprädiktive Regelung genauer beschrieben wird.
 
 \subsection{Optimalsteuerung}
 
@@ -45,25 +45,27 @@ Die Zustände werden vom Zustandsvektor $\vec{x}$ und die Controls vom Vektor $\
 \label{fig:opt}
 \end{figure}
 
-Um eine \textit{optimale Lösung} dieses zeitkontinuierlichen Optimierungsproblems zu betsimmen, muss die erste Ableitung die \textit{notwendigen} \textit{Karush-Kuhn-Tucker} Bedingungen erfüllen. Weiterhin muss die zweite Ableitung einer \textit{hinreichenden} Bedingung genügen. Daher ist es notwendig, dass das nichtlineare Optimalsteuerungsproblem zweifach stetig differenzierbar ist und damit auch das mathematische Modell des Prozesses \cite[S.~21ff.]{di14}.
+Um eine \textit{optimale Lösung} dieses zeitkontinuierlichen Optimierungsproblems zu bestimmen, muss die erste Ableitung die \textit{notwendigen} \textit{Karush-Kuhn-Tucker} Bedingungen erfüllen. Weiterhin muss die zweite Ableitung einer \textit{hinreichenden} Bedingung genügen. Daher ist es notwendig, dass das nichtlineare Optimalsteuerungsproblem zweifach stetig differenzierbar ist und damit auch das mathematische Modell des Prozesses \cite[S.~21ff.]{di14}.
 
 Eine \textit{optimale Lösung} beschreibt einen optimalen Einsatz von Steuergrößen -- hinsichtlich der formulierten Kostenfunktion -- zur Beeinflussung des Systems und wird auch als \textit{Optimalsteuerungsplan} bezeichnet.
 
 Konkret können mehrere, numerische Ansätze zur Lösung des Optimalsteuerungsproblems verfolgt werden, die sich in den \textit{Zustandsraum}, die \textit{indirekten} sowie \textit{direkten Verfahren} einteilen lassen. Reale Probleme zeichnen sich durch eine Vielzahl an Nebenbedingungen aus. Diese eigenen sich besonders zur Optimierung mit direkten Verfahren, weshalb sie in der Praxis am weitesten verbreitet sind \cite[S.~63]{di14}. 
 Da die \acrlong{mpr} nur den Rahmen dieser Arbeit bildet, wird nicht näher auf die Optimalsteuerung eingegangen. Der interessierte Leser findet in \cite{di14} eine theoretische fundierte Einführung zur Optimalsteuerung sowie eine ausführliche Beschreibung der einzelnen Lösungsverfahren.
 
-%finito
 
 \subsection{Modellprädiktive Regelung}
 
-Da zwischen realen Modellen und den tatsächlichen Prozessen immer Diskrepanzen bestehen, wird sich der reale Prozess durch die Umsetzung des berechneten Optimalsteuerungsplans mit höchster Wahrscheinlichkeit auch nicht exakt der Berechnung folgen. Dies wird auch als Model-Plant-Mismatch bezeichnet. Die Modellprädiktive Regelung eignet sich hervorragend, um diese Modellfehler sowie Störungen auszugleichen ohne eine umfassende Echtzeitregelung einzusetzen. Eine Echtzeitregelung lässt sich aufgrund des enormen Rechenaufwands ohnehin nur durch Näherungen und Vereinfachungen für sehr einfache Anwendungen umsetzen. Diese Lücke wird durch Modellprädiktive Regelung geschlossen, die ein beschränktes, immer gleich weit in die Zukunft schauendes Zeitintervall betrachtet. Zu diskret wiederholten Zeitpunkten wird das Verhalten eines Prozesses durch Kenntnis des aktuellen Zustandes und mit Hilfe eines Modells in dem Intervall vorhergesagt und versucht, dieses mit Optimalsteuerungsplänen dem gewählten Optimierungskriterium entsprechend zu beeinflussen. Dadurch kann auf Abweichungen, egal ob durch Modellabweichungen oder Störungen des Prozesses, zum Optimalsteuerungsplan zu den diskreten Zeitpunkten reagiert werden \cite[S.~71]{di14}.
+Da zwischen Modellen und den realen Prozessen immer Diskrepanzen bestehen, wird der Prozess durch den Einsatz eines berechneten Optimalsteuerungsplans mit höchster Wahrscheinlichkeit nicht exakt dem vorausberechneten Weg folgen. Dieses Phänomen wird auch als \textit{Model-Plant-Mismatch} bezeichnet. Die \acrlong{mpr} eignet sich hervorragend, um diesen Model-Plant-Mismatch sowie Störungen des Prozesses auszugleichen, ohne den Einsatz einer umfassenden \textit{Echtzeitregelung}. Eine solche Echtzeitregelung lässt sich aufgrund des enormen Rechenaufwands ohnehin nur durch Näherungen und Vereinfachungen für sehr einfache Anwendungen umsetzen. Diese Lücke wird durch die \acrlong{mpr} geschlossen. Sie betrachtet ein beschränktes, immer gleich weit in die Zukunft hinein ragendes Zeitintervall und versucht zu diskret wiederholten Zeitpunkten das Verhalten des Systems vorherzusagen. Diese geschieht durch eine Vorausberechnung mit Hilfe eines mathematischen Modells des Prozesses, aufbauend auf der Kenntnis des aktuellen Zustandes. Dabei wird gleichzeitig durch die periodisch Berechnung von Optimalsteuerungsplänen versucht, die projizierten Zustände dem gewählten Optimalitätskriterium entsprechend zu beeinflussen. Dadurch kann auf Abweichungen des Prozesses zum ursprünglichen Optimalsteuerungsplan zu diskreten Zeitpunkten reagiert, unabhängig davon ob diese durch eine Modellabweichungen oder Störungen bedingt sind \cite[S.~71]{di14}.
 
-Im Rahmen dieser Arbeit wird eine Anlage aufgebaut und ein Modell gebildet, die eine Raumtemperaturregelung während des laufenden Betriebs mit Modellprädiktiver Regelung ermöglicht. Im ersten Schritt werden auf Basis von aktuellen Messungen des Systemzustandes und Kenntnis der nicht beeinflussbaren Steuergrößen zu jedem diskreten Steuerungszeitpunkt optimale Steuerungspläne bestimmt. Im nächsten Schritt soll die Modellprädiktive Regelung Vorhersagewerte für den äußeren, nicht beeinflussbaren Steuergrößen zur die Bestimmung der optimalen Steuersignale nutzen.
-Die Anforderungen die sich daraus an ein Modell ableiten, werden bei der Modellbildung in Kapitel \ref{chap:modellbildung} explizit spezifiziert.
+Im Rahmen dieser Arbeit wird eine Anlage aufgebaut und ein Modell gebildet, die eine Modellprädiktive Raumtemperaturregelung während des laufenden Betriebs ermöglichen sollen. 
+Die hieraus abgeleiteten Anforderungen an eine Anlage werden im Kapitel \ref{chap:anlagendesign} bei der Anforderungsanalyse beschrieben.
+Aus dieser Theorie ergeben sich weitere Anforderungen, welche bei der Modellbildung in Kapitel \ref{chap:modellbildung} dargelegt werden.
+
 
 \section{Technische Grundlagen zur Kommunikation mit Bussystemen}
 \label{sec:grundlagenbus}
-In diesem Kapitel werden die Grundlagen von Hard- und Software beleuchtet die für die Kommunikation der Steuerung mit den einzelnen Anlagenteilen benötigt werden.
+
+In diesem Kapitel werden die technischen Grundlagen von Hard- und Software beleuchtet, welche die für die Kommunikation der Steuerung mit den einzelnen Anlagenteilen benötigt werden.
 Diese umfassen zunächst Bussysteme im Allgemeinen, dann das OSI Modell für techn. Kommunikation und werden anhand des spezifischen/konkreten Anwendungsfalls Modbus erläutert.
 
 Die Einführung wird an der Struktur von \cite{schn06} anlehnen.
