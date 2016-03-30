@@ -20,11 +20,11 @@ Ziel dieses Kapitel ist es, eine Anlage zur Raumtemperaturregelung für den Betr
 \label{sec:anforderungen}
 
 \subsection{Einsatzziele und Rahmenbedingungen}
-Um die Anforderungen an eine Anlage zu bestimmen, die sich für die Anwendung mit Modellprädiktiver Regelung eignet, werden zunächst die Einsatzziele der Anlage definiert. Wie in Kapitel \ref{sec:motivation} erwähnt, ist die hier betrachtete Anlage als ein Teil einer großen Anlage gedacht, daher sollten die Einsatzziele kompatibel zueinander gewählt werden. Um die Kompatibilität zu gewährleisten, wurden mit den Projektverantwortlichen\footnote{In Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}} der Forschung im Bereich solarer Anwendungen an der Hochschule Karlsruhe gemeinsam konkrete Einsatzziele der Anlage erarbeitet. Als Ergebnis wurden die folgenden konkreten Ziele vereinbart:
+Um die Anforderungen an eine Anlage zu bestimmen, die sich für die Anwendung mit Modellprädiktiver Regelung eignet, werden zunächst die Einsatzziele der Anlage definiert. Wie in Kapitel \ref{sec:motivation} erwähnt, ist die hier betrachtete Anlage als Teil einer großen Anlage gedacht, daher sollten die Einsatzziele kompatibel zueinander gewählt werden. Um die Kompatibilität zu gewährleisten, wurde mit den Projektverantwortlichen\footnote{In Person von Herrn \textsc{Adrian Bürger} und \textsc{Markus Bohlayer}} der Forschung im Bereich solarer Anwendungen an der Hochschule Karlsruhe gemeinsam konkrete Einsatzziele der Anlage erarbeitet. Als Ergebnis wurden die folgenden konkreten Ziele vereinbart:
  
 \begin{itemize}
 	\item Die Einarbeitung in die Thematiken Modellbildung, Kommunikation von technischen Systemen und Modellprädiktive Regelung soll durch eine praktisches Anwendung unterstützt werden.
-	\item Es soll Know-how im Bereich der Kommunikation von technischen Systemen aufgebaut werden, insbesondere im Umgang mit der Software, der Hardware und zahlreichen Schnittstellen.
+	\item Es soll Know-how im Bereich der Kommunikation von technischen Systemen aufgebaut werden, insbesondere im Umgang mit der Software, der Hardware und den zahlreichen Schnittstellen.
 	\item Die Anlage soll eine hohe Funktionalität und Robustheit gegenüber Fehlern und Beschädigungen vorweisen, da bei der Einarbeitung eine erhöhte Wahrscheinlichkeit der Fehlbedienung besteht und Schäden dadurch vermieden werden sollen.
 	\item Es soll ein Vergleich verschiedener Methodiken beim Einsatz von Modellprädiktiver Regelung ermöglicht werden.
 	\item Außerdem soll ein Vergleich von Ergebnissen bei der Variation von Steuerungsparametern sowie beim Einsatz verschiedener Steuerungs- und Regelungsalgorithmen ermöglicht werden.
@@ -63,6 +63,7 @@ Aus den Einsatzziele und Rahmenbedingungen lassen sich die Anforderungen an die 
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
+\addlinespace[1mm]
 Raum K004a als Umgebung  & \multirow{3}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
@@ -75,17 +76,17 @@ Raum K004a als Umgebung  & \multirow{3}{\hsize}{
  \\
 	
 \cmidrule[0.1pt](lr{2em}){1-1} 
-Minimaler baulicher Aufwand & \\
+\addlinespace[1mm] Minimaler baulicher Aufwand & \\
 
 \cmidrule[0.1pt](lr{2em}){1-1} 
-Minimaler finanzieller \newline Aufwand &\\ 
+\addlinespace[1mm] Minimaler finanzieller \newline Aufwand &\\ 
 
 
 
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
-\addlinespace[4mm] Modellprädiktive Regelung mit JModelica.org und CasADi \newline & \multirow{3}{\hsize}{
+\addlinespace[1mm] Modellprädiktive Regelung mit JModelica.org und CasADi \newline & \multirow{3}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
 \item Die Modellbildung erfolgt in Modelica.
@@ -97,10 +98,10 @@ Minimaler finanzieller \newline Aufwand &\\
 }  \\
 
 \cmidrule[0.1pt](lr{2em}){1-1}
-\addlinespace[4mm] Einsatz der Modbus \newline Kommunikationstechnologie \newline 	& 		\\
+\addlinespace[1mm] Einsatz der Modbus \newline Kommunikationstechnologie \newline 	& 		\\
 
 \cmidrule[0.1pt](lr{2em}){1-1}
-\addlinespace[4mm] Flexible Ansteuerung der Anlage \newline & \\
+\addlinespace[1mm] Flexible Ansteuerung der Anlage \newline & \\
 
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
@@ -417,5 +418,12 @@ Die Anlage konnte aufgrund von Lieferschwierigkeiten des Wärmemengenzählers er
 Seit Mitte Januar läuft die Anlage durchgängig stabil und fehlerfrei und leistet einen sehr zuverlässigen Dienst.
 Die Forderung einer hohen Funktionalität der Anlage konnte demnach erfüllt werden. Durch die Programmierung einer fehlertoleranten Software konnte ebenfalls dem Wunsch einer hohen Robustheit der Anlage nachgekommen werden.
 
-Der gemessene Raumtemperaturverlauf über den Zeitraum von Mitte Januar bis Mitte April ist in REFXXXXX dargestellt. Durch ihn lässt sich die These bestätigen, dass die Anlage eine Raumtemperatur regeln kann.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160330_regelung}
+\caption{Raumtemperturverlauf für ein 14-tägiges Intervall im Februar 2016}
+\label{fig:regelung}
+\end{figure}
+
+Der gemessene Raumtemperaturverlauf über 14-tägiges Intervall im Februar 2016 ist in \ref{fig:regelung} dargestellt. Er wurde bei Betrieb der Anlage aufgenommen Schaltpunkte 21 und 23 Grad Durch ihn lässt sich die These bestätigen, dass die Anlage eine Raumtemperatur regeln kann.
 Aufgrund der zentralen Steuerung der Anlage, welche in Python umgesetzt wurde und fehlerfrei funktioniert, sind die Voraussetzungen für eine Regelbarkeit mit Hilfe von Modellprädiktiver Regelung erfüllt. Um die Eignung zu überprüfen, wird jedoch noch ein Modell des Raumes und der Anlage benötigt, welches im nachfolgenden Kapitel gebildet wird.

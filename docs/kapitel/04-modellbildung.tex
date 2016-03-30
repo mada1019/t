@@ -381,7 +381,12 @@ Im nächsten Schritt wird der Transmissionsgrad der Fensterscheiben geschätzt. 
 \label{fig:step2}
 \end{figure}
 
-window-transmission = 0.00687213
+Die Plots auf der linken Seite stellen das Ergebnis für ein 220-minütiges Intervall am 02.01.2016, auf der rechten Seite für ein 270 minütiges Intervall 05.01.2016 dar. Die Parameterschätzung ergab einen geschätzten Transmissionsgrad von $window_{transmission}=0.00687213$.
+ 
+Die oberen beiden Plots enthalten die Verläufe der Steuergröße Außenlufttemperatur im Intervall, wobei die Solarstrahlung und die Heizung keinen Einfluss hatten. Die genauen Messdaten sind den Dateien auf der angehängten CD in \ref{att:cd} im Ordner enthalten. Die mittleren Plots zeigen einen Vergleich der gemessen Raumtemperatur mit der Simulation des geschätzten Intervalls über 100 Minuten. Darin ist gut zu erkennen, dass die Dynamik des Modells durch eine Anpassung des Parameters weiter verbessert werden konnte. Die unteren Plots zeigen die Abweichung zwischen Simulation und Messwerten. Im linken Intervall beschreibt die Simulation bis auf minimale Abweichungen das reale System sehr genau, im Rechten ergibt sich bei der Simulation ein leicht erhöhte Temperatur im Vergleich zur Messung, die mit einer Abweichung von etwa $0,35^{\circ}C$ nach 100 Minuten immer noch eine ausreichende Güte besitzt.
+
+
+
 %Here WE GO!!!!
 
 
@@ -413,6 +418,14 @@ step3 schätzung mit heizung und teilweise störgrößen
 
 
 u-radiator = 12.9872
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160330_validierung2pe}
+\caption{Simulation des Raummodells mit Einsatz des Heizkörpers mit geschätztem Parameter}
+\label{fig:valid2pe}
+\end{figure}
 
 JMODELICA fähig beweisen, also nächster Schritt MPC implementierung prüfen.
 
