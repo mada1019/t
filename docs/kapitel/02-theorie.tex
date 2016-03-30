@@ -269,7 +269,7 @@ Bei der Abhandlung der Dienstaufgaben anhand der Client/Server-Architektur, steh
 \end{figure}
 
 Die unterste physikalische Schicht definiert die mechanischen und elektrischen Schnittstellen zur physischen Verbindung von Systemen und zur Übertragung der einzelnen Bits \cite[S.~49f.]{osi96}. Sie legt also die mechanischen und elektrischen Eigenschaften der Übertragung fest, also die Endsystemkopplung durch Stecker, die Kabelspezifikationen und die Zuordnung der Anschlüsse. Außerdem wird die Art der Codierung und die Spannungspegel der Übertragung spezifiziert. In der Regel werden dazu bestehende Normen genutzt, wie zum Beispiel die zuvor beschriebene elektrische Übertragungsstrecke nach EIA 485-Norm \cite[S.~14f.]{schn06}.
-Ein wichtiger Aspekt des Modells ist es, dass die Spezifikation der Schnittstelle und nicht das physikalisches Medium selbst Teil der Schicht eins ist, da die Kommunikation unabhängig von der konkreten Ausprägung abläuft \cite[S.~9]{schn06}.
+Ein wichtiger der Ebene ist es, dass die Spezifikation der Schnittstelle und nicht das physikalisches Medium selbst Teil der Schicht eins ist, da die Kommunikation unabhängig von der konkreten Ausprägung abläuft \cite[S.~9]{schn06}.
 
 Die zweite Schicht widmet sich der Kommunikation zwischen zwei Systemen. Deshalb stellt die Datenverbindungsschicht funktionale und prozedurale Hilfsmittel für den Aufbau und die Trennung einer Verbindung sowie den Transfer von Dateneinheiten zur Verfügung. Außerdem  wird der darüber liegenden Netzwerkschicht eine Kontrolle über die Verbindung von physikalischen Netzwerken ermöglicht \cite[S.~46f.]{osi96}.
 Eine weitere umfangreiche Aufgabe ist die Sicherung der Daten. Durch die Einteilung der Daten in Rahmen und und die Nutzung von Strategien zur Fehlererkennung und -vermeidung, soll die Sicherheit gewährleistet werden. Dies kann durch die zuvor beschriebenen Methodiken, wie beispielsweise dem CRC geschehen. Wichtig hierbei ist, dass die Schicht keinerlei Kenntnis über Inhalte der Daten hat \cite[S.~9ff.]{schn06}
@@ -281,15 +281,11 @@ Typische Aufgaben sind die Adressierung der Teilnehmer, der Auf- und Abbau von T
 
 Die fünfte Schicht -- die Sitzungsschicht -- startet eine Sitzungsverbindung mit eindeutiger Adresse, wenn diese von einer höheren Schicht angefordert wird. Diese Verbindung dient dazu, den Datenaustausch auf höherer Ebene zu organisieren, indem Sitzungsadressen mit den Transportadressen verknüpft werden \cite[S.~35]{osi96}. Sie verbindet demnach die Anwendungsschichten mit dem Transportsystem über eine Schnittstelle \cite[S.~13]{schn06}.
 
-Die sechste Schicht ist nach \cite[S.~33f.]{osi96} für die Darstellung der Daten zuständ die von Anwendung-Entitäten entweder kommuniziert oder bei deren Kommunikation referenziert werden.
-Sie stellt außerdem eine gemeinsame Represantion der übertragenen Daten dar zwischen Anwendungs-Entitäten und befreit diese dadurch von Syntaxabhängigkeiten.
-\cite[S.~13f.]{schn06} stellt fest, dass die Dienste die der Darstellung der transferierten Daten dienen wie die Codierung der zu übertragenden Daten, der verwendete Zeichensatz und die Darstellung der Daten auf dem Bildschirm oder Drucker. Semantik/Syntax beim Nachrichtenaustausch und der beiden Kommunizierenden Prozesse. Evtl Komprimierung um Zeit und Kosten zu sparen .
+Die sechste Schicht ist nach \cite[S.~33f.]{osi96} mit der Darstellung der Daten betraut, die von beiden Kommunikationsanwendungen entweder verstanden oder referenziert werden. Dadurch wird eine gemeinsame Repräsentation der zu übertragenen Daten geschaffen. \cite[S.~13f.]{schn06} stellt fest, dass diese Dienste eine Syntaxfreiheit der Daten beim Nachrichtenaustausch schaffen und durch eine Kompression der Daten Zeit- und Kostenvorteile der Übertragung generiert werden.
 
+Die siebte und letzte Schicht stellt einem Benutzer lediglich eine Zugriffsmöglichkeit auf das OSI Kommunikationssystem zur Verfügung \cite[S.~32]{osi96}. Benutzer sind in der Regel Softwareanwendungen kein Mensch ist. \cite[S.~14]{schn06}
 
-Die siebte und letzte Schicht stellt lediglich eine Möglichkeit für Anwendungsprzesse zur Verfügung um auf die OSI Umgebung zuzugreifen. Jeder Anwendung stellt im OSI genau einen Anwendungsprozess dar, verschiedene Anwendungsprozesse für verschiedene Anwendungen und vice versa \cite[S.~32]{osi96}
-stellt Funktionen bereit, mit denen der Benutzer auf das Kommunikationssystem zugreifen kann, wobei der Benutzer idR ein Computerprogramm und kein Mensch ist. \cite[S.~14]{schn06}
-
-Im folgenden werden die verwendeten Modbus Protokolle und Spezifikation ind Anwendung Berzug zum OSI Modell gebracht um den praktischenNutzen davon klar zu machen.
+Im nachfolgenden Abschnitt werden die später angewandten Modbus Protokolle und deren Spezifikation beschrieben und in Bezug zum \acrshort{osi} gebracht, um den praktischen Nutzen davon zu verdeutlichen.
 
 
 \subsection{Modbus Kommunikationstechnologie}
