@@ -291,68 +291,69 @@ Im nachfolgenden Abschnitt werden die später angewandten Modbus Protokolle und 
 \subsection{Modbus Kommunikationstechnologie}
 \label{sub:modbus}
 
-Zunächst wird die Modbus Technologie in das \acrlong{osi} eingeordnet, bevor eine Beschreibung derSpezifikationen und Protokolle gemäß der zuvor von Bussystemen.
+Zunächst wird die Modbus Technologie in das \acrlong{osi} eingeordnet, bevor eine Beschreibung der genauen Spezifikationen und Protokolle anhand der zuvor dargelegten Merkmalen erfolgt.
 
-Das Modbus Protokoll teilt sich auf verschiedene Protokolle auf, zum einen auf das Application Layer Messaging Protocol auf oberster Ebene, welches auf das Modbus Over Serial Line Protocol sowie das Ethernet TCP/IP Protokoll aufbaut.
-Das Application Layer Messaging Protocol lässt sich im OSI Referenzmodell in die siebte und oberste Schicht(Anwendungsschicht) einordnen wie in \ref{fig:modbusosi} dargestellt. Bei der Nutzung des Modbus over Serial line Protocol implementiert diese die zweite Schicht und die Ebenen drei bis sechs sind leer implementiert. Als physikalische Schicht werden die Übertragungsstandards nach EIA 485 oder nach EIA 232 \cite[S.~2]{mod06ser}.
-Anstatt des Over serial line kann auch das Modbus Messaging On TCP/IP Protocol verwendet, dann implementiert dieses zusammen mit den dem TCP/IP Standard zusammen die Netzwerkschicht im OSI-Referenzmodell. Das Ethernet implementiert dabei die Datensicherungsschicht Nummer zwei und dessen physikalische Spezifikationen die unterste physikalische Schicht und deren Schnittstellen. Die Ebenen vier bis sechs sind auch bei Nutzung dieser Kommunikationsweise leer implementiert \cite[S.~2f.]{mod12}. Eine Einführung zum Ethernet und TCP/IP Standard findet sich in \cite{schn06}, detaillierte Ausführungen dazu in \cite{fu03}.
+Das Modbus Protokoll teilt sich in verschiedene Protokolle auf, zum einen auf das \textit{Application Layer Messaging Protocol} auf oberster Ebene, welches auf das \textit{Modbus Over Serial Line Protocol} sowie das \textit{Ethernet} und \textit{TCP/IP Protokoll} aufbauen kann.
+Das Application Layer Messaging Protocol lässt sich im OSI Referenzmodell in die siebte und oberste Schicht(Anwendungsschicht) einordnen wie in \ref{fig:modbusosi} dargestellt. Bei der gemeinsamen Nutzung mit dem Modbus Over Serial Line Protocol, wird letzteres in die zweite Schicht eingeordnet und die Ebenen drei bis sechs sind leer implementiert. Als physikalische Schicht werden die Übertragungsstandards nach EIA 485 oder nach EIA 232 genutzt \cite[S.~2]{mod06ser}.
 
-Nun wird das Modbus Application Layer Messaging Protocol erläutert. Anschließend werden die Modbus Protokolle der unteren Ebenen erläutert bis hin zu den physikalischen Schnittstellen.
+Anstatt des seriellen Modbus Protkolls kann auch das \textit{Modbus Messaging On TCP/IP Protocol} verwendet werden, dass dabei zusammen mit den dem TCP/IP Protokoll zusammen die Netzwerkschicht im OSI-Referenzmodell implementiert. Die Ethernet Technologie implementiert dann die Datensicherungsschicht und definiert die Spezifikationen der untersten physikalischen Schicht und deren Schnittstellen. Die Ebenen vier bis sechs sind auch bei Nutzung dieser Kommunikationsweise leer implementiert \cite[S.~2f.]{mod12}. Eine allgemeine Einführung zur Ethernet Technologie und zum TCP/IP Standard findet sich in \cite{schn06}. Für eine ausführliche Darstellung wird jedoch auf \cite{fu03} verwiesen.
+
+Die Funktionen der einzelnen Ebenen werden im folgenden ausführlich dargestellt. Zunächst wird das Modbus Application Layer Messaging Protocol erläutert, dass von beiden unteren Modbus Protokollen genutzt wird. Anschließend werden letztere bis hin zu den physikalischen Schnittstellen erläutert.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160319_modbusosi}
-\caption[Die Modbus Kommunikation im OSI-Referenzmodell]{Die Modbus Kommunikation im OSI-Referenzmodell aus \cite[S.~5]{mod06ser}}
+\caption[Die Modbus Kommunikation im OSI-Referenzmodell]{Die Modbus Kommunikation im OSI-Referenzmodell, entnommen aus \cite[S.~5]{mod06ser}}
 \label{fig:modbusosi}
 \end{figure}
 
+Das Modbus Application Layer Messaging Protocol kann von verschiedenen Netzwerken und Bussystemen zur Master/Slave Kommunikationen genutzt werden \cite[S.~2f.]{mod12}.Das Protokoll definiert eine gemeinsame Telegrammstruktur, bezogen auf die Inhalte und den Rahmen des Telegramms. Diese Definition ermöglicht die Kommunikation zwischen verschiedenen Geräten innerhalb eines Netzwerks, unabhängig von Art und Typ des darunter liegenden Netzwerks. Es beschreibt außerdem wie die Kommunikation abläuft. Zum einen, wie der Master beziehungsweise Client eine Anfrage an einen Server beziehungsweise Slave stellt, zum anderen deren Reaktionen und Antworten auf Anfragen. Außerdem beschreibt es die Überwachung auf Übertragungsfehler \cite[S.~2f.]{mod96}.
+Die Kommunikation kann über eine serielle Leitung nach EIA 485 beziehungsweise EIA 232 sowie über ein lokales Ethernet-Netzwerk erfolgen. Über Gateways, wie in Abschnitt \ref{sec:grundlagenbus} erläutert, kann die Kommunikation auch über verschiedene Typen von Bussystemen oder Netzwerken geschehen \cite[S.~3f.]{mod12}.
 
-Das Modbus Application Layer Messaging protocol ist ein Protokoll, dass verschiedene Netzwerke und Bussysteme zur Master/Slave Kommunikationen von verbundenen Geräten nutzen kann \cite[S.~2f.]{mod12}, jedoch übernimmt im Rahmen des Protokolls der Master die Rolle des Clients und die Slaves die Rollen als Server, da der Client alleinig die Anfragen stellt und die Server lediglich auf Anfragen antworten.Das Modbus Protokoll definiert eine gemeinsame Telegrammstruktur, bezogen auf Inhalte und Rahmen der Nachricht. Damit ermöglicht es die Kommunikation zwischen verschiedenen Geräten innerhalb eines Netzwerks, welche unabhängig von Art und Typ des darunter liegenden Netzwerks sind. Es beschreibt außerdem wie die Kommunikation abläuft, wie der Client eine Anfrage an ein Server stellt und wie diese auf die Anfragen reagieren und antworteten und beschreibt wie Fehler bei der Übertragung entdeckt und darauf hingewiesen werden \cite[S.~2f.]{mod96}.
-Die Kommunikation kann dabei über eine serielle Leitung nach EIA 485 sowie über Ethernet Netzwerk erfolgen. Über Gateways, wie in Abschnitt \ref{sec:grundlagenbus} bereits erläutert, kann die Kommunikation auch über verschiedene Typen von Bussystemen oder Netzwerken geschehen \cite[S.~3f.]{mod12}.
-
-Das Modbus Protokoll stellt ein allgemeines Gerüst für Telegramme zur Verfügung, welches in \ref{fig:modbusframe} dargestellt ist.  Die einfache Protocol Data Unit (PDU) enthält die eigentlichen Informationen die ausgetauscht werden sollen und sind daher unabhängig vom Netzwerk oder dem Bussystems. Zu den Informationen gehören die eigentlichen Daten, welche leer sein können oder Daten enthalten die der Slave, in Rahmen von Modbus auch als Server bezeichnet, benötigt, und ein Funktionscode, der ein Byte groß ist und beschreibt welche Art der Aktion Reaktion gefordert ist/wird. Die sogenannte Application Data Unit (ADU) enthält zusätzlich zur PDU weitere Informationen zur Adressierung im Netzwerk und zur Fehlererkennung und ist daher abhängig vom Netzwerk. Der Buszugriff ist damit als Master-Slave geregelt.
+Das allgemeines Gerüst für Modbus Telegramme ist in \ref{fig:modbusframe} dargestellt. Die Protocol Data Unit (PDU) enthält die auszutauschenden Informationen und ist unabhängig vom Netzwerk oder dem Bussystem. Zu den Informationen zählen die eigentlichen Daten, welche auch leer sein können, sowie ein Funktionscode, der beschreibt welche Art der Reaktion gefordert wird. Die sogenannte Application Data Unit (ADU) enthält neben der PDU weitere Informationen zur Adressierung im Netzwerk und zur Fehlererkennung und ist daher abhängig von der zugrundeliegenden Netzwerkstruktur.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160319_Modbusframe}
-\caption[Allgemeiner Rahmen für Telegramme nach dem Modbus Anwendungsprotokoll]{Allgemeiner Rahmen für Telegramme nach dem Modbus Anwendungsprotokoll aus \cite[S.~3]{mod12}}
+\caption[Allgemeiner Rahmen für Telegramme nach dem Modbus Anwendungsprotokoll]{Allgemeiner Rahmen für Telegramme nach dem Modbus Anwendungsprotokoll, entnommen aus \cite[S.~3]{mod12}}
 \label{fig:modbusframe}
 \end{figure}
 
-Für die Kommunikation wird innerhalb des Masters, der im Rahmen von Modbus auch als Client bezeichnet wird, die Kommunikation durch eine ADU initialisiert. Das genaue Format der ADU wird ist nach Modbus Protokollspezifikation festgelegt. Das Schema einer Transaktion läuft nach dem Prinzip in \ref{fig:modbustransaktion} ab.
-Wenn eine ADU fehlerfrei empfangen wurde nutzt der Server das Funktioncode Feld um anzuzeigen, ob seine Antwort ebenfalls eine normale, fehlerfrei Antwort, durch eine einfaches Echo des empfangenen Funktionscodes, ist oder ob ein irgendein Fehler aufgetreten ist durch einen Exception code.
-Die Größe der PDU ist grundsätzlich durch die serielle Kommunikation begrenzt auf 256 Bytes, da jedoch noch zwei Bytes für einen Cyclic Redundancy Check und ein Byte für die Server Adresse reserviert werden müssen ist die PDU auf 253 Bytes begrenzt.
-Ein weiterer, wichtiger Aspekt ist, dass Modbus die \Gun big-Endian\Gob Codierung/Repräsentation für Daten verwendet verwendet, falls der numerische Wert größer als ein einzelner Byte ist \cite[S.~3ff.]{mod12}. Anhand des Beispielder Uhrzeit kann die Bedeutung der Big-Endian Repräsentation einfach erläutert werden: Die Daten werden so aufgeteilt, dass zunächst die Daten mit der höchsten Wertigkeit, also den Stunden zuerst gesendet werden, anschließend den Minuten und zum Schluss die Sekunden, unabhängig von deren numerischem Wert. Also werden nacheinander die Code 03, 50, 12 empfangen bedeutet dues dass die Uhrzeit 03:50:12 ist. Der interessierte Leser wird für eine weitere Ausführungen auch zu little-Endian Darstellung in \cite{endian05}.
+Die Kommunikation erfolgt anhand einer \textit{Server/Client Architektur}, bei der der \textit{Client} die Rolle des Masters und die \textit{Server} die Rolles der Slaves übernehmen. Sie wird innerhalb des Clients durch eine ADU initialisiert. Das genaue Format der ADU wird durch die Wahl des Modbus RTU oder TCP Protokolls festgelegt. Das Schema einer Transaktion läuft jedoch bei beiden nach demselben Prinzip ab, welches in \ref{fig:modbustransaktion} graphisch dargestellt ist.
+Wenn eine ADU fehlerfrei empfangen wurde nutzt der Server den Funktion Code, um anzuzeigen ob ein Fehler aufgetreten ist. Ist die der Fall, wird dies durch einen Exception Function Code angezeigt. Ansonsten sendet der Server eine normale Antwort, zusammen mit einem einfachen Echo des empfangenen Funktionscodes.
+Die Größe der PDU ist aufgrund der seriellen Kommunikation begrenzt auf 256 Bytes. Da zwei Bytes für einen Cyclic Redundancy Check und ein Byte für die Server Adresse reserviert sind, ist die PDU auf eine Länge von 253 Bytes begrenzt.
+
+Ein weiterer, wichtiger Aspekt ist, dass das Modbus Anwendungsprotokoll die \Gun big-Endian\Gob Codierung für Daten verwendet verwendet, deren numerischer Wert größer als ein einzelnes Byte ist \cite[S.~3ff.]{mod12}. 
+Anhand des Beispiel einer Uhrzeit kann die Bedeutung der Big-Endian Repräsentation einfach erläutert werden: Die Daten werden zum Transport so aufgeteilt, dass zunächst die Daten mit der höchsten Wertigkeit, also den Stunden zuerst gesendet werden. Anschließend folgen die Minuten und zum Schluss die Sekunden, unabhängig von deren numerischem Wert. Werden nun nacheinander die Telegramme $03$, $50$, $12$ empfangen, werden diese als 03:50:12h interpretiert. Der interessierte Leser wird für nähere Ausführungen, auch zu little-Endian Codierung, an \cite{endian05} verwiesen.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160319_modbusclientserver}
-\caption[Transaktion mit dem Modbus Protokoll]{Transaktion mit dem Modbus Protokoll nach \cite[S.~4]{mod12}}
+\caption[Transaktion mit dem Modbus Protokoll]{Transaktion mit dem Modbus Protokoll, nach \cite[S.~4]{mod12}}
 \label{fig:modbustransaktion}
 \end{figure}
+%fine til here
 
-Das Modbus Datenmodell basiert darauf, dass auf die Daten in vier verschiedenen Tabellen mit unterschiedlichen Funktionen und Datenobjekten zugegriffen werden kann:
+Die Funktionscodes umfassen ein Byte und sind wie bereits angesprochen in der PDU enthalten. Es existieren 255 verschiedene Codes die von 1 aufwärts gezählt werden. Sie definieren welche Aktion ein Server ausführen soll. In erster Linie dienen sie dem Datenzugriff in verschiedenen Tabellen, können aber auch für Diagnosen oder nutzerdefinierte Aktionen benutzt werden. Weiterhin lassen sie sich in drei große Gruppen untergliedern, die öffentlichen, nutzerdefinierbaren und die reservierten Funktionscodes. Die öffentlichen Codes sind wohldefiniert und dokumentiert sowie auf Konformität getestet und sind daher einfach, schnell und sicher nutzbar. Die vom nutzerdefinierbaren Funktionscodes können genutzt werden um die öffentlichen Codes durch eigene Funktioniltäten zu ergänzen. Die reservierten Codes sind für Altprodukten einiger Unternehmen reserviert, welche an der Entwicklung des Modbus Protokolls beteiligt waren \cite[S.~10ff.]{mod12}.
+
+Das Modbus Datenmodell basiert darauf, dass durch den Funktionscode und auf die Daten in vier verschiedenen Tabellen für unterschiedliche Funktionen und Datenobjekte zugegriffen werden kann:
 \begin{itemize}
-	\item In die Discretes Input, welche Single Bit Objekte enthält und lediglich gelesen werden kann,
-	\item die Coils, welche ebenfalls Single Bit Objekte enthält jedoch gelesen und beschrieben werden darf,
-	\item die Input Registers, die Datenobjekte als 16-Bit Wort enthält und wiederum nur gelesen werden kann
-	\item und die Holding Registers, dessen 16-Bit Wort Objekte wiederum gelesen und beschrieben werden dürfen.
+	\item In die \textit{Discretes Input} Tabelle, welche Single Bit Objekte enthält und lediglich gelesen werden kann,
+	\item die \textit{Coils} Tabelle, welche ebenfalls Single Bit Objekte enthält jedoch gelesen und beschrieben werden darf,
+	\item die \textit{Input Registers} Tabelle, die Datenobjekte als 16-Bit Wort enthält und wiederum nur gelesen werden kann
+	\item und die \textit{Holding Registers} Tabelle, dessen 16-Bit Wort Objekte wiederum gelesen und beschrieben werden dürfen.
 \end{itemize}
 
-16 bit wort entspricht einer Folge von 16 bits/binärzeichen das also einen dezimalen Zahlenwert zwischen 0 und 65.536. Nach der IEC 61131-3 Norm entspricht es in iim Rechner einem Integer Wert.
-
-Die Daten selbst können auch innerhalb einer Tabelle abgelegt sein, müssen lediglich über die vier angegebenen Tabellen zugreifbar sein, also die Referenz auf die Daten muss gegeben sein, der Rest ist egal. Jede Tabelle besitzt Daten adressiert zwischen 0 und 65535 und ist damit auch nach oben begrenzt was Daten angeht. Welche Daten wo genau stehen, also unter welcher Adresse kann von Gerät zu Gerät unterschiedlich sein und wird vom Gerätehersteller festgelegt. \cite[S.~6ff.]{mod12}
+Ein 16-Bit Wort entspricht einer Folge von 16 binären Symbolen. Nach der \textit{IEC 61131-3 Norm} entspricht es im Rechner einem Integer Wert und es lassen sich damit ganze Zahlen zwischen 0 und 65.536 beziehungsweise -32.768 und 32.767 darstellen.
+Die Daten selbst können auch innerhalb einer einzigen Tabelle abgelegt sein, es muss lediglich Interface für den Zugriff auf die vier verschiedenen Tabellen möglich sein. Jede Tabelle ist begrenzt auf maximal 65536 Einträge, deren Adressierung bei beginnt 0 und bei 65535 endet \cite[S.~6ff.]{mod12}. An welcher Stelle welche Daten zu finden wird vom Hersteller eines modbusfähigen Geräts definiert und üblicherweise durch ein Modbusadressmapping beschrieben. Ein Beispiel dazu findet sich in den Datenblätter zu den Komponenten der Anlage in Anhang \ref{att:modbusmap}.
+Um also auf die Daten einer modbusfähigen Komponente zugreifen zu können, muss durch den Funktionscode die richtige Tabelle und durch die Adresse wiederum die richtige Stelle in der Tabelle referenziert werden.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160319_modbusadresse}
-\caption[Datenmodell und Adressierung nach dem Modbus Protokoll]{Datenmodell und Adressierung nach dem Modbus Protokoll aus \cite[S.~8]{mod12}}
+\caption[Datenmodell und Adressierung nach dem Modbus Protokoll]{Datenmodell und Adressierung nach dem Modbus Protokoll, entnommen aus \cite[S.~8]{mod12}}
 \label{fig:modbusadresse}
 \end{figure}
-
-Die Funktionscodes starten bei 1 und können bis 255 genutzt werden und sind wie bereits angesprochen in der PDU enthalten und definieren welche Aktion ein Server ausführen soll. In erster Linie dienen sie dem Datenzugriff in den Tabellen, können aber auch für Diagnosen oder nutzerdefinierte Aktionen benutzt werden. Daher lassen sich die Funktionscodes in drei große Gruppen aufteilen, die öffentlichen, nutzerdefinierbaren und die reservierten Funktionscodes. Die öffentlichen sind wohldefiniert, unique, dokumentiert und sind auf Konformität getestet und sind daher einfach, schnell und sicher nutzbar. Die vom Nutzer definierbaren Funktionscodes können genutzt werden um von den öffentlich bereitgestellten nicht bereitgestellte Funktionen eigens zu definieren/nutzbar zu machen. Die reservierten Codes sind von wenigen Unternehmen, welche an der Entwicklung des Modbus Protokolls beteiligt waren, für deren hinterlassene Produkte reserviert und daher nicht öffentlich nutzbar\cite[S.~10ff.]{mod12}.
-
-Als nächstes folgen die beiden verschiedenen Modbus Over Serial Line Protocol und Modbus Messaging On TCP/IP Protocol
 
 Beim Modbus Over Serial Line Protocol können die Daten über zwei unterschiedliche Modi übertragen werden, der RTU und ASCII Modus. Näheres Der ASCII Modus ist optional und wird in \cite{mod06ser} detailliert beschrieben. Der RTU Modus wird von allen modbusfähigen Komponenten unterstützt und spezifiziert das folgende Format zur Übertragung der einzelnen Bytes: Jede Byteübertragung beginnt mit einem Startbit, auf das zu übertragende Byte, bsetehend aus acht einzelnen Bits, folgt, bevor die Übertragung optional von einem Paritätsbit und einem Stoppbit beziehungsweise lediglich von zwei Stoppbits abgeschlossen wird. Dabei wird jedes zu übertragende Byte als zwei 4-bit hexadezimales Zeichen übertragen\cite[S.~12f.]{mod06ser}. Die Paritätsprüfung ist optional und dient der Fehlerüberprüfung des Telegramms, wie bereits in Abschnitt \ref{sec:grundlagenbus} erläutert.
 Der Rahmen eines gesamten Modbus RTU Telegramms besteht aus der Slave Adresse, die für jeden Slave eindeutig ist und zwischen 1 und 247 liegt, und dem Function Code, die jeweils aus einem Byte bestehen. Darauf folgen die eigentlichen Informationen für die 0 bis 252 Bytes vorgesehen sind. Abgeschlossen wird der Rahmen durch ein CRC Feld, dass aus einem CRC Low und einem CRC High byte aufgebaut ist und dazu dient das Telegramm auf Fehler zu überprüfen. Der Ablauf und Vorgang des CRC Checks ist detailliert in \cite{mod06ser} beschrieben. Die Übertragung eines Telegramms erfolgt byteweise, wie zuvor beschrieben. Die Datensicherung findet also durch Parität und CRC auf verschiedenen Ebenen statt.
