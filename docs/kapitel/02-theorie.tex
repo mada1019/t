@@ -41,7 +41,7 @@ Die Zustände werden vom Zustandsvektor $\vec{x}$ und die Controls vom Vektor $\
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160327_mpc}
-\caption[Variablen, Neben- und Randbedingungen eines optimalen Steuerungsproblems]{Variablen, Neben- und Randbedingungen eines optimalen Steuerungsproblems \cite[S.61]{di14}}
+\caption[Variablen, Neben- und Randbedingungen eines optimalen Steuerungsproblems]{Variablen, Neben- und Randbedingungen eines optimalen Steuerungsproblems, entnommen aus \cite[S.61]{di14}}
 \label{fig:opt}
 \end{figure}
 
@@ -80,7 +80,6 @@ Die \textit{Informationen} über einen Prozess und dessen Zustand werden auf hoh
 
 Im Detail wird die Struktur eines Telegramms in Abschnitt \ref{sub:modbus} am Beispiel von zwei Modbus Kommunikationsprotokollen erläutert. Eine graphische Illustration dazu findet sich in \ref{fig:modbusframe}.
 
-%Fine til here
 \subsubsection{Netzwerk und Topologie}
 
 Einzelne Komponenten der Anlage werden zur Kommunikation miteinander über \textit{Verbindungsleitungen} miteinander verbunden, welche zur Übertragung von Telegrammen genutzt werden. Dabei entstehen \textit{Netzwerke}, wobei die Komponenten der Anlage auch \textit{Netzwerkteilnehmer} bezeichnet werden. Ein Netzwerk lässt sich in einzelne Segmente einteilen und kann je nach Ausführung der Verbindungsleitungen und Anzahl der Teilnehmer unterschiedlich ausgeprägt sein. Anhand der geometrischen Anordnung lassen sich die folgenden, verschiedenen \textit{Netzwerktopologien} unterscheiden.
@@ -89,140 +88,135 @@ Einzelne Komponenten der Anlage werden zur Kommunikation miteinander über \text
 Die einfachste Art zwei Teilnehmer eines Netzwerks miteinander zu verbinden ist sogenannte \textit{Zweipunktverbindung}. Dazu werden die Netzwerkteilnehmer jeweils durch eine direkte Leitung miteinander verbunden. Mit der Anzahl von Teilnehmern steigt jedoch auch der Verbindungsaufwand überproportional an, um in solchen \textit{vermaschten Netzwerk} alle Teilnehmer miteinander zu verbinden. Dies hat für große vermaschte Netzwerke zur Folge, dass eine unübersichtlich große Anzahl von Schnittstellen und ein extrem hoher Verkabelungsaufwand entsteht, der wiederum mit hohen Kosten verbunden ist. Um diese Kosten zu vermeiden, ergeben sich noch weitere Möglichkeiten zur Verbindung und Anordnung von Netzwerkteilnehmern \cite[S.~1f.]{schn06}.
 
 
-Um dem hohen Verkabelungsaufwand zu entgehen, wird bei großen Netzwerken zu einer \textit{Linienstruktur} übergegangen. Diese wird auch als \textit{Bus-Struktur} bezeichnet wird und in \ref{fig:bus_struktur} veranschaulicht. Charakteristisch für die Bus-Struktur ist, dass alle Teilnehmer entlang einer langen Verbindungsleitung, dem sogenannten \textit{Buskabel}, angeordnet sind. Sie sind mit Hilfe von kurzen \textit{Stichleitungen} an das gemeinsame Buskabel angebunden, über das die gesamte Kommunikation im Netzwerk erfolgt.
+Um dem hohen Verkabelungsaufwand zu entgehen, wird bei großen Netzwerken zu einer \textit{Linienstruktur} übergegangen. Diese wird auch als \textit{Bus-Struktur} bezeichnet und ist in \ref{fig:bus_struktur} veranschaulicht. Charakteristisch für die Bus-Struktur ist, dass alle Teilnehmer entlang einer langen Verbindungsleitung, dem sogenannten \textit{Buskabel}, angeordnet sind. Sie sind mit Hilfe von kurzen \textit{Stichleitungen} an das gemeinsame Buskabel angebunden, über das die gesamte Kommunikation im Netzwerk erfolgt.
 
-Durch diese Netzwerktopologie wird der Verkabelungsaufwand sowie die Anzahl an Schnittstellen stark reduziert, insbesondere für sehr große Netzwerke. Jedoch wird durch Nutzung einer gemeinsamen Kommunikationsleitung eine gleichzeitige Kommunikation von mehreren Teilnehmern erschwert. Daher wurden sogenannte \textit{Buszugriffsverfahren} eingeführt, welche Zugriffsregeln auf die Busleitung definieren und im nachfolgenden Abschnitt beschrieben werden. Weiterhin müssen aufgrund der Parallelschaltung alle Teilnehmer ständig alle Telegramme mitverfolgen, wodurch der Sender stark belastet wird. Die Busleitungslängen sind meist sehr lange\footnote{Diese reichen von mehreren hundert Metern bis teilweise in den Kilometerbereich, je nach Art und Einsatzort der Anwendung.}. Daher ist Länge der Leitung, bezogen auf die zu übertragende Wellenlänge, nicht mehr vernachlässigbar klein und die Busleitung muss zur Vermeidung von Reflexionen durch Leitungsabschlusswiderstände an beiden Enden abgeschlossen werden. Außerdem werden die Leitungslängen und die Teilnehmer je Netzwerksegment begrenzt \cite[S.~3f.]{schn06}.
+Durch diese Netzwerktopologie wird der Verkabelungsaufwand sowie die Anzahl an Schnittstellen stark reduziert, insbesondere für sehr große Netzwerke. Jedoch wird durch die Nutzung einer gemeinsamen Kommunikationsleitung eine gleichzeitige Kommunikation von mehreren Teilnehmern erschwert. Daher wurden sogenannte \textit{Buszugriffsverfahren} eingeführt, welche Zugriffsregeln auf die Busleitung definieren und im nachfolgenden Abschnitt beschrieben werden. Weiterhin müssen aufgrund der Parallelschaltung alle Teilnehmer ständig alle Telegramme mitverfolgen, wodurch der Sender stark belastet wird. 
+
+Die Busleitungslängen sind außerdem meist sehr lange\footnote{Diese reichen von mehreren hundert Metern bis teilweise in den Kilometerbereich, je nach Art und Einsatzort der Anwendung.}. Daher ist Länge der Leitung, bezogen auf die zu übertragende Wellenlänge, nicht mehr vernachlässigbar klein und die Busleitung muss zur Vermeidung von Reflexionen durch Leitungsabschlusswiderstände an beiden Enden abgeschlossen werden. Außerdem werden die Leitungslängen und die Teilnehmer je Netzwerksegment begrenzt \cite[S.~3f.]{schn06}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160109_busstruktur}
-\caption[Bus-Struktur]{Bus-Struktur aus \cite[S.~3]{schn06}}
+\caption[Bus-Struktur]{Bus-Struktur,entnommen aus \cite[S.~3]{schn06}}
 \label{fig:bus_struktur}
 \end{figure}
-%Fine til here
-Ein weiterer begrenzender Faktor für die Leitungslänge ist der Fakt, dass die maximale Übertragungslänge und die maximale Übertragungsrate miteinander verknüpft sind und sich gegenseitig beschränken.
-Der Leitungs- und Kapazitätswiderstand einer Leitung hängen von der Länge der Leitung ab und lassen sich durch das Ersatzschaltbild eines RC-Gliedes repräsentieren, wie in Abbildung \ref{fig:bus_impuls} a) zu sehen ist. Durch die beiden Widerstände entsteht auf der Leitung eine Impulsverzerrung \gls{timp}, die somit mittelbar von der Leitungslänge abhängt.
-Je länger die Leitung wird, desto größer werden auch beiden Widerstände. Durch die erhöhte Leitungskapazität $C_{Leitung}$ erhöht sich die Ladezeit und gleichzeitig sinkt durch den erhöhten Leitungswiderstand $R_{Leitung}$ die Lastspannung $U_{G}$. Damit vergrößert sich die Impulsverzerrung \gls{timp}, wie in \ref{fig:bus_impuls} b) und \ref{fig:bus_impuls} c) dargestellt.
-Dadurch wird die maximale Frequenz \gls{fmax} der Datenübertragung auf den Kehrwert der Impulsverzerrung $f_{max}=\frac{1}{\Delta t_{Imp}}$ beschränkt, da ansonsten der Empfänger den Wechsel des logischen Zustandes nicht mehr registrieren kann. In der Praxis bedeutet dies, dass die maximale Übertragungslänge und die maximale Übertragungsrate miteinander verknüpft sind und sich gegenseitig beschränken \cite[S.~4f.]{schn06}.
+
+
+Der Leitungs- und Kapazitätswiderstand einer Busleitung hängen unmittelbar von ihrer Länge ab und lassen sich durch das Ersatzschaltbild eines RC-Gliedes repräsentieren, wie in Abbildung \ref{fig:bus_impuls} a) zu sehen ist. Durch die beiden Widerstände entsteht eine Impulsverzerrung \gls{timp}, die somit mittelbar von der Leitungslänge abhängt.
+
+Je länger die Leitung wird, desto größer werden auch die beiden Widerstände. Die Ladezeit steigt durch die erhöhte Leitungskapazität $C_{Leitung}$, gleichzeitig sinkt die Lastspannung $U_{G}$ durch den vergrößerten Leitungswiderstand $R_{Leitung}$. Dadurch verstärkt sich die Impulsverzerrung \gls{timp}, wie in \ref{fig:bus_impuls} b) und \ref{fig:bus_impuls} c) dargestellt.
+
+Die maximale Frequenz \gls{fmax} der Datenübertragung wird auf den Kehrwert der Impulsverzerrung $f_{max}=\frac{1}{\Delta t_{Imp}}$ beschränkt, sodass der Empfänger den Wechsel des logischen Zustandes weiterhin registrieren kann. In der Praxis bedeutet dies, dass die Leitungslänge und die Übertragungsrate miteinander verknüpft sind und sich gegenseitig beeinträchtigen \cite[S.~4f.]{schn06}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160110_impulsbus}
-\caption[Impulsverzerrung auf einer Leitung]{Impulsverzerrung auf einer Leitung: a) Ersatzschaltbild der Anordnung b) Ausgangsspannung des Generators c) Empfängerspannung aus \cite[S.~4]{schn06}}
+\caption[Impulsverzerrung auf einer Leitung]{Impulsverzerrung auf einer Leitung: a) Ersatzschaltbild der Anordnung b) Ausgangsspannung des Generators c) Empfängerspannung, entnommen aus \cite[S.~4]{schn06}}
 \label{fig:bus_impuls}
 \end{figure}
 
-Um die Begrenzung der Leitungslängen zu korrigieren, wurde die Bus-Struktur zu einer Baumstruktur weiterentwickelt, welche in \ref{fig:baum_struktur} dargestellt ist. Darin werden einzelne Netzwerk-Segemente, also einzelne Bus-Strukturen, durch Verstärkerelemente, sogenannte  Repeater, zu einem großen Netzwerk verknüpft. Um damit jedoch größere Flächen als mit der Bus-Struktur zu vernetzen und gleichzeitig die maximale Leitungslänge und die maximale Anzahl der Busteilnehmer zu vergrößern, wird jedoch eine galvanische Trennung der Teilnehmer voneinander benötigt \cite[S.5~f.]{schn06}. Die Besonderheit in dieser Struktur liegt also darin, dass sich durch Ihren Aufbau bestehende Bus-Strukturen auch nachträglich einfach erweitern oder miteinander verknüpfen lassen. Die Bauteile zur Erweiterung von Netzwerken werden im Abschnitt \ref{sub:schnitt} Schnittstellen vorgestellt.
+Um die Beschränkung der Leitungslänge aufzulockern, wird die Bus-Struktur zu einer \textit{Baum-Struktur} weiterentwickelt.
+In \ref{fig:baum_struktur} ist zu erkennen, dass mehrere Netzwerk-Segmente durch \textit{Verstärkerelemente} zu einem großen Netzwerk verknüpft werden. Die verschiedenen Segmente wiederum bestehen aus einzelnen Bus-Strukturen.
+Es wird eine galvanische Trennung der Teilnehmer benötigt, um große Flächen zu vernetzen und und damit die Einschränkungen der Bus-Struktur zu umgehen \cite[S.5~f.]{schn06}.
+Die Besonderheit dieser Struktur liegt darin, dass sie durch ihren Aufbau nachträgliche Erweiterungen mühelos ermöglicht. Die verschiedenen Bauteile zur Erweiterung eines Netzwerkes werden im nachfolgenden Abschnitt \ref{sub:schnitt} vorgestellt.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160110_baumstruktur}
-\caption[Baumstruktur]{Baumstruktur aus \cite[S.~5]{schn06}}
+\caption[Baumstruktur]{Baumstruktur, entnommen aus \cite[S.~5]{schn06}}
 \label{fig:baum_struktur}
 \end{figure}
 
-Weitere wichtige Netzwerk Topologien, die für das Verständnis dieser Arbeit keine weitere Relevanz haben, sind die Ring- und die Stern-Struktur.
-Die Ring-Struktur ist durch einen physikalischer Ring von Zweipunktverbindungen aufgebaut und gekennzeichnet durch die Kommunikation der Teilnehmer übereinander hinweg. Die Stern-Topologie hingegen ist um eine Zentralstation herum ausgebaut, die mit allen Teilnehmer verbunden ist und über die die gesamte Kommunikation abläuft. Der interessierte Leser findet in \cite[S.~6f.]{schn06} detailliertere Ausführungen.
+Weitere bedeutende Netzwerktopologien sind die \textit{Ring-} und die \textit{Stern-Struktur}, die für das Verständnis dieser Arbeit keine weitere Relevanz besitzen.
+Die Ring-Struktur besteht aus einem physikalischen Ring von Zweipunktverbindungen und ist durch eine Kommunikation der Teilnehmer übereinander hinweg gekennzeichnet.
+Bei der Stern-Topologie hingegen, sind die Netzwerkteilnehmer um eine Zentralstation herum angeordnet. Die gesamte Kommunikation läuft über die zentrale Komponente, die mit jedem einzelnen Teilnehmern verbunden ist. Der interessierte Leser wird für detaillierte Beschreibungen auf \cite{schn06} verwiesen.
 
 \subsubsection{Buszugriffsverfahren}
-Die meisten Netzwerktopologien kommunizieren gemeinsam über eine Verbindungsleitung. Daher werden Regeln für den Zugriff definiert, um eine reibungslose Kommunikation zu ermöglichen. Die Buszugriffsverfahren lassen sich in zwei Gruppen aufteilen, der kontrollierten und zufälligen Verfahren \cite[S.~19]{schn06}.
 
-Bei den kontrollierten Verfahren ist der Sender bereits vor Sendebeginn eindeutig bestimmt und eine Zuteilung des Busses ist nicht notwendig. Der Buszugriff findet entweder zentral innerhalb einer Zentralstation statt, bei sogenannten Master/Slave-Verfahren, oder wird dezentral durch Steuereinheiten vorgenommen, wie z.B. beim Tokenring und Tokenbus. Ein solches Verfahren heißt echtzeitfähig, wenn die Zykluszeit zur Datenübertragung berechenbar ist, aufgrund einer Beschränkung der Länge des Übertragungsintervalls und der maximalen Datenlänge.
-Bei zufälligen Buszugriffsverfahren greifen die Teilnehmer bei Bedarf auf die Verbindungsleitung zu und müssen sicherstellen, dass diese nicht gerade von einem anderen Teilnehmer belegt ist. Da nicht vorhergesehen werden kann, an welchem Zeitpunkt Informationen übertragen werden kann keine Echtzeitfähigkeit erreicht werden \cite[S.~19]{schn06}.
+Bei den meisten Netzwerktopologien erfolgt die Kommunikation  über eine gemeinsame Verbindungsleitung. Daher müssen Regeln für den Zugriff definiert werden, die eine reibungslose Kommunikation gewährleisten. \textit{Buszugriffsverfahren} lassen sich in zwei Gruppen untergliedern, in \textit{kontrollierte} und \textit{zufällige Verfahren} \cite[S.~19]{schn06}.
 
-Das Master/Slave-Verfahren besteht in der Regel aus einer Bussteuerungseinheit, dem sogenannten Master, und mehreren passiven Teilnehmern, den Slaves. Die Kommunikation wird ausschließlich vom Master initiiert, der die Verbindung zu den Slaves aktiv durch ein Request herstellt, in welchem die angeforderten Daten sepzifiziert sind. Die Slaves treten nur nach Anfragen in Aktion und antworten darauf unmittelbar mit einer Response, die die angeforderten Daten des Masters enthält. In der Regel erfolgt die Kommunikation zyklisch zu allen Slaves gleichzeitig (Polling), damit der Master ein umfassendes und aktuelles Bild über den Systemzustand bekommt. Dadurch ergeben sich einfache Slaves, die günstig in den Bus eingebunden werden können, weil die gesamte \Gun Intelligenz\Gob im Master implementiert ist. Jedoch gilt es bei diesem Verfahren zu beachten, dass der Informationsaustausch zwischen verschiedenen Slaves längere Zeit in Anspruch nehmen kann und bei einem Ausfall des Masters das gesamte Bussystem stillliegt \cite[S.~19ff.]{schn06}.
-Auf eine weitere Beschreibung der übrigen Verfahren wird aufgrund der fehlenden Relevanz für diese Arbeit verzichtet, der interessierte Leser findet jedoch bei \cite{schn06} im Kapitel Buszugriffsverfahren ausführliche Informationen.
+Bei den kontrollierten Verfahren ist der Sender bereits vor Sendebeginn eindeutig bestimmt, daher ist eine Zuteilung des Busses ist nicht erforderlich. Der Zugriff findet entweder zentral statt, bei den sogenannten \textit{Master/Slave-Verfahren}, oder wird dezentral durch Steuereinheiten geregelt, wie beispielsweise bei dem \textit{Tokenring} und \textit{Tokenbus}. Ein solches Verfahren heißt \textit{echtzeitfähig}, falls die Zykluszeit der Datenübertragung durch eine Beschränkung der maximalen Telegrammlänge und damit des Übertragungsintervalls bestimmbar ist.
+Bei zufälligen Buszugriffsverfahren greifen die Teilnehmer bei Bedarf auf die Verbindungsleitung zu. Dabei müssen sie sicherstellen, dass die Busleitung nicht gleichzeitig von einem anderen Teilnehmer belegt ist. Es kann nicht bestimmt werden zu welchen Zeitpunkten Telegramme übertragen werden, wodurch keine Echtzeitfähigkeit vorliegt \cite[S.~19]{schn06}.
+
+Beim Master/Slave-Verfahren kommen eine \textit{Bussteuerungseinheit}, der sogenannte \textit{Master}, sowie mehrere \textit{passive Teilnehmer}, die sogenannten \textit{Slaves}, zum Einsatz.
+Die Kommunikation wird ausschließlich vom Master initiiert, indem er aktiv eine Verbindung zu den Slaves herstellt und \textit{Requests} sendet, in welchen die angeforderten Daten spezifiziert sind.
+Die Slaves werden lediglich durch Anfragen aktiv und antworten unmittelbar mit einer \textit{Response}, welche die angeforderten Daten enthält.
+Damit der Master ein umfassendes und aktuelles Bild über den Systemzustand bekommt, erfolgt die Kommunikation in der Regel in periodischen Intervallen zeitgleich mit allen Slaves (\textit{Polling}). Als Slaves können einfache und günstige Bauteile eingesetzt werden, da im Master die benötigte \Gun Intelligenz\Gob implementiert ist. 
+Es gilt bei diesem Verfahren zu beachten, dass der Informationsaustausch zwischen verschiedenen Slaves längere Zeit in Anspruch nehmen kann und das ein Ausfall des Masters das gesamte Bussystem stilllegt \cite[S.~19ff.]{schn06}.
+
+Auf eine Beschreibung der übrigen Verfahren wird aufgrund der fehlenden Relevanz für diese Arbeit verzichtet. Weitere Ausführungen finden sich bei \cite{schn06}.
 
 \subsubsection{Datensicherung}
 
-Bei der Übertragung von Informationen besteht die Gefahr von Störungen, welche sich als Fehler in einer Nachricht durch Invertierung von Bits  äußern. Störungen sind in der Regel technischer Art, wie zum Beispiel elektromagnetische Störsignale, Rauschen oder Potentialdifferenzen, und gegen einen Großteil lassen verschiedene Vorkehrungen treffen. Dadurch ergibt sich die Möglichkeit Störungen vorzubeugen oder diese nach Einsatz zu beseitigen. Der erste Ansatz ist also eine Verminderung des Auftretens durch technische Vorkehrungen, wie zum Beispiel Schirmung der Kabel, galvanische Trennung von Netzwerken oder differenzielle Signalübertragung. Der zweite Ansatz beschäftigt sich mit der Überwachung des Nachrichtenverkehrs und dem Ausbessern/Gegenmaßnahmen bei Fehlern \cite[S.~30]{schn06}.
+Bei der Übertragung von Informationen besteht die Gefahr von Störungen, welche sich als Fehler in einem Telegramm durch eine Invertierung einzelner Bits äußern. Störquellen sind in der Regel technischer Art, wie zum Beispiel durch elektromagnetische Störsignale, Rauschen oder Potentialdifferenzen. Gegen einen Großteil von Störfaktoren lassen daher Vorkehrungen treffen. Damit ergibt sich die Möglichkeit Störungen vorzubeugen oder nach Auftreten zu beseitigen. Der erste Ansatz dient einer Verminderung des Auftretens durch technische Vorkehrungen, wie beispielsweise eine Abschirmung der Kabel oder die galvanische Trennung von Netzwerken. Der zweite Ansatz beschäftigt sich mit der Überwachung des Telegrammverkehrs und den Gegenmaßnahmen beim Auftreten von Fehlern \cite[S.~30]{schn06}.
 
-Auf dem Gebiet der Buskommunikation entspricht wird eine Information oder Nachricht oder Telegramm codiert. Es werden stets Transparente Codes betrachtet, Welche bitorientiert sind. Dabei sind jegliche Kombination von Bits erlaubt und man kann allein Aus der Folge der Blitz nicht auf einen Fehler schließen.
-Definition Telegramm und Bit(0 und 1)
+Wie zuvor erwähnt, bestehen Telegramme auf unterster Ebene aus Bitfolgen. Dabei sind jegliche Kombination von Bits erlaubt, wodurch allein aus der Folge der Bits nicht auf einen Fehler geschlossen werden kann.
+Bei der Übermittlung von Telegrammen können drei Arten von Fehlern auftreten:
+\begin{itemize}
+	\item Der Fehler ist erkennbar und kann korrigiert werden.
+	\item Der Fehler ist erkennbar, lässt sich jedoch nicht korrigieren.
+	\item Der Fehler ist nicht erkennbar und damit auch nicht korrigierbar.
+\end{itemize}
+Falls der Fehler erkannt werden kann, ist bereits ein großer Teil der Arbeit getan. Die normale Reaktion auf erkannte Fehler, ist eine einfache Wiederholung der Übertragung, die auch als \textit{Error Detection and Automatic Aequest Repeat} (ARQ) bezeichnet wird.
+Eine Fehlermaß bei der Datenübertragung ist die die \textit{Bitfehlerrate}, welche den prozentualen Anteil fehlerhafter Bits bezogen auf die Anzahl der gesamten gesendeten bits angibt. In der Technik ergibt sich durchschnittlich eine Bitfehlerrate von etwa $p=10^{-4}$. 
+Eine weitere wichtige Kennzahl ist die \textit{Restfehlerrate}, welche die unerkannten, fehlerhaften Bitfolgen nach der Anwendung von Fehlerkennungsstrategien misst. Sie ist ein Maß für die Unversehrtheit von Telegrammen und gibt den prozentualen Anteil von fehlerhaften Bits in Bezug auf die gesamte Anzahl der Bits eines Telegramms an \cite[S.~31ff.]{schn06}.
 
-Die Vorkehrungen technischer Art Können Sind in aller Regel in den Spezifikationen der einzelnen Bussysteme enthalten, daher Werden diese nicht weiter beschrieben und lediglich die Überwachung und Ausbesserung das Nachrichtenverkehrs erläutert.
-Bei der Übermittlung von Nachrichten können drei Arten von Fehlern auftreten:
-Der Fehler kam erkennbar und korrigierbar sein,
-Erkennbar und nicht korrigierbar
-Oder nicht erkennbar und damit auch nicht korrigierbar.
-
-Kann der Fehler erkannt werden ist bereits ein großer Teil der Arbeit getan. 
-
-Fehlermaße sind
-die Bitfehlerrate p = Anzahl fehlerhafter bits/ gesamtzahl gesendete bits, schlechtester Wert ist p=0,5, da durch invertierung immer wieder umstellbar. üblich in Technik $p=10^{-4}$.
-ARQ(Error detection and automatic request repeat) ist normale Reaktion auf erkannte Fehler, dass eine einfache Wiederholung der Übertragung.
-
-Restfehlerrate R ist eine wichtige Kennzahl weil, sie die unerkannten, fehlerhaften Bitfolgen die nach der Anwendung von Fehlererkennungstrategien noch verbleiben misst. R = Anzahl unerkannt fehlerhafter Bitmkombinationen/Gesamtlänge in Bits der Information.
--->Maß für Unversehrtheit der Daten
-
-Telegrammeffizienz auch wichtig, weil sie eine Aussage erlaubt wie viel Infomrtionen tarnsportiert werden können und sie steht im Gegensatz zur Restfehlerquote, je sicherer Übertragung desto weniger Effizienz. E = fehlerfreie Infobits/Gesamtzahl übertragene bits(incl. Adresse Erro check usw.)
-\cite[S.~31ff.]{schn06}
-
-Die genauen Berechnungen der Wahrscheinlichkeiten und der mittleren Zeit zwischen zwei Fehlern sind und noch viel mehr Details finden sich im Kapitel Datensicherung in \cite[S.~31f.]{schn06} zu finden.
-
-Um Fehler systematisch zu erkennen, existieren verschiedene Fehlererkennungsstrategien. Die einfachste ist der Paritätsbit, der lediglich die Quersumme des Telegramms angibt, P=0 für eine ungerade und p=1 für eine gerade Quersumme. Damit können diejenigen Fehler entdeckt werden, die eine ungerade Anzahl an Bitflips haben, die mit geraden leider nicht. Eine Erweiterung der Paritätssicherung ist die Blocksicherung, bei der die Paritäten über ein Array aus mehreren Telegrammen überprüft werden kann \cite[S.~34f.]{schn06}.
+Um Fehler systematisch zu erkennen, existieren verschiedene Fehlererkennungsstrategien. Eine einfache Möglichkeit stellt die Nutzung eines \textit{Paritätsbits} dar. Dieses gibt lediglich an, ob die Quersumme der Bitfolge gerade oder ungerade ist. Damit können jedoch nur Fehler entdeckt werden, die eine ungerade Anzahl an Bitflips besitzen. Um die Anzahl der erkannten Fehler zu erhöhen, kann das Paritätsbit zur \textit{Blocksicherung} erweitert werden, bei der die Paritäten über ein Array aus mehreren Telegrammen überprüft wird \cite[S.~34f.]{schn06}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160314_crc}
-\caption[\textit{Cyclic Redundancy Check}]{\textit{Cyclic Redundancy Check} aus \cite[S.~38]{schn06}}
+\caption[\textit{Cyclic Redundancy Check}]{\textit{Cyclic Redundancy Check}, entnommen aus \cite[S.~38]{schn06}}
 \label{fig:crc}
 \end{figure}
 
-Beim sogenannten Cyclic Redundancy Check, in der Literatur häufig als CRC-Check bezeichnet, wird ein Telegramm als Zahl aufgefasst. Im Sender wird diese Zahl durch das Generatorpolynom G geteilt. Das Ergebnis wird verworfen, lediglich der Rest bei der Division wird an das Telegramm angehängt. Der Empfänger dividiert das empfangene Telegramm durch dasselbe Polynom G und falls sich ein Rest von 0 ergibt, war die Übertragung fehlerfrei. Dadurch lassen sich abhängig vom Generatorpolynom G unterschiedliche Güten der Fehlererkennung realisieren. In \ref{fig:crc} sind die Vorgänge beim Cyclic Redundancy Check graphisch zusammengefasst.
-
-
+Beim sogenannten \acrlong{crc} (\acrshort{crc}) wird ein gesamtes Telegramm als Zahl aufgefasst. Im Sender wird diese Zahl durch ein bestimmtes Generatorpolynom $G$ geteilt. Das Ergebnis wird verworfen, lediglich der Rest bei der Division wird an das Telegramm angehängt. Der Empfänger wiederum dividiert das empfangene Telegramm durch dasselbe Polynom G. Falls sich ein Divisionsrest von 0 ergibt, war die Übertragung fehlerfrei, ansonsten hat sich ein Fehler bei der Übertragung ereignet. Abhängig vom Generatorpolynom G, lassen sich unterschiedliche Güten bei der Fehlererkennung realisieren. In \ref{fig:crc} sind die Vorgänge beim Cyclic Redundancy Check graphisch zusammengefasst.
 
 \subsubsection{Schnittstellen}
 \label{sub:schnitt}
 
-Die physikalische Übertragung der Daten/Telegramme kann über verschiedenste Schnittstellen geschehen und erfplgt binär. Je nach Topologie des Bussystems und Protokoll, kann die Datenübertragung seriell oder parallel geschehen wie in \ref{fig:seriell} zu sehen. Bei einer parallelen Datenübertragung werden immer mehrere Bits gleichzeitig übertragen, weshalb eine hohe Übertragungsgeschwindigkeit erreicht werden kann, jedoch eine aufwändige im Sinne eines vermaschten Netzes notwendig ist. Daher erfolgt in der Praxis eher eine serielle Datenübertragung, also die einzelne Übertragung von bits nacheinander über eine Leitung, wie sie zum Beispiel mit einer Bus-Struktur möglich ist \cite[S.~13]{sch08}.
-
+Die physikalische Übertragung der Telegramme kann über verschiedenste elektrische oder optische Schnittstellen geschehen und läuft Bitweise ab. Je nach Topologie des Bussystems und eingesetztem Übertragungsprotokoll kann die Datenübertragung \textit{seriell} oder \textit{parallel} erfolgen. Bei der parallelen Datenübertragung werden mehrere Bits gleichzeitig übertragen, womit eine hohe Übertragungsgeschwindigkeit erreicht werden kann. Dazu wird eine aufwändige Netzwerktopologie, im Sinne eines vermaschten Netzes, benötigt. Daher erfolgt die Datenübertragung in der Praxis seriell, also einzelne Bits nacheinander über eine gemeinsame Kommunikationsleitung, wie zum Beispiel bei einer Bus-Struktur \cite[S.~13]{sch08}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160314_seriell}
-\caption[Parallele und serielle Datenübertragung]{Parallele und serielle Datenübertragung aus \cite[S.~13]{sch08}}
+\caption[Parallele und serielle Datenübertragung]{Parallele und serielle Datenübertragung, entnommen aus \cite[S.~13]{sch08}}
 \label{fig:seriell}
 \end{figure}
 
 
-Bei der binären Datenübertragung werden lediglich zwei Zustände unterschieden, deren Signalwerte einen High-Pegel \gls{phigh} und einen Low-Pegel \gls{plow} besitzen, die durch einen Bereich, in dem das Signal nicht definiert ist, voneinander getrennt sind \cite[S.~9]{sch08}.
-Die Geschwindigkeit der Datenübertragung wird in der Einheit Baud gemessen und definiert als übertragene Bits pro Sekunde (Bps)\cite[S.~22]{sch08}.
+Bei der \textit{binären Datenübertragung} von werden lediglich zwei Zustände unterschieden. Die beiden Zuständen werden durch Signalbereiche definiert, welche wiederum durch einen High-Pegel \gls{phigh} und einen Low-Pegel \gls{plow} festgelegt sind. Der Bereich zwischen den beiden Pegeln dient der Hysterese, weshalb der Zustand für Signale in diesem Bereich nicht definiert ist \cite[S.~9]{sch08}.
+Die Geschwindigkeit der Datenübertragung wird in übertragenen Bits pro Sekunde $\frac{Bits}{s}$ gemessen und häufig auch als \textit{Baud-Rate} bezeichnet \cite[S.~22]{sch08}.
 
-Die gängigsten Übertragungsverfahren sind elektrische und optische Schnittstellen. Die elektrischen Schnittstellen gliedern sich wiederum in Strom- und Spannungs-Schnittstellen auf. Im weiteren Verlauf der Arbeit sind lediglich die Spannungsschnittstellen EIA\footnote{Abkürzung der Normen und Standards die von der Electronic Industries Alliance entwickelt wurden.} 232 und EIA 485, welche auch als EIA 232 und EIA 485 beziechnet werden, relevant, weshalb der interessierte Leser weitere Informationen zu weiteren Schnittstellen in \cite[S.~13ff.]{sch08} und \cite[S.~57ff.]{schn06} findet.
+Die gängigsten Übertragungsverfahren basieren auf elektrischen und optischen Schnittstellen. Die elektrischen Schnittstellen wiederum lassen sich weiter in \textit{Strom-} und \textit{Spannungs-Schnittstellen} untergliedern. Für den weiteren Verlauf der Arbeit sind lediglich die Spannungsschnittstellen \textit{EIA}\footnote{Abkürzung der Normen und Standards die von der Electronic Industries Alliance entwickelt wurden.}\textit{ 232} und \textit{EIA 485} relevant, welche auch als \textit{RS 232} und \textit{RS 485} bezeichnet werden. Nähere Beschreibungen von weiteren wichtigen Schnittstellen sind in \cite[S.~13ff.]{sch08} und \cite[S.~57ff.]{schn06} zu finden.
 
-Die EIA 232 Schnittstelle ist wie bereits erwähnt eine Spannungsschnittstelle, die für Punkt-zu-Punkt Verbindungen geeignet ist und deren Pegel in \ref{fig:rs232} zu sehen sind. Die Pegel sind für Spannungen zwischen $-3V<p_{high}<-15V$ als logische \Gun 1\Gob, der Low-Pegel für Spannungen zwischen $-3V<p_{low}<-15V$ als die logische \Gun 0\Gob definiert. Im Intervall $[-3V,3V]$ ist das Signal nicht definiert, weshalb dieser Bereich möglichst schnell durchlaufen werden sollte. Da der Signalpegel von der Datenleitung hin zur Masse gemessen wird kann er nicht symmetrisch sein und ist damit erdunsymmetrisch. \cite[S.~57f.]{schn06}
+Die \textit{RS 232 Schnittstelle} ist eine Spannungsschnittstelle, deren definierte Signalpegel in \ref{fig:rs232} zu sehen sind. Die Pegel sind für Spannungen zwischen $-3V<p_{high}<-15V$ als logische \Gun 1\Gob, der Low-Pegel für Spannungen zwischen $-3V<p_{low}<-15V$ als die logische \Gun 0\Gob definiert. Im Intervall $[-3V,3V]$ ist das Signal nicht definiert, weshalb dieser Bereich möglichst schnell durchlaufen werden sollte. Da der Signalpegel von der Datenleitung hin zur Masse gemessen wird kann er nicht symmetrisch sein und wird als erdunsymmetrisch bezeichnet. \cite[S.~57f.]{schn06}
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160314_rs232}
-\caption[Spannungspegel und Stecker der EIA 232-Schnittstelle]{Links: Spannungspegel EIA 232-Schnittstelle aus \cite[S.~57]{schn06} \newline Rechts: Stecker EIA 232-Schnittstelle aus \cite[S.~14]{sch08}}
+\caption[Spannungspegel und Stecker der EIA 232-Schnittstelle]{Links: Spannungspegel EIA 232-Schnittstelle, entnommen aus \cite[S.~57]{schn06} \newline Rechts: Stecker EIA 232-Schnittstelle, entnommen aus \cite[S.~14]{sch08}}
 \label{fig:rs232}
 \end{figure}
 
-Typischerweise steht eine solche Schnittstelle jedem Rechner als COM-Port zur Verfügung und in der Automatisierungstechnik werden nur die RxD (Receive Data), TxD (Transmit Data) und GND Leitungen, die ein gemeinsames Bezugspotenzial definiert, verwendet. Wichtig bei der Verkabelung ist, dass die übertragende Leitung TxD immer mit der empfangenden Leitung RxD verbunden ist \cite[S.~14f.]{sch08}.
+Typischerweise steht eine RS 232 Schnittstelle handelsüblichen Rechnern als \textit{COM-Port} zur Verfügung. In der Automatisierungstechnik werden zumeist nur die \textit{RxD} (Receive Data), \textit{TxD} (Transmit Data) und \textit{GND}, welche ein gemeinsames Bezugspotenzial definiert, Leitung verwendet. Wichtig bei der Verkabelung ist, dass die übertragende Leitung TxD mit der empfangenden Leitung RxD verbunden wird \cite[S.~14f.]{sch08}.
 
-%Here we go
-Die EIA 485 Schnittstelle ist ebenfalls eine Spannungsschnittstelle, die jedoch für Mehrpunktverbindungen geeignet ist und die in der Norm ISO
-8482 beschrieben ist. Die Signalübertragung erfolgt über zwei Übertragungsleitungen, die in der Regel als verdrilltes und abgeschirmtes Zweidrahtleitung ausgeführt sind. Die Signalpegel entsprechen der Differenzialspannung $U_{AB}$ zwischen den beiden Leitungen, die innerhalb des Intervalls von $[-7V,12V]$ bezogen auf die Masse liegen muss. Durch das verdrillte Leitungspaar, wirken sich mögliche Störgrößen auf die Spannung beider Leitungen gleichermaßen aus, wodurch die Spannungsdifferenz unverändert bleibt und eine erhöhte Störfestigkeit gegenüber der EIA 232-Schnittstelle erreicht wird.
-Bei der Pegelfestlegung werden für Empfänger und Sender gibt es verschiedene Vorgaben, wie in \ref{fig:rs485} graphisch dargestellt. So müssen die Sender eine Differenzspannung zwischen $-1,5V<U_{AB}<-5V$ für logische \Gun 1\Gob und $1,5V<U_{AB}<-5V$ für logische \Gun 0\Gob leisten können. Empfänger hingegen müssen in der Lage sein Spannungsdifferenzen von $U_{AB}<-0,3V$ als logische \Gun 1\Gob und $0,3<VU_{AB}$ als logische \Gun 0\Gob zu detektieren und zu interpretieren \cite[S.~59ff.]{schn06}.
+Die \textit{RS 485 Schnittstelle} ist ebenfalls eine Spannungsschnittstelle, die in der Norm \textit{ISO 8482} ausführlich beschrieben ist. Die Signalübertragung erfolgt mit Hilfe von zwei Übertragungsleitungen, die in der Regel als verdrilltes und abgeschirmtes Zweidrahtleitung ausgeführt sind. Die Signalpegel entsprechen der Differenzialspannung $U_{AB}$ zwischen den beiden Leitungen, die innerhalb des Intervalls von $[-7V,12V]$ liegen muss. Durch das verdrillte Leitungspaar, wirken sich mögliche Störgrößen auf die Spannung beider Leitungen gleichermaßen aus, wodurch die Spannungsdifferenz unverändert bleibt und eine erhöhte Störfestigkeit gegenüber der EIA 232-Schnittstelle erreicht wird.
+Bei der Pegelfestlegung werden für Empfänger und Sender verschiedene Vorgaben gemacht, welche in \ref{fig:rs485} graphisch dargestellt sind. So müssen die Sender eine Differenzspannung zwischen $-1,5V<U_{AB}<-5V$ für die logische \Gun 1\Gob und $1,5V<U_{AB}<-5V$ für die logische \Gun 0\Gob leisten können. Empfänger hingegen müssen in der Lage sein, Spannungsdifferenzen von $U_{AB}<-0,3V$ als logische \Gun 1\Gob und $0,3<VU_{AB}$ als logische \Gun 0\Gob zu detektieren \cite[S.~59ff.]{schn06}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160314_rs485}
-\caption[Spannungspegel und Stecker der EIA 485-Schnittstelle]{Links: Spannungspegel EIA 485-Schnittstelle aus \cite[S.~60]{schn06} \newline Rechts: Stecker EIA 485-Schnittstelle aus \cite[S.~19]{sch08}}
+\caption[Spannungspegel und Stecker der EIA 485-Schnittstelle]{Links: Spannungspegel EIA 485-Schnittstelle, entnommen aus \cite[S.~60]{schn06} \newline Rechts: Stecker EIA 485-Schnittstelle, entnommen aus \cite[S.~19]{sch08}}
 \label{fig:rs485}
 \end{figure}
 
-Es besteht ein geringer Installationsaufwand und die Datenübertragung erfolgt über die TxD/RxD + und TxD/RxD - Leitungen, ein gemeinsames Bezugspotential über die GND Leitung wird nicht zwingend benötigt, jedoch wird ein Leitungsabschluss an beiden Enden des Buskabels benötigt.  \cite[S.~19f.]{sch08}.
+Die Datenübertragung erfolgt über die \textit{TxD/RxD+} und \textit{TxD/RxD-} Leitung, ein gemeinsames Bezugspotential über die GND Leitung wird nicht zwingend benötigt. Allerdings wird zusätzlich ein Leitungsabschluss an beiden Enden des Buskabels benötigt.  \cite[S.~19f.]{sch08}.
 
+Um ein Netzwerk zu erweitern, können verschiedene Arten von Bauteile eingesetzt werden. Sogenannte \textit{Repeater} sind aktive Bauteile, die eine kurze Zeitverzögerung verursachen und Netzwerke derselben Schnittstelle miteinander verbinden. Es werden lediglich die einzelnen Leitungen miteinander verbunden und das Datensignal verstärkt, indem die empfangenen Bits blind kopiert und auf das angeschlossene Netzwerksegment übertragen werden. Daher ist er für die Kommunikationsteilnehmer unsichtbar \cite[S.~79f.]{schn06}.
 
-Um Netzwerk zu erweitern, können verschiedene Bauteile eingesetzt werden. Sogenannte Repeater sind aktive Bauteile, die lediglich einen kurze Zeitverzögerung verursachen und nur Netzwerke der selben Schnittstelle miteinander verbinden kann. Er ist ein aktives Bauteil, dass das Datensignal lediglich verstärkt, indem er die empfangenen Bits blind kopiert und verstärkt auf das angeschlossene Netzwerk überträgt, weshalb er für die Kommunikationsteilnehmer unsichtbar ist \cite[S.~79f.]{schn06}.
-
-Eine Möglichkeit um Netzwerke verschiedener Art zu verbinden bieten Bridges und Gateways. Erstere werden auch als Schnittstellenumsetzer bezeichnet und kommen zum Einsatz, wenn trotz gleichem Übertragungsprotokoll genutzt unterschiedliche physikalische Schnittstellen oder Übertragungsmedien genutzt werden sollen \cite[S.~80f.]{schn06}. Er erkennt die Datenflussrichtung automatisch und wandelt die Pegel der Schnittstellen in den jeweils anderen um \cite[S.~21]{sch08}
-Die sogenannten Gateways dienen der Kopplung von Netzwerken, die verschiedene Architekturen aufweisen, also neben unterschiedlichen physikalischen Schnittstellen auch andere Übertragungsprotokolle verwenden. Das Gateway ist demnach umfassender als die Bridge und erweitert deren Funktionen um die Übersetzung der Signale von einen Übertragungsprotokoll in das jeweils andere \cite[S.~84f.]{schn06}.
-
+Eine Möglichkeit, um Netzwerke verschiedener Art miteinander zu verbinden, bieten \textit{Bridges} und \textit{Gateways}. Erstere werden auch als \textit{Schnittstellenumsetzer} bezeichnet und kommen zum Einsatz, wenn das gleiche Übertragungsprotokoll bei unterschiedlichen physikalischen Schnittstellen genutzt wird \cite[S.~80f.]{schn06}. Eine Bridge erkennt die Datenflussrichtung automatisch und wandelt die Signale gemäß den Pegeln des jeweils anderen Netzwerks um \cite[S.~21]{sch08}
+Die sogenannten Gateways dienen der Kopplung von Netzwerken, die verschiedene Architekturen aufweisen. Sie werden benötigt, falls neben unterschiedlichen physikalischen Schnittstellen auch verschiedene Übertragungsprotokolle verwendet werden. Das Gateway ist demnach umfassender als eine Bridge und erweitert deren Funktionen, um die Übersetzung der Telegramme von einem Übertragungsprotokoll in das jeweils andere \cite[S.~84f.]{schn06}.
 
 
 \subsection{OSI-Kommunikationsmodell}
