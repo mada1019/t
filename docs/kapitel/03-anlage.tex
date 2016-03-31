@@ -404,7 +404,7 @@ Eine Darstellung des Programms findet sich in Listing \ref{lst:oven}. Es zeigt d
 
 Der eigentliche Steueralgorithmus beginnt mit einer while-Schleife. Eine dauerhafte Laufzeit des Algorithmus wird über die Schleifenbedingung $true$ erreicht, welche nur durch eine Tastenkombination oder durch das Auftreten eines Fehlers gestoppt werden kann.
  Tritt eines der beiden Abbruchkriterien ein, werden die Verbindungen zu den Anlagenteilen getrennt. Dieses Vorgehen soll eine schnelle Wiederaufnahme des Betriebs gewährleisten, da die Komponenten auf diese Weise nicht durch eine bestehende Verbindung blockiert werden.
-Der Algorithmus beginnt damit alle Messwerte innerhalb der Anlage ausgelesen und daraus das arithmetische Mittel der Raumtemperaturen bestimmen. Die angenommene Raumtemperatur lässt sich ebenfalls über den Gewichtungsvektor weightings als gewichtetes arithmetisches Mittel berechnen.
+Der Algorithmus beginnt damit alle Messwerte innerhalb der Anlage ausgelesen und daraus das arithmetische Mittel der Raumtemperaturen bestimmen. Die angenommene Raumtemperatur lässt sich ebenfalls über den Gewichtungsvektor \textit{weightings} als gewichtetes arithmetisches Mittel berechnen.
 Zum Auslesen der Werte, werden die Methoden des \textit{Sensors} Objekts \textit{s} und des \textit{Actuators} Objekts \textit{a} aufgerufen.
 Das Abfangen von Fehlern wurde bereits in den unteren Klassen implementiert, sodass die Methoden zur Bedienung der Anlage einfach und robust aufgebaut sind. Außerdem wurde an gegebenen Stellen darauf geachtet, mögliche Fehlbedienungen  von vornherein auszuschließen. Ein Beispiel hierfür ist, dass nur real mögliche Ventilstellungen gesetzt und keine unmöglichen Werte angefordert werden können.
 Anhand des berechneten Mittelwerts wird entschieden, ob der Heizkörper zur Raumerwärmung eingeschaltet, weiterhin genutzt oder abgeschaltet werden soll. Liegt die Raumtemperatur unterhalb von 21 Grad Celsius und der Heizkörper ist ausgeschaltet, so erfolgt eine Ausgabe in der Konsole. Diese besagt, dass es zu kalt ist, woraufhin das Öffnen des Heizungsventils veranlasst wird. Sobald die Temperatur über 22 Grad Celsius steigt und der Heizkörper zeitgleich eingeschaltet ist, erfolgt eine erneute Ausgabe. In dieser heißt es, dass es zu warm ist, wodurch das Heizungsventil umgehend geschlossen wird.
@@ -424,6 +424,8 @@ Aus Gründen der Übersichtlichkeit sind die Abhängigkeiten der Klassen unterei
 Die Anlage konnte aufgrund von Lieferschwierigkeiten des Wärmemengenzählers erst am 16.12.2015 erfolgreich in Betrieb genommen werden. Seither sind lediglich kleinere Fehler aufgetreten, wodurch die Programmierung der Anlage stetig und sukzessive verbessert werden konnte.
 Seit Mitte Januar läuft die Anlage durchgängig stabil und fehlerfrei und leistet einen sehr zuverlässigen Dienst.
 Die Forderung einer hohen Funktionalität der Anlage konnte demnach erfüllt werden. Durch die Programmierung einer fehlertoleranten Software konnte ebenfalls dem Wunsch einer hohen Robustheit der Anlage nachgekommen werden.
+
+\newpage
 
 \begin{figure}
 \centering

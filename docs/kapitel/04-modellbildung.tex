@@ -270,7 +270,7 @@ Außerdem wird der Startzeitpunkt und der Abstand zwischen den einzelnen Messpun
 
 Ansonsten wird der effektive Strahlungswert nach \cite[S.~67f.]{qu11} berechnet und in der Datei qdotsun-effective gespeichert. Dieses Programm findet in leicht abgewandelter Form einfach zur Umrechnung einzelner Messwerte Verwendung, indem das Einlesen und Speichern der umgerechneten Daten durch die Abfrage eines Messwertes und die Übergabe einer Variable durch einen umgerechneten Messwert ersetzt wird.
 
-Der effektive Strahlungswert wird durch den Transmissionsgrad des Fensterglases weiter abgeschwächt. Dieser wird durch einen weiteren Parameter, dem $window\_transmission$, beschrieben. Der Schätzwert für die doppelscheibige Verglasung des Fensters in K004b stammt aus \cite[S.~63]{ha13}. Dadurch erweitert sich das Modell um ein Fenster als Subkomponente:
+Der effektive Strahlungswert wird durch den Transmissionsgrad des Fensterglases weiter abgeschwächt. Eine ausführliche Beschreibung dazu findet sich in \cite{ha13} und \cite{ka13}. Der Transmissionsgrad wird durch einen weiteren Parameter, dem $window\_transmission$, beschrieben. Der Schätzwert für die doppelscheibige Verglasung des Fensters in K004b stammt aus \cite[S.~63]{ha13}. Dadurch erweitert sich das Modell um ein Fenster als Subkomponente:
 
 \begin{lstlisting}[language=Modelica, caption={Fenster als Subkomponente des Raummodells},label=lst:raumdrei]
 model Window
@@ -306,7 +306,7 @@ In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Ve
 Die Validierung des Modells unterteilt sich in zwei Schritte. Zunächst wird das Raummodell ohne die Verwendung des Heizkörpers simuliert. Auf diese Weise soll überprüft werden, ob in dem Grundmodell alle wichtigen physikalischen Effekte berücksichtigt wurden. Im nächsten Schritt erfolgt eine Simulation, bei der der Heizkörper zum Einsatz kommt. Mithilfe  dieses Simulationsdurchgangs soll die Güte des Heizkörpermodells ermittelt werden.
 Für die ersten Simulation gilt es ein Zeitintervall zu finden, welches eine möglichst lange Dauer vorweist, während dem wenige Störfaktoren aufgetreten sind und der Heizkörper möglichst nicht genutzt wurde. Ein solches Zeitintervall findet sich über die Weihnachtsfeiertage vom 23.12.2105 bis zum 28.12.2015, da aufgrund der Feiertage das Büro nicht genutzt wurde.
 Das Intervall umfasst etwas mehr als fünf Tage, wobei an den ersten Tagen relativ milde Außentemperaturen zwischen $8^{\circ}C$ und $16^{\circ}C$ geherrscht haben. Erst am letzten Tag nähert sich die Außenlufttemperatur dem Gefrierpunkt von $0^{\circ}C$. Die Sonne hat an jedem der betrachteten Tage gegen Mittag geschienen und den Raum dadurch erwärmt.
-Die genauen Messdaten der Globalstrahlung und Außentemperatur für diesen Zeitraum, zwischen denen jeweils zehnminütige Intervalle liegen, wurden von \cite{wetter} zur Verfügung gestellt. Sie sind in REFXXXXBILD veranschaulicht sowie auf der angehängten CD in der Datei XXXXXX zu finden.
+Die genauen Messdaten der Globalstrahlung und Außentemperatur für diesen Zeitraum, zwischen denen jeweils zehnminütige Intervalle liegen, wurden von \cite{wetter} zur Verfügung gestellt. Sie auf der angehängten CD im Anhang \ref{att:cd} zu finden.
 Der Simulation wurde außerdem eine Temperatur von $22^{\circ}C$ im Inneren des K~Gebäudes und die gemessene Initialtemperatur von $22,8^{\circ}C$ zugrunde gelegt. In \ref{fig:valid1} sind die Ergebnisse der Simulation im Plot abgebildet. Die Simulationsergebnisse  werden im Folgenden analysiert.
 
 
@@ -333,7 +333,7 @@ Im Rahmen der Modellprädiktiven Regelung werden wie bereits erwähnt kürzere S
 
 Im nächsten Schritt findet eine Simulation mit dem Einsatz des Heizkörpers statt, um das vollständige Modell mit der Realität abzugleichen. Der Heizkörper wurde für die folgende Modellsimulation in insgesamt vier Volumenelemente diskretisiert.
 Nun musste ein Zeitintervall gefunden werden, indem die Raumtemperatur unter die untere Schalttemperatur von $20^{\circ}C$ fällt, sodass der Heizkörper zum Erwärmen des Raumes bis zum oberen Schaltpunkt von $21,5^{\circ}C$ genutzt wird und  schließlich die Raumluft das Heizkörperventil wieder abkühlt. Ein geeignetes Intervall findet sich vom 28.12.2015 bis zum 30.12.2015. Dieses ist zudem gut geeignet, da das Büro innerhalb dieses Zeitraums nicht genutzt wurde und dadurch keine weiteren Störgrößen in der Betrachtung auftreten.
-Die Messdaten für die Globalstrahlung und Außenlufttemperatur wurden auch für diese Simulation in zehnminütigen Intervallen von \cite{wetter} zur Verfügung gestellt und sind auf der angehängten CD in der Datei XXXXXXXXXXXX zu finden. Am Nachmittag des 29.12.2016 hat die Sonne leicht geschienen. Die Außenlufttemperatur hat sich leicht unterhalb des Gefrierpunkts bis hin zu 6 Grad bewegt. Der Heizkörper wurde am Nachmittag des 29.12.2015 bis abends genutzt.
+Die Messdaten für die Globalstrahlung und Außenlufttemperatur wurden auch für diese Simulation in zehnminütigen Intervallen von \cite{wetter} zur Verfügung gestellt und sind auf der angehängten CD im Anhang \ref{att:cd} zu finden. Am Nachmittag des 29.12.2016 hat die Sonne leicht geschienen. Die Außenlufttemperatur hat sich leicht unterhalb des Gefrierpunkts bis hin zu 6 Grad bewegt. Der Heizkörper wurde am Nachmittag des 29.12.2015 bis abends genutzt.
 Wie auch bei der voragehenden Simulation, wurden hier eine Temperatur von $22^{\circ}C$ im K~Gebäude und die gemessene Initialtemperatur von $21,25^{\circ}C$ zugrunde gelegt. Die Simulationsergebnisse sind im Plot \ref{fig:valid2} abgebildet und werden wiederum im Folgenden analysiert.
 
 \begin{figure}
@@ -439,6 +439,8 @@ Es wurden wiederholt kürzere Simulationen mit einer angepassten Initialtemperat
 Nach 800 simulierten Minuten setzt die Heizung ein, was durch das Modell gut abgebildet wird. Es bestehen lediglich Abweichungen bei zwei kleineren Temperaturabfällen, die sich durch Störgrößen wie beispielsweise das Öffnen der Fenster erklären lassen, und daher vom Modell nicht berücksichtigt wurden.
 
 Zusammenfassend lässt sich festhalten, dass das Modell eine solide Beschreibung des Verhaltens von K004b liefert und sich damit für den Einsatz mit einer \acrlong{mpr} eignet. Im letzten Abschnitt wird überprüft, ob das Modell den Anforderungen für den Einsatz mit \textsc{JModelica.org} genügt.
+
+\newpage
 
 \section{Modellprädiktive Regelung}
 
