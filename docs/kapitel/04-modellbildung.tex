@@ -40,7 +40,7 @@ Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothet
 \label{fig:grundraum}
 \end{figure}
 
-Ausgehend von einer initialen Raumtemperatur und der externen Steuergröße der Umgebungslufttemperatur, wird zur Bestimmung der Temperatur innerhalb eines Raumes der Ausgleichsprozess zwischen Raum und Umgebung untersucht. Konkret muss dafür der ausgetauschte Wärmestrom näher betrachtet werden. Um diesen nach \ref{eq:qdot} zu berechnen, müssen zunächst die verschiedene modellrelevanten Eigenschaften des Raumes durch physikalische Parameter beschrieben werden. Für die Berechnung der Austauschoberfläche müssen die Raumbreite, -länge und -höhe bekannt sein. Außerdem sind der U-Wert einer Betonwand und die spezifische Wärmekapazität sowie die Dichte von Luft für die Bestimmung des Wärmestroms relevant.
+Ausgehend von einer initialen Raumtemperatur und der externen Steuergröße der Umgebungslufttemperatur, wird zur Bestimmung der Temperatur innerhalb eines Raumes der Ausgleichsprozess zwischen Raum und Umgebung untersucht. Konkret muss dafür der ausgetauschte Wärmestrom näher betrachtet werden. Um diesen nach \ref{eq:qdot} zu berechnen, müssen zunächst die verschiedenen modellrelevanten Eigenschaften des Raumes durch physikalische Parameter beschrieben werden. Für die Berechnung der Austauschoberfläche müssen die Raumbreite, -länge und -höhe bekannt sein. Außerdem sind der U-Wert einer Betonwand und die spezifische Wärmekapazität sowie die Dichte von Luft für die Bestimmung des Wärmestroms relevant.
 Diese modellrelevanten Eigenschaften sind allesamt mit ihren Zahlenwerten in \ref{tab:eigenschaften_raum} zusammengefasst.
 
 \begin{table}[H]
@@ -96,7 +96,7 @@ Damit ist ein Grundmodell für die Berechnung der Temperatur eines Raumes aufges
 
 \subsection{Modellerweiterung durch Berücksichtigung der realen Umgebung}
 
-Im nächsten Schritt wird das einfache Raummodell zunächst an die reale Umgebung des Raumes K004b angepasst. Die Lage von K00b ist in \ref{fig:skizzek004a} ersichtlich. Es lässt sich erkennen, dass der Raum zwei Außenwände besitzt, die an Umgebungsluft grenzen. Zu diesen zählen die Wände Richtung Süden und Westen. Die anderen beiden Wände sowie die Decke und der Boden grenzen an weitere Gebäudeteile des K~Gebäudes. Der Raum im Modell bildet nach wie vor ein geschlossenes System. Zusammen mit dem K~Gebäude und der Umgebungsluft kann er als ein abgeschlossenes System angesehen werden, bei dessen Betrachtung potenzielle Wärmeströme zwischen Raum und Außenumgebung sowie Raum und K~Gebäude berücksichtigt werden müssen. Da die fließenden Wärmeströme im Vergleich zur sehr großen Energie innerhalb des K~Gebäudes und der Umgebung nur verschwindend gering sind, wird der Einfluss der Wärmeströme auf die beiden, den Raum umgebenden Teilsysteme vernachlässigt. Daher kann von konstanten und homogenen Temperaturen der beiden Teilsysteme ausgegangen werden.
+Im nächsten Schritt wird das einfache Raummodell zunächst an die reale Umgebung des Raumes K004b angepasst. Die Lage von K004b ist in \ref{fig:skizzek004a} ersichtlich. Es lässt sich erkennen, dass der Raum zwei Außenwände besitzt, die an Umgebungsluft grenzen. Zu diesen zählen die Wände Richtung Süden und Westen. Die anderen beiden Wände sowie die Decke und der Boden grenzen an weitere Gebäudeteile des K~Gebäudes. Der Raum im Modell bildet nach wie vor ein geschlossenes System. Zusammen mit dem K~Gebäude und der Umgebungsluft kann er als ein abgeschlossenes System angesehen werden, bei dessen Betrachtung potenzielle Wärmeströme zwischen Raum und Außenumgebung sowie Raum und K~Gebäude berücksichtigt werden müssen. Da die fließenden Wärmeströme im Vergleich zur sehr großen Energie innerhalb des K~Gebäudes und der Umgebung nur verschwindend gering sind, wird der Einfluss der Wärmeströme auf die beiden, den Raum umgebenden Teilsysteme vernachlässigt. Daher kann von konstanten und homogenen Temperaturen der beiden Teilsysteme ausgegangen werden.
 
 Durch diese Erweiterung des Modells hängt die Raumtemperatur nun von zwei Wärmeströmen und damit indirekt von zwei externen Steuergrößen, der Temperatur der Umgebung und des K~Gebäudes, ab. Die Oberfläche des Raumes wird in die Austauschoberfläche mit der Umgebung und die mit dem K~Gebäude aufgeteilt, um die Wärmeströme separat berechnen zu können. Die Temperatur der Außenumgebung und die umgebenden des K~Gebäudes werden im Modell in Form von externe Steuergrößen berücksichtigt. Durch diese Festlegung erweitert sich das Gleichungssystem des Grundmodells in \ref{lst:grundraum} folgendermaßen:
 \begin{lstlisting}[language=Modelica, caption={Erweitertes Gleichungssystem Modell des Raumes unter Berücksichtigung der realen Umgebung in Modelica}, label=lst:raumeins]
@@ -177,7 +177,7 @@ Das Modell berücksichtigt nun auch die räumlichen Gegebenheiten und beschreibt
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160316_raumeins}
-\caption{Erweitertes Raummodell}
+\caption{Erweitertes Raummodell durch Anpassung an die räumlichen Gegebenheiten}
 \label{fig:raumeins}
 \end{figure}
 
@@ -253,7 +253,7 @@ equation
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160317_raumzwei}
-\caption{Erweitertes Raummodell}
+\caption{Erweitertes Raummodell durch Anpassung an Solarstrahlung und Störgrößen}
 \label{fig:raumdrei}
 \end{figure}
 
@@ -299,7 +299,7 @@ Es gibt weitere Effekte innerhalb des Raumes K004b, die jedoch bewusst nicht ber
 
 \section{Simulation und Modellanpassung}
 
-In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Verwendung des Modells. Dazu werden für die Steuergrößen reale Messwerte vorgegeben, um die Güte des Modells abzuschätzen zu können, durch einen Vergleich der berechneten und tatsächlichen gemessen Werte. Abschließend erfolgt eine Anpassung der Modellparameter mit Hilfe von \cite{casiopeia}, um die Modellgüte zu verbessern.
+In diesem Abschnitt erfolgt zunächst die Simulation der Raumtemperatur unter Verwendung des Modells. Dazu werden für die Steuergrößen reale Messwerte vorgegeben, um die Güte des Modells abzuschätzen zu können, durch einen Vergleich der berechneten und tatsächlichen gemessen Werte. Abschließend erfolgt eine Anpassung der Modellparameter mithilfe von \cite{casiopeia}, um die Modellgüte zu verbessern.
 
 \subsection{Simulation und Validierung des Modells}
 
@@ -358,7 +358,7 @@ Um die Modellgüte hinsichtlich des Einsatzes der Heizung zu verbessern, wird im
 \subsection{Anpassung des Modells}
 
 Ziel des Abschnittes ist eine Verbesserung des Raummodells, welche durch eine Parameterschätzung mit \cite{casiopeia}, einer freien Softwareumgebung für die optimale Versuchsplanung und Parameterschätzung, durchgeführt wird.
-Wie bereits erwähnt, werden beim Einsatz des Modells mit Modellprädiktiver Regelung kürzere Intervalle betrachtet, daher erfolgt die weitere Modelloptimierung anhand von kürzeren Intervallen. Die Parameterschätzung wurde mit freundlicher Unterstützung von Herrn \textsc{Adrian Bürger} durchgeführt, der das Übersetzen des Modell und die Ausführung übernommen hat.
+Wie bereits erwähnt, werden beim Einsatz des Modells mit Modellprädiktiver Regelung kürzere Intervalle betrachtet, daher erfolgt die weitere Modelloptimierung anhand von kürzeren Intervallen. Die Parameterschätzung wurde mit freundlicher Unterstützung von Herrn \textsc{Adrian Bürger} durchgeführt, der das Übersetzen des Modells und die Ausführung übernommen hat.
 
 Die Parameterschätzung erfolgt systematisch, um die einzelnen Modellparameter anzupassen. Der Wärmedurchgangskoeffizient der Raumwände und des Heizkörpers sowie der Transmissionsgrad der Fensterscheiben sollen als Parameter geschätzt werden. Die Schätzung erfolgt in drei Schritten. Der Wärmedurchgangskoeffizient der Glasscheibe wird als fester Wert angenommen, da sich aufgrund der offensichtlichen Korrelation zwischen den beiden Wärmedurchgangskoeffizienten voneinander nicht-physikalische Schätzwerte ergeben können. 
 Es muss beachtet werden, dass die Erhöhung der Modellgüte durch den Einsatz realer Messwerte mit einer Abweichung der physikalischen Schätzparameter zur Realität einhergehen kann, da Störgrößen und Messfehler implizit berücksichtigt werden.
@@ -381,7 +381,7 @@ Im nächsten Schritt wird der Transmissionsgrad der Fensterscheiben geschätzt. 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160329_pestep2}
-\caption{Parameterschätzung}
+\caption{Parameterschätzung des Transmissionsgrads in zwei verschiedenen Intervallen}
 \label{fig:step2}
 \end{figure}
 
@@ -407,7 +407,7 @@ Im letzten Schritt wird die Schätzung des Wärmedurchgangskoeffizienten des Hei
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160329_pestep3}
-\caption{Parameterschätzung}
+\caption{Parameterschätzung des Wärmedurchgangskoeffizienten des Heizkörpers in zwei verschiedenen Intervallen}
 \label{fig:step3}
 \end{figure}
 
@@ -442,7 +442,7 @@ Zusammenfassend lässt sich festhalten, dass das Modell eine solide Beschreibung
 
 \section{Modellprädiktive Regelung}
 
-Um eine \acrlong{mpr} in \textsc{\textsc{JModelica.org}} anhand des Raummodells zu ermöglichen, wird das Modell in ein optimierungsfähiges Objekt übersetzt. Dazu wird das Modell mithilfe des \textsc{JModelica.org} Compilers anhand des Programms in Listing \ref{lst:comp} in ein JMU und Optimization Object transferiert.
+Um eine \acrlong{mpr} in \textsc{JModelica.org} anhand des Raummodells zu ermöglichen, wird das Modell in ein optimierungsfähiges Objekt übersetzt. Dazu wird das Modell mithilfe des \textsc{JModelica.org} Compilers anhand des Programms in Listing \ref{lst:comp} in ein JMU und Optimization Object transferiert.
 
 \lstinputlisting[language=Python ,caption={Programm zur Übersetzung des Raummodells in optimierungsfähige Objekte in \textsc{JModelica.org}}, label=lst:comp]{listings/compiling.py}
 
@@ -451,7 +451,7 @@ Trotz der Ausgabe von kleineren Warnungen, lässt sich das Modell fehlerfrei üb
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160330_mpc}
-\caption{\textsc{\textsc{JModelica.org}} Kompatibilität des Modells}
+\caption{\textsc{JModelica.org} Kompatibilität des Modells}
 \label{fig:jmod}
 \end{figure}
 
