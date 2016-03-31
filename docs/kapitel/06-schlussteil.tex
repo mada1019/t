@@ -34,25 +34,15 @@ Anhand der vorgestellten Ergebnisse und durch die Bestätigung der beiden Thesen
 Zunächst wurde die Grundvorraussetzung geschaffen, indem eine Anlage zur Regelung der Raumtemperatur installiert und deren Fähigkeit zur Regelung bestätigt wurde. Diese wurde zusätzlich mit einer zentralen Bedienoberfläche in Python ausgestattet, die durch einen simplen Aufbau und eine klare Struktur eine einfache Möglichkeit der Ansteuerung bietet. Dadurch eignet sich die Anlage in besonderem Maße für eine Modellprädiktive Regelung mit \textit{JModelica.org} und kann daher auch für eine Modellprädiktive Temperaturregelung genutzt werden. 
 Weiterhin wurde durch verschiedene Simulationen und Schätzungen gezeigt, dass das Modell eine hinreichende Beschreibung des realen Systemverhaltens liefert. Gleichzeitig wurde die Komplexität des Modells bei der Entwicklung möglichst gering gehalten, sodass eine moderate Rechenkapazität zur Simulation des Modells ausreicht. Abschließend konnte das Modell fehlerfrei in zwei optimierungsfähige Objekte der Plattform \textit{JModelica.org} übersetzt werden. Damit wurde die Kompatibilität des Modells für einen Einsatz mit der Modellprädiktiven Regelung gezeigt.
 
-Eine Anlage und ein Modell für die Modellprädiktive Temperaturregelung kann also durch die in dieser Arbeit beschriebenen ANlange und Modell aufgebaut sein.
+Eine Anlage und ein Modell für die Modellprädiktive Temperaturregelung kann also durch die in dieser Arbeit beschriebenen Anlage und Modell aufgebaut sein.
 
 \section{Ausblick und Ansatzpunkte für weitere Arbeiten}
 \label{sec:ausblick}
 
-Nachdem die Fähigkeit der beiden Teile der Arbeit gezeigt wurde, bietet aich der größte Anknüpfpunkt für ein weitere Arbeit zur tatsächlichen Implementierung einer Modellprädiktiven Regelung der beiden teile an. Dabei gilt es zunächst zu klären, ob eine eigene Klasse für MPC geschrieben wird oder die besteehnde generische von JMODelivca.oirg genutzt wird. Außerdem ist zu klären, wie lange der rollierende Intervall.
+Nachdem die Fähigkeit zur Modellprädiktiven Regelung der Anlage und des Modells gezeigt wurde, bietet sich als nächster Schritt eine tatsächliche Implementierung einer Modellprädiktiven Temperaturregelung an. Dafür gilt es zu klären, ob hierzu die bestehende, generische Klasse von \textit{JModelica.org} genutzt werden kann oder ob es sinnvoll ist eine eigene Implementierung der Modellprädiktiven Regelung durch Nutzung von \textit{CasADi} Werkzeugen durchzuführen. Ein wichtiger Aspekt dabei ist die Übergabe der gemessenen Steuergrößen an die Optimierungsumgebung, welche durch die Umwelt vorgegeben sind. Weiterhin stellt sich die Frage, ob der Einbezug von Prognosewerten für Steuergrößen wie der Globalstrahlung oder der Außenlufttemperatur sinnvoll sind. 
 
-Dazu werden im ersten Schritt werden auf Basis von aktuellen Messungen des Systemzustandes und der vorgegebenen Steuergrößen zu jedem diskreten Steuerungszeitpunkt optimale Steuerungspläne bestimmt werden..
-Im nächsten Schritt soll die Modellprädiktive Regelung Vorhersagewerte für den äußeren, nicht beeinflussbaren Steuergrößen zur die Bestimmung der optimalen Steuersignale nutzen.
+Ein weiteren Ansatzpunkt bietet das Raummodell, bei welchem durch einen Vergleich mit bestehenden umfangreichen Modellen, wie beispielsweise \cite{therakles13}, Verbesserungs- oder Verschlankungspotenziale aufgedeckt werden können.
 
-Welchge art der Verwendung?
-MPC mit JModelica.org also deren mpc klasse
-eigene in casadi
-etc?
+Ein weiteren Anknüpfpunkt bietet eine detaillierte Untersuchung der Raumtemperaturverteilung und des exakten Einflusses der Solarstrahlung auf die Raumtemperatur, um die angenommene Homogenität zu übeprüfen
 
-Vergleich mit bestehenden Modellen möglich z.B. das THERAKLES Modell
-
-Annahme Temperatur und homogen im Raum unteruschen
-
-Annahm homogene Raumtemperatur bzw einschwingvorgang überprügefn ob modellrelevant
-Sonnenstarhlung genauer untersuchen und für MPc auf Vorhersagewerte gehen.
-Implementierung MPC, länge intervall, kostenfunktionen versch. kriterien untersuchen
+Abschließend bietet die durch die Anlage die Möglichkeit zur ganzjährigen Regelung der Raumtemperatur, durch den Aufbau und die Möglichkeit einer einfachen, modularen Erweiterbarkeit beispielsweise durch eine Klimatisierung und automatisierte ANsteuerung der Verschattung.
