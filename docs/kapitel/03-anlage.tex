@@ -38,7 +38,7 @@ Zusammenfassend lässt sich festhalten, dass die Anlage als Forschungsumgebung f
 Neben den oben genannten Einsatzzielen wurden von Seiten der Hochschule Karlsruhe\footnote{In Person von Frau Professor \textsc{Angelika Altmann-Dieses}, Herrn Professor \textsc{Marco Braun} und Herrn \textsc{Adrian Bürger}} weitere Rahmenbedingungen definiert, die im Folgenden dargestellt sind:
 
 \begin{itemize}
-	\item Der Raum K004a im K Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
+	\item Der Raum K004b im K Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
 	\item Die Installation der Anlage muss mit minimalem baulichem und finanziellem Aufwand realisierbar sein.
 	\item Für die Kommunikation zwischen den Anlageteilen soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen Übertragungsprotokollen genutzt werden.
 	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform JModelica.org erfolgen.
@@ -64,10 +64,10 @@ Aus den Einsatzziele und Rahmenbedingungen lassen sich die Anforderungen an die 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
 \addlinespace[1mm]
-Raum K004a als Umgebung  & \multirow{3}{\hsize}{
+Raum K004b als Umgebung  & \multirow{3}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
-	\item Anpassen der Anlage an Raum K004a.
+	\item Anpassen der Anlage an Raum K004b.
 	\item Nutzen bestehender Heizkörper anstatt einer Klimatisierung des Raumes. 
 	\item Die Anlage soll auf die wesentlichen Funktionalitäten und eine minimale Anzahl an Komponenten beschränkt sein. 
 \end{itemize}
@@ -165,18 +165,18 @@ Erweiterbarkeit der Anlage
 \label{tab:anforderungen_umgebung}
 \end{table}
 
-Die grundlegendste Anforderung der Planung, ist die Anpassung an die Gegebenheiten des Raumes K004a, welche in \ref{fig:skizzek004a} skizziert sind. Der Raum befindet sich auf dem Campus der Hochschule Karlsruhe, an der südwestlichen Ecke des K~Gebäudes im Erdgeschoss. Die südliche und westliche Wand teilt sich der Raum mit der Außenumgebung und wird daher im Folgenden als Außenwand bezeichnet. Die östliche und nördliche Wand sowie die Decke und der Boden des Raumes grenzen an weitere Innenräume des K~Gebäudes. In der südlichen Außenwand ist eine Fensterfront mit Jalousien eingebaut, direkt darunter ist ein Heizkörper installiert.
+Die grundlegendste Anforderung der Planung, ist die Anpassung an die Gegebenheiten des Raumes K004b, welche in \ref{fig:skizzek004a} skizziert sind. Der Raum befindet sich auf dem Campus der Hochschule Karlsruhe, an der südwestlichen Ecke des K~Gebäudes im Erdgeschoss. Die südliche und westliche Wand teilt sich der Raum mit der Außenumgebung und wird daher im Folgenden als Außenwand bezeichnet. Die östliche und nördliche Wand sowie die Decke und der Boden des Raumes grenzen an weitere Innenräume des K~Gebäudes. In der südlichen Außenwand ist eine Fensterfront mit Jalousien eingebaut, direkt darunter ist ein Heizkörper installiert.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160102_k004a}
-\caption[Raumskizze K004A vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft]{Raumskizze K004A vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft}
+\caption[Raumskizze K004b vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft]{Raumskizze K004b vom K Gebäude der Hochschule Karlsruhe -- Technik und Wirtschaft}
 \label{fig:skizzek004a}
 \end{figure}
 
 Durch die Raumwahl werden bereits zwei wichtige Anforderungen erfüllt, denn durch die Fensterfront kann der Einfluss der Sonneneinstrahlung auf die Raumtemperatur untersucht werden. Darüber hinaus kann der bestehende Heizkörper in die Anlage integriert werden und so einen minimalen baulichen Aufwand sicherstellen. Da eine Klimatisierung zur Raumtemperaturregelung mit einem erheblichen finanziellen und baulichen Aufwand verbunden wäre, kann diese zunächst ausgeschlossen werden. Um der Forderung nach einer erweiterbaren Anlage nachzukommen, soll bei der Planung ein möglicher Nachrüstungsvorgang durch eine Klimatisierung und eine Ansteuerung der Jalousien trotz alledem berücksichtigt werden.
 
-Der Raum K004a wird als Büro von wissenschaftlichen Mitarbeitern der Hochschule Kalrsruhe genutzt, daher befinden sich darin, wie in \ref{fig:skizzek004a} abgebildet, sechs Computerarbeitsplätze und das übliche Büro-Mobiliar. Durch  den Einfluss von Mensch und Rechner, sogenannten Störgrößen welche im Modell berücksichtigt werden müssen, wird die Anforderung einer möglichst anwendungsnahen Umgebung erfüllt.
+Der Raum K004b wird als Büro von wissenschaftlichen Mitarbeitern der Hochschule Kalrsruhe genutzt, daher befinden sich darin, wie in \ref{fig:skizzek004a} abgebildet, sechs Computerarbeitsplätze und das übliche Büro-Mobiliar. Durch  den Einfluss von Mensch und Rechner, sogenannten Störgrößen welche im Modell berücksichtigt werden müssen, wird die Anforderung einer möglichst anwendungsnahen Umgebung erfüllt.
 
 Als weitere restriktive Vorgabe soll die Modellprädiktive Regelung unter Zuhilfenahme der Plattform \textsc{JModelica.org} erfolgen. \textsc{JModelica.org} ist eine kostenlose Open-Source Plattform	 zur Analyse, Simulation und Optimierung von komplexen, dynamischen Systemen, die auf der Modellierungssprache Modelica basiert. Aufbauend auf den mathematischen Modellen physikalischer Systeme in Modelica, lassen sich, dank der Unterstützung der Spracherweiterung Optimica, Optimierungsprobleme durch einfache Konstrukte das Optimierungsintervall, die Kostenfunktion und die Nebenbedingungen einfach formulieren. JModelica.org wird über eine Python Nutzerschnittstelle genutzt und besitzt eine eigene Klasse für die Modellprädiktive Regelung, welche bisher noch experimenteller Art ist \cite[S.~1f.]{jmod15}.
 Der Compiler kann die Modelle und Optimierungsprobleme in verschiedene Formate übersetzen. Zum einen in einen direkt ausführbaren C Code, der die Modellgleichungen und Optimierungsparameter enthält, und ein XML Code, der die Meta-Daten des Modells enthält. Zum anderen kann das Modell in ein \textit{OptimizationProblem} Objekt transferiert werden, welches eine symbolische Repräsentation des Optimierungsproblems darstellt \cite[S.~12ff.]{jmod15}.
@@ -206,7 +206,7 @@ Python stellt, wie bereits erwähnt, Schnittstellen und Funktionalitäten für d
 \subsection{Aufgabe der Anlage}
 Ziel der Anlage ist es, die Temperatur innerhalb eines Raumes mit Hilfe eines technischen Systems zu regeln, welches den zuvor deklarierten Anforderungen genügt.
 
-Dazu gilt es zunächst die Temperatur innerhalb des Raumes K004A über einfache Raumtemperaturfühler zu erfassen. Ist die Raumtemperatur bekannt, so soll diese mit Hilfe eines Heizkörpers beeinflusst werden, damit sie einer vorgegebener Temperaturkurve folgen kann. 
+Dazu gilt es zunächst die Temperatur innerhalb des Raumes K004b über einfache Raumtemperaturfühler zu erfassen. Ist die Raumtemperatur bekannt, so soll diese mit Hilfe eines Heizkörpers beeinflusst werden, damit sie einer vorgegebener Temperaturkurve folgen kann. 
 
 Die Heizleistung wird über das Einlassventil gesteuert, hängt jedoch auch von weiteren Eigenschaften des Heizkörpers ab. Sie wird von einem Wärmemengenzähler gemessen und mittelbar über den Massenstrom und die Temperaturen des Heizwassers am Ein- und Auslass bestimmt. Zur Messung werden ein Durchflusssensor und zwei Temperatursensoren an den jeweiligen Enden des Heizkörpers eingesetzt. Um die Heizleistung zu steuern muss demnach der Massenstrom des Heizwassers gemessen und gesteuert werden und zugleich beide Temperaturen am Heizkörper bekannt sein. Der Massenstrom kann mit Hilfe eines Stellantriebs über ein Ventil  eingestellt werden. Aus der Temperatur am Einlass und den Eigenschaften des Heizkörpers, lässt sich die Temperatur am Auslass und damit die aktuelle Heizleistung bestimmen. Durch diesen Zusammenhang wird eine gezielte Beeinflussung der Raumtemperatur ermöglicht.
 
@@ -219,7 +219,7 @@ Die oben genannte, umfassende Aufgabe wird von einer Anlage übernommen, die sic
 
 Als zentrale Komponente der Anlage muss der logische Controller Python unterstützen und die gesamten Steuerungs- und Kommunikationsaufgaben übernehmen. Darüber hinaus müssen im Rahmen der Modellprädiktiven Regelung in regelmäßigen Zeitabständen wiederholt Optimalsteuerungsprobleme gelöst werden, weshalb eine ausreichend große Rechenkapazität benötigt wird. Um diese Aufgaben übernehmen zu können und um keinen zusätzlichen finanziellen Aufwand zu generieren, wird zunächst ein freier Rechner der Hochschule Karlsruhe als Controller genutzt.  
 
-Wie zuvor beschrieben besitzt die Sensorik den größten Umfang, da sie neben der Raumtemperatur auch den Massenstrom und die Temperaturen am Heizkörper erfasst.Innerhalb des Raumes K004A wird die Innentemperatur durch mehrere Sensoren erfasst, um die unterstellte Homogenität zu überprüfen und eine belastbare Raumtemperatur für die Modellberechnungen herauszufinden. Für die Erfassung der Heizleistung kommt ein Wärmemengenzähler zum Einsatz, der aus einem Rechenwerk, zwei weiteren Temperatursensoren und einem Durchflusssensor aufgebaut ist. Für die Modellprädiktive Regelung werden die einzelnen Werte aller Sensoren benötigt, weshalb das Rechenwerk einen Zugriff auf diese ermöglichen muss.
+Wie zuvor beschrieben besitzt die Sensorik den größten Umfang, da sie neben der Raumtemperatur auch den Massenstrom und die Temperaturen am Heizkörper erfasst.Innerhalb des Raumes K004b wird die Innentemperatur durch mehrere Sensoren erfasst, um die unterstellte Homogenität zu überprüfen und eine belastbare Raumtemperatur für die Modellberechnungen herauszufinden. Für die Erfassung der Heizleistung kommt ein Wärmemengenzähler zum Einsatz, der aus einem Rechenwerk, zwei weiteren Temperatursensoren und einem Durchflusssensor aufgebaut ist. Für die Modellprädiktive Regelung werden die einzelnen Werte aller Sensoren benötigt, weshalb das Rechenwerk einen Zugriff auf diese ermöglichen muss.
 
 Die Aktorik umfasst lediglich die Ansteuerung des Heizungsventils. Wie zuvor bereits erwähnt wird dazu ein Stellantrieb genutzt, um das Ventil stufenlos zu öffnen und zu Schließen und damit den Massenstrom bis hin zu einem Maximalwert zu steuern. 
 
