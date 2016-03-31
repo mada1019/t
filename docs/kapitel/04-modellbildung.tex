@@ -369,10 +369,11 @@ Zunächst wird der Wärmedurchgangskoeffizient der Wand bestimmt, wozu Intervall
 \label{fig:step1}
 \end{figure}
 
-Die Plots auf der linken Seite stellen das Ergebnis für ein 100-minütiges Intervall vom Abend des 05.01.2016, auf der rechten Seite vom Abend des 23.01.2016 dar. Mit dem vorab fixierten U-Wert für Glas ergab sich ein Schätzwert für den Wärmedurchgangskoeffizient der Wand von $U_{wall}=0.612986$ 
+Die Plots auf der linken Seite stellen das Ergebnis für ein 100-minütiges Intervall vom Abend des 05.01.2016, auf der rechten Seite vom Abend des 23.01.2016 dar. Mit dem vorab fixierten U-Wert für Glas ergab sich ein Schätzwert für den Wärmedurchgangskoeffizient der Wand von $U_{wall}=0.612986$ .
+
 Die oberen beiden Plots enthalten die Verläufe der Steuergröße Außenlufttemperatur im Intervall, wobei die Solarstrahlung und die Heizung keinen Einfluss hatten. Die genauen Messdaten sind den Dateien auf der angehängten CD in \ref{att:cd} im Ordner enthalten. Die mittleren Plots zeigen einen Vergleich der gemessen Raumtemperatur mit der Simulation des geschätzten Intervalls über 100 Minuten. Darin ist gut zu erkennen, dass die Dynamik des Modells durch eine Anpassung des Parameters weiter verbessert werden konnte. Die unteren Plots zeigen die Abweichung zwischen Simulation und Messwerten. Im linken Intervall beschreibt die Simulation bis auf minimale Abweichungen das reale System sehr genau, im Rechten ergibt sich bei der Simulation ein leicht erhöhte Temperatur im Vergleich zur Messung, die mit einer Abweichung von etwa $0,35^{\circ}C$ nach 100 Minuten immer noch eine ausreichende Güte besitzt.
 
-Im nächsten Schritt wird der Transmissionsgrad der Fensterscheiben geschätzt. Dazu wurden wiederum Intervalle identifiziert, an denen die Sonne geschienen hat und die Störgrößen und den Einsatz der Heizung möglichst ausschließen. Dazu bieten sich zwei Intervalle Anfang Januar an, am 02.01.2016 und 05.01.2016 gegen die Mittagszeit, an denen das Büro nur teilweise genutzt wurde. Die Ergebnisse der Schätzung für die knapp 250 Minuten umfassenden Intervalle sind in \ref{fig:step2} zusammengefasst. Das Skript zur Parameterschätzung findet sich im Anhang \ref{att:cd} in der Datei $room_pe_step2_day.py$.
+Im nächsten Schritt wird der Transmissionsgrad der Fensterscheiben geschätzt. Dazu wurden wiederum Intervalle identifiziert, an denen die Sonne geschienen hat und die Störgrößen und den Einsatz der Heizung möglichst ausschließen. Dazu bieten sich zwei Intervalle Anfang Januar an, am 02.01.2016 und 05.01.2016 gegen die Mittagszeit, an denen das Büro nur teilweise genutzt wurde. Die Ergebnisse der Schätzung sind in \ref{fig:step2} zusammengefasst. Das Skript zur Parameterschätzung findet sich im Anhang \ref{att:cd} in der Datei $room_pe_step2_day.py$.
 
 \begin{figure}
 \centering
@@ -398,7 +399,7 @@ Um die Verbesserung der Modellgüte einordnen zu können, erfolgt eine erneute S
 
 Abgesehen von einem Fehler bei der Initialisierung der Raumtemperatur zu Beginn der Simulation, ist eine erheblich Verbesserung zu erkennen. Über ein fünf-tägiges Intervall ist die Abweichung der Simulation sehr gering und die Dynamik des Systems wird sehr gut beschrieben.
 
-Im letzen Schritt wird die Schätzung des Wärmedurchgangskoeffizienten des Heizkörpers durchgeführt. Es wurden Schätzintervalle identifiziert, an denen keine Solarstrahlung zu finden war und Störgrößen möglichst ausgeschlossen werden können. Dazu bieten sich zwei Intervalle am Abend des 17.01.2016, an dem die Heizung von der Anlage genutzt wurde. Die Ergebnisse der Parameterschätzung für die 20 Minuten umfassenden Intervalle sind in \ref{fig:step3}} zusammengefasst. Das Skript zur Parameterschätzung findet sich im Anhang \ref{att:cd} in der Datei $room_pe_step3_radiator_night.py$.
+Im letzen Schritt wird die Schätzung des Wärmedurchgangskoeffizienten des Heizkörpers durchgeführt. Es wurden Schätzintervalle identifiziert, an denen keine Solarstrahlung zu finden war und Störgrößen möglichst ausgeschlossen werden können. Dazu bieten sich zwei Intervalle am Abend des 17.01.2016, an dem die Heizung von der Anlage genutzt wurde. Die Ergebnisse der Parameterschätzung für die 20 Minuten umfassenden Intervalle sind in \ref{fig:step3} zusammengefasst. Das Skript zur Parameterschätzung findet sich im Anhang \ref{att:cd} in der Datei $room_pe_step3_radiator_night.py$.
 
 \begin{figure}
 \centering
@@ -407,15 +408,11 @@ Im letzen Schritt wird die Schätzung des Wärmedurchgangskoeffizienten des Heiz
 \label{fig:step3}
 \end{figure}
 
+Die Plots stellen das Ergebnis für die beiden 20-minütigen Intervalle dar. Die Parameterschätzung ergab einen realistischen Schätzwert für den Wärmedurchgangskoeffizienten des Heizkörpers von $u=_{radiator}=12.9872$.
+Wie zuvor sind in den oberen Plots die Verläufe der Steuergrößen im Schätzintervall zu sehen. Die Außentemperaturen waren in beiden Intervallen knapp unterhalb des Gefrierpunkts und in keinem der beiden Intervalle wurde eine Globalstrahlung gemessen. Außerdem wurde die Heizung mit voller Leistung betrieben.
+Auf beiden Ergebnisplots folgt die Simulation der Temperaturkurve sehr gut, wenn auch die Diskrepanz zum Ende des Intervalls hin zunimmt. Mit einer maximalen Temperaturabweichung bei beiden Intervallen mit einem Betrag von $0,2^{\circ}C$ beschreibt das Modell das reale Verhalten damit ausreichend.
 
-Die Plots auf der linken Seite stellen das Ergebnis für ein 220-minütiges Intervall am 02.01.2016, auf der rechten Seite für ein 270 minütiges Intervall 05.01.2016 dar. Die Parameterschätzung ergab einen geschätzten Transmissionsgrad von $u=_{radiator}=12.9872$. Dieser Wert scheint zunächst unrealistisch klein. Bei einer genaueren Betrachtung ist zu beachten, dass wie bereits eingangs erwähnt bei der Parameterschätzung eine Anpassung des Modells an die Messwerte stattfindet, inklusive deren Störgrößen und Messfehler. Weiterhin ist der tatsächliche Transmissionsgrad der Fensterscheiben in K004b unbekannt, da der Fensterhersteller \textsc{Schüco} lediglich die Rahmen produziert. Das Unternehmen, welches die Glasscheiben eingesetzt und die Fenster montiert hat und damit die Information besitzt, konnte leider nicht ermittelt werden.
-
-In den oberen Plots sind wiederum die Verläufe der Steuergrößen im Schätzintervall zu sehen. Die Außentemperaturen waren in beiden Intervallen mild zwischen fünf und acht Grad Celsius. im ersten Intervall wurde eine schwache, im zweiten hingegen wurde eine starke Globalstrahlung gemessen. Auf beiden Ergebnisplots ist zu erkennen, dass der Einfluss der Strahlung zum Ende des Intervalls hin immer weiter unterschätzt wird. Die Temperaturabweichung liegt bei beiden Intervallen unterhalb einem Betrag von $0,4^{\circ}C$. Im rechten Modellabgleich ist durch die leicht angedeuteten Senken sehr schön zu erkennen, dass das Verhalten des Modells mit der Realität trotz Abweichungen sehr gut abgebildet wird.
-Unter der Berücksichtigung der Messfehler und da insbesondere die ersten Minuten der Simulation eine ausreichende Beschreibung der Realität liefern, sollte die Güte des Modells für eine Anwendung mit Modellprädiktiver Regelung ausreichen.
-
-
-
-
+Eine erneute Simulation des vorherigen Simulationsintervalls mit dem Einsatz des Heizkörper verdeutlicht eine Vrbesserung des Modells. Die Ergebnisse sind im Plot in \ref{fig:valid2pe} dargestellt.
 
 \begin{figure}
 \centering
@@ -423,6 +420,21 @@ Unter der Berücksichtigung der Messfehler und da insbesondere die ersten Minute
 \caption{Simulation des Raummodells mit Einsatz des Heizkörpers mit geschätztem Parameter}
 \label{fig:valid2pe}
 \end{figure}
+
+Es ist eine deutliche Verbesserung zu erkennen, indem das . Über ein fünf-tägiges Intervall ist die Abweichung der Simulation sehr gering und die Dynamik des Systems wird sehr gut beschrieben.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160330_benchmark}
+\caption{Simulation des Raummodells mit Einsatz des Heizkörpers mit geschätztem Parameter}
+\label{fig:valid2pe}
+\end{figure}
+
+
+\section{Modellprädiktive Regelung}
+
+
 
 JMODELICA fähig beweisen, also nächster Schritt MPC implementierung prüfen.
 
