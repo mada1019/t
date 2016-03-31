@@ -41,7 +41,7 @@ Neben den oben genannten Einsatzzielen wurden von Seiten der Hochschule Karlsruh
 	\item Der Raum K004b im K Gebäude der Hochschule Karlsruhe wird zur Installation der Anlage und Einrichtung der Forschungsumgebung zur Verfügung gestellt.
 	\item Die Installation der Anlage muss mit minimalem baulichem und finanziellem Aufwand realisierbar sein.
 	\item Für die Kommunikation zwischen den Anlageteilen soll die Modbus Kommunikationstechnologie mit mindestens zwei verschiedenen Übertragungsprotokollen genutzt werden.
-	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform JModelica.org erfolgen.
+	\item Die Modellprädiktive Regelung soll mit Hilfe der Plattform \textsc{JModelica.org} erfolgen.
 \end{itemize}
 
 \subsection{Definition der Anforderungen}
@@ -86,7 +86,7 @@ Raum K004b als Umgebung  & \multirow{3}{\hsize}{
 \cmidrule[0.5pt](r{0.25em}){1-1} 
 \cmidrule[0.5pt](l{0.25em}){2-2}
 
-\addlinespace[1mm] Modellprädiktive Regelung mit JModelica.org und CasADi \newline & \multirow{3}{\hsize}{
+\addlinespace[1mm] Modellprädiktive Regelung mit \textsc{JModelica.org} und CasADi \newline & \multirow{3}{\hsize}{
 \begin{minipage}[t]{0.57\textwidth}
 \begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=5mm]
 \item Die Modellbildung erfolgt in Modelica.
@@ -178,7 +178,7 @@ Durch die Raumwahl werden bereits zwei wichtige Anforderungen erfüllt, denn dur
 
 Der Raum K004b wird als Büro von wissenschaftlichen Mitarbeitern der Hochschule Kalrsruhe genutzt, daher befinden sich darin, wie in \ref{fig:skizzek004a} abgebildet, sechs Computerarbeitsplätze und das übliche Büro-Mobiliar. Durch  den Einfluss von Mensch und Rechner, sogenannten Störgrößen welche im Modell berücksichtigt werden müssen, wird die Anforderung einer möglichst anwendungsnahen Umgebung erfüllt.
 
-Als weitere restriktive Vorgabe soll die Modellprädiktive Regelung unter Zuhilfenahme der Plattform \textsc{JModelica.org} erfolgen. \textsc{JModelica.org} ist eine kostenlose Open-Source Plattform	 zur Analyse, Simulation und Optimierung von komplexen, dynamischen Systemen, die auf der Modellierungssprache Modelica basiert. Aufbauend auf den mathematischen Modellen physikalischer Systeme in Modelica, lassen sich, dank der Unterstützung der Spracherweiterung Optimica, Optimierungsprobleme durch einfache Konstrukte das Optimierungsintervall, die Kostenfunktion und die Nebenbedingungen einfach formulieren. JModelica.org wird über eine Python Nutzerschnittstelle genutzt und besitzt eine eigene Klasse für die Modellprädiktive Regelung, welche bisher noch experimenteller Art ist \cite[S.~1f.]{jmod15}.
+Als weitere restriktive Vorgabe soll die Modellprädiktive Regelung unter Zuhilfenahme der Plattform \textsc{JModelica.org} erfolgen. \textsc{JModelica.org} ist eine kostenlose Open-Source Plattform	 zur Analyse, Simulation und Optimierung von komplexen, dynamischen Systemen, die auf der Modellierungssprache Modelica basiert. Aufbauend auf den mathematischen Modellen physikalischer Systeme in Modelica, lassen sich, dank der Unterstützung der Spracherweiterung Optimica, Optimierungsprobleme durch einfache Konstrukte das Optimierungsintervall, die Kostenfunktion und die Nebenbedingungen einfach formulieren. \textsc{JModelica.org} wird über eine Python Nutzerschnittstelle genutzt und besitzt eine eigene Klasse für die Modellprädiktive Regelung, welche bisher noch experimenteller Art ist \cite[S.~1f.]{jmod15}.
 Der Compiler kann die Modelle und Optimierungsprobleme in verschiedene Formate übersetzen. Zum einen in einen direkt ausführbaren C Code, der die Modellgleichungen und Optimierungsparameter enthält, und ein XML Code, der die Meta-Daten des Modells enthält. Zum anderen kann das Modell in ein \textit{OptimizationProblem} Objekt transferiert werden, welches eine symbolische Repräsentation des Optimierungsproblems darstellt \cite[S.~12ff.]{jmod15}.
 
 Die \textit{OptimizationProblem} Objekte können anschließend direkt mit den Optimierungswerkzeugen von \textsc{CasADi} bearbeitet und damit zur Lösung des Optimierungsproblems eingesetzt werden. \textsc{CasADi} ist ein Open-Source Softwaretool, das einzelne Bausteine für die numerische Optimierung im Allgemeinen und für die Optimalsteuerung im Speziellen zur Verfügung stellt. Es eignet sich besonders gut für die gradientenbasierte numerische Optimierung von nichtlinearen Problemen aufgrund seiner effizienten Ableitungserzeugung durch die Algorithmische Differentiation und der Möglichkeit zur Integration von gewöhnlichen Differenzialgleichungen. Die Interaktion mit dem Nutzer soll aus Gründen der Stabilität über die Schnittstelle in Python erfolgen \cite[S.~5f.]{casadi}.

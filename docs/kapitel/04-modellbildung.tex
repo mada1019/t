@@ -349,7 +349,7 @@ Insbesondere im Zusammenhang mit den zuvor festgestellten Unsicherheiten bei den
 
 Zusammenfassend lässt sich feststellen, dass das Modell die grundlegende Systemdynamik der Realität beschreibt, jedoch noch gewisse Abweichungen im Modell vorhanden sind. Dies wurde insbesondere durch die sehr langen Simulationsintervalle deutlich, die für den späteren Einsatz des Modells nicht von weiterer Relevanz sind.
 
- Um die Modellgüte insbesondere hinsichtlich des Einsatzes der Heizung zu verbessern, wird im Folgenden eine Parameterschätzung vorgenommen und abschließend überprüft, ob das Modell den Anforderungen für eine Modellprädiktive Regelung mit JModelica.org genügt.
+ Um die Modellgüte insbesondere hinsichtlich des Einsatzes der Heizung zu verbessern, wird im Folgenden eine Parameterschätzung vorgenommen und abschließend überprüft, ob das Modell den Anforderungen für eine Modellprädiktive Regelung mit \textsc{JModelica.org} genügt.
 
 
 \subsection{Anpassung des Modells}
@@ -421,33 +421,36 @@ Eine erneute Simulation des vorherigen Simulationsintervalls mit dem Einsatz des
 \label{fig:valid2pe}
 \end{figure}
 
-Es ist eine deutliche Verbesserung zu erkennen, indem das . Über ein fünf-tägiges Intervall ist die Abweichung der Simulation sehr gering und die Dynamik des Systems wird sehr gut beschrieben.
+Die Abweichungen der Kurve sind deutlich verbessert sowie die Verzögerung hat sich verkürzt. Die Dynamik hat sich für das eintägige Intervall ebenfalls verbessert, wenn auch nur leicht.
 
+Abschließend erfolgt eine Modellprädiktive Regelungsnahe Simulation des Modells. Das Ergebnis ist in \ref{fig:bench} dargestellt.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160330_benchmark}
 \caption{Simulation des Raummodells mit Einsatz des Heizkörpers mit geschätztem Parameter}
-\label{fig:valid2pe}
+\label{fig:bench}
 \end{figure}
 
+Es wurden wiederholt kürzere Simulationen mit einer angepassten Initialtemperatur angesetzt, um eine Struktur ähnlich der Modellprädiktiven Regelung zu erhalten. Die Außenlufttemperatur bewegte sich während des Zeitraums knapp über dem Gefrierpunkt und es wurde lediglich eine schwache Globalstrahlung detektiert. Beim Einsatz der Heizung wurden kürzere Simulationsintervalle von 20 Minuten angesetzt, ansonsten wurden die Simulationen für längere Intervalle durchgeführt.
+Nach 800 simulierten Minuten setzt die Heizung ein, was durch das Modell gut abgebildet wird. Es bestehen lediglich Abweichungen an zwei kleineren Abfällen der gemessenen Temperatur, die sich durch Störgrößen wie beispielsweise das Öffnen der Fenster erklären lassen, und daher vom Modell nicht berücksichtigt wurden.
+
+Zusammenfassend lässt sich feststellen, dass das Modell eine solide Beschreibung des Verhaltens von K004b darstellt und sich damit für den Einsatz in der \acrlong{mpr} eignet. Im letzten Abschnitt wird überprüft, ob das Modell den Anforderungen für den Einsatz mit \textsc{JModelica.org} genügt.
 
 \section{Modellprädiktive Regelung}
 
+Um eine \acrlong{mpr} in \textsc{\textsc{JModelica.org}} anhand des Raummodells zu ermöglichen, wird das Modell in ein Optimierungsfähiges Objekt übersetzt. Dazu wird das Modell mithilfe des \textsc{JModelica.org} Compilers in ein JMU und Optimization Object transferiert anhand des Programms in Listing \ref{lst:comp}.
 
+\lstinputlisting[language=Python ,caption={Programm zur Übersetzung des Raummodells in Optimierungsfähige Objekte in \textsc{JModelica.org}}, label=lst:comp]{listings/compiling.py}
 
-JMODELICA fähig beweisen, also nächster Schritt MPC implementierung prüfen.
-
-\lstinputlisting[language=Python ,caption={Programm zur Übersetzung des Raummodells in Optimierungsfähige Objekte in JMoelica.org}, label=lst:comp]{listings/compiling.py}
-
-Siehe da es funkt
+Trotz der Ausgabe von kleineren Warnungen, lässt sich das Modell übersetzen und damit für Optimierungszwecke in \textsc{JModelica.org}nutzen. Eine Bestätigung in der Python Konsole für das erfolgreich übersetzte Problem findet sich in \ref{fig:jmod}.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{abbildungen/20160330_mpc}
-\caption{JModelica.org Kompabiltät des Modells}
+\caption{\textsc{\textsc{JModelica.org}} Kompabiltät des Modells}
 \label{fig:jmod}
 \end{figure}
 
-Damit lässt sich die Hypothese bestätigen, das sich das Modell für den Einsatz mit JModelica.org eignet.
-Zusammenfassend sagen, dass MPC ermöglicht werden kann. Intervall der diskreten Zeitpunkte jedoch kürzer, siehe PS und Simulation.
+Die Hypothese, dass sich das Modell für den Einsatz mit \textsc{JModelica.org} eignet, kann also bestätigt werden.
+Damit sind die Voraussetzungen für eine Modellprädiktive Regelung der Raumtemperatur in K004b geschaffen.
