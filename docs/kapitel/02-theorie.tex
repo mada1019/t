@@ -221,23 +221,23 @@ Die sogenannten Gateways dienen der Kopplung von Netzwerken, die verschiedene Ar
 
 \subsection{OSI-Kommunikationsmodell}
 
-Aufgrund der großen Anzahl verschiedener technischer Systeme existieren auch viele verschiedene Arten der Kommunikation untereinander. Bei der genaueren Betrachtung der Kommunikation wird ersichtlich, dass diese oftmals ähnlich abläuft und sich durch ein Meta-Schema beschreiben lässt \cite[S.~8]{schn06}. Um die Kommunikation auch über verschiedenen Systeme hinweg zu ermöglichen und zu formalisieren, wurde von der \acrlong{ios} (\acrshort{ios}) 1984 ein abstraktes Referenz-Modell entwickelt, dass in der \textit{ISO-Norm 7498-1} beschrieben ist. Es dient der Entwicklung und Verbesserung von Standards des Informationsaustausch sowie der Wahrung einer gewissen Konsistenz, als Referenz für bestehende Standards \cite[S.~1]{osi96}. Das Ziel bei dem Entwurf des Modells war es, eine Menge ann Standards zu schaffen, um autonomen Systemen die Kommunikation untereinander zu ermöglichen \cite[S.~4]{osi96}.
+Aufgrund der großen Anzahl verschiedener technischer Systeme existieren auch viele verschiedene Arten der Kommunikation untereinander. Bei der genaueren Betrachtung der Kommunikation wird ersichtlich, dass diese oftmals ähnlich abläuft und sich durch ein Meta-Schema beschreiben lässt \cite[S.~8]{schn06}. Um die Kommunikation auch über verschiedene Systeme hinweg zu ermöglichen und zu formalisieren, wurde von der \acrlong{ios} (\acrshort{ios}) 1984 ein abstraktes Referenz-Modell entwickelt, das in der \textit{ISO-Norm 7498-1} beschrieben ist. Es dient der Entwicklung und Verbesserung von Standards des Informationsaustausch sowie der Wahrung einer gewissen Konsistenz, als Referenz für bestehende Standards \cite[S.~1]{osi96}. Das Ziel bei dem Entwurf des Modells war es, eine Menge an Standards zu schaffen, um autonomen Systemen die Kommunikation untereinander zu ermöglichen \cite[S.~4]{osi96}.
 
 Das sogenannte \acrlong{osi} (\acrshort{osi}) wird im Folgenden erläutert, und abschließend im Anwendungskontext der Modbus Kommunikationstechnologie referenziert.
 
-Zunächst wird im Standard definiert, womit sich das Modell beschäftigt und abgegrenzt, welche Aspekte im Modell keine Berücksichtigung finden \cite[S.~3]{osi96}:
+Zunächst wird im Standard definiert, womit sich das Modell im Allgemeinen beschäftigt und abgegrenzt, welche Aspekte im Modell keine Berücksichtigung finden \cite[S.~3]{osi96}:
 \begin{quote}
 \textit{\Gun OSI is concerned with the exchange of information between open systems (and not the internal functioning of each individual real open system).\Gob}
 \end{quote}
 
-Das \acrshort{osi} beschäftigt sich also zentral mit dem Austausch von Informationen zwischen verschiedenen offenen Systemen und allen dabei anfallenden Aktivitäten. Diese sind sehr umfangreich und lassen sich in folgenden vier Bereiche gliedern \cite[S.~3f.]{osi96}:
+Das \acrshort{osi} beschäftigt sich also zentral mit dem Austausch von Informationen zwischen verschiedenen offenen Systemen und allen dabei anfallenden Aktivitäten. Diese sind sehr umfangreich und lassen sich in folgende vier Bereiche gliedern \cite[S.~3f.]{osi96}:
 \begin{itemize}
 	\item Der Austausch von Informationen zwischen offenen Systemen,
 	\item die physischen Medien zur Verbindung von offenen Systemen und deren Gegebenheiten zum Transport von Informationen,
 	\item die Vernetzung von offenen Systemen
 	\item sowie die Interaktion zwischen offenen Systemen und deren Fähigkeit zur Kooperation bei der Datenübertragung.
 \end{itemize}
-Bezogen auf den Austausch von Informationen, überschneidet sich die physische Verbindung und die Vernetzung zur Infrastruktur und Architektur. Diese steht dann für die Übertragung zur Verfügung steht. Die Interaktion umfasst weitaus mehr Aufgaben: Neben der Synchronisation der Prozesse, welche Daten austauschen wollen, muss auch die Darstellung der Daten und eventuell notwendige Transformationen beachtet werden, um eine Kompatibilität unterschiedlicher Systeme zu erreichen. Weitere wichtige Aufgaben sind die Datenspeicherung und i-ntegrität sowie die Sicherheit beim Austausch hinsichtlich Fehlern und Datenschutz \cite[S.~4]{osi96}.
+Bezogen auf den Austausch von Informationen, überschneidet sich die physische Verbindung und die Vernetzung zur Infrastruktur und Architektur. Die Architektur steht dann für die Übertragung zur Verfügung steht. Die Interaktion umfasst weitaus mehr Aufgaben: Neben der Synchronisation der Prozesse, welche Daten austauschen wollen, muss auch die Darstellung der Daten und eventuell notwendige Transformationen beachtet werden, um eine Kompatibilität unterschiedlicher Systeme zu erreichen. Weitere wichtige Aufgaben sind die Datenspeicherung und -integrität sowie die Sicherheit beim Austausch hinsichtlich Fehlern und Datenschutz \cite[S.~4]{osi96}.
 Es ist leicht zu erkennen, dass die technische Kommunikation einen sehr umfangreichen und komplizierten Prozess darstellt. Daher wird der Kommunikationsprozess im \acrshort{osi} stark abstrahiert und in sieben gedankliche Ebenen gegliedert. Die einzelnen abstrakten Ebenen sind in \ref{fig:osi} dargestellt und fassen verschiedene Aufgaben des Kommunikationsprozesses in Teilaufgaben zusammen.
 
 \begin{figure}
@@ -250,14 +250,14 @@ Es ist leicht zu erkennen, dass die technische Kommunikation einen sehr umfangre
 
 Die Ebenen werden als Schichten bezeichnet und haben klar definierte Aufgaben und Schnittstellen zu ihren Nachbarschichten. An diesen Schnittstellen werden Dienste bereitgestellt, die von den anderen Ebenen genutzt werden können. Durch diesen Aufbau können einzelne Schichten einfach bearbeitet oder ausgetauscht werden, ohne die Gesamtfunktionalität zu gefährden. Außerdem kann ein System auch aus Komponenten verschiedener Hersteller zusammengesetzt werden, wodurch diese Architektur sehr gut als Basis für offene Systeme dient. In \ref{fig:osi} ist ebenfalls dargestellt, dass die Schichten eins bis vier gemeinsam auch als Übertragungsschichten beziehungsweise Transportsystem zusammengefasst werden, weil sie die Aufgabe der Datenübertragung zwischen Systemen übernehmen. Die Schichten fünf bis sieben werden als Anwendungsschichten bezeichnet, weil sie bei der Datenübertragung die Zusammenarbeit zwischen der Anwendersoftware und dem Betriebssystem sicherstellen \cite[S.~8f.]{schn06}.
 
-Die Schnittstellen zwischen den Schichten werden als\textit{ Service Access Points} (SAP) bezeichnet und besitzen jeweils eine eindeutige Adresse. Die obere Schicht ist der \textit{Service User}, der den Dienst der darunter liegenden Schicht nutzt, dem \textit{Service Provider}. Für den Datenaustausch stehen Dienste zur Verfügung, welche in verbindungsorientierte und verbindungslose unterschieden werden. Verbindungslose Dienste benötigen keine Verbindung zwischen den Kommunikationspartnern zur Datenübertragung. Verbindungsorientierte Dienste benötigen für den Datenaustausch zunächst einen virtuellen Kanal zwischen Kommunikationspartnern. Typische Dienste sind beispielsweise das Aufbauen und Abbauen von Verbindungen sowie der eigentliche Datenaustausch \cite[S.~11f.]{schn06}.
+Die Schnittstellen zwischen den Schichten werden als\textit{ Service Access Points} (SAP) bezeichnet und besitzen jeweils eine eindeutige Adresse. Die obere Schicht ist der \textit{Service User}, der den Dienst der darunter liegenden Schicht nutzt, die des \textit{Service Providers}. Für den Datenaustausch stehen Dienste zur Verfügung, welche in verbindungsorientierte und verbindungslose unterschieden werden. Verbindungslose Dienste benötigen keine Verbindung zwischen den Kommunikationspartnern zur Datenübertragung. Verbindungsorientierte Dienste benötigen für den Datenaustausch zunächst einen virtuellen Kanal zwischen Kommunikationspartnern. Typische Dienste sind beispielsweise das Aufbauen und Abbauen von Verbindungen sowie der eigentliche Datenaustausch \cite[S.~11f.]{schn06}.
 
 Bei der Abhandlung der Dienstaufgaben anhand der Client/Server-Architektur, stehen vier grundlegende Dienstvorgänge zur Verfügung, die zusammengefasst in \ref{fig:vorgang} abgebildet sind \cite[S.~2f.]{mod06tcp}:
 
 \begin{itemize}
 	\item Das Stellen einer Anforderung, ein Request,
 	\item das Senden einer Meldung, eine Indication,
-	\item das Senden eine Antwort, eine Response,
+	\item das Senden einer Antwort, eine Response,
 	\item und das Senden einer Bestätigung, eine Confirmation.
 \end{itemize}
 
@@ -269,10 +269,10 @@ Bei der Abhandlung der Dienstaufgaben anhand der Client/Server-Architektur, steh
 \end{figure}
 
 Die unterste physikalische Schicht definiert die mechanischen und elektrischen Schnittstellen zur physischen Verbindung von Systemen und zur Übertragung der einzelnen Bits \cite[S.~49f.]{osi96}. Sie legt also die mechanischen und elektrischen Eigenschaften der Übertragung fest, also die Endsystemkopplung durch Stecker, die Kabelspezifikationen und die Zuordnung der Anschlüsse. Außerdem wird die Art der Codierung und die Spannungspegel der Übertragung spezifiziert. In der Regel werden dazu bestehende Normen genutzt, wie zum Beispiel die zuvor beschriebene elektrische Übertragungsstrecke nach EIA 485-Norm \cite[S.~14f.]{schn06}.
-Ein wichtiger der Ebene ist es, dass die Spezifikation der Schnittstelle und nicht das physikalisches Medium selbst Teil der Schicht eins ist, da die Kommunikation unabhängig von der konkreten Ausprägung abläuft \cite[S.~9]{schn06}.
+Ein wichtiger Aspekt der Ebene ist es, dass die Spezifikation der Schnittstelle und nicht das physikalisches Medium selbst Teil der Schicht eins ist, da die Kommunikation unabhängig von der konkreten Ausprägung abläuft \cite[S.~9]{schn06}.
 
 Die zweite Schicht widmet sich der Kommunikation zwischen zwei Systemen. Deshalb stellt die Datenverbindungsschicht funktionale und prozedurale Hilfsmittel für den Aufbau und die Trennung einer Verbindung sowie den Transfer von Dateneinheiten zur Verfügung. Außerdem  wird der darüber liegenden Netzwerkschicht eine Kontrolle über die Verbindung von physikalischen Netzwerken ermöglicht \cite[S.~46f.]{osi96}.
-Eine weitere umfangreiche Aufgabe ist die Sicherung der Daten. Durch die Einteilung der Daten in Rahmen und und die Nutzung von Strategien zur Fehlererkennung und -vermeidung, soll die Sicherheit gewährleistet werden. Dies kann durch die zuvor beschriebenen Methodiken, wie beispielsweise dem CRC geschehen. Wichtig hierbei ist, dass die Schicht keinerlei Kenntnis über Inhalte der Daten hat \cite[S.~9ff.]{schn06}
+Eine weitere umfangreiche Aufgabe ist die Sicherung der Daten. Durch die Einteilung der Daten in Rahmen und die Nutzung von Strategien zur Fehlererkennung und -vermeidung, soll die Sicherheit gewährleistet werden. Dies kann durch die zuvor beschriebenen Methodiken, wie beispielsweise dem CRC geschehen. Wichtig hierbei ist, dass die Schicht keinerlei Kenntnis über Inhalte der Daten hat \cite[S.~9ff.]{schn06}
 
 Die dritte Schicht beschäftigt sich mit dem Netzwerk als Ganzes. Die Aufgaben der Netzwerkschicht hängen davon ab, ob der Datenaustausch  verbindungsorientiert oder verbindungslos stattfindet. Daher steuert sie den Aufbau, die Erhaltung und das Trennen von Verbindungen  sowie den eigentlichen Datenaustausch \cite[S.~41f.]{osi96}. Weiterhin ist sie für den Transport der Daten innerhalb des Netzwerks zuständig. Sie kontrolliert den Datenverkehr im Netzwerk und legt eventuell Routen für die einzelnen Kommunikationsvorgänge fest \cite[S.~11f.]{schn06}.
 
@@ -283,7 +283,7 @@ Die fünfte Schicht -- die Sitzungsschicht -- startet eine Sitzungsverbindung mi
 
 Die sechste Schicht ist nach \cite[S.~33f.]{osi96} mit der Darstellung der Daten betraut, die von beiden Kommunikationsanwendungen entweder verstanden oder referenziert werden. Dadurch wird eine gemeinsame Repräsentation der zu übertragenen Daten geschaffen. \cite[S.~13f.]{schn06} stellt fest, dass diese Dienste eine Syntaxfreiheit der Daten beim Nachrichtenaustausch schaffen und durch eine Kompression der Daten Zeit- und Kostenvorteile der Übertragung generiert werden.
 
-Die siebte und letzte Schicht stellt einem Benutzer lediglich eine Zugriffsmöglichkeit auf das OSI Kommunikationssystem zur Verfügung \cite[S.~32]{osi96}. Benutzer sind in der Regel Softwareanwendungen kein Mensch ist. \cite[S.~14]{schn06}
+Die siebte und letzte Schicht stellt einem Benutzer lediglich eine Zugriffsmöglichkeit auf das OSI Kommunikationssystem zur Verfügung \cite[S.~32]{osi96}. Benutzer sind in der Regel Softwareanwendungen \cite[S.~14]{schn06}.
 
 Im nachfolgenden Abschnitt werden die später angewandten Modbus Protokolle und deren Spezifikation beschrieben und in Bezug zum \acrshort{osi} gebracht, um den praktischen Nutzen davon zu verdeutlichen.
 
