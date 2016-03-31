@@ -273,13 +273,13 @@ Als veränderte Anordnung der Temperatursensoren wurden jeweils drei Sensoren an
 
 Um die Heizung mit den benötigten Sensoren auszustatten, bietet sich wie in Abschnitt \ref{sub:idee} erwähnt ein Wärmemengenzähler an. Die Temperaturmessung am Ein- und Auslass der Heizung gestaltet sich jedoch etwas aufwendiger als zuvor. Es werden Tauchhülsen im Vor- und Rücklauf des Heizkörpers benötigt, welche vom Heizwasser direkt umflossen werden. Aufgrund der Tauchhülsen werden geringfügige bauliche Änderungen nötig, beispielsweise können diese in einen Kugelhahn eingeschraubt werden. Sie sind jeweils mit einem Temperaturfühler bestückt und ermöglichen dadurch die Messung der Heizwassertemperatur. Der Einbau des Durchflusssensors erfordert ebenfalls bauliche Maßnahmen. Dazu wird entweder im Vor- oder Rücklauf, je nach Spezifikation Herstellers, ein Stück Rohrleitung entfernt und durch den Durchflusssensor ersetzt. Dieser kann beim Einbau entweder fest integriert oder durch eine Anschlussverschraubung, beziehungsweise einen Flanschanschluss, demontierbar eingebaut werden.
 
-In der Anlage kommt der Wärmemengenzähler \textsc{MULTICAL 602} von \textsc{Kamstrup} zum Einsatz, da er neben einem geforderten Modbus Kommunikationsmodul weitere besondere Eigenschaften mit sich bringt. Die Temperaturmessung erfolgt durch zwei PT500 Sensoren, wohingegen der Durchfluss von einem \textsc{ULTRAFLOW 54} Ultraschallsensor erfasst wird. Die gemessenen, wie auch die berechneten Werte der Heizungsleistung lassen sich einzeln durch das Rechenwerk auslesen.
-Der \textsc{MULTICAL 602} ist zum einen kostengünstig und umfasst alle benötigten Sensoren, die bereits präzise aufeinander abgestimmt sind. Zum anderen ist er wartungsfrei, da er den Durchfluss über kontaktlose Ultraschallmessungen bestimmt, indem er die Laufzeitdifferenz zwischen wechselseitig gesendeten und empfangenen Signalen zweier integrierter Ultraschallsensoren auswertet. Ein klarer Vorteil des Durchflusssensors \textsc{ULTRAFLOW 54} ist, dass er bereits mit einer Tauchhülse ausgestattet ist, sodass lediglich eine weitere Tauchhülse montiert werden muss.
+In der Anlage kommt der Wärmemengenzähler \textsc{Multical 602} von \textsc{Kamstrup} zum Einsatz, da er neben einem geforderten Modbus Kommunikationsmodul weitere besondere Eigenschaften mit sich bringt. Die Temperaturmessung erfolgt durch zwei PT500 Sensoren, wohingegen der Durchfluss von einem \textsc{Ultraflow 54} Ultraschallsensor erfasst wird. Die gemessenen, wie auch die berechneten Werte der Heizungsleistung lassen sich einzeln durch das Rechenwerk auslesen.
+Der \textsc{Multical 602} ist zum einen kostengünstig und umfasst alle benötigten Sensoren, die bereits präzise aufeinander abgestimmt sind. Zum anderen ist er wartungsfrei, da er den Durchfluss über kontaktlose Ultraschallmessungen bestimmt, indem er die Laufzeitdifferenz zwischen wechselseitig gesendeten und empfangenen Signalen zweier integrierter Ultraschallsensoren auswertet. Ein klarer Vorteil des Durchflusssensors \textsc{Ultraflow 54} ist, dass er bereits mit einer Tauchhülse ausgestattet ist, sodass lediglich eine weitere Tauchhülse montiert werden muss.
 
 
 Die Steuerung des Durchflusses im Heizkörper erfolgt über ein Heizungsventil, welches mithilfe eines Stellantriebs geöffnet und geschlossen wird. Dieser kann wiederum von einem Elektromotor angetrieben werden, der sich durch seine schnelle Reaktion, jedoch auch durch seine hohen Anschaffungskosten auszeichnet. Alternativ kann ein thermoelektrisches Element als Antrieb genutzt werden, welches sich durch seine geringen Anschaffungskosten auszeichnet, allerdings aber eine langsamere Reaktionszeit besitzt. Die Ansteuerung des Stellantriebs erfolgt üblicherweise unabhängig von der Ausführung durch ein digitales oder analoges Spannungs- oder Stromsignal.
 
-Um eine Steuerung durch den Controller zu ermöglichen wird ein Signalwandler eingesetzt, der Modbustelegramme in elektrische Signale umwandeln kann. Hierzu wird innerhalb der Anlage das \textit{EX9024-M} Modul von \textsc{ExpertDAQ} integriert, welches sich leicht in ein serielles RS485-Netzwerk einbinden lässt. Das Modul ist Modbus RTU-fähig und besitzt vier analoge Ausgänge, die verschiedene Spannungs- und Strombereiche ausgeben können. Da für den Stellantrieb lediglich ein Ausgang genutzt wird, besteht die Möglichkeit einer einfachen Erweiterung der Anlage um drei weitere analoge Komponenten, wie beispielsweise einen Schalter zur Bedienung der Jalousien.
+Um eine Steuerung durch den Controller zu ermöglichen wird ein Signalwandler eingesetzt, der Modbustelegramme in elektrische Signale umwandeln kann. Hierzu wird innerhalb der Anlage das \textsc{EX9024-M} Modul von \textsc{ExpertDAQ} integriert, welches sich leicht in ein serielles RS485-Netzwerk einbinden lässt. Das Modul ist Modbus RTU-fähig und besitzt vier analoge Ausgänge, die verschiedene Spannungs- und Strombereiche ausgeben können. Da für den Stellantrieb lediglich ein Ausgang genutzt wird, besteht die Möglichkeit einer einfachen Erweiterung der Anlage um drei weitere analoge Komponenten, wie beispielsweise einen Schalter zur Bedienung der Jalousien.
 
 Der thermoelektrische Stellantrieb \textit{ABNM-LIN} von \textit{Danfoss} wird zur stufenlosen Betätigung des Heizkörperventils eingesetzt. Seine Ansteuerung erfolgt über ein analoges 0-10~V Signal, welches innerhalb der Anlage vom EX9024-M bereitgestellt wird. Der Stellantrieb wandelt das angelegte Signal in einen proportionalen linearen Stellweg um, womit er den Durchfluss im Heizkörper steuert.
 
@@ -288,8 +288,16 @@ Das beschriebene Konzept zeichnet sich besonders dadurch aus, dass es eine koste
 
 \section{Installation und Inbetriebnahme}
 
-Eine Übersicht über den Aufbau der Anlage findet sich in Abbildung REFXXXXX. Die Installation lässt sich in die zwei Bereiche Hardware und Software untergliedern. Die Hardware Installation umfasst die  Montage der einzelnen Komponenten, deren Stromversorgung und die Verkabelung im Netzwerk.
+Eine Übersicht über den Aufbau und die Installation der Anlage findet sich in \ref{fig:anlagegesamt}. Die Installation lässt sich in die zwei Bereiche Hardware und Software untergliedern. Die Hardware Installation umfasst die  Montage der einzelnen Komponenten, deren Stromversorgung und die Verkabelung im Netzwerk.
 Der zweite Teil beschäftigt sich mit der Inbetriebnahme der Anlage durch eine softwareseitige Ansteuerung der Anlage.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{abbildungen/20160330_anlagegesamt}
+\caption{Schaltplan der Raumtemperaturregelungsanlage}
+\label{fig:anlagegesamt}
+\end{figure}
+
 
 
 \subsection{Hardware}
@@ -298,10 +306,10 @@ Der Aufbau des Netzwerks wurde bereits in \ref{fig:netzwerk} dargestellt. Als Et
 Um den Webthermographen in die Anlage einzubinden, wurde dasselbe Prozedere durchlaufen.
 
 Der Schaltplan des seriellen RS-485 Netzwerks wird in \ref{fig:schaltplan} dargestellt. Zur Verkabelung des Netzwerks wird eine Busleitung von \textsc{LappKabel} verwendet, welche aus zwei jeweils paarweise verdrillten Leitungspaaren
-besteht, die durch ein Kupfergeflecht gegen Störungen abgeschirmt sind. Das Datenblatt der Busleitung ist im Anhang unter XXXX zu finden.
-Die Verkabelung erfolgt gemäß der Spezifikationen im Modbus seriell Protokoll ZITAT, daher wird die D0 Leitung der braunen Ader, die D1 Leitung hingegen der gelben Ader und die GNC Common Leitung der weißgrauen Ader zugewiesen. Das grüne Kabel kann für eine gemeinsame Stromversorgung der Komponenten eingesetzt werden, was im Rahmen dieser Anlage aufgrund der vielen unterschiedlichen benötigten Spannungen nicht genutzt wurde. Folglich hat jede Komponente, wie im Schaltplan dargestellt, ein eigenes Netzteil und daher eine eigene Stromversorgung. 
+besteht, die durch ein Kupfergeflecht gegen Störungen abgeschirmt sind. Das Datenblatt der Busleitung ist im Anhang \ref{att:bus} zu finden.
+Die Verkabelung erfolgt gemäß der Spezifikationen im Modbus seriell Protokoll \cite{mod06ser}, daher wird die D0 Leitung der braunen Ader, die D1 Leitung hingegen der gelben Ader und die GNC Common Leitung der weißgrauen Ader zugewiesen. Das grüne Kabel kann für eine gemeinsame Stromversorgung der Komponenten eingesetzt werden, was im Rahmen dieser Anlage aufgrund der vielen unterschiedlichen benötigten Spannungen nicht genutzt wurde. Folglich hat jede Komponente, wie im Schaltplan dargestellt, ein eigenes Netzteil und daher eine eigene Stromversorgung. 
 
-Die Kabel wurden gemäß der Übersicht in REFFFFXXXX verlegt und mit den Bauteilen entsprechend dem Schaltplan in ref{fig:schaltplan} verbunden. Die kurzen Stichleitungen wurden über flexibel einsetzbare und zugleich wiederverwendbare Hebelklemmen an die lange Busleitung angeschlossen.
+Die Kabel wurden gemäß der Übersicht in \ref{fig:anlagegesamt} verlegt und mit den Bauteilen entsprechend dem Schaltplan in ref{fig:schaltplan} verbunden. Die kurzen Stichleitungen wurden über flexibel einsetzbare und zugleich wiederverwendbare Hebelklemmen an die lange Busleitung angeschlossen.
 
 
 \begin{figure}
