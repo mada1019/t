@@ -20,7 +20,7 @@
 Das Ziel der Arbeit war die Untersuchung, wie eine Anlage zur Raumtemperaturregelung und ein mathematisches Modell derselben aufgebaut sein kann, um eine \acrlong{mpr} der Raumtemperatur zu ermöglichen.
 Zur Beantwortung dieser Frage wurde im Verlauf der Arbeit eine konkrete Anlage installiert und ein Modell entwickelt.
 
-Zunächst wurden im dritten Kapitel die besonderen Anforderungen für eine Modellprädiktive Regelung analysiert und daraus eine erste Idee entwickelt. Die Idee bestand in der Automatisierung eines Raumes der Hochschule Karlsruhe, der als zukünftige Forschungsumgebung genutzt werden kann. Durch die Nutzung von einfachen Temperatursensoren und eines Stellantriebs zur Ansteuerung des bestehenden Heizkörpers, wurde die Idee in die Praxis umgesetzt. Die Kommunikation innerhalb der Anlage wurde durch eine klare Struktur möglichst einfach und übersichtlich gehalten. Durch den Einsatz von Interfaces wird weiterhin eine einfache Ansteuerung der Anlage erlaubt, auch ohne detaillierte Fachkenntnisse zur Anlage und den verwendeten Kommunikationstechnologien. Abschließend wurde eine Zweipunktregelung zur Inbetriebnahme der Anlage eingesetzt, anhand derer die Fähigkeit zur Regelung einer Raumtemperatur gezeigt wurde.
+Zunächst wurden im dritten Kapitel die besonderen Anforderungen für eine Modellprädiktive Regelung analysiert und daraus eine erste Idee entwickelt. Die Idee bestand in der Automatisierung eines Raumes der Hochschule Karlsruhe, der als zukünftige Forschungsumgebung genutzt werden kann. Durch die Nutzung von einfachen Temperatursensoren und eines Stellantriebs zur Ansteuerung des bestehenden Heizkörpers, wurde die Idee in die Praxis umgesetzt. Die Kommunikation innerhalb der Anlage wurde durch eine klare Struktur möglichst einfach und übersichtlich gehalten. Durch den Einsatz von Interfaces wird weiterhin eine einfache Ansteuerung der Anlage erlaubt, auch ohne detaillierte Fachkenntnisse zur Anlage und den verwendeten Kommunikationstechnologien. Abschließend wurde eine Zweipunktregelung zur Inbetriebnahme der Anlage eingesetzt, anhand derer die Fähigkeit zur Regelung einer Raumtemperatur aufgezeigt wurde.
 
 Damit konnte die Hypothese belegt werden, dass sich die spezifizierte Anlage zur Regelung einer Raumtemperataur eignet.
 
@@ -29,12 +29,17 @@ Der anschließende Teil beschäftigte sich mit der Bildung eines Raummodells. Da
 
 Dadurch konnte eine weitere Hypothese belegt werden, dass das Modell für die Modellprädiktive Regelung mithilfe der Plattform \textit{JModelica.org} geeignet ist.
 
-Aufgrund der vorgestellten Ergebnisse und durch die Bestätigung der beiden Thesen, kann die Beantwortung auf die Forschungsfrage erfolgen. 
+Anhand der vorgestellten Ergebnisse und durch die Bestätigung der beiden Thesen, kann die Forschungsfrage durch die installierte Anlage und das gebildete Modell beantwortet werden.
 
- und ein Modell
+Zunächst wurde die Grundvorraussetzung geschaffen, indem eine Anlage zur Regelung der Raumtemperatur installiert und deren Fähigkeit zur Regelung bestätigt wurde. Diese wurde zusätzlich mit einer zentralen Bedienoberfläche in Python ausgestattet, die durch einen simplen Aufbau und eine klare Struktur eine einfache Möglichkeit der Ansteuerung bietet. Dadurch eignet sich die Anlage in besonderem Maße für eine Modellprädiktive Regelung mit \textit{JModelica.org} und kann daher auch für eine Modellprädiktive Temperaturregelung genutzt werden. 
+Weiterhin wurde durch verschiedene Simulationen und Schätzungen gezeigt, dass das Modell eine hinreichende Beschreibung des realen Systemverhaltens liefert. Gleichzeitig wurde die Komplexität des Modells bei der Entwicklung möglichst gering gehalten, sodass eine moderate Rechenkapazität zur Simulation des Modells ausreicht. Abschließend konnte das Modell fehlerfrei in zwei optimierungsfähige Objekte der Plattform \textit{JModelica.org} übersetzt werden. Damit wurde die Kompatibilität des Modells für einen Einsatz mit der Modellprädiktiven Regelung gezeigt.
+
+Eine Anlage und ein Modell für die Modellprädiktive Temperaturregelung kann also durch die in dieser Arbeit beschriebenen ANlange und Modell aufgebaut sein.
 
 \section{Ausblick und Ansatzpunkte für weitere Arbeiten}
 \label{sec:ausblick}
+
+Nachdem die Fähigkeit der beiden Teile der Arbeit gezeigt wurde, bietet aich der größte Anknüpfpunkt für ein weitere Arbeit zur tatsächlichen Implementierung einer Modellprädiktiven Regelung der beiden teile an. Dabei gilt es zunächst zu klären, ob eine eigene Klasse für MPC geschrieben wird oder die besteehnde generische von JMODelivca.oirg genutzt wird. Außerdem ist zu klären, wie lange der rollierende Intervall.
 
 Dazu werden im ersten Schritt werden auf Basis von aktuellen Messungen des Systemzustandes und der vorgegebenen Steuergrößen zu jedem diskreten Steuerungszeitpunkt optimale Steuerungspläne bestimmt werden..
 Im nächsten Schritt soll die Modellprädiktive Regelung Vorhersagewerte für den äußeren, nicht beeinflussbaren Steuergrößen zur die Bestimmung der optimalen Steuersignale nutzen.

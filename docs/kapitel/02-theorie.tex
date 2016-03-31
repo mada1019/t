@@ -148,7 +148,7 @@ Auf eine Beschreibung der übrigen Verfahren wird aufgrund der fehlenden Relevan
 
 \subsubsection{Datensicherung}
 
-Bei der Übertragung von Informationen besteht die Gefahr von Störungen, welche sich als Fehler in einem Telegramm durch eine Invertierung einzelner Bits äußern. Störquellen sind in der Regel technischer Art, wie zum Beispiel durch elektromagnetische Störsignale, Rauschen oder Potentialdifferenzen. Gegen einen Großteil von Störfaktoren lassen sich daher Vorkehrungen treffen. Damit ergibt sich die Möglichkeit Störungen vorzubeugen oder nach Auftreten zu beseitigen. Der erste Ansatz dient einer Verminderung des Auftretens durch technische Vorkehrungen, wie beispielsweise eine Abschirmung der Kabel oder die galvanische Trennung von Netzwerken. Der zweite Ansatz beschäftigt sich mit der Überwachung des Telegrammverkehrs und den Gegenmaßnahmen beim Auftreten von Fehlern \cite[S.~30]{schn06}.
+Bei der Übertragung von Informationen besteht die Gefahr von Störungen, welche sich als Fehler in einem Telegramm durch eine Invertierung einzelner Bits äußern. Störquellen sind in der Regel technischer Art, wie zum Beispiel durch elektromagnetische Störsignale, Rauschen oder Potenzialdifferenzen. Gegen einen Großteil von Störfaktoren lassen sich daher Vorkehrungen treffen. Damit ergibt sich die Möglichkeit Störungen vorzubeugen oder nach Auftreten zu beseitigen. Der erste Ansatz dient einer Verminderung des Auftretens durch technische Vorkehrungen, wie beispielsweise eine Abschirmung der Kabel oder die galvanische Trennung von Netzwerken. Der zweite Ansatz beschäftigt sich mit der Überwachung des Telegrammverkehrs und den Gegenmaßnahmen beim Auftreten von Fehlern \cite[S.~30]{schn06}.
 
 Wie zuvor erwähnt, bestehen Telegramme auf unterster Ebene aus Bitfolgen. Dabei ist jegliche Kombination von Bits erlaubt, wodurch allein aus der Folge der Bits nicht auf einen Fehler geschlossen werden kann.
 Bei der Übermittlung von Telegrammen können drei Arten von Fehlern auftreten:
@@ -211,7 +211,7 @@ Bei der Pegelfestlegung werden für Empfänger und Sender verschiedene Vorgaben 
 \label{fig:rs485}
 \end{figure}
 
-Die Datenübertragung erfolgt über die \textit{TxD/RxD+} und \textit{TxD/RxD-} Leitung, ein gemeinsames Bezugspotential über die GND Leitung wird nicht zwingend benötigt. Allerdings wird zusätzlich ein Leitungsabschluss an beiden Enden des Buskabels benötigt.  \cite[S.~19f.]{sch08}.
+Die Datenübertragung erfolgt über die \textit{TxD/RxD+} und \textit{TxD/RxD-} Leitung, ein gemeinsames Bezugspotenzial über die GND Leitung wird nicht zwingend benötigt. Allerdings wird zusätzlich ein Leitungsabschluss an beiden Enden des Buskabels benötigt.  \cite[S.~19f.]{sch08}.
 
 Um ein Netzwerk zu erweitern, können verschiedene Arten von Bauteile eingesetzt werden. Sogenannte \textit{Repeater} sind aktive Bauteile, die eine kurze Zeitverzögerung verursachen und Netzwerke derselben Schnittstelle miteinander verbinden. Es werden lediglich die einzelnen Leitungen miteinander verbunden und das Datensignal verstärkt, indem die empfangenen Bits blind kopiert und auf das angeschlossene Netzwerksegment übertragen werden. Daher ist er für die Kommunikationsteilnehmer unsichtbar \cite[S.~79f.]{schn06}.
 
