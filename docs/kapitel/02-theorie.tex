@@ -405,36 +405,34 @@ Der Leitfaden zur Implementierung des Modbus TCP Protokolls weist außerdem dara
 
 \section{Technische Grundlagen zur Modellbildung}
 \label{sec:grundlagenmodell}
-In diesem Kapitel werden die technischen Grundlagen zur Bildung eines mathematischen Modells des Raumes erläutert.
-Themrodym systeme
-1. HS thermo
-Wärmeübertragung
+In diesem Abschnitt werden die technischen Grundlagen zur Bildung eines mathematischen Modells eines Raumes in Kapitel \ref{chap:modellbildung} erläutert.
 
 \subsection{Thermodynamische Systeme}
-Im Raummodell müssen Energieströme, genauer betrachtet Wärmeströme, untersucht werden. Um dieses thermodynamischen Vorgänge mithilfe von Bilanzierungsgleichungen zu beschreiben, folgt zunächst ein kurze Einführung in die Thermodynamische Systembildung nach \cite[S.~11ff.]{ba12}.
 
-\textit{Thermodynamische Systeme} werden durch den zu untersuchenden Raum abgegrenzt. Sie dienen dem Zweck der Bilanzierung von Massen- und Energieströmen und alles was diesen abgegrenzten Raum an den Systemgrenzen umgibt wird als Umgebung bezeichnet. Die begrenzenden Flächen können gedanklicher, physischer oder beider Natur zugleich sein, wichtig ist jedoch das die Systemgrenzen eindeutig festgelegt sind \cite[S.~11]{ba12}.
+Für das Raummodell müssen Energieströme -- genauer betrachtet Wärmeströme -- untersucht werden. Um diese thermodynamischen Vorgänge mithilfe von Bilanzierungsgleichungen zu beschreiben, folgt zunächst ein kurze Einführung in die Thermodynamische Systembildung nach \cite[S.~11ff.]{ba12}.
+
+\textit{Thermodynamische Systeme} werden durch den zu untersuchenden Raum abgegrenzt, der an den Grenzen von der Umgebung umgeben ist. Sie dienen dem Zweck der Bilanzierung von Massen- und Energieströmen. Die begrenzenden Flächen können gedanklicher, physischer oder beider Art zugleich sein, wichtig ist das die Systemgrenzen eindeutig festgelegt sind \cite[S.~11]{ba12}.
 
 Anhand der Eigenschaften von den Systemgrenzen lassen sich die thermodynamischen Systeme weiter differenzieren.
-Solche Systeme, deren Grenzen undurchlässig für Materie sind, werden als \textit{geschlossene Systeme} bezeichnet und werden durch eine konstante Stoffmenge innerhalb des Systems gekennzeichnet. Die Grenzen eines geschlossenen Systems sind meistens räumlich anhand eines fixen Volumens definiert, können aber auch beweglich sein, wie z.B. das Volumen einer vorgegebenen Stoffmenge unabhängig von dessen räumlicher Ausdehnung \cite[S.~12]{ba12}.
+Solche Systeme, deren Grenzen undurchlässig für Materie sind, werden als \textit{geschlossene Systeme} bezeichnet und werden durch eine konstante Stoffmenge innerhalb des Systems gekennzeichnet. Die Grenzen eines geschlossenen Systems sind meistens räumlich anhand eines fixen Volumens definiert, können aber auch beweglich sein, wie beispielsweise das Volumen einer vorgegebenen Stoffmenge unabhängig von dessen räumlicher Ausdehnung \cite[S.~12]{ba12}.
 
 Sind die Grenzen von thermodynamischen Systemen für Materie durchlässig, werden diese als \textit{offene Systeme} bezeichnet. In der Regel werden diese von Stoffströmen durchflossen und durch räumlich festgelegte Grenzen beschrieben. Diese werden in der Literatur auch als \textit{Kontrollraum} oder \textit{Kontrollvolumen} bezeichnet \cite[S.~12]{ba12}.
 
-Ein \textit{abgeschlossenes System} umfasst in der Regel mehrere Systeme oder ein einzelnes System und dessen Umgebung, so dass es zwischen den Grenzen des abgeschlossenen Systems und seiner Umgebung keine Wechselwirkungen gibt. Die Systemgrenzen werden also so gelegt, dass über sie hinweg keine \acrlong{bzw} keine relevanten\footnote{\textit{Relevant} im Sinne von kaum messbarer Fluss und nicht messbare Auswirkung auf das System.} Flüsse von Materie und Energie \cite[S.~13]{ba12}.
+Ein \textit{abgeschlossenes System} umfasst in der Regel mehrere Systeme oder ein einzelnes System und dessen Umgebung, so dass es zwischen den Grenzen des abgeschlossenen Systems und seiner Umgebung keine Wechselwirkungen gibt. Die Systemgrenzen werden so gelegt, dass über sie hinweg keine \acrlong{bzw} keine relevanten\footnote{\textit{Relevant} im Sinne von kaum messbarer Fluss und nicht messbare Auswirkung auf das System.} Flüsse von Materie und Energie stattfinden \cite[S.~13]{ba12}.
 
-Nach der Abgrenzung folgt die \textit{Beschreibung} von thermodynamischen Systemen und dessen \textit{Eigenschaften}. Diese erfolgt durch \textit{Variablen} und \textit{physikalische Größen} die ein System kennzeichnen. Falls die Variablen feste Werte annehmen werden diese als \textit{Zustandsgrößen} bezeichnet, da sie den \textit{Zustand} eines Systems bestimmen \cite[S.~13]{ba12}. Im Rahmen der Modellbildung in Kapitel \ref{chap:modellbildung} ist es ausreichend die Vorgänge und Effekte auf systemischer Ebene zu betrachten, wodurch sich Modelle mit wenigen Variablen und physikalischen Größen beschreiben lassen.
+Nach der Abgrenzung folgt die Beschreibung von thermodynamischen Systemen und dessen \textit{Eigenschaften}. Diese erfolgt durch \textit{Variablen} und \textit{physikalische Größen} die ein System kennzeichnen. Die Variablen, welche den \textit{Zustand} eines Systems bestimmen, werden diese als \textit{Zustandsgrößen} bezeichnet \cite[S.~13]{ba12}. Im Rahmen der Modellbildung in Kapitel \ref{chap:modellbildung} ist es ausreichend die Vorgänge und Effekte auf systemischer Ebene zu betrachten, wodurch sich Modelle mit wenigen Variablen und physikalischen Größen beschreiben lassen.
 
 Die Variablen lassen sich in \textit{äußere Größen}, welche den mechanischen Zustand eines Systems beschreiben\footnote{Zum Beispiel die Koordinaten im Raum oder die relative Geschwindigkeit zum Beobachter)}, und \textit{innere Größen} gliedern, welche den thermodynamischen Zustand, also die Eigenschaften der Materie innerhalb der Systemgrenzen, beschreiben\cite[S.13~f.]{ba12}.
 
-Innerhalb der Grenzen eines thermodynamischen Systems, und damit implizit auch für das Raummodell\footnote{Diese Annahme wird im Kapitel \ref{chap:schlussteil} noch überprüft und kritisch hinterfragt werden müssen} wird \textit{Homogenität} angenommen. Dies bedeutet, dass die physikalischen Eigenschaften, wie \acrlong{zb} Temperatur und Druck, sowie die chemische Zusammensetzung an jeder Stelle innerhalb des Systems homogen ist, also die gleiche Ausprägung besitzt \cite[S.15]{ba12}.
+Innerhalb der Grenzen eines thermodynamischen Systems, und damit implizit auch für das Raummodell wird \textit{Homogenität} angenommen. Dies bedeutet, dass die physikalischen Eigenschaften, wie \acrlong{zb} Temperatur und Druck, sowie die chemische Zusammensetzung an jeder Stelle innerhalb des Systems die gleiche Ausprägung besitzt \cite[S.15]{ba12}.
 
-Da wir im Rahmen der Modellbildung Zustände betrachten müssen auch deren Änderungen genauer untersucht werden. Die \textit{Zustandsänderungen} eines Systems werden durch Änderungen von Energie oder Materie über dessen Grenzen hinweg bedingt und finden meist im Austausch der Umgebung statt. Während einer solchen Änderung des Systemzustands wird ein Prozess durchlaufen, der eine zeitliche Abfolge von Ereignissen ist. Eine Änderung des Zustands eines Systems mit der gleichen Wirkung kann also durch verschiedene Prozesse bewirkt werden. Daher beschreibt ein \textit{Prozess} nicht nur die Veränderung des Zustands sondern viel mehr die Beziehungen zwischen einem System und seiner Umgebung \cite[S.21~f.]{ba12}.
+Da wir im Rahmen der Modellbildung Zustände betrachten, müssen auch deren Änderungen genauer untersucht werden. Die \textit{Zustandsänderungen} eines Systems werden durch Änderungen von Energie oder Materie über dessen Grenzen hinweg bedingt und finden meist im Austausch der Umgebung statt. Während einer solchen Änderung des Systemzustands wird ein Prozess durchlaufen, der eine zeitliche Abfolge von Ereignissen ist. Eine Änderung des Zustandes eines Systems mit einer gleichen Wirkung, kann also durch verschiedene Prozesse bewirkt werden. Daher beschreibt ein \textit{Prozess} nicht nur die Veränderung des Zustands, sondern viel mehr die Beziehungen zwischen einem System und seiner Umgebung \cite[S.21~f.]{ba12}.
 
-Ein Prozess kann aber auch innerhalb eines Systems stattfinden, dass heißt ohne äußere Einwirkungen. Dies geschieht zum durch das Aufheben innerer Hemmungen oder dem Wegfall Zwängen von Außen. Diese Prozesse laufen in abgeschlossenen Systemen meist von selbst ab und streben als Ziel einen ausgeglichenen, also homogenen, Endzustand an. \textit{Ausgleichsprozesse} dienen somit dazu, einen \textit{Gleichgewichtszustand} zu erreichen und repräsentieren Wechselwirkungen zwischen verschiedenen Teilen eines abgeschlossenen Systems. Dabei gleichen sich die Zustandsgrößen von einzelnen Subsystemen wie zum Beispiel der Druck oder die Temperatur einander an. Der Gleichgewichtszustand wird also durch die Zustände in den einzelnen Subsystemen bestimmt und ist dadurch charakterisiert, dass ein System diesen Zustand nicht von sich aus sondern nur durch äußere Eingriffe verlässt, zum Beispiel durch eine Veränderungen in der Umgebung. Die Erfahrung lehrt, dass ein System einem Gleichgewichtszustand entgegen strebt, wenn es sich selbst überlassen wird \cite[S.22~f.]{ba12}.
-Im Rahmen der Modellbildung in Kapitel \ref{chap:modellbildung} nehmen diese \textit{Ausgleichsprozesse} eine zentrale Rolle ein, weil der Großteil an Änderungen von einzelnen Zustandsgrößen innerhalb des Raumes darauf zurückgeführt werden können. 
+Ein Prozess kann aber auch innerhalb eines Systems stattfinden, dass heißt ohne äußere Einwirkungen. Dies geschieht zum Beispiel durch das Aufheben innerer Hemmungen oder dem Wegfall von äußeren Zwängen. Diese Prozesse laufen in abgeschlossenen Systemen meist von selbst ab und streben einen ausgeglichenen, also homogenen, Endzustand an. \textit{Ausgleichsprozesse} dienen dazu, einen \textit{Gleichgewichtszustand} zu erreichen und repräsentieren Wechselwirkungen zwischen verschiedenen Teilen eines abgeschlossenen Systems. Dabei gleichen sich die Zustandsgrößen von einzelnen Subsystemen wie zum Beispiel der Druck oder die Temperatur einander an. Der Gleichgewichtszustand wird also durch die Zustände in den einzelnen Subsystemen bestimmt und ist dadurch charakterisiert, dass ein System diesen Zustand nicht von sich aus, sondern nur durch äußere Eingriffe verlässt, beispielsweise durch eine Veränderungen in der Umgebung. Die Erfahrung lehrt, dass ein System einem Gleichgewichtszustand entgegen strebt, wenn es sich selbst überlassen wird \cite[S.22~f.]{ba12}.
 
 \subsection{Erster Hauptsatz der Thermodynamik}
-Der erste Hauptsatz der Thermodynamik wird im Folgenden als allgemeiner Energieerhaltungssatz formuliert und anschließend angewendet um eine Energiebilanzgleichung für geschlossene thermodynamische Systeme zu erhalten.
+
+Der erste Hauptsatz der Thermodynamik wird zunöchst als allgemeiner Energieerhaltungssatz formuliert und anschließend angewandt, um eine Energiebilanzgleichung für geschlossene thermodynamische Systeme zu erhalten.
 
 Der erste Hauptsatz der Thermodynamik erweitert den mechanischen Energieerhaltungssatz um die Energieformen Wärme und innere Energie. Er handelt ganz allgemein vom Prinzip der Energieerhaltung und  dient er der Bilanzierung von Systemen \cite[S.~43]{ba12}.
 
@@ -445,7 +443,7 @@ Die Gesamtenergie eines Systems \gls{e} setzt sich zusammen aus der potenziellen
 E := E_{pot} + E_{kin} + U
 \end{equation}
 
-Im weiteren Verlauf der Arbeit werden nur ortsfeste Systeme betrachtet die sich dadurch auszeichnen, dass deren potenzielle Energie  \gls{epot} in etwa konstant ist. Weiterhin erfahren sie im betrachteten Intertialsystem Erde auch nur sehr kleine Änderungen in ihrer Geschwindigkeit, weshalb auch die kinetische Energie \gls{ekin} in etwa konstant ist.  Da die Änderungen der mechanischen Energien in Bezug auf die Änderung der inneren Energie sehr klein sind werden im Folgenden nicht weiter betrachtet und die Gesamtenergie eines Systems \gls{e} vereinfacht und lediglich aus der inneren Energie bestehend angenommen.
+Im weiteren Verlauf der Arbeit werden nur ortsfeste Systeme betrachtet, die sich dadurch auszeichnen, dass deren potenzielle Energie  \gls{epot} in etwa konstant ist. Weiterhin erfahren sie im betrachteten Intertialsystem Erde auch nur sehr kleine Änderungen in ihrer Geschwindigkeit, weshalb auch die kinetische Energie \gls{ekin} in etwa konstant ist.  Da die Änderungen der mechanischen Energien in Bezug auf die Änderung der inneren Energie sehr klein sind, werden im Folgenden nicht weiter betrachtet und die Gesamtenergie eines Systems \gls{e} wird vereinfacht und lediglich aus der inneren Energie bestehend angenommen.
 
 Die innere Energie hängt von der spezifischen Wärmekapazität \gls{cp}, der Masse eines Systems \gls{msys} und der Temperatur \gls{t} \acrlong{bzw} \gls{T} ab \cite[S.~54]{ba12}:
 
@@ -454,7 +452,7 @@ Die innere Energie hängt von der spezifischen Wärmekapazität \gls{cp}, der Ma
 U := m*c_p*T=m*c_p*t+u_0,~mit~t=T-T_0
 \end{equation}
 
-Nach dem Prinzip der Energieerhaltung, kann die Energie eines Systems also weder erzeugt noch vernichtet werden sondern lediglich durch den Energietransport über dessen Grenzen hinweg verändert werden. Daraus ergeben sich folgende qualitative Formen des Energietransports \cite[S.~48f.]{ba12}:
+Nach dem Prinzip der Energieerhaltung, kann die Energie eines Systems weder erzeugt noch vernichtet, sondern lediglich durch den Energietransport über dessen Grenzen hinweg verändert werden. Daraus ergeben sich folgende qualitative Formen des Energietransports \cite[S.~48f.]{ba12}:
 
 \begin{itemize}
 	\item Die Arbeit \gls{w}, die entweder von oder an einem System verrichtet wird, in differentieller Form die Leistung \gls{p}.
@@ -473,22 +471,21 @@ Mit der zuvor getroffenen Annahme, dass die innere Energie der des Systems entsp
 \end{equation}
 
 
-%Noch einmal überarbeiten
-
 \subsection{Wärmeübertragung}
 
-Wärmeströme spielen bei der Modellbildung in Kapitel \ref{chap:modellbildung} eine wichtige Rolle, daher ist eine genauere Betrachtung dieser unumgänglich und im Folgenden werden die Grundlagen dazu erläutert.
+Wie zuvor erwähnt haben Wärmeströme eine zentrale Bedeutung bei der Modellbildung, weshalb ein genauere Betrachtung folgt.
 
-Die Definition von Wärmeübertragung ist nach \cite[S.~1]{bo14} \Gun [...] der Transfer der Energieform Wärme aufgrund einer Temperaturdifferenz. \Gun Die Definition umfasst also einen zuvor beschriebenen Ausgleichsprozess und eine Änderung der inneren Energie eines thermodynamischen Systems.
+Die Definition von Wärmeübertragung ist nach \cite[S.~1]{bo14} \Gun [...] der Transfer der Energieform Wärme aufgrund einer Temperaturdifferenz. \Gun .
 Die Wärmeübertragung kann nach \textit{Nußelt}\footnote{Beschrieben in seinem Aufsatz \Gun Das Grundgesetz des Wärmeüberganges\Gob , 1915.} grundsätzlich durch zwei verschiedene Arten stattfinden \cite[S.~3f.]{bo14}:
 
 \begin{itemize}
-	\item Durch Strahlung, bei der die Übertragung von Wärme ohne stofflichen Träger durch elektromagnetische Wellen zwischen Oberflächen erfolgt. Weil diese Art der Wärmeübertragung keine Relevanz für die weiteren Betrachtungen hat wird er interessierte Leser an dieser auf \cite{bo14} verwiesen der diese Thematik detailliert ausführt. 
-	\item  Durch Wärmeleitung, die sich wiederum in die Wärmeübertragung zwischen ruhenden Stoffen, und die Konvektion, die eine Wärmeübertragung zwischen einem ruhenden und einem strömenden Fluid beschreibt, aufteilen lässt. 
+	\item Wärmeübertragung durch Strahlung, bei der die Übertragung von Wärme ohne stofflichen Träger, lediglich durch elektromagnetische Wellen zwischen Oberflächen erfolgt. Weil diese Art der Wärmeübertragung keine Relevanz für die weiteren Betrachtungen hat wird er interessierte Leser für eine fundierte Einführung an \cite{bo14} verwiesen. 
+	\item  Wärmeübertragung durch Wärmeleitung, die sich wiederum in die Wärmeübertragung zwischen ruhenden Stoffen, und die Konvektion, die eine Wärmeübertragung zwischen einem ruhenden und einem strömenden Fluid beschreibt, aufteilen lässt. 
 \end{itemize}
 
-Die übertragene Wärmemenge ist bei der reinen Wärmeleitung lediglich von den Stoffeigenschaften und der Temperaturdifferenz abhängig, bei der Konvektion hingegen, unabhängig davon ob erzwungen oder frei, hängt sie von der Strömung der Fluide ab. Die Konvektion ist ein Effekt zusätzlich zur reinen Wärmeleitung auftritt und ist im weiteren Verlauf der Arbeit nicht relevant und wird deshalb nicht detaillierter ausgeführt \cite[S.~3f.]{bo14}.
-Erfolgt der Wärmetransport stationär, dass heißt er ist von äußeren Anregungen bedingt und unabhängig von der Zeit, lässt er sich qualitativ einfach als konstanter Wärmestrom \gls{qdot} beschreiben und gibt an wie viel Wärme pro Sekunde übertragen wird \cite[S.~5ff.]{bo14}. Der Wärmestrom ist wie zuvor bereits erwähnt von den Stoffeigenschaften abhängig, welche von der Wärmedurchgangszahl \gls{uwert}\footnote{Der U-Wert wurde bis zu der Umstellung auf die europäischen Prüfnormen 2003 als k-Wert bezeichnet und ist unter dieser Bezeichnung noch häufig in der Literatur zu finden \cite[S.1~f.]{sa04}} und der Austauschoberfläche \gls{A}, an der der Wärmeaustausch stattfindet. Typische U-Werte für verschiedene Materialien und Komponenten finden in der einschlägigen Literatur und beziehen sich bei der Übertragung durch eine Wand im europäischen Raum auf die Außenfläche \cite[S.~28]{bo14}. Damit lässt sich der Wärmestrom unter Berücksichtigung der Abhängigkeiten durch die kinetische Kopplungsgleichung quantifizieren \cite[S.~6f.]{bo14}:
+Die übertragene Wärmemenge ist bei der reinen Wärmeleitung lediglich von den Stoffeigenschaften und der Temperaturdifferenz abhängig, bei der Konvektion hingegen hängt sie von der Strömung der Fluide ab, unabhängig davon ob erzwungene oder freie Konvektion. Die Konvektion ist ein Effekt, der zusätzlich zur reinen Wärmeleitung auftritt ebenfalls nicht relevant für den weiteren Verlauf ist und detaillreich von \cite{bo14} beschrieben wird.
+Erfolgt der Wärmetransport stationär, dass heißt von äußeren Anregungen bedingt und unabhängig von der Zeit, lässt er sich qualitativ einfach als konstanter Wärmestrom \gls{qdot} beschreiben. Er gibt, an wie viel Wärme pro Sekunde übertragen werden \cite[S.~5ff.]{bo14}. 
+Der Wärmestrom ist wie zuvor bereits erwähnt von den Stoffeigenschaften abhängig, welche von der Wärmedurchgangszahl \gls{uwert}\footnote{Der U-Wert wurde bis zu der Umstellung auf die europäischen Prüfnormen 2003 als k-Wert bezeichnet und ist unter dieser Bezeichnung noch häufig in der Literatur zu finden \cite[S.1~f.]{sa04}} und der Austauschoberfläche \gls{A}, an welcher der Wärmeaustausch stattfindet. Typische U-Werte für verschiedene Materialien und Komponenten finden in der einschlägigen Literatur und beziehen sich bei der Übertragung durch eine Wand im europäischen Raum auf die Außenfläche \cite[S.~28]{bo14}. Damit lässt sich der Wärmestrom unter Berücksichtigung der Abhängigkeiten durch die kinetische Kopplungsgleichung quantifizieren \cite[S.~6f.]{bo14}:
 
 \begin{equation}
 \label{eq:qdot}
@@ -496,61 +493,3 @@ Erfolgt der Wärmetransport stationär, dass heißt er ist von äußeren Anregun
 \end{equation}
 
 Unterschiedliche geometrische Ausprägungen, wie zum Beispiel ein Wärmeaustausch durch eine Wand oder ein Rohr hindurch, finden damit implizit bei der Austauschoberfläche Berücksichtigung.
-
-
-
-\section{Technische Grundlagen zur Solar- und Gebäudetechnik}
-
-\subsection{Außenklima und Komponenten}
-
-Der Begriff Außenklima wird häufig im Zusammenhang mit dem Thema Umwelt und deren Einflüsse auf Gebäude gebraucht.  Der allgemeine Begriff des Klimas wird von \cite[S.~295]{ha13} definiert als:
-\begin{quote}
-\Gun die Summe aller Umweltfaktoren, die unmittelbar oder mittelbar Einfluss nehmen auf die Gesundheit und das Befinden von Menschen und Tieren, auf die Entwicklung von Pflanzen sowie auf den Zustand von Lagergütern, Produktionsverfahren, Maschinen, Apparaten und Bauwerken.\Gob
-\end{quote}
-
-Daraus lässt sich ableiten, dass das Außenklima ein Aspekt des Klimas ist und den meteorologischen Umweltzustand außerhalb von Gebäuden, an einem bestimmten, lokalen Ort meint. Abhängig vom Außenklima stellt sich innerhalb von Gebäuden ein Innenklima ein, welches direkten Einfluss auf das Wohlbefinden von Menschen hat und wodurch der mittelbare Einfluss des Außenklimas gegeben ist. Um den Zustand zu beschreiben werden viele Zustandsgrößen herangezogen. Um einen Überblick zu bekommen, lassen sich diese in verschiedene Bereiche gliedern \cite[S.~295f.]{ha13} :
-Schall
-Licht
-Temperatur
-und Feuchte
- 
-Im Hinblick auf die Modellbildung in Kapitel \ref{chap:modellbildung} sind lediglich die Größen zur Beschreibung der Temperatur und des Lichts von Interesse, eine detaillierte Ausführung in die Bereiche Schall und Feuchte und deren Zustandsgrößen ist in \cite{ha13} gegeben.
-
-Je nach Größe des Gebietes wird von einem Regional- bwziehungsweise Makroklima, das große Gebiete umfasst, oder von einem Lokal- beziehungsweise Mikroklima gesprochen, dass kleine Gebiete wie eine Straße oder einen Park umfasst und von deren Besonderheiten abhängig ist. So kann z.B. die Außentemperatur je nach Verschattungsgrad einer Straße lokal erhöht oder erniedrigt sein.
-Das Klima folgt in verschiedenen Regionen der Erde bestimmten Charakteristiken, welche sich in Klimazonen zusammenfassen lassen. Die Erde besteht aus vierzehn verschiedenen Klimazonen und in Europa wird von einem Übergangsklima gesprochen \cite[S.~296f.]{ha13}. 
-
-Eine Übersicht der Außenklimakomponenten, die einen Einfluss auf die Gebäudetechnik und damit auch auf die Raumtemperatur haben ist in \ref{fig:aussenklima} gegeben. Für die Modellbildung ist weiterhin eine Quantifizierung der relevanten Größen des Außenklimas in den Bereichen Licht und Temperatur erforderlich. Wie bereits im vorherigen Abschnitt erwähnt, werden Wärmeströme durch Temperaturdifferenzen bedingt, weshalb die Außenlufttemperatur $Hier Symbol$ einen großen Einfluss auf die Raumtemperatur hat und durch Messung quantifiziert werden muss. Des Weiteren werden die lichttechnischen Größen der kurzwelligen direkten und diffusen Strahlung durch die beiden Strahlungsintensitäten $G_{dif}$ und $G_{dir}$ beschrieben, da sie Energie durch einen Wärmestrom in ein System einbringen und damit auch einen Einfluss ausüben.
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{abbildungen/20160322_aussenklima}
-\caption[Komponenten des Außenklimas]{Komponenten des Außenklimas aus \cite[S.~298]{ha13}}
-\label{fig:aussenklima}
-\end{figure}
-
-\subsubsection{Die Außenlufttemperatur}
-Eine Übersicht über die Außenlufttemperatur  
-
-
-\subsubsection{Sonnenstrahlung}
-\label{sub:sonne}
-
-Gemessen wird immer Globalstarhlung.
-
-\cite{therakles13}
-\cite[S.~63ff.]{qu11}
-\cite[S.~61ff.]{ka13}
-\cite[S.~315ff.]{ha13} Bild
-
-Algorithmus nach \cite{re08}
-
-Nutzung Berechnung/Implementierung von \cite{pysolar}
-
-\subsection{Gebäudetechnik Glas und Wärmedurchgangskoeffizienten}
-Auf gehts
-
-Glas nach \cite[S.~61ff.]{ha13}
-Durchlassgrad nach \cite[S.~604ff.]{ha13}
-Transmissionsgrad 
-
-
