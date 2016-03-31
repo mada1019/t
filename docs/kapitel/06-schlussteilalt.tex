@@ -1,0 +1,48 @@
+%
+% Schlussbetrachtung
+%
+% @version 1.0
+% @author wipatrick
+% @created 22. November 2015
+% @edited 
+
+\setchapterpreamble[o]{%
+\dictum[--- \textsc{René Descartes}, \emph{französischer Philosoph, Mathematiker und Naturwissenschaftler}]{\Gun Alles Wissen besteht in einer sicheren und klaren Erkenntnis. \Gob}}
+\renewcommand{\chapterheadstartvskip}{\vspace*{3cm}}
+
+\chapter{Schlussbetrachtung}
+\label{chap:schlussteil}
+\renewcommand{\chapterheadstartvskip}{\vspace*{-0.5cm}}
+
+\section{Fazit}
+\label{sec:zusammenfassung}
+
+Das Ziel der Arbeit war die Untersuchung, wie eine Anlage zur Raumtemperaturregelung und ein mathematisches Modell derselben aufgebaut sein kann, um eine \acrlong{mpr} der Raumtemperatur zu ermöglichen.
+Zur Beantwortung dieser Frage wurde im Verlauf der Arbeit eine konkrete Anlage installiert und ein Modell entwickelt.
+
+Zunächst wurden im dritten Kapitel die besonderen Anforderungen für eine Modellprädiktive Regelung analysiert und daraus eine erste Idee entwickelt. Die Idee bestand in der Automatisierung eines Raumes der Hochschule Karlsruhe, der als zukünftige Forschungsumgebung genutzt werden kann. Durch die Nutzung von einfachen Temperatursensoren und eines Stellantriebs zur Ansteuerung des bestehenden Heizkörpers, wurde die Idee in die Praxis umgesetzt. Die Kommunikation innerhalb der Anlage wurde durch eine klare Struktur möglichst einfach und übersichtlich gehalten. Durch den Einsatz von Interfaces wird weiterhin eine einfache Ansteuerung der Anlage erlaubt, auch ohne detaillierte Fachkenntnisse zur Anlage und den verwendeten Kommunikationstechnologien. Abschließend wurde eine Zweipunktregelung zur Inbetriebnahme der Anlage eingesetzt, anhand derer die Fähigkeit zur Regelung einer Raumtemperatur aufgezeigt wurde.
+
+Damit konnte die Hypothese belegt werden, dass sich die spezifizierte Anlage zur Regelung einer Raumtemperataur eignet.
+
+Der anschließende Teil beschäftigte sich mit der Bildung eines Raummodells. Das Modell wurde für den Betrieb einer Modellprädiktiven Regelung der zuvor installierten Anlage entwickelt. Die daraus resultierenden Anforderungen an das Modell wurden beim der schrittweisen Aufbau beachtet. Das Modell wurde auf Validität untersucht, wobei festgestellt wurde, dass die grundlegende Dynamik der realen Prozesse ausreichend beschrieben wird. Anschließend wurde eine Parameterschätzung mithilfe von \cite{casiopeia} durchgeführt, um die Modellgüte zu verbessern. Nachdem das Modellverhalten anhand von weiteren Simulationen untersucht wurde, konnte auch eine prinzipielle Eignung des Modells einen Einsatz mit der Modellprädiktiven Regelung festgestellt werden. Abschließend wurde durch eine Übersetzung des Modells in ein Optimierungsfähiges Objekt gezeigt, dass es für die Modellprädiktive Regelung in der Plattform \textsc{JModelica.org} geeignet ist.
+
+
+Dadurch konnte eine weitere Hypothese belegt werden, dass das Modell für die Modellprädiktive Regelung mithilfe der Plattform \textit{JModelica.org} geeignet ist.
+
+Anhand der vorgestellten Ergebnisse und durch die Bestätigung der beiden Thesen, kann die Forschungsfrage durch die installierte Anlage und das gebildete Modell beantwortet werden.
+
+Zunächst wurde die Grundvorraussetzung geschaffen, indem eine Anlage zur Regelung der Raumtemperatur installiert und deren Fähigkeit zur Regelung bestätigt wurde. Diese wurde zusätzlich mit einer zentralen Bedienoberfläche in Python ausgestattet, die durch einen simplen Aufbau und eine klare Struktur eine einfache Möglichkeit der Ansteuerung bietet. Dadurch eignet sich die Anlage in besonderem Maße für eine Modellprädiktive Regelung mit \textit{JModelica.org} und kann daher auch für eine Modellprädiktive Temperaturregelung genutzt werden. 
+Weiterhin wurde durch verschiedene Simulationen und Schätzungen gezeigt, dass das Modell eine hinreichende Beschreibung des realen Systemverhaltens liefert. Gleichzeitig wurde die Komplexität des Modells bei der Entwicklung möglichst gering gehalten, sodass eine moderate Rechenkapazität zur Simulation des Modells ausreicht. Abschließend konnte das Modell fehlerfrei in zwei optimierungsfähige Objekte der Plattform \textit{JModelica.org} übersetzt werden. Damit wurde die Kompatibilität des Modells für einen Einsatz mit der Modellprädiktiven Regelung gezeigt.
+
+Eine Anlage und ein Modell für die Modellprädiktive Temperaturregelung kann also durch die in dieser Arbeit beschriebenen Anlage und Modell aufgebaut sein.
+
+\section{Ausblick und Ansatzpunkte für weitere Arbeiten}
+\label{sec:ausblick}
+
+Nachdem die Fähigkeit zur Modellprädiktiven Regelung der Anlage und des Modells gezeigt wurde, bietet sich als nächster Schritt eine tatsächliche Implementierung einer Modellprädiktiven Temperaturregelung an. Dafür gilt es zu klären, ob hierzu die bestehende, generische Klasse von \textit{JModelica.org} genutzt werden kann oder ob es sinnvoll ist eine eigene Implementierung der Modellprädiktiven Regelung durch Nutzung von \textit{CasADi} Werkzeugen durchzuführen. Ein wichtiger Aspekt dabei ist die Übergabe der gemessenen Steuergrößen an die Optimierungsumgebung, welche durch die Umwelt vorgegeben sind. Weiterhin stellt sich die Frage, ob der Einbezug von Prognosewerten für Steuergrößen wie der Globalstrahlung oder der Außenlufttemperatur sinnvoll sind. 
+
+Ein weiteren Ansatzpunkt bietet das Raummodell, bei welchem durch einen Vergleich mit bestehenden umfangreichen Modellen, wie beispielsweise \cite{therakles13}, Verbesserungs- oder Verschlankungspotenziale aufgedeckt werden können.
+
+Ein weiteren Anknüpfpunkt bietet eine detaillierte Untersuchung der Raumtemperaturverteilung und des exakten Einflusses der Solarstrahlung auf die Raumtemperatur, um die angenommene Homogenität zu übeprüfen
+
+Abschließend bietet die durch die Anlage die Möglichkeit zur ganzjährigen Regelung der Raumtemperatur, durch den Aufbau und die Möglichkeit einer einfachen, modularen Erweiterbarkeit beispielsweise durch eine Klimatisierung und automatisierte ANsteuerung der Verschattung.

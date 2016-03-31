@@ -14,7 +14,7 @@
 
 Ziel dieses Kapitels ist es, ein hinreichend exaktes Modell zur Berechnung der Raumtemperatur in  Raum K004b zu bilden. Die Modellbildung soll physikalisch motiviert sein und daher auf den thermodynamischen Prozessen des Raumes mit der Außenumgebung und der Anlage aus Kapitel \ref{chap:anlagendesign} basieren. Es soll außerdem speziellen Anforderungen genügen, die eine Modellprädiktive Regelung der Anlage ermöglichen.
 
-Zunächst wird ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise erweitert und an den bestehenden Raum angepasst wird. Nachdem eine Anpassung an die realen Einflussgrößen erfolgt ist, wird die Güte des Models mithilfe einer Simulation abgeschätzt und schließlich durch eine Parameterschätzung verbessert. Zum Abschluss wird überprüft, ob sich das Modell für den Einsatz einer Modellprädiktiven Regelung mit JModelciua.org eignet.
+Zunächst wird ein einfaches Grundmodell für einen hypothetischen Raum gebildet, dass anschließend schrittweise erweitert und an den bestehenden Raum angepasst wird. Nachdem eine Anpassung an die realen Einflussgrößen erfolgt ist, wird die Güte des Models mithilfe einer Simulation abgeschätzt und schließlich durch eine Parameterschätzung verbessert. Zum Abschluss wird überprüft, ob sich das Modell für den Einsatz einer Modellprädiktiven Regelung mit \textsc{JModelica.org} eignet.
 
 
 \section{Modellbildung}
@@ -41,7 +41,7 @@ Um ein möglichst einfaches Grundmodell zu erhalten, wird zunächst ein hypothet
 \end{figure}
 
 Ausgehend von einer initialen Raumtemperatur und der externen Steuergröße der Umgebungslufttemperatur, wird zur Bestimmung der Temperatur innerhalb eines Raumes der Ausgleichsprozess zwischen Raum und Umgebung untersucht. Konkret muss dafür der ausgetauschte Wärmestrom näher betrachtet werden. Um diesen nach \ref{eq:qdot} zu berechnen, müssen zunächst die verschiedene modellrelevanten Eigenschaften des Raumes durch physikalische Parameter beschrieben werden. Für die Berechnung der Austauschoberfläche müssen die Raumbreite, -länge und -höhe bekannt sein. Außerdem sind der U-Wert einer Betonwand und die spezifische Wärmekapazität sowie die Dichte von Luft für die Bestimmung des Wärmestroms relevant.
-Diese modellrelevanten Eigenschaften sind allesamt mit ihren Zahlenwerten in Tabelle \ref{tab:eigenschaften_raum} zusammengefasst.
+Diese modellrelevanten Eigenschaften sind allesamt mit ihren Zahlenwerten in \ref{tab:eigenschaften_raum} zusammengefasst.
 
 \begin{table}[H]
 \centering
@@ -122,7 +122,7 @@ Damit wurde das Raummodell an die reale Umgebung angepasst und um die Temperatur
 Um das Modell an die realen Gegebenheiten des Raumes K004b anzupassen, müssen zwei bauliche Tatbestände beachtet werden. Wie sich aus \ref{fig:skizzek004a} entnehmen lässt, bildet eine Fensterfront die südlichen Außenwand des Raumes. Der U-Wert eines Fensters weicht erheblich von dem einer Wand ab, daher muss ein zusätzlicher Wärmestrom zwischen dem Raum und der Umgebung durch das Fenster im Modell berücksichtigt werden. Das Öffnen und Schließen der Fenster, mit den daraus resultieren Massenströmen, wird zunächst nicht explizit berücksichtigt, sodass  sich das Raummodell weiterhin als geschlossenes System betrachten lässt. 
 Gleichermaßen wie das Fenster, soll der vorhandene Heizkörper zunächst in Form einer einfachen Wärmequelle in das Modell integriert werden. Durch den Heizkörper ist es möglich den Raum zu beheizen und somit eine Temperaturerhöhung im Raum herbeizuführen. Durch diese Anpassung des Modells erhöht sich die Anzahl der Steuergrößen erneut. 
 
-Zur Beschreibung der Eigenschaften des Raummodells werden weitere physikalische Parameter notwendig. Dazu zählen der U-Wert einer Fensterscheibe sowie die Breite und Höhe der Fensterfront. Das Modell wird um die besagten Eigenschaften, die in Tabelle \ref{tab:eigenschaften_raumerw} aufgelistet sind, ergänzt.
+Zur Beschreibung der Eigenschaften des Raummodells werden weitere physikalische Parameter notwendig. Dazu zählen der U-Wert einer Fensterscheibe sowie die Breite und Höhe der Fensterfront. Das Modell wird um die besagten Eigenschaften, die in \ref{tab:eigenschaften_raumerw} aufgelistet sind, ergänzt.
 
 \begin{table}[H]
 \centering
