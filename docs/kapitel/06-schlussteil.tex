@@ -17,7 +17,21 @@
 \section{Fazit}
 \label{sec:zusammenfassung}
 
+Das Ziel der Arbeit war die Untersuchung, wie eine Anlage zur Raumtemperaturregelung und ein mathematisches Modell derselben aufgebaut sein kann, um eine \acrlong{mpr} der Raumtemperatur zu ermöglichen.
+Zur Beantwortung dieser Frage wurde im Verlauf der Arbeit eine konkrete Anlage installiert und ein Modell entwickelt.
 
+Zunächst wurden im dritten Kapitel die besonderen Anforderungen für eine Modellprädiktive Regelung analysiert und daraus eine erste Idee entwickelt. Die Idee bestand in der Automatisierung eines Raumes der Hochschule Karlsruhe, der als zukünftige Forschungsumgebung genutzt werden kann. Durch die Nutzung von einfachen Temperatursensoren und eines Stellantriebs zur Ansteuerung des bestehenden Heizkörpers, wurde die Idee in die Praxis umgesetzt. Die Kommunikation innerhalb der Anlage wurde durch eine klare Struktur möglichst einfach und übersichtlich gehalten. Durch den Einsatz von Interfaces wird weiterhin eine einfache Ansteuerung der Anlage erlaubt, auch ohne detaillierte Fachkenntnisse zur Anlage und den verwendeten Kommunikationstechnologien. Abschließend wurde eine Zweipunktregelung zur Inbetriebnahme der Anlage eingesetzt, anhand derer die Fähigkeit zur Regelung einer Raumtemperatur gezeigt wurde.
+
+Damit konnte die Hypothese belegt werden, dass sich die spezifizierte Anlage zur Regelung einer Raumtemperataur eignet.
+
+Der anschließende Teil beschäftigte sich mit der Bildung eines Raummodells. Das Modell wurde für den Betrieb einer Modellprädiktiven Regelung der zuvor installierten Anlage entwickelt. Die daraus resultierenden Anforderungen an das Modell wurden beim der schrittweisen Aufbau beachtet. Das Modell wurde auf Validität untersucht, wobei festgestellt wurde, dass die grundlegende Dynamik der realen Prozesse ausreichend beschrieben wird. Anschließend wurde eine Parameterschätzung mithilfe von \cite{casiopeia} durchgeführt, um die Modellgüte zu verbessern. Nachdem das Modellverhalten anhand von weiteren Simulationen untersucht wurde, konnte auch eine prinzipielle Eignung des Modells einen Einsatz mit der Modellprädiktiven Regelung festgestellt werden. Abschließend wurde durch eine Übersetzung des Modells in ein Optimierungsfähiges Objekt gezeigt, dass es für die Modellprädiktive Regelung in der Plattform \textsc{JModelica.org} geeignet ist.
+
+
+Dadurch konnte eine weitere Hypothese belegt werden, dass das Modell für die Modellprädiktive Regelung mithilfe der Plattform \textit{JModelica.org} geeignet ist.
+
+Aufgrund der vorgestellten Ergebnisse und durch die Bestätigung der beiden Thesen, kann die Beantwortung auf die Forschungsfrage erfolgen. 
+
+ und ein Modell
 
 \section{Ausblick und Ansatzpunkte für weitere Arbeiten}
 \label{sec:ausblick}
